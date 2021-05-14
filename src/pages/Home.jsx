@@ -21,6 +21,7 @@ export default class Home extends Component {
     this.getCategories = this.getCategories.bind(this);
     this.handleInputSearch = this.handleInputSearch.bind(this);
     this.handleSubmitFetch = this.handleSubmitFetch.bind(this);
+    this.handleSelectCategory = this.handleSelectCategory.bind(this);
   }
 
   componentDidMount() {
@@ -42,16 +43,19 @@ export default class Home extends Component {
     this.setState({ value });
   }
 
+  handleSelectCategory(e) {
+    const { value } = e.target;
+    return api
+      .getProductsFromCategoryAndQuery(value, '')
+      .then((data) => this.setState({ products: data.results }));
+  }
+
   handleCard() {
     const { products } = this.state;
     return (
       <div className="card-container">
         {products.map((item) => (
-          <ProductCard
-            key={ item.id }
-            item={ item }
-            data-testid="product"
-          />
+          <ProductCard key={ item.id } item={ item } data-testid="product" />
         ))}
       </div>
     );
@@ -63,11 +67,15 @@ export default class Home extends Component {
   }
 
   render() {
-    const { categories, foundProducts } = this.state;
+    const { categories, foundProducts, products } = this.state;
+    console.log(products);
 
     return (
       <div>
-        <Categories categories={ categories } />
+        <Categories
+          handleSelectCategory={ this.handleSelectCategory }
+          categories={ categories }
+        />
         <div>
           <InputSearch
             handleInputSearch={ this.handleInputSearch }
