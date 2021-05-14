@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import ButtonToCart from '../components/ButtonToCart';
 import InputSearch from '../components/InputSearch';
 import * as api from '../services/api';
 import ProductCard from '../components/ProductCard';
@@ -57,6 +59,9 @@ export default class Home extends Component {
             handleInputSearch={ this.handleInputSearch }
             handleSubmitFetch={ this.handleSubmitFetch }
           />
+          <Link to="/cart" data-testid="shopping-cart-button">
+            <ButtonToCart />
+          </Link>
           <p data-testid="home-initial-message">
             {foundProducts
               ? 'Digite algum termo de pesquisa ou escolha uma categoria.'
