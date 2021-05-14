@@ -6,8 +6,9 @@ class Header extends Component {
       <form>
         <button type="submit">Carrinho de compras</button>
         <input type="text" />
-          Meu carrinho está vazio
-      </form>);
+        <p>Meu carrinho está vazio</p>
+      </form>
+    );
   }
 }
 
