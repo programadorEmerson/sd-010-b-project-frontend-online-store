@@ -1,9 +1,11 @@
 export async function getCategories() {
-  const response = await fetch('https://github.com/tryber/sd-010-b-project-frontend-online-store');
-  const result = response.json();
-  console.log(result);
+  const response = await fetch('https://api.mercadolibre.com/sites/MLB/categories');
+  const result = await response.json();
+  return result;
 }
 
-export async function getProductsFromCategoryAndQuery(/* categoryId, query */) {
-  // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
+export async function getProductsFromCategoryAndQuery(categoryId, query) {
+  const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}_ID&q=${query}`);
+  const result = await response.json();
+  return result;
 }
