@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, Link, BrowserRouter } from 'react-router-dom';
-import Header from './components/Header';
-import ShoppingCart from './components/ShoppingCart';
-import ListCategory from './components/ListCategory';
+import { Header, ShoppingCart, ListCategory } from './components';
 import { getCategories } from './services/api';
 
 class App extends Component {

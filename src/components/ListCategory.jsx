@@ -8,7 +8,7 @@ class ListCategory extends Component {
     return (
       <ul>
         {categories.map((category) => (
-          <Category key={category.name} category={category} />
+          <Category key={ category.name } category={ category } />
         ))}
       </ul>
     );
