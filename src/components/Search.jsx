@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Categories from './Categories';
 
 class Search extends Component {
   render() {
@@ -19,6 +20,7 @@ class Search extends Component {
             data-testid="shopping-cart-button"
           />
         </button>
+        <Categories />
       </section>
     );
   }
