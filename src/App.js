@@ -5,8 +5,6 @@ import CategoryList from './components/CategoryList';
 import { getCategories } from './services/api';
 import './App.css';
 
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);

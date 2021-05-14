@@ -1,23 +1,38 @@
 import React from 'react';
-class CategoryList extends React.Component {
+import PropTypes from 'prop-types';
 
+class CategoryList extends React.Component {
+  generateSelectCategories = () => {
+    const { categories } = this.props;
+
+    return (
+      <select>
+        {
+          categories.map((category) => {
+            const { name } = category;
+            return (
+              <option key={ name } data-testid="category" value={ name }>{ name }</option>
+            );
+          })
+        }
+      </select>
+    );
+  }
 
   render() {
-    const { categories } = this.props;
-    return(
+    return (
       <section>
-       <label>
-         Escolha a categoria:
-         <select>
-           {categories.map((category) => {
-             const { name } = category;
-             return <option data-testid="category" value={ name }>{ name }</option>
-           })}
-         </select>
-       </label>
+        <label htmlFor="category">
+          Escolha a categoria:
+          { this.generateSelectCategories() }
+        </label>
       </section>
     );
   }
 }
+
+CategoryList.propTypes = {
+  categories: PropTypes.shape.isRequired,
+};
 
 export default CategoryList;
