@@ -6,11 +6,11 @@ class ProductList extends React.Component {
   render() {
     const { products } = this.props;
     return (
-      <div>
+      <li>
         { products.map((product) => (
           <ProductCard key={ product.key } product={ product } />
         ))}
-      </div>
+      </li>
     );
   }
 }
