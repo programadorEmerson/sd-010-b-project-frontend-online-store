@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import btnIcon from '../img/iconeCompras.png'
-
+import btnIcon from '../img/iconeCompras.png';
 
 class Home extends React.Component {
   // handleOnClick = (target) => {
@@ -14,8 +13,8 @@ class Home extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <Link data-testid="shopping-cart-button" to='/checkout'>
-          <img width='30px' src={btnIcon} alt="checkout"></img>
+        <Link data-testid="shopping-cart-button" to="/checkout">
+          <img width="30px" src={ btnIcon } alt="checkout" />
         </Link>
       </div>
     );
