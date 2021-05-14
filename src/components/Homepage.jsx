@@ -1,6 +1,7 @@
 import React from 'react';
 import * as api  from '../services/api';
 import ProductsByTerms from './productsByTerms';
+import { Link } from 'react-router-dom';
 
 class Homepage extends React.Component {
   constructor() {
@@ -38,6 +39,7 @@ class Homepage extends React.Component {
         </h3>
         <button data-testid="query-button" onClick={this.handleClick}>Pesquisar</button>
         {arrProducts.map((product) => <ProductsByTerms key={product.id} product={product} />)}
+        <Link to="/pagecart" data-testid="shopping-cart-button">Page Cart</Link>
       </div>
     );
   }
