@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CatList from '../components/CatList';
 
 class Home extends React.Component {
   render() {
@@ -10,6 +11,7 @@ class Home extends React.Component {
           <p
             data-testid="home-initial-message"
           >
+            <CatList />
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         </div>
