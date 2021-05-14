@@ -31,7 +31,10 @@ export default class Home extends Component {
     const { value } = this.state;
     return api
       .getProductsFromCategoryAndQuery('', value)
-      .then((data) => this.setState({ products: data.results }));
+      .then((data) => this.setState({ products: data.results }))
+      .catch(() => {
+        this.setState({ foundProducts: false });
+      });
   }
 
   handleInputSearch({ target }) {
