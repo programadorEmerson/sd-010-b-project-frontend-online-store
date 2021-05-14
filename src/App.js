@@ -14,7 +14,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Vms que vamos
+          Grupo Requisito 1
         </a>
       </header>
     </div>
