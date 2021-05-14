@@ -1,8 +1,11 @@
 import React from 'react';
 // import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Message from './components/Message';
+import CategoryList from './components/CategoryList';
 import { getCategories } from './services/api';
 import './App.css';
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -25,9 +28,11 @@ class App extends React.Component {
   }
 
   render() {
+    const { categories } = this.state;
     return (
       <div>
         <Message />
+        <CategoryList categories={ categories } />
       </div>
     );
   }
