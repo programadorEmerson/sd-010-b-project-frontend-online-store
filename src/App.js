@@ -1,24 +1,24 @@
-import { ShoppingCartOutlined } from '@material-ui/icons';
 import React from 'react';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
-import './App.css';
+
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import ShoppingCart from './pages/ShoppingCart';
+import ShoppingHome from './pages/ShoppingHome';
+
+import './App.css';
 // import * as api from './services/api';
 
 function App() {
   // console.log(api.getCategories());
   return (
-    <div className="App">
+    <main>
       <BrowserRouter>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          {/* TODO: Verify if can change 'style' for 'className' */}
-          <ShoppingCartOutlined style={ { fontSize: 40 } } />
-        </Link>
         <Switch>
-          <Route path="/cart" component={ ShoppingCart } />
+          <Route exact path="/" component={ ShoppingHome } />
+          <Route exact path="/cart" component={ ShoppingCart } />
         </Switch>
       </BrowserRouter>
-    </div>
+    </main>
   );
 }
 
