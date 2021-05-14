@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import { getCategories } from './services/api';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>Edit src/App.js and save to reload.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categories: [],
+    };
+  }
 
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  componentDidMount = async () => {
+    console.log(await getCategories());
+    const categories = await getCategories();
+    this.updateState(categories);
+  }
+
+  updateState = (categories) => {
+    this.setState({ categories });
+  }
+
+  render() {
+    const { categories } = this.state;
+    return (
+      <div className="App">
+        <h1>Categories</h1>
+        {categories.map(({ id, name }) => (
+          <div id={ id } key={ id }>
+            <p>{name}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
 export default App;
