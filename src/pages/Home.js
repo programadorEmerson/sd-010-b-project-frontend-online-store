@@ -41,7 +41,7 @@ class Home extends React.Component {
             data-testid="query-button"
             onClick={ () => this.handleClick(searchQuery) }
           >
-          Buscar
+            Buscar
           </button>
           {isEmpty ? (
             <p data-testid="home-initial-message">
