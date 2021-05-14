@@ -5,7 +5,9 @@ import {
   Switch,
 } from 'react-router-dom';
 // import { getCategories } from './services/api';
+// import { Home, ShoppingCart } from './component';
 import Home from './component/Home';
+import ShoppingCart from './component/ShoppingCart';
 
 class App extends React.Component {
   // constructor() {
@@ -30,7 +32,8 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route path="/" component={ Home } />
+          <Route exact path="/" component={ Home } />
+          <Route path="/cart" component={ ShoppingCart } />
         </Switch>
       </Router>
     );
