@@ -1,13 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import ShoppingCart from './Components/ShoppingCart';
+import Checkout from './Components/Checkout';
+// import * as api from './services/api';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-      </header>
+      <Router>
+        <Route exact path="/" component={ ShoppingCart } />
+        <Route exact path="/checkout" component={ Checkout } />
+      </Router>
     </div>
   );
 }
