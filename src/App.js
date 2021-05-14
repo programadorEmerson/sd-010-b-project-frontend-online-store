@@ -8,10 +8,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={Home}/>
+          <Route path="/" component={ Home } />
         </Switch>
       </BrowserRouter>
-     
     </div>
   );
 }
