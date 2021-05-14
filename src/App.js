@@ -3,13 +3,14 @@ import './App.css';
 import { Route, Switch, Link, BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import ShoppingCart from './components/ShoppingCart';
-import { getCategories } from './services/api'
+import ListCategory from './components/ListCategory';
+import { getCategories } from './services/api';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: [],
+      categories: [],
       cart: [],
     };
 
@@ -21,19 +22,28 @@ class App extends Component {
   }
 
   async updateCategory() {
-    const response = await getCategories();
-    this.setState({ category: response });
+    const categories = await getCategories();
+    this.setState({ categories });
   }
 
   render() {
-    const { cart } = this.state;
+    const { cart, categories } = this.state;
     return (
       <BrowserRouter>
         <Header />
         <p>
-          <Link data-testid="shopping-cart-button" to="/cart">Oii</Link>
+          <Link data-testid="shopping-cart-button" to="/cart">
+            Carrinho
+          </Link>
         </p>
         <Switch>
+          <Route
+            exact
+            path="/"
+            render={ () => (<ListCategory
+              categories={ categories }
+            />) }
+          />
           <Route path="/cart" render={ () => <ShoppingCart cart={ cart } /> } />
         </Switch>
       </BrowserRouter>

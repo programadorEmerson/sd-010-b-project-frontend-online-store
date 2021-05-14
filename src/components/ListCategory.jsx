@@ -5,12 +5,18 @@ import Category from './Category';
 class ListCategory extends Component {
   render() {
     const { categories } = this.props;
-    return categories.map((category) => (
-      <Category key={ category.name } category={ category } />
-    ));
+    return (
+      <ul>
+        {categories.map((category) => (
+          <Category key={category.name} category={category} />
+        ))}
+      </ul>
+    );
   }
 }
 
-ListCategory.propTypes = {};
+ListCategory.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default ListCategory;

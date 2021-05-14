@@ -11,7 +11,9 @@ class Category extends Component {
 }
 
 Category.propTypes = {
-  category: PropTypes.objectOf.isRequired,
+  category: PropTypes.shape({
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 export default Category;
