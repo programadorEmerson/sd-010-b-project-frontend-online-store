@@ -1,8 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
+import * as api from './services/api';
 import './App.css';
 
 function App() {
+  (api.getCategories().then((res) => console.log(res)));
+
   return (
     <div className="App">
       <header className="App-header">
