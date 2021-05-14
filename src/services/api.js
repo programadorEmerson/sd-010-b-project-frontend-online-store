@@ -1,5 +1,7 @@
 export async function getCategories() {
-  // Implemente aqui
+  const response = await fetch('https://github.com/tryber/sd-010-b-project-frontend-online-store');
+  const result = response.json();
+  console.log(result);
 }
 
 export async function getProductsFromCategoryAndQuery(/* categoryId, query */) {
