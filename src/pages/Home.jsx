@@ -6,9 +6,10 @@ class Home extends React.Component {
       <div>
         <li />
         {/* deixar um li criado só p lembrar d fazer uma lista dinâmica */}
-        <span data-testid="home-initial-message">
+        <label htmlFor="searchBar" data-testid="home-initial-message">
+          <input type="text" name="searchBar" />
           Digite algum termo de pesquisa ou escolha uma categoria.
-        </span>
+        </label>
       </div>
     );
   }
