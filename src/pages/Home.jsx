@@ -31,9 +31,10 @@ class Home extends React.Component {
               { catItem.name }
             </li>))}
         </ul>
-        <span data-testid="home-initial-message">
+        <label htmlFor="searchBar" data-testid="home-initial-message">
+          <input type="text" name="searchBar" />
           Digite algum termo de pesquisa ou escolha uma categoria.
-        </span>
+        </label>
       </div>
     );
   }
