@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ButtonToCart from '../components/ButtonToCart';
-import InputSearch from '../components/InputSearch';
 import * as api from '../services/api';
+
+import InputSearch from '../components/InputSearch';
+import Categories from '../components/Categories';
+import ButtonToCart from '../components/ButtonToCart';
 import ProductCard from '../components/ProductCard';
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleInputSearch = this.handleInputSearch.bind(this);
-    this.handleSubmitFetch = this.handleSubmitFetch.bind(this);
+  constructor() {
+    super();
 
     this.state = {
+      categories: [],
       products: [],
       foundProducts: true,
       value: '',
     };
+
+    this.getCategories = this.getCategories.bind(this);
+    this.handleInputSearch = this.handleInputSearch.bind(this);
+    this.handleSubmitFetch = this.handleSubmitFetch.bind(this);
+  }
+
+  componentDidMount() {
+    this.getCategories();
   }
 
   handleSubmitFetch() {
     const { value } = this.state;
     return api
-      .getProductsFromCategoryAndQuery(null, value)
+      .getProductsFromCategoryAndQuery('', value)
       .then((data) => this.setState({ products: data.results }))
       .catch(() => {
         this.setState({ foundProducts: false });
@@ -49,12 +57,18 @@ export default class Home extends Component {
     );
   }
 
+  async getCategories() {
+    const getCategoriesFromApi = await api.getCategories();
+    this.setState({ categories: getCategoriesFromApi });
+  }
+
   render() {
-    const { foundProducts } = this.state;
+    const { categories, foundProducts } = this.state;
 
     return (
       <div>
-        <div className="">
+        <Categories categories={ categories } />
+        <div>
           <InputSearch
             handleInputSearch={ this.handleInputSearch }
             handleSubmitFetch={ this.handleSubmitFetch }
