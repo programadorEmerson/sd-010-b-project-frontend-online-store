@@ -16,7 +16,7 @@ function App() {
       </div>
       <BrowserRouter>
         <div>
-          <Link to="/shopping-cart" data-testid="shopping-cart-button" />
+          <Link to="/shopping-cart" data-testid="shopping-cart-button">Carrinho</Link>
         </div>
         <Switch>
           <Route exact path="/" render={ () => <ProductList /> } />
