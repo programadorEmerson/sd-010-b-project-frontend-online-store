@@ -1,13 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+// import * as api from './services/api';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-      </header>
+      <h1>Hello World</h1>
+      <span data-testid="home-initial-message">
+        Digite algum termo de pesquisa ou escolha uma categoria.
+      </span> 
     </div>
   );
 }
