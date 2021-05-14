@@ -1,9 +1,11 @@
 import React from 'react';
 
+import './styles/ProductsSearchBar.css';
+
 class ProductsSearchBar extends React.Component {
   render() {
     return (
-      <div>
+      <div className="ProductsSearchBar">
         <input />
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
