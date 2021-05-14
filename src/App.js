@@ -1,6 +1,9 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import { getCategories } from './services/api';
+import Home from './pages/Home';
+import './App.css';
 
 class App extends React.Component {
   componentDidMount() {
@@ -9,7 +12,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">Teste</div>
+      <main className="App">
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" component={ Home } />
+          </Switch>
+        </BrowserRouter>
+      </main>
     );
   }
 }
