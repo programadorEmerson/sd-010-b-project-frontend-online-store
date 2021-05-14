@@ -1,19 +1,55 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as api from '../services/api';
+import ProductList from '../components/ProductList';
 import CatList from '../components/CatList';
 
 class Home extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      searchQuery: [],
+      products: [],
+      isEmpty: true,
+    };
+  }
+
+  handleSearch = ({ target: { value } }) => {
+    this.setState({
+      searchQuery: value,
+    });
+  }
+
+  handleClick = (categoryId, search) => {
+    api.getProductsFromCategoryAndQuery(categoryId, search).then(({ results }) => (
+      this.setState({
+        isEmpty: false,
+        products: results,
+      })
+    ));
+  }
+
   render() {
+    const { searchQuery, products, isEmpty } = this.state;
+
     return (
       <div className="App">
         <div>
-          <input type="text" />
-          <p
-            data-testid="home-initial-message"
+          <input data-testid="query-input" type="text" onChange={ this.handleSearch } />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ () => this.handleClick('categoryId', searchQuery) }
           >
-            <CatList />
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
+            Buscar
+          </button>
+          {isEmpty ? (
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+          ) : <ProductList products={ products } />}
+          <CatList />
         </div>
         <Link data-testid="shopping-cart-button" to="/cart">VER CARRINHO</Link>
       </div>
