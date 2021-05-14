@@ -1,7 +1,7 @@
 import React from 'react';
-import * as api  from '../services/api';
-import ProductsByTerms from './productsByTerms';
 import { Link } from 'react-router-dom';
+import * as api from '../services/api';
+import ProductsByTerms from './productsByTerms';
 import * as Api from '../services/api';
 import CategoryList from './CategoryList';
 
@@ -9,12 +9,12 @@ class Homepage extends React.Component {
   constructor() {
     super();
 
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
       searchQuery: '',
       categories: [],
-      arrProducts: []
+      arrProducts: [],
 
     };
 
@@ -48,17 +48,17 @@ class Homepage extends React.Component {
     );
   }
 
-  async handleClick () {
+  async handleClick() {
     const { searchQuery } = this.state;
-    const productTerms = await api.getProductsFromCategoryAndQuery('', searchQuery)
+    const productTerms = await api.getProductsFromCategoryAndQuery('', searchQuery);
     this.setState({
       arrProducts: productTerms.results,
-    })
-   }
+    });
+  }
 
   render() {
     const { searchQuery, arrProducts } = this.state;
-    console.log(arrProducts)
+    console.log(arrProducts);
     return (
       <div>
         <input
@@ -71,13 +71,17 @@ class Homepage extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
           {this.renderCategories()}
         </h3>
-
-        <Link to="/pagecart" data-testid="shopping-cart-button">
-          Page Cart
-        </Link>
-
-        <button data-testid="query-button" onClick={this.handleClick}>Pesquisar</button>
-        {arrProducts.map((product) => <ProductsByTerms key={product.id} product={product} />)}
+        <button
+          type="button"
+          data-testid="query-button"
+          onClick={ this.handleClick }
+        >
+          Pesquisar
+        </button>
+        {arrProducts.map((product) => (<ProductsByTerms
+          key={ product.id }
+          product={ product }
+        />))}
         <Link to="/pagecart" data-testid="shopping-cart-button">Page Cart</Link>
       </div>
     );
