@@ -4,7 +4,7 @@ class Checkout extends React.Component {
   render() {
     return (
       <p data-testid="shopping-cart-empty-message">
-        Seu carrinho está vazio      
+        Seu carrinho está vazio
       </p>
     );
   }

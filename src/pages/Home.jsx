@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
-
-import Checkout from './Checkout';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
   render() {
@@ -11,7 +9,6 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <Link data-testid="shopping-cart-button" to="/checkout">Carrinho</Link>
-        <Route path="/checkout" component={ Checkout } />
       </div>
     );
   }
