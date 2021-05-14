@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as Api from '../services/api';
 import CategoryList from './CategoryList';
+
 
 class Homepage extends React.Component {
   constructor() {
@@ -53,6 +55,7 @@ class Homepage extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
           {this.renderCategories()}
         </h3>
+        <Link to="/pagecart" data-testid="shopping-cart-button">Page Cart</Link>
       </div>
     );
   }
