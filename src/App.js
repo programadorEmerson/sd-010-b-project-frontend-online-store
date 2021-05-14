@@ -9,7 +9,7 @@ function App() {
       <h1>Hello World</h1>
       <span data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
-      </span>
+      </span> 
     </div>
   );
 }
