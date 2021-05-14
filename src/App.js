@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import ShoppingCart from './components/ShoppingCart';
 
@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     const { cart } = this.state;
     return (
-      <div>
+      <BrowserRouter>
         <Header />
         <p>
           <Link data-testid="shopping-cart-button" to="/cart">Oi</Link>
@@ -23,7 +23,7 @@ class App extends Component {
         <Switch>
           <Route path="/cart" render={ () => <ShoppingCart cart={ cart } /> } />
         </Switch>
-      </div>
+      </BrowserRouter>
     );
   }
 }
