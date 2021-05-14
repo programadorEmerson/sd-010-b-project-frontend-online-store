@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ProdutctsList extends React.Component {
+class ProductsSearchBar extends React.Component {
   render() {
     return (
       <div>
@@ -13,4 +13,4 @@ class ProdutctsList extends React.Component {
   }
 }
 
-export default ProdutctsList;
+export default ProductsSearchBar;
