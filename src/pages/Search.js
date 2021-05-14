@@ -7,7 +7,7 @@ class Search extends React.Component {
     return (
       <section>
         <input type="search" />
-        <Link to="/cart"><CartImage /></Link>
+        <Link to="/cart" data-testid="shopping-cart-button"><CartImage /></Link>
         <h2
           data-testid="home-initial-message"
         >
