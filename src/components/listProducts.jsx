@@ -31,10 +31,17 @@ class ListProducts extends React.Component {
   }
 
   render() {
+    const { products } = this.state;
     return (
       <section>
         <input name="query" ata-testid="query-input" onChange={ this.handleOnchange } />
         <button type="button" data-testid="query-button">teste</button>
+        { products.map((element) => (
+          <div data-testid="product" key={ element.id }>
+            <h3>{ element.title }</h3>
+            <img src={ element.thumbnail } alt={ element.title } />
+            <p>{ element.price }</p>
+          </div>)) }
       </section>
     );
   }
