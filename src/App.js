@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Categories from './components/Categories';
 import Home from './components/Home';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
           <Route path="/" component={ Home } />
         </Switch>
       </BrowserRouter>
+      <Categories />
     </div>
   );
 }
