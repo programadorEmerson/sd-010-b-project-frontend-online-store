@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Img from '../images/cart.png';
+import Category from '../components/Categories';
 
 class Home extends React.Component {
   render() {
     return (
       <div className="App">
-        <input />
+        <Category />
         <Link to="/cart">
           <button type="button">
             <img

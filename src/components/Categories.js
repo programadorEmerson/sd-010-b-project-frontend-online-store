@@ -5,23 +5,31 @@ class Categories extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: '',
-      name: '',
+      categories: []
     };
+    this.recuperarCategorias = this.recuperarCategorias.bind(this);
   }
 
-  componentDidMount() {
-    api.getCategories().then(({ id, name }) => {
-      this.setState({
-        id,
-        name,
-      });
-    });
+  componentDidMount () {
+    this.recuperarCategorias();
   }
+
+  recuperarCategorias () {
+    const teste = api.getCategories().then((result) => {
+      Object.entries(result).filter((teste) => {
+        console.log(teste[1])
+      })
+    })
+  }
+
   render() {
+    const teste2 = this.categories;
+
     return (
       <div>
-
+          <ol>
+                      
+          </ol>
       </div>
     );
   }
