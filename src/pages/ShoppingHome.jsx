@@ -1,3 +1,4 @@
+import { ShoppingCartOutlined } from '@material-ui/icons';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +12,7 @@ class ShoppingHome extends Component {
       <section className="ShoppingHome">
         <ProductsSearchBar />
         <Link to="/cart" data-testid="shopping-cart-button">
-          Cart
+          <ShoppingCartOutlined style={ { fontSize: '40' } } />
         </Link>
       </section>
     );
