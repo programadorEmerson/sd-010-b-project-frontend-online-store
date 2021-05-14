@@ -1,13 +1,21 @@
 import React from 'react';
+import Button from './Button';
 
 class SeachBar extends React.Component {
-  render () {
+  render() {
     return (
       <section>
-        <input type="text"  />
-        <p data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</p>
+        <label htmlFor="input">
+          <input type="text" id="input" />
+        </label>
+        <Button />
+        <h1
+          data-testid="home-initial-message"
+        >
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h1>
       </section>
-    )
+    );
   }
 }
 

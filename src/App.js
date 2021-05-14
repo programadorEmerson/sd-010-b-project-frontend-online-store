@@ -1,17 +1,20 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import SeachBar from './components/SearchBar';
+import ShoppingCart from './pages/ShoppingCart';
+import Index from './pages/Index';
 
 function App() {
   return (
-   <main>
-     <BrowserRouter>
+    <main>
+      <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ SeachBar } />
+          {/* <Route path="/cart" componet={ Button } /> */}
+          <Route exact path="/" component={ Index } />
+          <Route path="/ShoppingCart" component={ ShoppingCart } />
         </Switch>
-     </BrowserRouter>
-   </main>
+      </BrowserRouter>
+    </main>
   );
 }
 
