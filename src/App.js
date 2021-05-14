@@ -4,11 +4,12 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 
 function App() {
+  console.log();
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route to="/" component={ Home } />
+          <Route exact path="/" component={ Home } />
         </Switch>
       </BrowserRouter>
     </div>
