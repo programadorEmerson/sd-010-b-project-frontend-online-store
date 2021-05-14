@@ -5,7 +5,7 @@ class ShoppingCart extends Component {
     return (
       <section>
         <h1>Carrinho de Compras</h1>
-        <p>Carrinho Vazio!</p>
+        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
       </section>
     );
   }
