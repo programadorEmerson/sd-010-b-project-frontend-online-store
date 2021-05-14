@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductList from '../components/ProductList';
 
-// Alteração para dar push
-
 class Home extends React.Component {
   constructor() {
     super();
