@@ -5,16 +5,26 @@ import './Categories.css';
 
 class Categories extends Component {
   render() {
-    const { categories } = this.props;
+    const { categories, handleSelectCategory } = this.props;
     return (
       <div className="category">
         <h3>Categorias:</h3>
         <div>
-          {
-            categories.map(({ name, id }) => (
-              <li key={ id } data-testid="category">{ name }</li>
-            ))
-          }
+          {categories.map(({ name, id }) => (
+            <div key={ id }>
+              <label htmlFor="select-category">
+                { name }
+                <input
+                  id="select-category"
+                  type="radio"
+                  onClick={ (e) => handleSelectCategory(e) }
+                  data-testid="category"
+                  name="category"
+                  value={ id }
+                />
+              </label>
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -28,6 +38,7 @@ Categories.propTypes = {
       name: PropTypes.string,
     }),
   ).isRequired,
+  handleSelectCategory: PropTypes.func.isRequired,
 };
 
 export default Categories;
