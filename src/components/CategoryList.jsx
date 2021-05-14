@@ -7,7 +7,7 @@ class CategoryList extends Component {
     const { name } = this.props;
     return (
       <div className="category" data-testid="category">
-        <button type="button">{name}</button>
+        <button type="checkbox">{name}</button>
       </div>
     );
   }
