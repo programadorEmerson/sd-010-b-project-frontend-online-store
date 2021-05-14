@@ -30,7 +30,7 @@ export default class Home extends Component {
   handleSubmitFetch() {
     const { value } = this.state;
     return api
-      .getProductsFromCategoryAndQuery(null, value)
+      .getProductsFromCategoryAndQuery('', value)
       .then((data) => this.setState({ products: data.results }))
       .catch(() => {
         this.setState({ foundProducts: false });
@@ -68,7 +68,7 @@ export default class Home extends Component {
     return (
       <div>
         <Categories categories={ categories } />
-        <div className="">
+        <div>
           <InputSearch
             handleInputSearch={ this.handleInputSearch }
             handleSubmitFetch={ this.handleSubmitFetch }
