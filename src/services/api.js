@@ -1,5 +1,7 @@
 export async function getCategories() {
-  // Implemente aqui
+  return fetch(test)
+    .then((fetchReturn) => fetchReturn.json())
+    .catch((error) => error);
 }
 
 export async function getProductsFromCategoryAndQuery(/* categoryId, query */) {
