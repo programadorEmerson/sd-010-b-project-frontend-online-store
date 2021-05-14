@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Homepage from './components/Homepage';
 
 class App extends React.Component {
+
   render() {
     return (
       <BrowserRouter>
