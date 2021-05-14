@@ -1,21 +1,22 @@
+import React from 'react';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import ProductList from './components/ProductList';
 import ShoppingCart from './components/ShoppingCart';
 import { render } from '@testing-library/react';
 
-class App extends React.Component {
+function App() {
   constructor() {
     super()
     this.state = {
       searchText: '',
     }
   }
-
-  render() {
-    setSearchText({ target }) => {
+  
+  setSearchText({ target }) => {
       this.setState({
         searchText: target.value,
       })
-    }
+    }   
 
     return (
       <div className="App">
