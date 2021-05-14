@@ -1,27 +1,16 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Homepage from './components/Homepage';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      searchQuery: '',
-    };
-  }
-
   render() {
-    const { searchQuery } = this.state;
     return (
-      <div>
-        <input
-          type="text"
-          value={ searchQuery }
-          onChange={ (e) => this.setState({ searchQuery: e.target.value }) }
-        />
-        <h3 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h3>
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={ Homepage } />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
