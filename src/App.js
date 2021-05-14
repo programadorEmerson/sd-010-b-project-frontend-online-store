@@ -1,27 +1,35 @@
+import React from 'react';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+// import { render } from '@testing-library/react';
 import ProductList from './components/ProductList';
 import ShoppingCart from './components/ShoppingCart';
-import { render } from '@testing-library/react';
 
 class App extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       searchText: '',
-    }
+    };
+  }
+
+  setSearchText = ({ target }) => {
+    this.setState({
+      searchText: target.value,
+    });
   }
 
   render() {
-    setSearchText({ target }) => {
-      this.setState({
-        searchText: target.value,
-      })
-    }
-
+    const { searchText } = this.state;
     return (
       <div className="App">
         <div>
           <label htmlFor="search" data-testid="home-initial-message">
-            <input type="text" name="search" onChange="" />
+            <input
+              type="text"
+              name="search"
+              value={ searchText }
+              onChange={ this.setSearchText }
+            />
 
             Digite algum termo de pesquisa ou escolha uma categoria.
           </label>
@@ -31,7 +39,13 @@ class App extends React.Component {
             <Link to="/shopping-cart" data-testid="shopping-cart-button" />
           </div>
           <Switch>
-            <Route exact path="/" render={ () => <ProductList /> } />
+            <Route
+              exact
+              path="/"
+              render={
+                () => <ProductList searchText={ searchText } />
+              }
+            />
             <Route path="/shopping-cart" render={ () => <ShoppingCart /> } />
           </Switch>
         </BrowserRouter>
