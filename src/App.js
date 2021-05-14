@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.css';
+import ListProducts from './components/listProducts';
 // import * as api from './services/api';
 
 function App() {
   // console.log(api.getCategories());
   return (
-    <div className="App" />
+    <div className="App">
+      <ListProducts />
+    </div>
   );
 }
 
