@@ -26,7 +26,7 @@ class ProductList extends React.Component {
 }
 
 ProductList.propTypes = {
-  products: PropTypes.shape({
+  products: PropTypes.objectOf({
     id: PropTypes.string,
     title: PropTypes.string,
     thumbnail: PropTypes.string,

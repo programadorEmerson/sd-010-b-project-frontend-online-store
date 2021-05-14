@@ -20,11 +20,11 @@ class Home extends React.Component {
     });
   }
 
-  handleClick = (search) => {
-    api.getProductsFromQuery(search).then((products) => (
+  handleClick = (categoryId, search) => {
+    api.getProductsFromCategoryAndQuery(categoryId, search).then(({ results }) => (
       this.setState({
         isEmpty: false,
-        products,
+        products: results,
       })
     ));
   }
@@ -39,7 +39,7 @@ class Home extends React.Component {
           <button
             type="button"
             data-testid="query-button"
-            onClick={ () => this.handleClick(searchQuery) }
+            onClick={ () => this.handleClick('categoryId', searchQuery) }
           >
             Buscar
           </button>
