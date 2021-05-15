@@ -11,7 +11,6 @@ class CardList extends Component {
       results: [],
     };
 
-    this.getList = this.getList.bind(this);
   }
 
   componentDidMount() {
