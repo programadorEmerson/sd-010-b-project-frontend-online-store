@@ -1,16 +1,19 @@
 import React from 'react';
-import './App.css';
-import * as api from './services/api';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Cart from './components/Cart';
 
-function App() {
-  api.getCategories().then((categories) => { console.log(categories); });
-  return (
-    <div className="App">
-      <p data-testid="home-initial-message">
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </p>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={ Home } />
+          <Route path="/cart" component={ Cart } />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
