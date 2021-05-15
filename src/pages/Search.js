@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
-/* import PropTypes from 'prop-types'; */
 import ListCategories from './Listcategories';
 import CartImage from '../components/CartImage';
 import CartListProduct from '../components/CartListProduct';
