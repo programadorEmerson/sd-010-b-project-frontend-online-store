@@ -34,7 +34,6 @@ class Search extends React.Component {
   render() {
     /* const { onChange, value } = this.props; */
     const { products, query, category } = this.state;
-    /* console.log(products); */
     console.log(category);
     return (
       <section>
