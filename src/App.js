@@ -4,10 +4,13 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+
+import './App.css';
+
 // import { getCategories } from './services/api';
 // import { Home, ShoppingCart } from './component';
-import Home from './component/Home';
-import ShoppingCart from './component/ShoppingCart';
+import Home from './components/Home';
+import ShoppingCart from './components/ShoppingCart';
 
 class App extends React.Component {
   // constructor() {
