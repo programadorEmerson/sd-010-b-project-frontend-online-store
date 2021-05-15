@@ -18,12 +18,14 @@ class ProductList extends Component {
   }
 }
 ProductList.propTypes = {
-  products: PropTypes.arrayOf({
-    product: PropTypes.shape({
+  map: PropTypes.arrayOf({
+    products: PropTypes.shape({
       title: PropTypes.string,
       price: PropTypes.number,
       id: PropTypes.string,
       thumbnail: PropTypes.string,
-    }) }).isRequired,
-};
+    }),
+  }),
+}.isRequired;
+
 export default ProductList;

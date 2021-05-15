@@ -16,8 +16,8 @@ class Home extends Component {
    handleClick = async () => {
      const inputSearch = document.querySelector('#input-search');
      const { value } = inputSearch;
-     const responseProducts = await api.getProductsFromQuery(value);
-     // console.log(responseProducts.results.length);
+     const responseProducts = await api.getProductsFromCategoryAndQuery('categId', value);
+     //  console.log(responseProducts.results);
      if (responseProducts) {
        if (responseProducts.results.length > 0) {
          this.setState({
