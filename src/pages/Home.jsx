@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Category from '../components/Category';
+import { getProductsFromCategory } from '../services/api';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    const { categories } = props;
+  constructor() {
+    super();
     this.state = {
-      categories,
+      category: [],
     };
 
-    this.onChangeValue = this.onChangeValue.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
   }
 
-  onChangeValue({ target: value }) {
-    this.setState({ categories });
+  async onChangeCategory({ target: { value } }) {
+    console.log(value);
+    const category = await getProductsFromCategory(value);
+    this.setState({ category });
   }
 
   render() {
-    const { categories } = this.state;
+    const { categories } = this.props;
     return (
-      <div onChange={ this.onChangeValue }>
+      <div onChange={ this.onChangeCategory }>
         {categories.map((category) => (
-          <Category key={ category.name } category={ category } />
+          <Category
+            key={ category.name }
+            category={ category }
+          />
         ))}
       </div>
     );

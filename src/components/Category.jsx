@@ -4,15 +4,21 @@ import PropTypes from 'prop-types';
 class Category extends Component {
   render() {
     const {
-      category: { name },
+      category: { name, id },
     } = this.props;
-    return <li data-testid="category">{name}</li>;
+    return (
+      <label htmlFor={ name }>
+        {name}
+        <input data-testid="category" type="radio" value={ id } name="category" />
+      </label>
+    );
   }
 }
 
 Category.propTypes = {
   category: PropTypes.shape({
     name: PropTypes.string,
+    id: PropTypes.string,
   }).isRequired,
 };
 
