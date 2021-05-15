@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Img from '../images/cart.png';
-import Category from '../components/Categories';
+import Category from './Categories';
 
 class Home extends React.Component {
   render() {

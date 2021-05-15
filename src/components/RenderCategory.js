@@ -1,19 +1,19 @@
-import React from 'react';
-import * as api from '../services/api';
+// import React from 'react';
+// import * as api from '../services/api';
 
-class RenderCategory extends React.Component {
+// class RenderCategory extends React.Component {
 
-  render() {  
+//   render() {
 
-    return (
-      <li>
-          <button>
-                      
-          </button>
-      </li>
-    );
-    
-  }
-}
+//     return (
+//       <li>
+//           <button>
 
-export default RenderCategory;
+//           </button>
+//       </li>
+//     );
+
+//   }
+// }
+
+// export default RenderCategory;

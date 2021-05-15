@@ -17,11 +17,9 @@ class Categories extends React.Component {
 
   recuperarCategorias() {
     api.getCategories().then((result) => {
-      Object.entries(result).map((teste) => {
-        this.setState((oldState) => ({
-          categories: [...oldState.categories, teste[1]],
-        }));
-      });
+      Object.entries(result).map((teste) => this.setState((oldState) => ({
+        categories: [...oldState.categories, teste[1]],
+      })));
       this.setState({
         loading: false,
       });
@@ -35,7 +33,13 @@ class Categories extends React.Component {
         <ul>
           {
             loading ? <p>Carregando</p>
-              : categories.map((result) => <li key={ result.id } data-testid="category">{result.name}</li>)
+              : categories.map((result) => (
+                <li
+                  key={ result.id }
+                  data-testid="category"
+                >
+                  {result.name}
+                </li>))
           }
         </ul>
       </div>
