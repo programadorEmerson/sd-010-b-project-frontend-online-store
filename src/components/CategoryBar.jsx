@@ -19,7 +19,7 @@ class CategoryBar extends Component {
     const { categorieslist } = this.state;
     return (
       <div>
-        <h1>Categorias</h1>
+        <h1> Categorias </h1>
         <ul>
           {categorieslist.map(({ id, name }) => (
             <li
