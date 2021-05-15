@@ -5,7 +5,7 @@ class ProductCard extends React.Component {
   render() {
     const { title, price, thumbnail } = this.props;
     return (
-      <section className="product-card">
+      <section className="product-card" data-testid="product">
         <header className="product-card-header">
           <h1>{ title }</h1>
         </header>
