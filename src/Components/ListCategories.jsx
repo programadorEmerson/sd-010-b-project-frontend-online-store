@@ -13,9 +13,9 @@ class ListCategories extends Component {
     this.HandleListCategories();
   }
 
-  HandleListCategories = () => {
-    getCategories()
-      .then((categories) => this.setState({ categories }));
+  async HandleListCategories = () => {
+    const categories = await getCategories();
+    this.setState({ categories });
   }
 
   render() {
