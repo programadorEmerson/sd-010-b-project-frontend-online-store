@@ -1,5 +1,5 @@
-import React from "react";
-import * as api from "../services/api";
+import React from 'react';
+import * as api from '../services/api';
 
 export default class ListCategories extends React.Component {
   constructor() {
@@ -10,7 +10,7 @@ export default class ListCategories extends React.Component {
   }
 
   componentDidMount() {
-    console.log("carregou");
+    console.log('carregou');
     api.getCategories().then((list) => this.setState({ categories: list }));
   }
 
@@ -18,7 +18,7 @@ export default class ListCategories extends React.Component {
     const { categories } = this.state;
     const load = categories ? (
       categories.map((list, index) => (
-        <li key={index} data-testid="category">
+        <li key={ index } data-testid="category">
           {list.name}
         </li>
       ))

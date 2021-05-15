@@ -1,5 +1,5 @@
-import React from "react";
-import ListCategories from "./ListCategories";
+import React from 'react';
+import ListCategories from './ListCategories';
 
 import './styles/ProductsSearchBar.css';
 
