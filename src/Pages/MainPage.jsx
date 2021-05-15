@@ -4,7 +4,6 @@ import Button from '../Components/Button';
 import CardList from '../Components/CardList';
 import ListCategories from '../Components/ListCategories';
 
-
 class MainPage extends Component {
   render() {
     return (
