@@ -22,13 +22,14 @@ class CategoryList extends React.Component {
 
   render() {
     const { categories } = this.state;
+    const { onClick } = this.props;
     const section = (
       <section>
         <ul>
           Categorias:
           { categories.map(({ id, name }) => (
             <li key={ id } data-testid="category">
-              { name }
+              <button onClick={ onClick(id) }type>{name}</button>
             </li>))}
         </ul>
       </section>);

@@ -11,11 +11,21 @@ class Home extends React.Component {
     this.state = {
       filtered: [],
       search: '',
+      filterCategory: false,
     };
   }
 
-  // componentDidMount() {
-  // }
+  componentDidMount() {
+    this.getApiFromCategory();
+    this.requestApi2();
+  }
+
+  getApiFromCategory = (param) => async () => {
+    const getCategory = await getProductsFromCategoryAndQuery(param, '');
+    this.setState({
+      filterCategory: getCategory,
+    });
+  }
 
   getResult = ({ target: { value } }) => {
     this.setState({ search: value });
@@ -31,6 +41,7 @@ class Home extends React.Component {
 
   render() {
     const { filtered: { available_filters: resultFilter }, filtered } = this.state;
+    const { filterCategory } = this.state;
     return (
       <main>
         <div id="searchBar">
@@ -51,16 +62,20 @@ class Home extends React.Component {
           </p>
         </div>
         <Link data-testid="shopping-cart-button" id="cart" to="/cart">Carrinho</Link>
-        <CategoryList />
+        <CategoryList onClick={ this.getApiFromCategory } />
         {filtered.length !== 0 && (
           <div id="products">
             {!resultFilter || resultFilter.length === 0
               ? 'Nenhum produto a ser encontrado'
               : (filtered.results.map(
                 (product) => (<Card key={ product.id } product={ product } />),
-                // ({ id, title }) => (<li data-testid="product" key={ id }>{title}</li>),
               ))}
           </div>) }
+        {filterCategory && (
+          <div id="products-category">
+            {filterCategory.results
+              .map((product) => (<Card key={ product.id } product={ product } />))}
+          </div>)}
       </main>
     );
   }
