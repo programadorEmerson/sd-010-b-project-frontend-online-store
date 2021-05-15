@@ -71,19 +71,3 @@ class Search extends React.Component {
 
 
 export default Search;
-
-/*
-handlerClick = async () => {
-  const { category, query } = this.state;
-  this.setState({
-    loading: true,
-  }, () => {
-    api.getProductsFromCategoryAndQuery(category, query)
-      .then((response) => {
-        this.setState({
-          loading: false,
-          products: response.results,
-        });
-      });
-  });
-} */
