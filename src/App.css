@@ -54,27 +54,27 @@
 
 .product-card {
   margin-top: 16px;
-  width: 256px;
-  height: 256px;
   border: solid 1px black;
+  height: 256px;
+  width: 256px;
   border-radius: 16px;
 }
 
 .product-card h1 {
-  justify-content: center;
   font-size: large;
+  justify-content: center;
   text-align: center;
 }
 
 .product-card-image {
+  height: 120px;
   align-items: center;
   max-width: 240px;
-  height: 120px;
-  max-height: 120px;
   border-radius: 16px;
+  max-height: 120px;
 }
 
 .product-card-footer h2 {
   font-size: large;
   text-align: center;
- }
+}
