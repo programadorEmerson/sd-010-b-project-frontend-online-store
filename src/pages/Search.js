@@ -15,9 +15,7 @@ class Search extends React.Component {
     };
   }
 
-
   handlerChange = ({ target: { name, value } }) => {
-    /* console.log(value); */
     this.setState({
       [name]: value,
     });
@@ -32,14 +30,11 @@ class Search extends React.Component {
   }
 
   render() {
-    /* const { onChange, value } = this.props; */
-    const { products, query, category } = this.state;
-    console.log(category);
+    const { products } = this.state;
     return (
       <section>
         <input
           data-testid="query-input"
-          value={ query }
           type="search"
           onChange={ this.handlerChange }
           name="query"
@@ -68,6 +63,5 @@ class Search extends React.Component {
     );
   }
 }
-
 
 export default Search;

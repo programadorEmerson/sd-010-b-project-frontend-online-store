@@ -24,7 +24,6 @@ class ListCategories extends Component {
     });
   }
 
-
   render() {
     const { categories } = this.state;
     const { handlerChange } = this.props;

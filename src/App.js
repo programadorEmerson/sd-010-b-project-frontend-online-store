@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Search from './pages/Search';
 import './App.css';
 import Cart from './pages/Cart';
-import ListerProduct from './pages/ListerProduct';
+/* import ListerProduct from './pages/ListerProduct'; */
 
 function App() {
   return (
@@ -12,11 +12,11 @@ function App() {
         <Switch>
           <Route exact path="/" component={ Search } />
           <Route exact path="/cart" component={ Cart } />
-          <Route
+          {/* <Route
             exact
             path="/busca/:id"
             render={ (props) => <ListerProduct { ...props } /> }
-          />
+          /> */}
         </Switch>
       </main>
     </BrowserRouter>
