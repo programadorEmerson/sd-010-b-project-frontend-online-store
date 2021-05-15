@@ -2,38 +2,50 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class CategoryList extends React.Component {
-  generateSelectCategories = () => {
+  generateRadioCategories = () => {
     const { categories, onSelect } = this.props;
-
     return (
-      <select onChange={ (event) => onSelect(event) }>
+      <section>
         {
           categories.map((category) => {
             const { name } = category;
             return (
-              <option key={ name } data-testid="category" value={ name }>{ name }</option>
+              <ul key={ name }>
+                <li>
+                  <label htmlFor={ name }>
+                    <input
+                      onChange={ (event) => onSelect(event) }
+                      type="radio"
+                      key={ name }
+                      id={ name }
+                      name="category"
+                      data-testid="category"
+                      value={ name }
+                    />
+                    { name }
+                  </label>
+                </li>
+              </ul>
             );
           })
         }
-      </select>
+      </section>
     );
   }
 
   render() {
     return (
       <section>
-        <label htmlFor="category">
+        <h1>
           Escolha a categoria:
-          { this.generateSelectCategories() }
-        </label>
+        </h1>
+        { this.generateRadioCategories() }
       </section>
     );
   }
 }
-
 CategoryList.propTypes = {
-  categories: PropTypes.shape.isRequired,
-  onSelect: PropTypes.func.isRequired,
-};
-
+  categories: PropTypes.array,
+  onSelect: PropTypes.func,
+}.isRequired;
 export default CategoryList;

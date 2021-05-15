@@ -27,13 +27,25 @@ class Main extends React.Component {
       this.setState({ categories: listCategories });
     }
 
-    saveSelectedCategory = ({ target: { value } }) => {
-      this.setState({ selectedCategory: value });
-    }
-
     saveTypedProduct = ({ target: { value } }) => {
       this.setState({ typedProduct: value });
     }
+
+    saveSelectedCategory = async ({ target: { value } }) => {
+      this.setState({ selectedCategory: value });
+      // categorias com todas categorias
+      const categoriesSelect = await getCategories();
+      // com valor estamos recuperando o Id + name
+      const idAndNameCategory = categoriesSelect.find((category) => (
+        category.name === value));
+      // estamos usando a API para receber a lista de todos objetos daquela categoria
+      const arrayOfCategory = await getProductsFromCategoryAndQuery(
+        idAndNameCategory.id, idAndNameCategory.name,
+      );
+      const { results } = arrayOfCategory;
+      // pegar o results e filtrar com o que foi digitado!
+      this.setState({ searchResult: results });
+    };
 
     saveGettedProducts = async () => {
       const { selectedCategory: category, typedProduct: product } = this.state;
