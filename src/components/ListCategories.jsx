@@ -1,30 +1,41 @@
 import React from 'react';
+
 import * as api from '../services/api';
+
+import Loading from './Loading';
 
 export default class ListCategories extends React.Component {
   constructor() {
     super();
     this.state = {
-      categories: false,
+      loading: true,
     };
+
+    this.fetchCategories = this.fetchCategories.bind(this);
   }
 
   componentDidMount() {
-    console.log('carregou');
-    api.getCategories().then((list) => this.setState({ categories: list }));
+    this.fetchCategories();
+  }
+
+  async fetchCategories() {
+    const categories = await api.getCategories();
+    this.setState({
+      categories,
+      loading: false,
+    });
   }
 
   render() {
-    const { categories } = this.state;
-    const load = categories ? (
-      categories.map((list, index) => (
-        <li key={ index } data-testid="category">
-          {list.name}
-        </li>
-      ))
-    ) : (
-      <p>TESTE CAT</p>
-    );
-    return <ul>{load}</ul>;
+    const { loading, categories } = this.state;
+    if (loading) {
+      return (
+        <Loading />
+      );
+    }
+    const categoriesList = categories.map(({ name, id }) => (
+      <li key={ id } data-testid="category">{ name }</li>
+    ));
+    return categoriesList;
   }
 }
