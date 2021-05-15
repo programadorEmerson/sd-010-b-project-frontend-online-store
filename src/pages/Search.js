@@ -69,10 +69,6 @@ class Search extends React.Component {
   }
 }
 
-/* Search.propTypes = {
-  products: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-}; */
 
 export default Search;
 
