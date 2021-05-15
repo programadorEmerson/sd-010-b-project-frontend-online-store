@@ -33,6 +33,7 @@ class CategoryList extends React.Component {
 
 CategoryList.propTypes = {
   categories: PropTypes.shape.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
 export default CategoryList;

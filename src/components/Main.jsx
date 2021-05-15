@@ -36,8 +36,8 @@ class Main extends React.Component {
     }
 
     saveGettedProducts = async () => {
-      const { selectedCategory, typedProduct } = this.state;
-      const { results } = await getProductsFromCategoryAndQuery(selectedCategory, typedProduct);
+      const { selectedCategory: category, typedProduct: product } = this.state;
+      const { results } = await getProductsFromCategoryAndQuery(category, product);
       this.setState({ searchResult: results });
     }
 
@@ -45,24 +45,37 @@ class Main extends React.Component {
       const { searchResult } = this.state;
 
       return searchResult.map((result) => {
-        const { title, thumbnail, price } = result;
+        const { id, title, thumbnail, price } = result;
         return (
-          <ProductCard title={ title } thumbnail={ thumbnail } price={ price } />
+          <ProductCard
+            key={ id }
+            keytitle={ title }
+            thumbnail={ thumbnail }
+            price={ price }
+          />
         );
-      })
+      });
     }
 
     render() {
       const { categories } = this.state;
 
       return (
-        <div>
-          <Header onTyped={ this.saveTypedProduct } saveProducts={ this.saveGettedProducts } />
+        <main>
+          <Header
+            onTyped={ this.saveTypedProduct }
+            saveProducts={ this.saveGettedProducts }
+          />
           <Message />
-          <CategoryList onSelect={ this.saveSelectedCategory } categories={ categories } />
+          <CategoryList
+            onSelect={ this.saveSelectedCategory }
+            categories={ categories }
+          />
           <Link to="/ShopCart" data-testid="shopping-cart-button">Button!</Link>
-          {this.renderProductCards()}
-        </div>
+          <section className="product-card-list">
+            {this.renderProductCards()}
+          </section>
+        </main>
       );
     }
 }
