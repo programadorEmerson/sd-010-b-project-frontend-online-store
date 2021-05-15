@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ListCategories extends Component {
   render() {
@@ -7,13 +8,22 @@ class ListCategories extends Component {
       <aside>
         <ul>
           {
-            categories
-              .map((category) => <li key={ category.id } data-testid="category">{category.name}</li>)
+            categories.map((category) => (
+              <li
+                key={ category.id }
+                data-testid="category"
+              >
+                {category.name}
+              </li>))
           }
         </ul>
       </aside>
     );
   }
 }
+
+ListCategories.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default ListCategories;

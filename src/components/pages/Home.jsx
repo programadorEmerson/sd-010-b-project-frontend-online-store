@@ -24,12 +24,13 @@ export default class Home extends Component {
   }
 
   render() {
+    const { listCategories } = this.state;
     return (
       <div>
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <ListCategories categories={ this.state.listCategories } />
+        <ListCategories categories={ listCategories } />
       </div>
     );
   }
