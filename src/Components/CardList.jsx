@@ -10,14 +10,13 @@ class CardList extends Component {
     this.state = {
       results: [],
     };
-
   }
 
   componentDidMount() {
     this.getList();
   }
 
-   getList = async () => {
+  getList = async () => {
     const { results } = await getProductsFromCategoryAndQuery('MLB1384', 'Cadeira');
     this.setState({ results });
   }
