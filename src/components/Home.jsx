@@ -17,15 +17,24 @@ class Home extends Component {
      const inputSearch = document.querySelector('#input-search');
      const { value } = inputSearch;
      const responseProducts = await api.getProductsFromQuery(value);
-     this.setState({
-       products: responseProducts.results,
-       noProducts: true,
-     });
+     // console.log(responseProducts.results.length);
+     if (responseProducts) {
+       if (responseProducts.results.length > 0) {
+         this.setState({
+           products: responseProducts.results,
+           noProducts: false,
+         });
+       } else {
+         this.setState({
+           noProducts: true,
+         });
+       }
+     }
    }
 
    render() {
      const { products, noProducts } = this.state;
-     const noProduct = 'Nenhum produto foi encontrado';
+     const noProduct = 'Nenhum produto encontrado';
      return (
        <div>
          <input
