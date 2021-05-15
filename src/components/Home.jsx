@@ -17,7 +17,7 @@ class Home extends Component {
   }
 
   handleChecked = ({ target: { id } }) => {
-    // this.handleClick(id);
+    this.handleProducts(id);
     this.setState({ categoryId: id });
   }
 
@@ -25,10 +25,22 @@ class Home extends Component {
     this.setState({ search: value });
   }
 
-  // handleProducts = () => {
-  //   const { categoryId, search } = this.state;
-  //   this.handleClick(categoryId, search);
-  // }
+  handleProducts = async (id) => {
+    const { search } = this.state;
+    const filterProducts = await api.getProductsFromCategoryAndQuery(id, search);
+    if (filterProducts) {
+      if (filterProducts.results.length > 0) {
+        this.setState({
+          products: filterProducts.results,
+          noProducts: false,
+        });
+      } else {
+        this.setState({
+          noProducts: true,
+        });
+      }
+    }
+  }
 
   handleClick = async () => {
     const { categoryId, search } = this.state;
@@ -48,14 +60,6 @@ class Home extends Component {
     }
   }
 
-  // renderProducts = () => {
-  //   const { products, productsId, search } = this.state;
-  //   let product = products;
-  //   if (productsId === products.category_id) {
-  //     product = products.filter((prod) => prod);
-  //   }
-  // }
-
   render() {
     const { products, noProducts } = this.state;
     const noProduct = 'Nenhum produto encontrado';
@@ -70,7 +74,6 @@ class Home extends Component {
         />
         <button
           data-testid="query-button"
-          // onClick={ this.handleProducts }
           onClick={ this.handleClick }
           type="button"
         >
