@@ -14,7 +14,7 @@ function App() {
         <main className="App">
 
           <Switch>
-            <Route path="/" exact component={ Home } />
+            <Route exact path="/" component={ Home } />
           </Switch>
         </main>
         <footer>
