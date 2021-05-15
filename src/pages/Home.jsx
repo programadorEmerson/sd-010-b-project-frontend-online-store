@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Category from './Category';
+import Category from '../components/Category';
 
-class ListCategory extends Component {
+class Home extends Component {
   render() {
     const { categories } = this.props;
     return (
@@ -15,8 +15,8 @@ class ListCategory extends Component {
   }
 }
 
-ListCategory.propTypes = {
+Home.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default ListCategory;
+export default Home;

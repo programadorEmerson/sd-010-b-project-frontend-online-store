@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, Link, BrowserRouter } from 'react-router-dom';
-import { Header, ShoppingCart, ListCategory } from './components';
+import { Header } from './components';
+import { ShoppingCart, Home } from './pages';
 import { getCategories } from './services/api';
 
 class App extends Component {
@@ -38,7 +39,7 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={ () => (<ListCategory
+            render={ () => (<Home
               categories={ categories }
             />) }
           />
