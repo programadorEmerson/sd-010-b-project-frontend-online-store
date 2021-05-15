@@ -1,5 +1,6 @@
 import React from 'react';
 
+import CategoryBar from '../components/CategoryBar';
 import Input from '../components/Input';
 
 import { getCategories } from '../services/api';
@@ -13,7 +14,7 @@ class Home extends React.Component {
     return (
       <div className="homepage">
         <section className="categories-bar">
-          /
+          <CategoryBar />
         </section>
         <section className="result-page">
           <Input />
