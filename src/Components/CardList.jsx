@@ -18,7 +18,7 @@ class CardList extends Component {
     this.getList();
   }
 
-  async getList() {
+   getList = async () => {
     const { results } = await getProductsFromCategoryAndQuery('MLB1384', 'Cadeira');
     this.setState({ results });
   }
