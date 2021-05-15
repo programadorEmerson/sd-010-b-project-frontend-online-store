@@ -16,12 +16,14 @@ export default class Home extends Component {
       products: [],
       foundProducts: true,
       value: '',
+      cart: [],
     };
 
     this.getCategories = this.getCategories.bind(this);
     this.handleInputSearch = this.handleInputSearch.bind(this);
     this.handleSubmitFetch = this.handleSubmitFetch.bind(this);
     this.handleSelectCategory = this.handleSelectCategory.bind(this);
+    this.addProductIntoCart = this.addProductIntoCart.bind(this);
   }
 
   componentDidMount() {
@@ -55,7 +57,12 @@ export default class Home extends Component {
     return (
       <div className="card-container">
         {products.map((item) => (
-          <ProductCard key={ item.id } item={ item } data-testid="product" />
+          <ProductCard
+            key={ item.id }
+            item={ item }
+            addProductIntoCart={ this.addProductIntoCart }
+            data-testid="product"
+          />
         ))}
       </div>
     );
@@ -66,8 +73,13 @@ export default class Home extends Component {
     this.setState({ categories: getCategoriesFromApi });
   }
 
+  addProductIntoCart(item) {
+    const { cart } = this.state;
+    this.setState({ cart: [...cart, item] });
+  }
+
   render() {
-    const { categories, foundProducts } = this.state;
+    const { categories, foundProducts, cart } = this.state;
 
     return (
       <div>
@@ -80,7 +92,10 @@ export default class Home extends Component {
             handleInputSearch={ this.handleInputSearch }
             handleSubmitFetch={ this.handleSubmitFetch }
           />
-          <Link to="/cart" data-testid="shopping-cart-button">
+          <Link
+            to={ { pathname: '/cart', state: { cart } } }
+            data-testid="shopping-cart-button"
+          >
             <ButtonToCart />
           </Link>
           <p data-testid="home-initial-message">
