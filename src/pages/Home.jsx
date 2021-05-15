@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Category from '../components/Category';
+import { Category, SearchBar } from '../components';
 import { getProductsFromCategory } from '../services/api';
 import '../css/Home.css';
 
@@ -26,6 +26,7 @@ class Home extends Component {
         {categories.map((category) => (
           <Category key={ category.name } category={ category } />
         ))}
+        <SearchBar />
       </div>
     );
   }
