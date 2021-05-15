@@ -14,7 +14,7 @@ header {
 
 .input-search {
   display: flex;
-  font-family: FontAwesome, serif;
+  font-family: FontAwesome , serif;
   font-size: 16px;
   height: 32px;
   justify-content: flex-start;
