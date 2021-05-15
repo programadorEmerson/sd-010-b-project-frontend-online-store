@@ -15,11 +15,7 @@ class Categories extends React.Component {
   }
 
   recuperarCategorias () {
-    const teste = api.getCategories().then((result) => {
-      Object.entries(result).filter((teste) => {
-        console.log(teste[1])
-      })
-    })
+    const teste = api.getCategories().then((result) => console.log(result))
   }
 
   render() {
