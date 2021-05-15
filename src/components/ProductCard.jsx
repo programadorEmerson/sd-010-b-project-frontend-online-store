@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 
 export default class ProductCard extends Component {
   render() {
-    const { item } = this.props;
+    const { item, addProductIntoCart } = this.props;
     const { title, thumbnail, price } = item;
+
     return (
       <div className="card" data-testid="product">
         <p data-testid="shopping-cart-product-name">{title}</p>
@@ -13,6 +14,13 @@ export default class ProductCard extends Component {
           <img src={ thumbnail } alt="img" />
         </div>
         <p>{price}</p>
+        <button
+          type="button"
+          onClick={ () => addProductIntoCart(item) }
+          data-testid="product-add-to-cart"
+        >
+          Adicionar
+        </button>
         <Link
           data-testid="product-detail-link"
           to={ { pathname: '/datails', state: { item } } }
@@ -31,4 +39,5 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
+  addProductIntoCart: PropTypes.func.isRequired,
 };
