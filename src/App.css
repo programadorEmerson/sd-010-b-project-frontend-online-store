@@ -52,11 +52,23 @@ header {
   display: flex;
 }
 
+/* Componente CategoryBar */
+
 .categories-bar {
   border-style: solid;
   border-width: 1px;
   width: 300px;
 }
+
+.categories-bar h1 {
+  text-align: center;
+}
+
+.categories-bar li {
+  padding: 2px 10px;
+}
+
+/* Componente CategoryBar */
 
 .result-page {
   width: 100%;
