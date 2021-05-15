@@ -6,7 +6,7 @@ export default class Cart extends Component {
     return (
       <div>
         <Link to="/"><button type="submit">Voltar</button></Link>
-
+        <br />
         <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
 
       </div>

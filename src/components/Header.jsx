@@ -16,7 +16,6 @@ class Header extends Component {
           />
         </Link>
       </nav>
-
     );
   }
 }

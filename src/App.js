@@ -14,8 +14,8 @@ function App() {
         <main className="App">
 
           <Switch>
-            <Route path="/" exact component={ Home } />
-            <Route path="/cart" exact component={ Cart } />
+            <Route exact path="/" component={ Home } />
+            <Route exact path="/cart" component={ Cart } />
           </Switch>
         </main>
         <footer>
