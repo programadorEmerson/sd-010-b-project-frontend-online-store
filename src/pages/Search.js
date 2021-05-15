@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ListCategories from './Listcategories';
 import CartImage from '../components/CartImage';
 
 class Search extends React.Component {
@@ -13,6 +14,7 @@ class Search extends React.Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
+        <ListCategories />
       </section>
     );
   }
