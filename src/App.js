@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Search from './pages/Search';
 import './App.css';
 import Cart from './pages/Cart';
+import Home from './pages/Home';
 /* import ListerProduct from './pages/ListerProduct'; */
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <main>
         <Switch>
-          <Route exact path="/" component={ Search } />
+          <Route exact path="/" component={ Home } />
           <Route exact path="/cart" component={ Cart } />
           {/* <Route
             exact

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
-import ListCategories from './Listcategories';
-import CartImage from '../components/CartImage';
-import CartListProduct from '../components/CartListProduct';
+import ListCategories from './.Listcategories';
+import CartImage from '../components/Home/CartImage';
+import CartListProduct from '../components/Home/CartListProduct';
 
 class Search extends React.Component {
   constructor() {
@@ -36,13 +36,13 @@ class Search extends React.Component {
         <input
           data-testid="query-input"
           type="search"
-          onChange={ this.handlerChange }
+          onChange={this.handlerChange}
           name="query"
         />
         <button
           data-testid="query-button"
           type="button"
-          onClick={ this.handlerClick }
+          onClick={this.handlerClick}
         >
           Buscar
         </button>
@@ -52,11 +52,11 @@ class Search extends React.Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
-        <ListCategories handlerChange={ this.handlerChange } />
+        <ListCategories handlerChange={this.handlerChange} />
         {products.map((product) => (
           <CartListProduct
-            key={ product.id }
-            product={ product }
+            key={product.id}
+            product={product}
           />
         ))}
       </section>
