@@ -13,7 +13,7 @@ class ListCategories extends Component {
     this.HandleListCategories();
   }
 
-  async HandleListCategories = () => {
+  HandleListCategories = async () => {
     const categories = await getCategories();
     this.setState({ categories });
   }
