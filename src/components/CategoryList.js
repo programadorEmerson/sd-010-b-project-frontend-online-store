@@ -32,7 +32,7 @@ class CategoryList extends React.Component {
               <button onClick={ onClick(id) }type>{name}</button>
             </li>))}
         </ul>
-      </section>)
+      </section>);
     return (
       categories.length === 0 ? null : section
     );
