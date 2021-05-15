@@ -10,17 +10,17 @@ class ShoppingHome extends Component {
   render() {
     return (
       <section className="ShoppingHome">
+        <aside>
+          <ul>
+            <ListCategories />
+          </ul>
+        </aside>
         <main>
           <ProductsSearchBar />
           <Link to="/cart" data-testid="shopping-cart-button">
             Cart
           </Link>
         </main>
-        <aside>
-          <ul>
-            <ListCategories />
-          </ul>
-        </aside>
       </section>
     );
   }
