@@ -1,26 +1,30 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { getCategories } from './services/api';
 import Home from './pages/Home';
+import Header from './components/Header';
+
 import './App.css';
 
-class App extends React.Component {
-  componentDidMount() {
-    getCategories().then((categories) => console.log(categories));
-  }
+function App() {
+  return (
+    <BrowserRouter>
+      <div>
+        <Header />
+        <main className="App">
 
-  render() {
-    return (
-      <main className="App">
-        <BrowserRouter>
           <Switch>
-            <Route path="/" component={ Home } />
+            <Route path="/" exact component={ Home } />
           </Switch>
-        </BrowserRouter>
-      </main>
-    );
-  }
+        </main>
+        <footer>
+          <p>
+            Desenvolvido por: Trybe - Turma 10 - Trybo B - Grupo 11
+          </p>
+        </footer>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
