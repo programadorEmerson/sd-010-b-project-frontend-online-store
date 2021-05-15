@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Header from './components/Header';
-
+import Cart from './pages/Cart';
 import './App.css';
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
 
           <Switch>
             <Route path="/" exact component={ Home } />
+            <Route path="/cart" exact component={ Cart } />
           </Switch>
         </main>
         <footer>
