@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 class CategoryList extends React.Component {
   generateSelectCategories = () => {
-    const { categories } = this.props;
+    const { categories, onSelect } = this.props;
 
     return (
-      <select>
+      <select onChange={ (event) => onSelect(event) }>
         {
           categories.map((category) => {
             const { name } = category;
@@ -33,6 +33,7 @@ class CategoryList extends React.Component {
 
 CategoryList.propTypes = {
   categories: PropTypes.shape.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
 export default CategoryList;
