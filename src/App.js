@@ -1,7 +1,7 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import './App.css';
-import ProductsSearchBar from './components/ProductsSearchBar';
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import "./App.css";
+import ProductsSearchBar from "./components/ProductsSearchBar";
 // import * as api from './services/api';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <main>
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={ ProductsSearchBar } />
+          <Route path="/" component={ProductsSearchBar} />
         </Switch>
       </BrowserRouter>
     </main>
@@ -18,3 +18,4 @@ function App() {
 }
 
 export default App;
+
