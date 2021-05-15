@@ -15,11 +15,6 @@ class Search extends React.Component {
     };
   }
 
-  /* componentDidUpdate(prevProps, prevState) {
-    const { query, category } = this.state;
-    api.getProductsFromCategoryAndQuery(category, query)
-      .then((response) => console.log(response));
-  } */
 
   handlerChange = ({ target: { name, value } }) => {
     /* console.log(value); */
