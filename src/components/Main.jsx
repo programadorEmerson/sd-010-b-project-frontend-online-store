@@ -11,6 +11,8 @@ class Main extends React.Component {
     this.state = {
       categories: [],
       selectedCategory: '',
+      typedProduct: '',
+      searchResult: [],
     };
   }
 
@@ -27,12 +29,22 @@ class Main extends React.Component {
       this.setState({ selectedCategory: value });
     }
 
+    saveTypedProduct = ({ target: { value } }) => {
+      this.setState({ typedProduct: value });
+    }
+
+    saveGettedProducts = async () => {
+      const { selectedCategory, typedProduct } = this.state;
+      const { results } = await getProductsFromCategoryAndQuery(selectedCategory, typedProduct);
+      this.setState({ searchResult: results });
+    }
+
     render() {
       const { categories } = this.state;
 
       return (
         <div>
-          <Header getProducts={ getProductsFromCategoryAndQuery } />
+          <Header onTyped={ this.saveTypedProduct } saveProducts={ this.saveGettedProducts } />
           <Message />
           <CategoryList onSelect={ this.saveSelectedCategory } categories={ categories } />
           <Link to="/ShopCart" data-testid="shopping-cart-button">Button!</Link>
