@@ -52,14 +52,31 @@ header {
   display: flex;
 }
 
+/* Componente CategoryBar */
 .categories-bar {
   border-style: solid;
   border-width: 1px;
   width: 300px;
 }
 
+.categories-bar h1 {
+  text-align: center;
+}
+
+.categories-bar li {
+  padding: 2px 10px;
+}
+
+/* Componente CategoryBar */
 .result-page {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+}
+
+.products-list {
+  background-color: #dddadaab;
+  text-align: center;
 }
 
 footer {
