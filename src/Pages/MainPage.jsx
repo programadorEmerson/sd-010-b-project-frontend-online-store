@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '../Components/Button';
 
-class SearchBar extends Component {
+class MainPage extends Component {
   render() {
     return (
       <section>
@@ -15,4 +15,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default MainPage;
