@@ -67,8 +67,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { categories, foundProducts, products } = this.state;
-    console.log(products);
+    const { categories, foundProducts } = this.state;
 
     return (
       <div>
