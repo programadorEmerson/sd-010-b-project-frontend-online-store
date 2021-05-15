@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-/* import PropTypes from 'prop-types'; */
+import PropTypes from 'prop-types';
 
 export default class CartListProduct extends Component {
   render() {
-    const { product: { title } } = this.props;
-    console.log(title);
+    const { product: { title, thumbnail, price } } = this.props;
     /* const { title, img, prices } = product; */
     return (
       <div data-testid="product">
         <h3>{ title }</h3>
-        {/* <img src={ img } alt="..." />
-        <p>{ prices }</p> */}
+        <img src={ `${thumbnail}` } alt="..." />
+        <p>{ price }</p>
       </div>
     );
   }
 }
 
-/* CartListProduct.propTypes = {
-  title: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-  prices: PropTypes.string.isRequired,
-}; */
+CartListProduct.propTypes = {
+  product: PropTypes.shape({
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    price: PropTypes.string,
+  }).isRequired,
+};
