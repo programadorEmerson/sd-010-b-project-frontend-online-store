@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 import './App.css';
+
 import MainPage from './Pages/MainPage';
 import ShoppingCart from './Pages/ShoppingCart';
 

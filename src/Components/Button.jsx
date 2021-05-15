@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class Button extends Component {
   render() {
     return (
-      <button type="button">
+      <button type="button" data-testid="query-button">
         <Link to="/shopping-cart" data-testid="shopping-cart-button">teste</Link>
       </button>
     );
