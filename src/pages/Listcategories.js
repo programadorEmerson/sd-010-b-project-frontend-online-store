@@ -24,9 +24,6 @@ class ListCategories extends Component {
     });
   }
 
-  /* change({ target: { value } }) {
-    console.log(value);
-  } */
 
   render() {
     const { categories } = this.state;
