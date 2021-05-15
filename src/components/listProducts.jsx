@@ -36,12 +36,17 @@ class ListProducts extends React.Component {
       <section>
         <input name="query" ata-testid="query-input" onChange={ this.handleOnchange } />
         <button type="button" data-testid="query-button">teste</button>
-        { products.map((element) => (
-          <div data-testid="product" key={ element.id }>
-            <h3>{ element.title }</h3>
-            <img src={ element.thumbnail } alt={ element.title } />
-            <p>{ element.price }</p>
-          </div>)) }
+        <div className="product-list">
+          { products.map((element) => (
+            <div className="product-card" data-testid="product" key={ element.id }>
+              <h4>{ element.title }</h4>
+              <img src={ element.thumbnail } alt={ element.title } />
+              <h3>
+                { 'R$ ' }
+                { element.price }
+              </h3>
+            </div>)) }
+        </div>
       </section>
     );
   }
