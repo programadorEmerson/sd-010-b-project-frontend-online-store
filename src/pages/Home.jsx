@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 
 import Input from '../components/Input';
+import ProductsList from '../components/ProductsList';
 
 import { getCategories } from '../services/api';
 
@@ -21,6 +22,9 @@ class Home extends React.Component {
           <p className="text-search" data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
+          <section className="products-list">
+            <ProductsList />
+          </section>
         </section>
       </div>
     );

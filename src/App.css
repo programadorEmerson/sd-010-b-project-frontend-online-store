@@ -59,7 +59,14 @@ header {
 }
 
 .result-page {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+}
+
+.products-list {
+  background-color: #dddadaab;
+  text-align: center;
 }
 
 footer {
