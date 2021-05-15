@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CategoryList from './CategoryList';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import Message from './Message';
+
 import Header from './Header';
+import Message from './Message';
+import CategoryList from './CategoryList';
+import ProductCard from './ProductCard';
 
 class Main extends React.Component {
   constructor(props) {
@@ -39,6 +41,17 @@ class Main extends React.Component {
       this.setState({ searchResult: results });
     }
 
+    renderProductCards = () => {
+      const { searchResult } = this.state;
+
+      return searchResult.map((result) => {
+        const { title, thumbnail, price } = result;
+        return (
+          <ProductCard title={ title } thumbnail={ thumbnail } price={ price } />
+        );
+      })
+    }
+
     render() {
       const { categories } = this.state;
 
@@ -48,6 +61,7 @@ class Main extends React.Component {
           <Message />
           <CategoryList onSelect={ this.saveSelectedCategory } categories={ categories } />
           <Link to="/ShopCart" data-testid="shopping-cart-button">Button!</Link>
+          {this.renderProductCards()}
         </div>
       );
     }
