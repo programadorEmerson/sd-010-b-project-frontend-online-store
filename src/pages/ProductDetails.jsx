@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class ProductDatails extends Component {
+class ProductDetails extends Component {
   render() {
     const { location: { state: { item } } } = this.props;
     const { title } = item;
@@ -11,7 +11,7 @@ class ProductDatails extends Component {
   }
 }
 
-ProductDatails.propTypes = {
+ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       item: PropTypes.shape({
@@ -21,4 +21,4 @@ ProductDatails.propTypes = {
   }).isRequired,
 };
 
-export default ProductDatails;
+export default ProductDetails;

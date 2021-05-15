@@ -13,7 +13,10 @@ export default class ProductCard extends Component {
           <img src={ thumbnail } alt="img" />
         </div>
         <p>{price}</p>
-        <Link data-testid="product-detail-link" to={ { pathname: '/datails', state: { item } } }>
+        <Link
+          data-testid="product-detail-link"
+          to={ { pathname: '/datails', state: { item } } }
+        >
           Detalhes
         </Link>
       </div>
