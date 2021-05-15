@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import CategoryList from './CategoryList';
+import Card from './Card';
 
 class Home extends React.Component {
   constructor() {
@@ -29,12 +30,10 @@ class Home extends React.Component {
   }
 
   render() {
-    const { filtered } = this.state;
-    console.log(filtered);
-    const { available_filters } = filtered;
+    const { filtered: { available_filters: resultFilter }, filtered } = this.state;
     return (
-      <div>
-        <div>
+      <main>
+        <div id="searchBar">
           <input
             data-testid="query-input"
             type="text"
@@ -50,20 +49,19 @@ class Home extends React.Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <ol>
-            <CategoryList />
-          </ol>
-          <Link data-testid="shopping-cart-button" to="/cart">Carrinho</Link>
         </div>
-        {filtered.length !== 0
-        && (<div id="products">
-          {!available_filters || available_filters.length === 0
-            ? 'Nenhum produto a ser encontrado'
-            : (filtered.results.map(
-              (product) => (<li data-testid="product" key={ product.id }>{product.title}</li>),
-            ))}
-        </div>) }
-      </div>
+        <Link data-testid="shopping-cart-button" id="cart" to="/cart">Carrinho</Link>
+        <CategoryList />
+        {filtered.length !== 0 && (
+          <div id="products">
+            {!resultFilter || resultFilter.length === 0
+              ? 'Nenhum produto a ser encontrado'
+              : (filtered.results.map(
+                (product) => (<Card key={ product.id } product={ product } />),
+                // ({ id, title }) => (<li data-testid="product" key={ id }>{title}</li>),
+              ))}
+          </div>) }
+      </main>
     );
   }
 }
