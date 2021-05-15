@@ -6,43 +6,40 @@ class Categories extends React.Component {
     super();
     this.state = {
       categories: [],
-      loading: true
+      loading: true,
     };
     this.recuperarCategorias = this.recuperarCategorias.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.recuperarCategorias();
   }
 
-  recuperarCategorias () {
+  recuperarCategorias() {
     api.getCategories().then((result) => {
       Object.entries(result).map((teste) => {
         this.setState((oldState) => ({
-          categories: [...oldState.categories, teste[1]]
-        }))
+          categories: [...oldState.categories, teste[1]],
+        }));
       });
       this.setState({
-        loading: false
-      })
-    })
+        loading: false,
+      });
+    });
   }
 
-  render() {  
-    const { loading, categories} = this.state;
+  render() {
+    const { loading, categories } = this.state;
     return (
       <div>
-          <ul>
-            {
-              loading ? <p>Carregando</p> :
-              categories.map((result) => {
-                return <li key={result.id} data-testeid="category">{result.name}</li>
-              })
-            }
-          </ul>
+        <ul>
+          {
+            loading ? <p>Carregando</p>
+              : categories.map((result) => <li key={ result.id } data-testid="category">{result.name}</li>)
+          }
+        </ul>
       </div>
     );
-
   }
 }
 
