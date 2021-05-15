@@ -1,24 +1,24 @@
 import React from 'react';
-import * as api  from '../services/api';
-import ProductsByTerms from './productsByTerms';
 import { Link } from 'react-router-dom';
-import * as Api from '../services/api';
+import ProductsByTerms from './productsByTerms';
+import * as api from '../services/api';
 import CategoryList from './CategoryList';
 
 class Homepage extends React.Component {
   constructor() {
     super();
 
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
       searchQuery: '',
       categories: [],
-      arrProducts: []
-
+      arrProducts: [],
+      category: '',
     };
 
     this.LoadCategories = this.LoadCategories.bind(this);
+    this.setCategory = this.setCategory.bind(this);
     this.renderCategories = this.renderCategories.bind(this);
   }
 
@@ -26,8 +26,26 @@ class Homepage extends React.Component {
     this.LoadCategories();
   }
 
+  async handleClick() {
+    const { searchQuery, category } = this.state;
+    console.log(searchQuery, category);
+    const productTerms = await api.getProductsFromCategoryAndQuery(category, searchQuery);
+    this.setState({
+      arrProducts: productTerms.results,
+    });
+  }
+
+  // Passando essa função como prop para a lista de categorias renderizadas.
+  // Essa função basicamente pega o valor do input Radio, atualiza o state com esse valor e faz uma nova chamada para API do mercado Livre
+  setCategory(e) {
+    const { target: { value } } = e;
+    this.setState({ category: value }, () => {
+      this.handleClick();
+    });
+  }
+
   async LoadCategories() {
-    const allCategories = await Api.getCategories();
+    const allCategories = await api.getCategories();
     this.setState({
       categories: allCategories,
     });
@@ -40,25 +58,22 @@ class Homepage extends React.Component {
         {categories.length === 0 ? (
           <span>Nenhuma categoria foi encontrada</span>
         ) : (
-          categories.map((categ) => (
-            <CategoryList key={ categ.id } name={ categ.name } />
-          ))
+          categories.map((categ) => {
+            const { id, name } = categ;
+            return (<CategoryList
+              key={ id }
+              id={ id }
+              name={ name }
+              onClick={ this.setCategory }
+            />);
+          })
         )}
       </section>
     );
   }
 
-  async handleClick () {
-    const { searchQuery } = this.state;
-    const productTerms = await api.getProductsFromCategoryAndQuery('', searchQuery)
-    this.setState({
-      arrProducts: productTerms.results,
-    })
-   }
-
   render() {
     const { searchQuery, arrProducts } = this.state;
-    console.log(arrProducts)
     return (
       <div>
         <input
@@ -69,16 +84,20 @@ class Homepage extends React.Component {
         />
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
-          {this.renderCategories()}
         </h3>
-
-        <Link to="/pagecart" data-testid="shopping-cart-button">
-          Page Cart
-        </Link>
-
-        <button data-testid="query-button" onClick={this.handleClick}>Pesquisar</button>
-        {arrProducts.map((product) => <ProductsByTerms key={product.id} product={product} />)}
         <Link to="/pagecart" data-testid="shopping-cart-button">Page Cart</Link>
+        <button
+          type="button"
+          data-testid="query-button"
+          onClick={ this.handleClick }
+        >
+          Pesquisar
+        </button>
+        {this.renderCategories()}
+        {arrProducts.map((product) => (<ProductsByTerms
+          key={ product.id }
+          product={ product }
+        />))}
       </div>
     );
   }

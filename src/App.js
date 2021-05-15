@@ -5,7 +5,6 @@ import Homepage from './components/Homepage';
 import PageCart from './components/PageCart';
 
 class App extends React.Component {
-
   render() {
     return (
       <BrowserRouter>
