@@ -8,16 +8,14 @@ class Header extends Component {
         <h2>
           Project Frontend Online Store
         </h2>
-        <Link className="btn-type" to="/">
+        <Link className="btn-type" to="/cart" data-testid="shopping-cart-button">
           <img
-            data-testid="shopping-cart-button"
             src="https://www.seekpng.com/png/detail/257-2572499_close-shopping-cart-light-gray-shopping-cart.png"
             alt="cart"
             width="100px"
           />
         </Link>
       </nav>
-
     );
   }
 }

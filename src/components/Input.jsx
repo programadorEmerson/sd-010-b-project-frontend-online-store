@@ -26,7 +26,6 @@ class Input extends Component {
           />
         </header>
       </div>
-
     );
   }
 }
