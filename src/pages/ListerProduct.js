@@ -3,8 +3,12 @@ import Search from './Search';
 
 class ListerProduct extends React.Component {
   render() {
+    const { value, onChange } = this.state;
     return (
-      <Search />
+      <Search
+        value={ value }
+        onChange={ onChange }
+      />
     );
   }
 }
