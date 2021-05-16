@@ -9,6 +9,7 @@ class Input extends Component {
   }
 
   render() {
+    const { searchText, onSearchTextChange, onClickSearch } = this.props;
     const { urlfinal } = this.state;
     return (
       <div className="header-separator">
@@ -19,11 +20,23 @@ class Input extends Component {
             type="text/css"
           />
           <input
+            data-testid="query-input"
             className="input-search"
             type="text"
-            placeholder="Procurar &#xF002;"
+            placeholder="Pesquisar &#xF002;"
             autoComplete="off"
+            name="searchText"
+            value={ searchText }
+            onChange={ onSearchTextChange }
           />
+          <button
+            data-testid="query-button"
+            className="Btn-search"
+            type="submit"
+            onClick={ onClickSearch }
+          >
+            Procurar
+          </button>
         </header>
       </div>
     );

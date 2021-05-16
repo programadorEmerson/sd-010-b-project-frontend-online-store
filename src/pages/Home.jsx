@@ -19,10 +19,6 @@ class Home extends React.Component {
           <CategoryBar />
         </section>
         <section className="result-page">
-          <Input />
-          <p className="text-search" data-testid="home-initial-message">
-            Digite algum termo de Pesquisa ou escolha uma categoria.
-          </p>
           <section className="products-list">
             <ProductsList />
           </section>
