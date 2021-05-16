@@ -75,7 +75,8 @@ export default class Home extends Component {
 
   addProductIntoCart(item) {
     const { cart } = this.state;
-    this.setState({ cart: [...cart, item] });
+    const itemProduct = { ...item, qty: 1 };
+    this.setState({ cart: [...cart, itemProduct] });
   }
 
   render() {
