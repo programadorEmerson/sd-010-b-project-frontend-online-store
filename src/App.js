@@ -8,17 +8,15 @@ import Home from './pages/Home';
 function App() {
   return (
     <BrowserRouter>
-      <main>
-        <Switch>
-          <Route exact path="/" component={ Home } />
-          <Route exact path="/cart" component={ Cart } />
-          {/* <Route
+      <Switch>
+        <Route exact path="/" component={ Home } />
+        <Route exact path="/cart" component={ Cart } />
+        {/* <Route
             exact
             path="/busca/:id"
             render={ (props) => <ListerProduct { ...props } /> }
           /> */}
-        </Switch>
-      </main>
+      </Switch>
     </BrowserRouter>
   );
 }

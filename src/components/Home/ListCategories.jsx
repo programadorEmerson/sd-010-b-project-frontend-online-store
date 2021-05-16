@@ -1,49 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getCategories } from '../../services/api';
 
 class ListCategories extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      categories: [],
-    };
-  }
-
-  componentDidMount() {
-    this.requestApi();
-  }
-
-  requestApi = async () => {
-    const apiResponse = await getCategories();
-    this.setState({
-      categories: apiResponse,
-    });
-  }
-
   render() {
-    const { categories } = this.state;
-    const { handlerChange } = this.props;
+    const { handlerChange, categories } = this.props;
     return (
-      <select onChange={ handlerChange } name="category">
-        <option>Selecione uma categoria</option>
-        { categories.map(({ name, id }) => (
-          <option
-            key={ id }
-            data-testid="category"
-            value={ id }
-          >
-            { name }
-          </option>
-        )) }
-      </select>
+      <section className="select-categorie-component">
+        <select onChange={ handlerChange } name="category">
+          <option>Selecione uma categoria</option>
+          { categories.map(({ name, id }) => (
+            <option key={ id } data-testid="category" value={ id }>
+              { name }
+            </option>
+          )) }
+        </select>
+      </section>
     );
   }
 }
 
 ListCategories.propTypes = {
   handlerChange: PropTypes.func.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ListCategories;
