@@ -9,19 +9,20 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
       cart: [],
     };
-
-    this.updateCategory = this.updateCategory.bind(this);
   }
 
   componentDidMount() {
-    this.updateCategory();
+    this.updateCategories();
   }
 
-  async updateCategory() {
+  async updateCategories() {
     const categories = await getCategories();
+    this.setState({ categories });
+  }
+
+  updateCategory(categories) {
     this.setState({ categories });
   }
 

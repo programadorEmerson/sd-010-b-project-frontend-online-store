@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Category, SearchBar, ListProducts } from '../components';
-import { getProductsFromCategory } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import '../css/Home.css';
 
 class Home extends Component {
@@ -9,16 +8,35 @@ class Home extends Component {
     super();
     this.state = {
       category: '',
+      listCategories: [],
       products: [],
     };
 
+    this.updateCategories = this.updateCategories.bind(this);
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.updateListProducts = this.updateListProducts.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async onChangeCategory({ target: { value } }) {
-    const category = await getProductsFromCategory(value);
-    this.setState({ category });
+  componentDidMount() {
+    this.updateCategories();
+  }
+
+  async handleSubmit(inputSearch = '') {
+    const { category } = this.state;
+    const { results } = await getProductsFromCategoryAndQuery(category, inputSearch);
+    this.updateListProducts(results);
+  }
+
+  onChangeCategory({ target: { value } }) {
+    this.setState({ category: value }, () => {
+      this.handleSubmit(value);
+    });
+  }
+
+  async updateCategories() {
+    const listCategories = await getCategories();
+    this.setState({ listCategories });
   }
 
   updateListProducts(products) {
@@ -26,24 +44,19 @@ class Home extends Component {
   }
 
   render() {
-    const { products, category } = this.state;
-    const { categories } = this.props;
+    const { products, listCategories } = this.state;
     return (
       <>
         <div className="list-category" onChange={ this.onChangeCategory }>
-          {categories.map((elem) => (
+          {listCategories.map((elem) => (
             <Category key={ elem.name } category={ elem } />
           ))}
         </div>
-        <SearchBar updateListProducts={ this.updateListProducts } category={ category } />
+        <SearchBar handleSubmit={ this.handleSubmit } />
         <ListProducts products={ products } />
       </>
     );
   }
 }
-
-Home.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default Home;
