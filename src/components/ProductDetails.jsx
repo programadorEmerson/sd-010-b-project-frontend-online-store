@@ -9,6 +9,7 @@ class ProductDetails extends React.Component {
 
     this.state = {
       product: {},
+      render: false,
     };
   }
 
@@ -26,24 +27,30 @@ class ProductDetails extends React.Component {
   }
 
   setProductState(product) {
-    this.setState({ product });
+    this.setState({ product, render: true });
   }
 
   render() {
-    const { product: { title, price, thumbnail } } = this.state;
-    return (
-      <main>
-        <h1 data-testid="product-detail-name">Pequeno Principe, O</h1>
-        <img src={ thumbnail } alt={ title } />
-        <section>
-          <ul>
-            <h1>Descrição do Produto</h1>
-            <li>{title}</li>
-            <li>{price}</li>
-          </ul>
-        </section>
-      </main>
-    );
+    const { product: { title, price, thumbnail }, render } = this.state;
+    if (render) {
+      return (
+        <main data-testid="product-detail-name">
+          <h1>
+            Pequeno Principe, O
+            {title}
+          </h1>
+          <img src={ thumbnail } alt={ title } />
+          <section>
+            <ul>
+              <h1>Descrição do Produto</h1>
+              <li>{title}</li>
+              <li>{price}</li>
+            </ul>
+          </section>
+        </main>
+      );
+    }
+    return <h1>Carregando...</h1>;
   }
 }
 

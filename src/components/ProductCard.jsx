@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class ProductCard extends React.Component {
   render() {
     const {
-      id, typedProduct, category_id: categoryId, title, price, thumbnail,
+      id, typedProduct, categoryId, title, price, thumbnail,
     } = this.props;
     return (
       <section className="product-card" data-testid="product">
