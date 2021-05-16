@@ -34,7 +34,7 @@ class ProductDetails extends React.Component {
 
           <section className="product-details-right">
             <ul>
-              <h1>Descrição do Produto</h1>
+              <h1>Descrição do Produto:</h1>
               <li>{ title }</li>
               <li>{ price }</li>
               <h4>Localização do Produto</h4>
