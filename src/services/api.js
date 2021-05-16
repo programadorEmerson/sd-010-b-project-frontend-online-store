@@ -10,10 +10,7 @@ export async function getProductsFromCategoryAndQuery(categoryId = null, query =
   const endpointCategoryId = `https://api.mercadolibre.com/sites/MLB/search?q=$${categoryId}`;
   const endpointCategoryIdQuery = `https://api.mercadolibre.com/sites/MLB/search?category=$${categoryId}&q=$${query}`;
 
-  let endpoints = null;
-  if (categoryId === null && query === null) {
-    endpoints = endpointQuery;
-  }
+  let endpoints;
   if (categoryId === null && query !== null) {
     endpoints = endpointQuery;
   }
