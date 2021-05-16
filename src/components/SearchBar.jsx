@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { getProductsFromQuery } from '../services/api';
+import PropTypes from 'prop-types';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class SearchBar extends Component {
   constructor() {
     super();
     this.state = {
       inputSearch: '',
-      listProducts: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -19,11 +19,14 @@ class SearchBar extends Component {
 
   async handleSubmit() {
     const { inputSearch } = this.state;
-    const listProducts = await getProductsFromQuery(inputSearch);
-    this.setState({ listProducts });
+    const { updateListProducts, category } = this.props;
+    console.log(category);
+    const { results } = await getProductsFromCategoryAndQuery(category, inputSearch);
+    updateListProducts(results);
   }
 
   render() {
+    console.log(this.props.category);
     const { inputSearch } = this.state;
     return (
       <div>
@@ -38,7 +41,7 @@ class SearchBar extends Component {
           />
         </label>
         <button
-          data-testid="query-query-button"
+          data-testid="query-button"
           type="button"
           onClick={ this.handleSubmit }
         >
@@ -48,5 +51,10 @@ class SearchBar extends Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  updateListProducts: PropTypes.func.isRequired,
+  category: PropTypes.string.isRequired,
+};
 
 export default SearchBar;
