@@ -15,6 +15,7 @@ class Main extends React.Component {
       selectedCategory: '',
       typedProduct: '',
       searchResult: [],
+      shoppingCart: [],
     };
   }
 
@@ -62,13 +63,20 @@ class Main extends React.Component {
           <ProductCard
             key={ id }
             result={ result }
+            addToCart={ this.addProductToShoppingCart }
           />
         );
       });
     }
 
+    //  Adiciona o produto ao carrinho de compras (passado como prop para o card)
+    addProductToShoppingCart = (product) => {
+      const { shoppingCart } = this.state;
+      this.setState({ shoppingCart: [...shoppingCart, product] });
+    }
+
     render() {
-      const { categories } = this.state;
+      const { categories, shoppingCart } = this.state;
 
       return (
         <main>
@@ -81,7 +89,12 @@ class Main extends React.Component {
             onSelect={ this.saveSelectedCategory }
             categories={ categories }
           />
-          <Link to="/ShopCart" data-testid="shopping-cart-button">Button!</Link>
+          <Link
+            to={ { pathname: '/ShopCart', state: { shoppingCart } } }
+            data-testid="shopping-cart-button"
+          >
+            Ver Carrinho
+          </Link>
           <section className="product-card-list">
             { this.renderProductCards() }
           </section>
