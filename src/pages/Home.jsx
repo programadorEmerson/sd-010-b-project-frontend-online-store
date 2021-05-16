@@ -10,32 +10,34 @@ import { getCategories, getProductsFromCategoryAndQuery } from '../services/api'
 class Home extends React.Component {
   constructor() {
     super();
-    this.onChangeHandle = this.onChangeHandle.bind(this)
-    this.onClickHandle = this.onClickHandle.bind(this)
+    this.onChangeHandle = this.onChangeHandle.bind(this);
+    this.onClickHandle = this.onClickHandle.bind(this);
     this.state = {
       isLoading: false,
       products: [],
       inputfilter: null,
-    }
+    };
   }
 
-  onChangeHandle({target}) {
+  componentDidMount() {
+    getCategories().then((categories) => console.log(categories));
+  }
+
+  onChangeHandle({ target }) {
     this.setState({
       inputfilter: target.value,
     });
   }
 
-  onClickHandle() {
+  onClickHandle(event) {
+    event.preventDefault();
     const { inputfilter } = this.state;
+    this.setState({ isLoading: true });
     getProductsFromCategoryAndQuery(null, inputfilter)
-    .then((products) => this.setState({isLoading: true},() => ({
-      products,
-      isLoading: false,
-    })));
-  }
-
-  componentDidMount() {
-    getCategories().then((categories) => console.log(categories));
+      .then((products) => this.setState({
+        products,
+        isLoading: false,
+      }));
   }
 
   render() {
@@ -46,8 +48,14 @@ class Home extends React.Component {
           <CategoryBar />
         </section>
         <section className="result-page">
-          <Input onChange={this.onChangeHandle} />
-          <button onClick={this.onClickHandle}>&#9740;</button>
+          <Input onChange={ this.onChangeHandle } />
+          <button
+            data-testid="query-button"
+            type="submit"
+            onClick={ this.onClickHandle }
+          >
+            &#9740;
+          </button>
           <p className="text-search" data-testid="home-initial-message">
             Digite algum termo de Pesquisa ou escolha uma categoria.
           </p>
