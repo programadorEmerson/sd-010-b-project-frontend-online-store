@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class ProductDetails extends React.Component {
@@ -7,6 +8,7 @@ class ProductDetails extends React.Component {
 
     this.state = {
       render: false,
+      shoppingCart: [],
     };
   }
 
@@ -14,16 +16,24 @@ class ProductDetails extends React.Component {
     this.setRenderedState();
   }
 
-  setRenderedState() {
+  //  Seta o estado Rendenizar para VERDADEIRO
+  setRenderedState = () => {
     this.setState({ render: true });
   }
 
+  //  Adiciona o produto ao carrinho de compras
+  addProductToShoppingCart = (product) => {
+    const { shoppingCart } = this.state;
+    this.setState({ shoppingCart: [...shoppingCart, product] });
+  }
+
   render() {
-    const { render } = this.state;
+    const { render, shoppingCart } = this.state;
     const { location: { state: { result } } } = this.props;
     const {
       title, thumbnail, price, address: { city_name: city, state_name: state },
     } = result;
+
     if (render) {
       return (
         <main className="product-details">
@@ -41,6 +51,19 @@ class ProductDetails extends React.Component {
               <li>{ city }</li>
               <li>{ state }</li>
             </ul>
+            <button
+              type="submit"
+              data-testid="product-detail-add-to-cart"
+              onClick={ () => this.addProductToShoppingCart(result) }
+            >
+              Adicionar ao Carrinho
+            </button>
+            <Link
+              to={ { pathname: '/ShopCart', state: { shoppingCart } } }
+              data-testid="shopping-cart-button"
+            >
+              Ver Carrinho
+            </Link>
           </section>
         </main>
       );
