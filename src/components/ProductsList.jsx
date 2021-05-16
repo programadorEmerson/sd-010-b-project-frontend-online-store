@@ -51,7 +51,7 @@ class ProductsList extends React.Component {
           onClickSearch={ this.onHandleClick }
         />
         <p className="text-search" data-testid="home-initial-message">
-          Digite algum termo de Pesquisa ou escolha uma categoria.
+          Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <div>
           { isLoading ? <Loading />
