@@ -15,7 +15,6 @@ class Categories extends React.Component {
 
   fetchCategories = async () => {
     const categories = await api.getCategories();
-    console.log(categories);
     this.setState({
       categories,
 
