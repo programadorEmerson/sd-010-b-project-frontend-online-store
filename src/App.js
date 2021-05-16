@@ -4,6 +4,7 @@ import ShopCart from './components/ShopCart';
 import Main from './components/Main';
 
 import './App.css';
+import ProductDetails from './components/ProductDetails';
 
 class App extends React.Component {
   render() {
@@ -12,6 +13,11 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={ Main } />
+            <Route
+              exact
+              path="/product-details/:categoryId/:id"
+              render={ (props) => <ProductDetails { ...props } /> }
+            />
             <Route path="/ShopCart" component={ ShopCart } />
           </Switch>
         </BrowserRouter>

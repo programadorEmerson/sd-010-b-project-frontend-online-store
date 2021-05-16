@@ -57,13 +57,11 @@ class Main extends React.Component {
       const { searchResult } = this.state;
 
       return searchResult.map((result) => {
-        const { id, title, thumbnail, price } = result;
+        const { id } = result;
         return (
           <ProductCard
             key={ id }
-            keytitle={ title }
-            thumbnail={ thumbnail }
-            price={ price }
+            result={ result }
           />
         );
       });
@@ -85,7 +83,7 @@ class Main extends React.Component {
           />
           <Link to="/ShopCart" data-testid="shopping-cart-button">Button!</Link>
           <section className="product-card-list">
-            {this.renderProductCards()}
+            { this.renderProductCards() }
           </section>
         </main>
       );
