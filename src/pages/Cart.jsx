@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import CartItem from '../components/CartItem';
+import '../css/Cart.css';
 
 class Cart extends Component {
   render() {
