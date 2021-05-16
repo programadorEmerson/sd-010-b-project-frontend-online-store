@@ -34,6 +34,13 @@ const fakeCartItems = [
   },
 ];
 class Cart extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: fakeCartItems,
+    };
+  }
+
   render() {
     return (
       <section>
