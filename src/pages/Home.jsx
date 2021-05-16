@@ -30,7 +30,7 @@ class Home extends Component {
 
   onChangeCategory({ target: { value } }) {
     this.setState({ category: value }, () => {
-      this.handleSubmit(value);
+      this.handleSubmit();
     });
   }
 
