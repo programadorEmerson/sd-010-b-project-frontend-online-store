@@ -26,14 +26,14 @@ class CartItem extends Component {
     return (
       <div className="cart-item">
         {this.renderRemoveProductsIcon()}
-        {this.renderImageProduct()}
-        <div>Nome do produto</div>
+        {this.renderImageProduct(source)}
+        <div>{ name }</div>
         <div className="config-product-quantity">
           {this.renderDecreaseQuantityIcon()}
-          <div className="product-quantity">1</div>
+          <div className="product-quantity">{ quantity }</div>
           {this.renderIncreaseQuantityIcon()}
         </div>
-        <div className="product-price">R$ 1000</div>
+        <div className="product-price">{ price }</div>
       </div>
     );
   }
