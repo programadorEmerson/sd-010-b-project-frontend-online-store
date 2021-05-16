@@ -34,8 +34,8 @@ class ProductDetails extends React.Component {
     const { product: { title, price, thumbnail }, render } = this.state;
     if (render) {
       return (
-        <main data-testid="product-detail-name">
-          <h1>
+        <main>
+          <h1 data-testid="product-detail-name">
             Pequeno Principe, O
             {title}
           </h1>
