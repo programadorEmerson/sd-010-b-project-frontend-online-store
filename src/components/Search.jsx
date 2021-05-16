@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Categories from './Categories'
+import Categories from './Categories';
 
 class Search extends Component {
   render() {
