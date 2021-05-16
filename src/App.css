@@ -78,3 +78,33 @@
   font-size: large;
   text-align: center;
 }
+
+.product-details {
+  display: flex;
+}
+
+.product-details section {
+  margin: 16px;
+}
+
+.product-details-left {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 25%;
+}
+
+.product-details-left h1 {
+  text-align: center;
+}
+
+.product-details-right {
+  border-left: black solid 2px;
+  height: 620px;
+}
+
+.product-details-image {
+  border-radius: 16px;
+  max-height: 40vh;
+  width: 40vh;
+}

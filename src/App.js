@@ -15,7 +15,7 @@ class App extends React.Component {
             <Route exact path="/" component={ Main } />
             <Route
               exact
-              path="/product-details/:categoryId/:id/:typedProduct"
+              path="/product-details/:categoryId/:id"
               render={ (props) => <ProductDetails { ...props } /> }
             />
             <Route path="/ShopCart" component={ ShopCart } />

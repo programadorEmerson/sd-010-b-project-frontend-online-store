@@ -1,50 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getProductsFromCategoryAndQuery } from '../services/api';
-import mockedQueryResult from '../__mocks__/query';
 
 class ProductDetails extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      product: {},
       render: false,
     };
   }
 
-  async componentDidMount() {
-    const {
-      match: { params: { id, category_id: categoryId, typedProduct } },
-    } = this.props;
-    const productList = await getProductsFromCategoryAndQuery(categoryId, typedProduct);
-    const productListId = productList.results;
-    const product = productListId.find((productId) => productId.id === id);
-
-    console.log(mockedQueryResult.results[0].title);
-
-    this.setProductState(product);
+  componentDidMount() {
+    this.setRenderedState();
   }
 
-  setProductState(product) {
-    this.setState({ product, render: true });
+  setRenderedState() {
+    this.setState({ render: true });
   }
 
   render() {
-    const { product: { title, price, thumbnail }, render } = this.state;
+    const { render } = this.state;
+    const { location: { state: { result } } } = this.props;
+    const {
+      title, thumbnail, price, address: { city_name: city, state_name: state },
+    } = result;
     if (render) {
       return (
-        <main>
-          <h1 data-testid="product-detail-name">
-            Pequeno Principe, O
-            {title}
-          </h1>
-          <img src={ thumbnail } alt={ title } />
-          <section>
+        <main className="product-details">
+          <section className="product-details-left">
+            <h1 data-testid="product-detail-name">{ title }</h1>
+            <img className="product-details-image" src={ thumbnail } alt={ title } />
+          </section>
+
+          <section className="product-details-right">
             <ul>
               <h1>Descrição do Produto</h1>
-              <li>{title}</li>
-              <li>{price}</li>
+              <li>{ title }</li>
+              <li>{ price }</li>
+              <h4>Localização do Produto</h4>
+              <li>{ city }</li>
+              <li>{ state }</li>
             </ul>
           </section>
         </main>
