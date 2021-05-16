@@ -54,16 +54,19 @@ class Main extends React.Component {
     }
 
     renderProductCards = () => {
-      const { searchResult } = this.state;
+      const { searchResult, typedProduct } = this.state;
 
       return searchResult.map((result) => {
-        const { id, title, thumbnail, price } = result;
+        const { id, category_id, title, thumbnail, price } = result;
         return (
           <ProductCard
             key={ id }
-            keytitle={ title }
+            id={ id }
+            title={ title }
             thumbnail={ thumbnail }
             price={ price }
+            category_id={ category_id }
+            typedProduct={ typedProduct }
           />
         );
       });

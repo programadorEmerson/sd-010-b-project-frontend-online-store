@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ProductCard extends React.Component {
   render() {
-    const { title, price, thumbnail } = this.props;
+    const { id, typedProduct, category_id, title, price, thumbnail } = this.props;
     return (
       <section className="product-card" data-testid="product">
         <header className="product-card-header">
           <h1>{ title }</h1>
         </header>
-        <main className="product-card-main">
-          <img className="product-card-image" src={ thumbnail } alt={ title } />
-        </main>
+        <Link to={ `/product-details/${category_id}/${id}/${typedProduct}` } data-testid="product-detail-link">
+          <main className="product-card-main">
+            <img className="product-card-image" src={ thumbnail } alt={ title } />
+          </main>
+        </Link>
         <footer className="product-card-footer">
           <h2>
             R$
