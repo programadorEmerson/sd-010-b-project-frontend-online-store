@@ -1,14 +1,14 @@
 import React from 'react';
 
-class Product extends React.Component {
+class ProductCard extends React.Component {
   render() {
     const { product: { title } } = this.props;
     return (
-      <section>
+      <section data-testid="product">
         <p>{ title }</p>
       </section>
     );
   }
 }
 
-export default Product;
+export default ProductCard;

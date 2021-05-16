@@ -9,6 +9,7 @@ class Input extends Component {
   }
 
   render() {
+    const { onChange } = this.props;
     const { urlfinal } = this.state;
     return (
       <div className="header-separator">
@@ -23,6 +24,8 @@ class Input extends Component {
             type="text"
             placeholder="Procurar &#xF002;"
             autoComplete="off"
+            onChange={ onChange }
+            data-testid="query-input"
           />
         </header>
       </div>
