@@ -25,15 +25,13 @@ class Categories extends Component {
     return (
       <div>
         {console.log(categories)}
-        ({categories.map((category) => <Category 
+        {categories.map((category) => (<Category
           key={ category.id }
           category={ category }
-        />)})
+        />))}
       </div>
     );
   }
 }
-
-
 
 export default Categories;
