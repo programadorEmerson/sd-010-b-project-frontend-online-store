@@ -3,6 +3,36 @@ import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 import '../css/Cart.css';
 
+const fakeCartItems = [
+  {
+    id: '01',
+    name: 'Máquina de lavar',
+    source: '',
+    quantity: 1,
+    price: 4000,
+  },
+  {
+    id: '02',
+    name: 'Máquina de lavar',
+    source: '',
+    quantity: 1,
+    price: 2000,
+  },
+  {
+    id: '04',
+    name: 'Máquina de lavar',
+    source: '',
+    quantity: 1,
+    price: 5500,
+  },
+  {
+    id: '03',
+    name: 'Máquina de lavar',
+    source: '',
+    quantity: 1,
+    price: 5250,
+  },
+];
 class Cart extends Component {
   render() {
     return (
