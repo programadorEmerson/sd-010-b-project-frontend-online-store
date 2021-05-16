@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Category extends React.Component {
   render() {
@@ -8,5 +9,9 @@ class Category extends React.Component {
     );
   }
 }
+
+Category.propTypes = {
+  category: PropTypes.array,
+}.isRequired;
 
 export default Category;

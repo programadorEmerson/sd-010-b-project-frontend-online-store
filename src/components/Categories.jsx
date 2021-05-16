@@ -7,7 +7,7 @@ class Categories extends Component {
     super();
     this.state = {
       categories: [],
-    }
+    };
   }
 
   componentDidMount() {
@@ -21,17 +21,19 @@ class Categories extends Component {
   }
 
   render() {
-    const { categories } = this.state
+    const { categories } = this.state;
     return (
       <div>
         {console.log(categories)}
-        {categories.map((category) => <Category 
-        key={ category.id }
-        category={ category }
-        /> )}
+        ({categories.map((category) => <Category 
+          key={ category.id }
+          category={ category }
+        />)})
       </div>
     );
   }
 }
+
+
 
 export default Categories;
