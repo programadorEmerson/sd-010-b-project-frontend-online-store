@@ -9,8 +9,8 @@ class CartItem extends Component {
     return <Image source={ cancelIcon } alt="remover produto" width="50" />;
   }
 
-  renderImageProduct() {
-    return <Image source="#" alt="imagem do produto" width="100" />;
+  renderImageProduct(source) {
+    return <Image source={ source } alt="imagem do produto" width="100" />;
   }
 
   renderDecreaseQuantityIcon() {
