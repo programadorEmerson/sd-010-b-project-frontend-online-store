@@ -53,10 +53,10 @@ class ProductsList extends React.Component {
         <p className="text-search" data-testid="home-initial-message">
           Digite algum termo de Pesquisa ou escolha uma categoria.
         </p>
-        <p>
+        <div>
           { isLoading ? <Loading />
             : results.map((prod) => <Product key={ prod.index } product={ prod } />)}
-        </p>
+        </div>
       </section>
     );
   }

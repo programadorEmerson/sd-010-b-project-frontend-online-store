@@ -2,7 +2,6 @@ import React from 'react';
 import '../App.css';
 
 import CategoryBar from '../components/CategoryBar';
-import Input from '../components/Input';
 import ProductsList from '../components/ProductsList';
 
 import { getCategories } from '../services/api';

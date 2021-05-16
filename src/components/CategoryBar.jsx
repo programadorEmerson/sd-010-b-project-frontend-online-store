@@ -29,7 +29,6 @@ class CategoryBar extends Component {
               { name }
             </li>
           ))}
-          ;
         </ul>
       </div>
     );
