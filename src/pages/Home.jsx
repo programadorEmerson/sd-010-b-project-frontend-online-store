@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getCategories } from '../services/api';
 import SearchBar from '../components/SearchBar';
 
@@ -32,7 +33,6 @@ class Home extends React.Component {
               { catItem.name }
             </li>))}
         </ul>
-        <SearchBar />
       </div>
     );
   }
