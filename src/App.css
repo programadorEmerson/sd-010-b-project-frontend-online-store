@@ -52,6 +52,10 @@ header {
   display: flex;
 }
 
+input .btn-search {
+  width: 90px;
+}
+
 /* Componente CategoryBar */
 .categories-bar {
   border-style: solid;
@@ -63,8 +67,9 @@ header {
   text-align: center;
 }
 
-.categories-bar li {
-  padding: 2px 10px;
+.categories-labels {
+  display: block;
+  margin-bottom: 5px;
 }
 
 /* Componente CategoryBar */
