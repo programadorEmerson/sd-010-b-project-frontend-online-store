@@ -7,9 +7,9 @@ class Product extends Component {
     return (
       <div>
         <h1>{ title }</h1>
-        <img src={ thumbnail } alt={ thumbnail } />
+        <img src={ thumbnail } alt={ title } />
         <h2>{ price }</h2>
-        {/* {console.log(id)} */}
+        {/* {console.log('seilah')} */}
       </div>
     );
   }
