@@ -44,7 +44,7 @@ class Cart extends Component {
   render() {
     const { products } = this.state;
     return (
-      <section>
+      <>
         <Link to="/">Voltar</Link>
         <header>Carrinho de compras</header>
         <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
@@ -52,7 +52,7 @@ class Cart extends Component {
           { products.map((product) => (
             <CartItem key={ product.id } cartProduct={ product } />)) }
         </div>
-      </section>
+      </>
     );
   }
 }
