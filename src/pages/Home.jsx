@@ -23,14 +23,8 @@ class Home extends React.Component {
     this.setState({ [name]: value });
   }
 
-  clickButtonSearch = async () => {
-    const { search } = this.state;
-    const products = await api.getProductsFromCategoryAndQuery(search);
-    this.setState({
-      products,
-      loading: true,
-    });
-  }
+  // clickButtonSearch = async () => {
+  // }
 
   fetchCategories = async () => {
     const categories = await api.getCategories();
@@ -40,6 +34,7 @@ class Home extends React.Component {
   }
 
   render() {
+    const { search } = this.state;
     const { categories, products, loading } = this.state;
     return (
       <div>
@@ -54,16 +49,18 @@ class Home extends React.Component {
         <button
           type="button"
           data-testid="query-button"
-          onClick={ this.clickButtonSearch }
+          onClick={ async () => {
+            const resultProducts = await api.getProductsFromCategoryAndQuery(search)
+              .then((result) => this.setState({ products: result, loading: true }));
+          } }
         >
           Search
         </button>
-        { products
-          && categories.map((category) => (
+        {
+          categories.map((category) => (
             <div key={ category.id } data-testid="category">
               { category.name }
-            </div>))
-        }
+            </div>))}
         { loading
           && products.result.map((product) => (
             <Card product={ product } key={ product.id } />))}
