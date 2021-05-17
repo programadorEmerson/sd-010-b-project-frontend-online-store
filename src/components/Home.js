@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import CategoryList from './CategoryList';
 
-import Card from './Card';
+import CategoryList from './CategoryList';
+import ProductList from './ProductList';
 import SearchBar from './SearchBar';
 
 class Home extends React.Component {
@@ -18,11 +18,6 @@ class Home extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.getApiFromCategory();
-    this.getApiFromQuery();
-  }
-
   componentDidUpdate(_, previousState) {
     const { nameItems } = this.state;
     if (nameItems !== previousState.nameItems) {
@@ -31,7 +26,6 @@ class Home extends React.Component {
   }
 
   getApiFromCategory = (param) => async () => {
-    console.log('getApiFromCategory');
     this.setState({
       filterCategory: await getProductsFromCategoryAndQuery(param, ''),
       filtered: false,
@@ -52,6 +46,10 @@ class Home extends React.Component {
     }));
   }
 
+  getResult = ({ target: { value } }) => {
+    this.setState({ search: value });
+  }
+
   render() {
     const { filtered: { available_filters: resultFilter },
       filtered } = this.state;
@@ -70,22 +68,12 @@ class Home extends React.Component {
           <div id="products">
             {!resultFilter || resultFilter.length === 0
               ? 'Nenhum produto a ser encontrado'
-              : (filtered.results.map(
-                (product) => (
-                  <Card getName={ this.getName } key={ product.id } product={ product } />
-                ),
-              ))}
+              : <ProductList getName={ this.getName } products={ filtered.results } /> }
           </div>) }
 
         {filterCategory && (
           <div id="products-category">
-            {filterCategory.results
-              .map((product) => (
-                <Card
-                  getName={ this.getName }
-                  key={ product.id }
-                  product={ product }
-                />))}
+            <ProductList getName={ this.getName } products={ filterCategory.results } />
           </div>)}
       </main>
     );
