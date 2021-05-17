@@ -6,20 +6,17 @@ class ListCategories extends Component {
     super(props);
     this.state = {
       categories: [],
-      gotCategories: false,
     };
   }
 
   componentDidMount() {
-    const { gotCategories } = this.state;
-    if (!gotCategories) this.handleListCategories();
+    this.handleListCategories();
   }
 
   handleListCategories = async () => {
     const cat = await getCategories();
     this.setState({
       categories: cat,
-      gotCategories: true,
     });
   }
 
