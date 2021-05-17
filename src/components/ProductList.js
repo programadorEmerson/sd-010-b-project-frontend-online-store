@@ -37,7 +37,9 @@ class ProductList extends React.Component {
     const { results } = allProductsApi;
     return (
       <div>
-        { results.map((item) => this.constructorCard(item))}
+        <ol>
+          { results.map((item) => <li>{this.constructorCard(item)} </li>)}
+        </ol>
       </div>
     );
   }
