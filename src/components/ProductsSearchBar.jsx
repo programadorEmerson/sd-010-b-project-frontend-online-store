@@ -6,7 +6,13 @@ class ProductsSearchBar extends React.Component {
   render() {
     return (
       <div>
-        <input />
+        <input data-testid="query-input" />
+        <button
+          type="button"
+          data-testid="query-button"
+        >
+          Pesquisar
+        </button>
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
