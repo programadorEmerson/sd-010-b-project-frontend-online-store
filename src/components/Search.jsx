@@ -7,9 +7,11 @@ class Search extends Component {
     super();
 
     this.SearchOnChange = this.SearchOnChange.bind(this);
+    this.qualquercoisa = this.qualquercoisa.bind(this);
 
     this.state = {
       filterText: '',
+      vaipassar: '',
     };
   }
 
@@ -20,8 +22,15 @@ class Search extends Component {
     });
   }
 
-  render() {
+  qualquercoisa() {
     const { filterText } = this.state;
+    this.setState({
+      vaipassar: filterText,
+    });
+  }
+
+  render() {
+    const { vaipassar, filterText } = this.state;
 
     return (
       <div>
@@ -30,12 +39,13 @@ class Search extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
           <input value={ filterText } onChange={ this.SearchOnChange } type="text" />
-          <button onClick={ this.onClick } type="button">Buscar</button>
+          <button onClick={ this.qualquercoisa } type="button">Buscar</button>
         </form>
         <div>
           {/* <Categories /> */}
         </div>
         <AllProducts
+          vaipassar={ vaipassar }
           // filterText={ filterText }
         />
 

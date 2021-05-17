@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import * as api from '../services/api';
 import Loading from './Loading';
 import Product from './Product';
 
@@ -15,8 +15,19 @@ class AllProducts extends Component {
   }
 
   componentDidMount() {
-    const { id, product, filterText } = this.props;
-    getProductsFromCategoryAndQuery(id, product).then((response) => {
+    const { id, product } = this.props;
+    api.getProductsFromCategoryAndQuery(id, product).then((response) => {
+      this.setState({
+        prod: response.results,
+        loading: false,
+      });
+    });
+  }
+
+  filterOnClick() {
+    const { vaipassar } = this.props;
+    console.log(vaipassar);
+    api.getProductsFromQuery(vaipassar).then((response) => {
       this.setState({
         prod: response.results,
         loading: false,
@@ -39,7 +50,6 @@ class AllProducts extends Component {
           <Product
             key={ product.id }
             product={ product }
-            // filterText={ filterText }
           />))}
       </div>
     );
