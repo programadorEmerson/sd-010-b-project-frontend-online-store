@@ -6,11 +6,9 @@ class ProductList extends React.Component {
   render() {
     const { products } = this.props;
     return (
-      <li>
-        { products.map((product) => (
-          <ProductCard key={ product.key } product={ product } />
-        ))}
-      </li>
+      products.map((product) => (
+        <ProductCard key={ product.id } product={ product } />
+      ))
     );
   }
 }
