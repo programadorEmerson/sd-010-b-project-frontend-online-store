@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Product extends Component {
   render() {
-    const { id, title, price, thumbnail } = this.props;
+    const { product: { id, title, price, thumbnail } } = this.props;
     return (
       <div>
         <h1>{ title }</h1>

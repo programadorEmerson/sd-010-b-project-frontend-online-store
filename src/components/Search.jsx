@@ -9,7 +9,7 @@ class Search extends Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <input type="text" />
+          <input onChange={ SearchOnChange } type="text" />
         </form>
         <AllProducst />
       </div>
