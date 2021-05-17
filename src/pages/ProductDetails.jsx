@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Rating from '../components/Rating';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -30,11 +31,14 @@ class ProductDetails extends Component {
     const { title, thumbnail, price } = product;
 
     return (
-      <div className="product-detail-container">
-        <p data-testid="product-detail-name">{title}</p>
-        <img src={ thumbnail } alt={ title } />
-        <p>{price}</p>
-      </div>
+      <>
+        <div className="product-detail-container">
+          <p data-testid="product-detail-name">{title}</p>
+          <img src={ thumbnail } alt={ title } />
+          <p>{price}</p>
+        </div>
+        <Rating />
+      </>
     );
   }
 }

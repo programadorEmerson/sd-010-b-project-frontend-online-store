@@ -4,8 +4,9 @@ class Rating extends Component {
   render() {
     return (
       <form>
+        <h2>Avalie este produto</h2>
         <label htmlFor="userEmail">
-          User:
+          Email:
           <input
             type="email"
             name="userEmail"
@@ -16,18 +17,22 @@ class Rating extends Component {
         </label>
 
         <label htmlFor="rating">
-          Rating:
-          <input type="number" name="rating" id="rating" required />
+          Avaliação:
+          <input type="number" name="rating" id="rating" required placeholder="1 - 5" />
         </label>
 
         <label
           htmlFor="evaluation"
-          data-testid="product-detail-evaluation"
         >
-          Product Details:
-          <textarea placeholder="Insert your avaliation" />
+          Mensagem:
+          <textarea
+            data-testid="product-detail-evaluation"
+            placeholder="Message (opcional)"
+            name="evaluation"
+            id="evaluation"
+          />
         </label>
-        <button type="submit">Rate it</button>
+        <button type="submit">Avaliar</button>
 
       </form>
     );
