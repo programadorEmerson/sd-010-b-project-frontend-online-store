@@ -14,11 +14,13 @@ class App extends React.Component {
       arrProducts: [],
       category: '',
       searchQuery: '',
+      cart: [],
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.setCategory = this.setCategory.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   handleOnChange({ target: { value, name } }) {
@@ -45,8 +47,15 @@ class App extends React.Component {
     });
   }
 
+  addToCart(product) {
+    this.setState((prevState) => (
+      { cart: [...prevState.cart, product],
+      }
+    ));
+  }
+
   render() {
-    const { arrProducts, searchQuery } = this.state;
+    const { arrProducts, searchQuery, cart } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -59,12 +68,20 @@ class App extends React.Component {
               setCategory={ this.setCategory }
               onChange={ this.handleOnChange }
               searchQuery={ searchQuery }
+              addToCart={ this.addToCart }
             />) }
           />
-          <Route path="/pagecart" component={ PageCart } />
+          <Route
+            path="/pagecart"
+            render={ (props) => <PageCart { ...props } cart={ cart } /> }
+          />
           <Route
             path="/details/:id"
-            render={ (props) => <DetailsPage { ...props } arrProducts={ arrProducts } /> }
+            render={ (props) => (<DetailsPage
+              { ...props }
+              arrProducts={ arrProducts }
+              addToCart={ this.addToCart }
+            />) }
           />
         </Switch>
       </BrowserRouter>

@@ -4,15 +4,25 @@ import { Link } from 'react-router-dom';
 
 class ProductsByTerms extends React.Component {
   render() {
-    const { product: { title, price, thumbnail }, id } = this.props;
+    const { product, id, addToCart } = this.props;
+    const { title, price, thumbnail } = product;
     return (
-      <Link to={ `/details/${id}` } data-testid="product-detail-link">
-        <div data-testid="product">
-          <p>{title}</p>
-          <p>{price}</p>
-          <img src={ thumbnail } alt={ title } />
-        </div>
-      </Link>
+      <div>
+        <Link to={ `/details/${id}` } data-testid="product-detail-link">
+          <div data-testid="product">
+            <p>{title}</p>
+            <p>{price}</p>
+            <img src={ thumbnail } alt={ title } />
+          </div>
+        </Link>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ () => addToCart(product) }
+        >
+          Adicionar ao Carrinho
+        </button>
+      </div>
     );
   }
 }
@@ -23,7 +33,6 @@ ProductsByTerms.defaultProps = {
     price: 9999999,
     thumbnail: 'faltou imagem',
   },
-
 };
 
 ProductsByTerms.propTypes = {
@@ -33,6 +42,7 @@ ProductsByTerms.propTypes = {
     thumbnail: PropTypes.string,
   }),
   id: PropTypes.number.isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default ProductsByTerms;
