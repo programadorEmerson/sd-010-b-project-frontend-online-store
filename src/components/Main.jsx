@@ -72,7 +72,18 @@ class Main extends React.Component {
     //  Adiciona o produto ao carrinho de compras (passado como prop para o card)
     addProductToShoppingCart = (product) => {
       const { shoppingCart } = this.state;
-      this.setState({ shoppingCart: [...shoppingCart, product] });
+  
+      const testIfProductExist = shoppingCart.find((oldProduct) => {
+        return oldProduct.id === product.id;
+      })
+  
+      if(testIfProductExist === undefined) {
+        product.quantity = 1;
+        this.setState({ shoppingCart: [...shoppingCart, product] });
+        console.log(product);
+       } else {
+        product.quantity += 1
+      }
     }
 
     render() {

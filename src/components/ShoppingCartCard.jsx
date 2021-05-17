@@ -27,14 +27,14 @@ class ShoppingCartCard extends React.Component {
             className="card-button" type="submit"
           >-</button>
         </section>
-        <section className="shopping-cart-card-item input"><input type="text"/></section>
+        <section className="shopping-cart-card-item"><input className="input" type="text"/></section>
         <section className="shopping-cart-card-item button">
           <button
             data-testid="product-increase-quantity"
             className="card-button" type="submit"
           >+</button>
         </section>
-        <section className="shopping-cart-card-item price">R$ { price }</section>
+        <section className="shopping-cart-card-item price">{ price }</section>
       </main>
     );
   }
