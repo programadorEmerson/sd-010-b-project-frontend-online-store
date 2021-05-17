@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CartBtn from '../buttonsAndLinks/CartBtn';
 import { getCategories } from '../../services/api';
 import ListCategories from '../ListCategories';
 
@@ -26,12 +27,14 @@ export default class Home extends Component {
   render() {
     const { listCategories } = this.state;
     return (
-      <div>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        <ListCategories categories={ listCategories } />
-      </div>
+      <>
+        <CartBtn />
+        <div>
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+        </div>
+      </>
     );
   }
 }
