@@ -18,11 +18,11 @@ class App extends Component {
     this.setState((state) => ({ cart: [...state.cart, product] }));
   }
 
-  increaseProduct(product) {
-    const { id } = product;
+  increaseProduct(id, bool) {
     this.setState((state) => ({
       cart: state.cart.map((elem) => {
-        if (elem.id === id) return { ...elem, quant: elem.quant + 1 };
+        if (!bool && elem.id === id) return { ...elem, quant: elem.quant - 1 };
+        if (bool && elem.id === id) return { ...elem, quant: elem.quant + 1 };
         return elem;
       }),
     }));

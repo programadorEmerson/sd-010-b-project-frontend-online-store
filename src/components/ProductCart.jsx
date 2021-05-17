@@ -7,18 +7,25 @@ class ProductCart extends Component {
       product: { title, quant, id },
       increaseProduct,
     } = this.props;
-    console.log(increaseProduct);
+    const checkLength = quant <= 0 ? null : true;
     return (
       <div>
         <p data-testid="shopping-cart-product-name">{title}</p>
         <button
           type="button"
           data-testid="product-increase-quantity"
-          onClick={ () => increaseProduct(id) }
+          onClick={ () => increaseProduct(id, true) }
         >
           +
         </button>
-        <button type="button" data-testid="product-decrease-quantity">+</button>
+        <button
+          type="button"
+          onClick={ () => increaseProduct(id, false) }
+          data-testid="product-decrease-quantity"
+          disabled={ !checkLength }
+        >
+          -
+        </button>
         <p data-testid="shopping-cart-product-quantity">{quant}</p>
       </div>
     );
