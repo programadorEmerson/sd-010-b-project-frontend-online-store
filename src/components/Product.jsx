@@ -6,10 +6,12 @@ class Product extends Component {
     const { product: { id, title, price, thumbnail } } = this.props;
     return (
       <div>
-        <h1>{ title }</h1>
-        <img src={ thumbnail } alt={ thumbnail } />
-        <h2>{ price }</h2>
-        {/* {console.log(id)} */}
+        <img src={ thumbnail } alt={ title } />
+        <div className="container">
+          <h1>{ title }</h1>
+          <h2>{ price }</h2>
+        </div>
+        {/* {console.log('seilah')} */}
       </div>
     );
   }

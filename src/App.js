@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Search from './components/Search';
+// import Categories from './components/Categories'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={ Search } />
       </Switch>
+      {/* <Route exact path="/" component={ Categories } /> */}
     </BrowserRouter>
   );
 }

@@ -4,7 +4,7 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import Loading from './Loading';
 import Product from './Product';
 
-class AllProducst extends Component {
+class AllProducts extends Component {
   constructor() {
     super();
 
@@ -15,7 +15,7 @@ class AllProducst extends Component {
   }
 
   componentDidMount() {
-    const { id, product } = this.props;
+    const { id, product, filterText } = this.props;
     getProductsFromCategoryAndQuery(id, product).then((response) => {
       this.setState({
         prod: response.results,
@@ -24,9 +24,9 @@ class AllProducst extends Component {
     });
   }
 
-  SearchOnChange(text) {
-    console.log(text);
-  }
+  // SearchOnChange(text) {
+  //   console.log(text);
+  // }
 
   render() {
     const { prod, loading } = this.state;
@@ -34,21 +34,33 @@ class AllProducst extends Component {
 
     return (
       <div>
-        {console.log(prod)}
         {prod.map((product) => (
           // (console.log(product.id)
           <Product
             key={ product.id }
             product={ product }
+            // filterText={ filterText }
           />))}
       </div>
     );
   }
 }
 
-AllProducst.propTypes = {
+AllProducts.propTypes = {
   id: PropTypes.string,
   product: PropTypes.string,
 }.isRequired;
 
-export default AllProducst;
+export default AllProducts;
+
+// import React, { Component } from 'react';
+
+// class AllProducts extends Component {
+//   render() {
+//     return (
+//       <p>vai saber</p>
+//     );
+//   }
+// }
+
+// export default AllProducts;
