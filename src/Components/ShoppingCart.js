@@ -63,20 +63,21 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <span data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>
-        <input type="text" data-testid="query-input" onChange={ this.handleChange } />
-        <label htmlFor="botão">
+        <label htmlFor="query-input">
+          <input type="text" data-testid="query-input" onChange={ this.handleChange } />
           <button
-            value="botão"
+            id="botão"
             data-testid="query-button"
             type="submit"
             onClick={ this.filterInput }
-          />
+          >
+            Clique aqui
+          </button>
         </label>
         <Link data-testid="shopping-cart-button" to="/checkout">Compra</Link>
         { this.renderCategorys() }
