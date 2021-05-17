@@ -17,6 +17,18 @@ class CartItem extends Component {
     };
   }
 
+  decreaseQuantity = () => {
+    this.setState((prevState) => ({
+      quantity: (prevState.quantity >= 0) ? prevState.quantity - 1 : 0,
+    }));
+  };
+
+  increaseQuantity = () => {
+    this.setState((prevState) => ({
+      quantity: prevState.quantity + 1,
+    }));
+  };
+
   renderRemoveProductsIcon() {
     return <Image source={ cancelIcon } alt="remover produto" width="50" />;
   }
