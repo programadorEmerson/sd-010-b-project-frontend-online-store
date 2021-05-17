@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import * as api from '../services/api';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 export class ProductDetails extends Component {
   constructor() {
@@ -17,8 +18,7 @@ export class ProductDetails extends Component {
 
   requestProduct = async () => {
     const { match: { params: { id } } } = this.props;
-    const { getProductsById } = api;
-    const getProduct = await getProductsById(id);
+    const getProduct = await getProductsFromCategoryAndQuery(id, '');
     this.setState({
       product: getProduct,
     });
@@ -41,6 +41,7 @@ export class ProductDetails extends Component {
                 {`${item.name}: ${item.value_name}`}
               </li>))}
           </ul>
+          <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link>
         </div>
       )));
   }
