@@ -6,7 +6,7 @@ export async function getCategories() {
     .catch((error) => { console.log(`Erro na requisição: ${error}`); });
 }
 
-export async function getProductsFromCategoryAndQuery(categoryId, query) {
+export async function getProductsFromCategoryAndQuery(categoryId = null, query = null) {
   // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
   const URL = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&q=${query}`;
   return fetch(URL)

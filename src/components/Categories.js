@@ -1,5 +1,6 @@
 import React from 'react';
 import * as api from '../services/api';
+import './categories.css';
 
 class Categories extends React.Component {
   constructor() {
@@ -17,8 +18,8 @@ class Categories extends React.Component {
 
   recuperarCategorias() {
     api.getCategories().then((result) => {
-      Object.entries(result).map((teste) => this.setState((oldState) => ({
-        categories: [...oldState.categories, teste[1]],
+      result.map((obj) => this.setState((oldState) => ({
+        categories: [...oldState.categories, obj],
       })));
       this.setState({
         loading: false,
@@ -38,8 +39,17 @@ class Categories extends React.Component {
                   key={ result.id }
                   data-testid="category"
                 >
-                  {result.name}
-                </li>))
+                  <label htmlFor={ result.name }>
+                    <input
+                      type="radio"
+                      name="category"
+                      id={ result.name }
+                      value={ result.name }
+                    />
+                    {result.name}
+                  </label>
+                </li>
+              ))
           }
         </ul>
       </div>
