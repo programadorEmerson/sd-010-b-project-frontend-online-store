@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ShoppingCartCard from './ShoppingCartCard'
+import ShoppingCartCard from './ShoppingCartCard';
 
 class ShopCart extends React.Component {
   constructor() {
@@ -21,7 +21,7 @@ class ShopCart extends React.Component {
   populateShoppingCart = () => {
     const { location: { state: { shoppingCart } } } = this.props;
 
-    this.setState({ shoppingCartProducts: shoppingCart })
+    this.setState({ shoppingCartProducts: shoppingCart });
   }
 
   // Seta o valor total da compra
@@ -41,13 +41,15 @@ class ShopCart extends React.Component {
   }
 
   // Escolhe a quantidade do produto
-  changeProductQuantity = (symbol) => {
+  changeProductQuantity = (symbol, product, { target }) => {
     if (symbol === '+') {
-
+      console.log(product.quantity);
+      product.quantity += 1;
     }
 
     if (symbol === '-') {
-
+      product.quantity -= 1;
+      // console.log(target);
     }
   }
 
@@ -58,7 +60,11 @@ class ShopCart extends React.Component {
         <main>
           <h1>Carrinho de compras</h1>
           {shoppingCartProducts.map((productCart) => (
-            <ShoppingCartCard key={ productCart.id } productCart={ productCart } />
+            <ShoppingCartCard
+              key={ productCart.id }
+              productCart={ productCart }
+              changeProductQuantity={ this.changeProductQuantity }
+            />
           ))}
           <span data-testid="shopping-cart-product-quantity">
             <p>Quantidade de Itens no carrinho:</p>

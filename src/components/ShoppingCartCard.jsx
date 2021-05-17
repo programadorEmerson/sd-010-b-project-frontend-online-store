@@ -4,8 +4,8 @@ import './ShoppingCartCard.css';
 
 class ShoppingCartCard extends React.Component {
   render() {
-    const { productCart } = this.props;
-    const { title, price, thumbnail } = productCart;
+    const { productCart, changeProductQuantity } = this.props;
+    const { title, price, thumbnail, quantity } = productCart;
 
     return (
       <main className="shopping-cart-card">
@@ -23,13 +23,15 @@ class ShoppingCartCard extends React.Component {
         </section>
         <section className="shopping-cart-card-item button">
           <button
+            onClick={ () => changeProductQuantity('-', productCart) }
             data-testid="product-decreate-quantity"
             className="card-button" type="submit"
           >-</button>
         </section>
-        <section className="shopping-cart-card-item"><input className="input" type="text"/></section>
+        <section className="shopping-cart-card-item"><input value={quantity} className="input" type="text"/></section>
         <section className="shopping-cart-card-item button">
           <button
+            onClick={ () => changeProductQuantity('+', productCart) }
             data-testid="product-increase-quantity"
             className="card-button" type="submit"
           >+</button>
