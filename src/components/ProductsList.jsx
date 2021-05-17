@@ -25,7 +25,7 @@ class ProductsList extends React.Component {
 
 ProductsList.propTypes = {
   products: PropTypes.shape({
-    results: PropTypes.arrayOf(),
+    results: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
