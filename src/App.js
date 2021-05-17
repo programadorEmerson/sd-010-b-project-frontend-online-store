@@ -28,6 +28,7 @@ class App extends React.Component {
                type="text"
                name="search"
                value={ searchText }
+               data-testid="query-input"
                onChange={ this.setSearchText }
              />
 
@@ -43,7 +44,7 @@ class App extends React.Component {
                exact
                path="/"
                render={
-                 (props) => <ProductList { ...props } searchText={ searchText } />
+                 () => <ProductList searchText={ searchText } />
                }
              />
              <Route path="/shopping-cart" render={ () => <ShoppingCart /> } />
