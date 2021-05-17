@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ProductCard extends Component {
   constructor(props) {
@@ -15,15 +16,17 @@ class ProductCard extends Component {
   showResults() {
     const { results } = this.state;
     const card = results.map((result) => {
-      const { title, thumbnail, price } = result;
+      const { title, thumbnail, price, id } = result;
       return (
         <div key={ title } data-testid="product">
           <h4>{ title }</h4>
-          <img
-            src={ thumbnail }
-            width="150"
-            alt={ title }
-          />
+          <Link to={ `/product/${id}` } data-testid="product-detail-link">
+            <img
+              src={ thumbnail }
+              width="150"
+              alt={ title }
+            />
+          </Link>
           <span>{ price }</span>
         </div>
       );
