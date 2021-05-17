@@ -3,7 +3,6 @@ import './App.css';
 import { Route, Switch, Link, BrowserRouter } from 'react-router-dom';
 import { Header } from './components';
 import { ShoppingCart, Home } from './pages';
-import { getCategories } from './services/api';
 
 class App extends Component {
   constructor(props) {
@@ -31,8 +30,8 @@ class App extends Component {
           </Link>
         </p>
         <Switch>
-          <Route exact path="/" render={() => <Home categories={categories} />} />
-          <Route path="/cart" render={() => <ShoppingCart cart={cart} />} />
+          <Route exact path="/" render={ () => <Home categories={ categories } /> } />
+          <Route path="/cart" render={ () => <ShoppingCart cart={ cart } /> } />
         </Switch>
       </BrowserRouter>
     );
