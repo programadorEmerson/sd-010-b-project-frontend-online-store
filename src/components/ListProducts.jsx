@@ -19,9 +19,9 @@ class ListProducts extends Component {
           </div>
         </Link>
         <button
-          onClick={ () => setCart({ id, title, price, thumbnail, quant: 0 }) }
+          onClick={ () => setCart({ id, title, price, thumbnail, quant: 1 }) }
           type="button"
-          data-testid="product-detail-add-to-cart"
+          data-testid="product-add-to-cart"
         >
           Adicionar ao Carrinho
         </button>

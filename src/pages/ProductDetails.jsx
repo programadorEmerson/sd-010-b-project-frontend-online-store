@@ -36,7 +36,7 @@ class ProductDetails extends Component {
         <img src={ thumbnail } alt={ title } />
         <p>{price}</p>
         <button
-          onClick={ () => setCart({ id, title, price, thumbnail, quant: 0 }) }
+          onClick={ () => setCart({ id, title, price, thumbnail, quant: 1 }) }
           type="button"
           data-testid="product-detail-add-to-cart"
         >

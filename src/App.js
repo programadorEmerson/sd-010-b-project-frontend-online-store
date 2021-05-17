@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, Link, BrowserRouter } from 'react-router-dom';
-import { Header, ListProducts } from './components';
+import { Header } from './components';
 import { ShoppingCart, Home, ProductDetails } from './pages';
 
 class App extends Component {
@@ -14,7 +14,6 @@ class App extends Component {
   }
 
   setCart(product) {
-    console.log('oi');
     this.setState((state) => ({ cart: [...state.cart, product] }));
   }
 
