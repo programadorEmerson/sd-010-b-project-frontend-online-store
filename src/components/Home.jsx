@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { GrCart } from 'react-icons/gr';
+
 import ProductList from './ProductList';
 import Categories from './Categories';
 import * as api from '../services/api';
+import Header from './Header';
 
 class Home extends Component {
   constructor(props) {
@@ -62,31 +62,13 @@ class Home extends Component {
 
   render() {
     const { products, noProducts } = this.state;
+    
     const noProduct = 'Nenhum produto encontrado';
     return (
       <div>
-        <input
-          id="input-search"
-          type="text"
-          placeholder="busca"
-          data-testid="query-input"
-          onChange={ this.handleInput }
-        />
-        <button
-          data-testid="query-button"
-          onClick={ this.handleClick }
-          type="button"
-        >
-          Search
-        </button>
-        <Link to="/shopping-cart" data-testid="shopping-cart-button">
-          <GrCart />
-        </Link>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        { noProducts ? <p>{ noProduct }</p> : <ProductList products={ products } /> }
-        <Categories checked={ this.handleChecked } />
+      <Header handleInput={this.handleInput} handleClick={this.handleClick}/>
+      {noProducts ? <p>{noProduct}</p> : <ProductList products={products} />}
+      <Categories checked={this.handleChecked} />
       </div>
     );
   }
