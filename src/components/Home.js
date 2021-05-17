@@ -18,8 +18,10 @@ class Home extends React.Component {
   }
 
   getApiFromCategory = (param) => async () => {
+    console.log('getApiFromCategory');
     this.setState({
       filterCategory: await getProductsFromCategoryAndQuery(param, ''),
+      filtered: false,
     });
   }
 
@@ -27,6 +29,7 @@ class Home extends React.Component {
     const { search } = this.state;
     this.setState({
       filtered: await getProductsFromCategoryAndQuery('', search),
+      filterCategory: false,
     });
   }
 
