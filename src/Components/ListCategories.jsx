@@ -15,6 +15,10 @@ class ListCategories extends Component {
 
   HandleListCategories = async () => {
     const categories = await getCategories();
+    if (categories.length === 0) {
+      return null;
+    }
+    console.log(categories);
     this.setState({ categories });
   }
 

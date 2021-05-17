@@ -12,9 +12,9 @@ class CardList extends Component {
     };
   }
 
-  componentDidMount() {
-    this.getList();
-  }
+  // componentDidMount() {
+  //   this.getList();
+  // }
 
   getList = async () => {
     const { results } = await getProductsFromCategoryAndQuery('MLB1384', 'Cadeira');
@@ -26,7 +26,7 @@ class CardList extends Component {
     console.log(results);
     return (
       <div>
-        { results.map((result) => (<Card
+        {results && results.map((result) => (<Card
           key={ result.id }
           title={ result.title }
           img={ result.thumbnail }
