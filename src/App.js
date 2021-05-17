@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import ProductList from './components/ProductList';
 import ShoppingCart from './components/ShoppingCart';
 import CategoryList from './components/CategoryList';
+import ProductsByCategory from './components/ProductsByCategory';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Switch>
           <Route exact path="/" render={ () => <ProductList /> } />
           <Route path="/shopping-cart" render={ () => <ShoppingCart /> } />
+          <Route path="/:id" render={ () => <ProductsByCategory /> } />
         </Switch>
       </BrowserRouter>
     </div>
