@@ -77,7 +77,11 @@ class App extends React.Component {
           />
           <Route
             path="/details/:id"
-            render={ (props) => <DetailsPage { ...props } arrProducts={ arrProducts } /> }
+            render={ (props) => (<DetailsPage
+              { ...props }
+              arrProducts={ arrProducts }
+              addToCart={ this.addToCart }
+            />) }
           />
         </Switch>
       </BrowserRouter>
