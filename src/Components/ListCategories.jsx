@@ -41,16 +41,6 @@ class ListCategories extends Component {
 
   render() {
     return (
-      categories.map((category) => (
-        <li key={ category.id } data-testid="category">
-          { category.name }
-        </li>
-      ))
-    );
-  }
-
-  render() {
-    return (
       <div>
         <ul>
           { this.renderCategory() }
