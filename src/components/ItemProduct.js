@@ -26,12 +26,7 @@ class ItemProduct extends React.Component {
 
 ItemProduct.propTypes = {
   products: PropTypes.shape({
-    results: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      thumbnail: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      length: PropTypes.number,
-    }).isRequired,
+    results: PropTypes.string,
   }).isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
