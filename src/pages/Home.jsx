@@ -14,7 +14,7 @@ class Home extends React.Component {
     this.onClickHandle = this.onClickHandle.bind(this);
     this.state = {
       isLoading: false,
-      products: [],
+      products: {},
       inputfilter: null,
     };
   }
