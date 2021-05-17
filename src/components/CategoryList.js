@@ -29,8 +29,14 @@ class CategoryList extends React.Component {
         <ul>
           Categorias:
           { categories.map(({ id, name }) => (
-            <li key={ id } data-testid="category">
-              <button onClick={ onClick(id) } type="button">{name}</button>
+            <li key={ id }>
+              <button
+                data-testid="category"
+                onClick={ onClick(id) }
+                type="button"
+              >
+                {name}
+              </button>
             </li>))}
         </ul>
       </section>);
