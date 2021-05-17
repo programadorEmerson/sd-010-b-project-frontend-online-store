@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
-import ProductsByCategory from './ProductsByCategory';
-// import PropTypes from 'prop-types';
 
 class CategoryList extends React.Component {
   constructor(props) {
@@ -23,6 +22,7 @@ addCategories = (categories) => {
 
 render() {
   const { categories } = this.state;
+  const { onClick } = this.props;
   return (
     <div>
       { categories.map((category) => (
@@ -30,6 +30,8 @@ render() {
           <Link to={ `/${category.id}` }>
             <label htmlFor={ category.id }>
               <input
+                onClick={ onClick }
+                name="category"
                 data-testid="category"
                 type="radio"
                 id={ category.id }
@@ -43,5 +45,13 @@ render() {
   );
 }
 }
+
+CategoryList.propTypes = {
+  onClick: PropTypes.func,
+};
+
+CategoryList.defaultProps = {
+  onClick: () => {},
+};
 
 export default CategoryList;
