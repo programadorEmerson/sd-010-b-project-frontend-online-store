@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Img from '../images/cart.png';
 import Category from './Categories';
-import ItemProduct from './ItemProduct'
+import ItemProduct from './ItemProduct';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
@@ -12,7 +12,7 @@ class Home extends React.Component {
     this.onClickHandle = this.onClickHandle.bind(this);
     this.state = {
       products: [],
-      inputfilter: "",
+      inputfilter: null,
     };
   }
 
@@ -51,13 +51,19 @@ class Home extends React.Component {
         </p>
         <div>
           <input
-          value={ inputfilter }
-          type="text"
-          className="input-pesquisa-produto"
-          data-testid="query-input"
-          onChange={ this.onChangeHandle }
-        />
-        <button data-testid="query-button" onClick={ this.onClickHandle }>pesquisar</button>
+            value={ inputfilter }
+            type="text"
+            className="input-pesquisa-produto"
+            data-testid="query-input"
+            onChange={ this.onChangeHandle }
+          />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ this.onClickHandle }
+          >
+            pesquisar
+          </button>
         </div>
         <div>
           <ItemProduct products={ products } />
