@@ -40,3 +40,10 @@
     transform: rotate(360deg);
   }
 }
+
+.options {
+  display: flex;
+  flex: 1 1 wrap;
+  justify-content: space-evenly;
+  list-style: none;
+}
