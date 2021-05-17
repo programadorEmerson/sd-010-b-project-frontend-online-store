@@ -15,8 +15,7 @@ class ProductDetails extends Component {
 
   addProductIntoCart(item) {
     const { cart } = this.state;
-    const itemProduct = { ...item, qty: 1 };
-    this.setState({ cart: [...cart, itemProduct] });
+    this.setState({ cart: [...cart, item] });
   }
 
   render() {
