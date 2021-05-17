@@ -21,7 +21,7 @@ class App extends Component {
     const { cart, categories } = this.state;
     return (
       <BrowserRouter>
-        <Header />
+        <Header cartItems={ cart } />
         <p>
           <Link data-testid="shopping-cart-button" to="/cart">
             Carrinho
