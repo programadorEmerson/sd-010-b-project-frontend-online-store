@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
-import ProductList from './ProductList';
-import Categories from './Categories';
+import Header from '../components/Header';
+import ProductList from '../components/ProductList';
+import Categories from '../components/Categories';
 import * as api from '../services/api';
-import Header from './Header';
 
 class Home extends Component {
   constructor(props) {
@@ -62,13 +61,12 @@ class Home extends Component {
 
   render() {
     const { products, noProducts } = this.state;
-    
     const noProduct = 'Nenhum produto encontrado';
     return (
       <div>
-      <Header handleInput={this.handleInput} handleClick={this.handleClick}/>
-      {noProducts ? <p>{noProduct}</p> : <ProductList products={products} />}
-      <Categories checked={this.handleChecked} />
+        <Header handleInput={ this.handleInput } handleClick={ this.handleClick } />
+        { noProducts ? <p>{ noProduct }</p> : <ProductList products={ products } /> }
+        <Categories checked={ this.handleChecked } />
       </div>
     );
   }
