@@ -1,21 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import * as api from '../services/api';
+import SearchList from './SearchList';
 
 class CategoryList extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      search: '',
       searchText: [],
     };
   }
 
-  search = () => {
-    const { search } = this.state;
-    api.getProductsFromCategoryAndQuery(undefined, search).then(({ results }) => {
+  search = (id, name) => {
+    api.getProductsFromCategoryAndQuery(id, name).then(({ results }) => {
       this.setState({
         searchText: results,
       });
@@ -24,14 +22,20 @@ class CategoryList extends React.Component {
 
   render() {
     const { categories } = this.props;
+    const { searchText } = this.state;
     return (
-      <aside>
+      <section>
+        <aside>
+          <ol>
+            { categories.map(({ id, name }) => (
+              <li data-testid="category" key={ id }><button type="button" onClick={ () => this.search(id, name) }>{ name }</button></li>
+            )) }
+          </ol>
+        </aside>
         <ol>
-          { categories.map(({ id, name }) => (
-            <li data-testid="category" key={ id }><button type="button">{ name }</button></li>
-          )) }
+          {searchText.map((item) => <SearchList key={ item.id } item={ item } />)}
         </ol>
-      </aside>
+      </section>
     );
   }
 }
