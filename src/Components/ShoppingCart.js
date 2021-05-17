@@ -7,6 +7,8 @@ class ShoppingCart extends React.Component {
   constructor() {
     super();
 
+    this.onClick = this.onClick.bind(this);
+
     this.state = {
       lista: [],
       products: [],
@@ -18,14 +20,23 @@ class ShoppingCart extends React.Component {
     this.fetchCategories();
   }
 
-  fetchCategories = () => {
-    api.getCategories().then((result) => {
-      this.setState({ lista: result });
+  onClick({ target }) {
+    const { id, name } = target;
+    this.setState({
+      [name]: id,
     });
+    const { search } = this.state;
+    this.fetchItems(id, search);
   }
 
-  fetchItems = (search) => {
-    api.getProductsFromCategoryAndQuery(search).then((result) => {
+   fetchCategories = async () => {
+     await api.getCategories().then((result) => {
+       this.setState({ lista: result });
+     });
+   }
+
+  fetchItems = async (categoryId = '', search) => {
+    await api.getProductsFromCategoryAndQuery(categoryId, search).then((result) => {
       this.setState({ products: result.results });
     });
   }
@@ -33,8 +44,16 @@ class ShoppingCart extends React.Component {
   renderCategorys = () => {
     const { lista } = this.state;
     return lista.map((element) => (
-      <li key={ element.id } data-testid="category">
-        { element.name }
+      <li key={ element.id }>
+        <button
+          data-testid="category"
+          type="button"
+          id={ element.id }
+          name={ element.name }
+          onClick={ this.onClick }
+        >
+          { element.name }
+        </button>
       </li>
     ));
   }
@@ -76,7 +95,7 @@ class ShoppingCart extends React.Component {
             type="submit"
             onClick={ this.filterInput }
           >
-            Clique aqui
+            Clique!
           </button>
         </label>
         <Link data-testid="shopping-cart-button" to="/checkout">Compra</Link>
