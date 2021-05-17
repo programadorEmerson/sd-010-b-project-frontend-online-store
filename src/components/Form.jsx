@@ -17,7 +17,6 @@ class Form extends Component {
 
   render() {
     const { rating, email, comment } = this.state;
-    const { updateComments } = this.props;
     return (
       <form>
         <label htmlFor="email">
@@ -63,6 +62,7 @@ class Form extends Component {
         <button
           type="button"
           onClick={ () => {
+            const { updateComments } = this.props;
             updateComments(this.state);
           } }
         >
@@ -74,8 +74,7 @@ class Form extends Component {
   }
 }
 
-Form.protoTypes = {
-  rating: PropTypes.number.isRequired,
+Form.propTypes = {
   updateComments: PropTypes.func.isRequired,
 };
 export default Form;
