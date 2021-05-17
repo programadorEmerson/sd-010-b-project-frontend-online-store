@@ -54,6 +54,7 @@ class Main extends React.Component {
     this.setState({ searchResult: results });
   }
 
+  //  Rendeniza 1 card para cada produto
   renderProductCards = () => {
     const { searchResult } = this.state;
 
