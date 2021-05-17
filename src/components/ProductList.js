@@ -14,9 +14,12 @@ class ProductList extends React.Component {
     // eslint-disable-next-line react/prop-types
     const { searchText } = this.props;
 
-    getProductsFromQuery(searchText).then((products) => this.setState({
-      allProductsApi: products,
-    }));
+    getProductsFromQuery(searchText).then((products) => products.json()).then((products) => {
+      console.log(products);
+      this.setState({
+        allProductsApi: products,
+      });
+    });
   }
 
   constructorCard = (item) => (
