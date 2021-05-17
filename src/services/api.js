@@ -6,9 +6,9 @@ export async function getCategories() {
     .catch((error) => { console.log(`Erro na requisição: ${error}`); });
 }
 
-export async function getProductsFromCategoryAndQuery(categoryId = null, query = null) {
+export async function getProductsFromCategoryAndQuery(categoryId, query) {
   // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
-  const URL = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&q=${query}`;
+  const URL = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`;
   return fetch(URL)
     .then((result) => result.json())
     .catch((error) => { console.log(`Erro na requisição: ${error}`); });
