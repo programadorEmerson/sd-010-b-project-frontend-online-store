@@ -1,17 +1,21 @@
 import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import ShoppingCart from './Components/ShoppingCart';
-import Checkout from './Components/Checkout';
+import './App.css';
 // import * as api from './services/api';
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      <span data-testid="home-initial-message">
+        Digite algum termo de pesquisa ou escolha uma categoria.
+      </span>
+
+      <BrowserRouter>
         <Route exact path="/" component={ ShoppingCart } />
-        <Route exact path="/checkout" component={ Checkout } />
-      </Router>
+
+      </BrowserRouter>
+
     </div>
   );
 }

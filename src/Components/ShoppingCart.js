@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
+import CardList from './CardList';
 
 class ShoppingCart extends React.Component {
   constructor() {
@@ -8,16 +9,28 @@ class ShoppingCart extends React.Component {
 
     this.state = {
       lista: [],
+      products: [],
+      search: '',
     };
   }
 
   componentDidMount() {
+    this.fetchCategories();
+  }
+
+  fetchCategories = () => {
     api.getCategories().then((result) => {
       this.setState({ lista: result });
     });
   }
 
-  renderElement = () => {
+  fetchItems = (search) => {
+    api.getProductsFromCategoryAndQuery(search).then((result) => {
+      this.setState({ products: result.results });
+    });
+  }
+
+  renderCategorys = () => {
     const { lista } = this.state;
     return lista.map((element) => (
       <li key={ element.id } data-testid="category">
@@ -26,14 +39,48 @@ class ShoppingCart extends React.Component {
     ));
   }
 
+  renderProducts = () => {
+    const { products } = this.state;
+    // if (products.length < 1) {
+    //   return <p> Nenhum produto foi encontrado </p>;
+    // }
+    return products.map((product) => <CardList key={ product.id } product={ product } />);
+  }
+
+  filterInput = async () => {
+    const { search } = this.state;
+    return this.fetchItems(search);
+  }
+
+  handleChange = ({ target: { value } }) => {
+    this.updateState(value);
+  }
+
+  updateState= (param) => {
+    this.setState({
+      search: param,
+    });
+  }
+
   render() {
+
     return (
       <div>
         <span data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>
+        <input type="text" data-testid="query-input" onChange={ this.handleChange } />
+        <label htmlFor="botão">
+          <button
+            value="botão"
+            data-testid="query-button"
+            type="submit"
+            onClick={ this.filterInput }
+          />
+        </label>
         <Link data-testid="shopping-cart-button" to="/checkout">Compra</Link>
-        { this.renderElement() }
+        { this.renderCategorys() }
+        { this.renderProducts() }
       </div>
     );
   }
