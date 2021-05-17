@@ -10,23 +10,29 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      category: [],
       products: [],
     };
     this.handleQuery = this.handleQuery.bind(this);
+    this.handleCategory = this.handleCategory.bind(this);
   }
 
   handleQuery(value) {
     this.setState({ products: value.results });
-    // console.log(value.results);
+  }
+
+  handleCategory(value) {
+    this.setState({ category: value });
+    console.log(value);
   }
 
   render() {
-    const { products } = this.state;
+    const { products, category } = this.state;
     return (
       <main>
-        <Categories />
+        <Categories handleCategory={ this.handleCategory } />
         <BrowserRouter>
-          <Input callback={ this.handleQuery } />
+          <Input handleQuery={ this.handleQuery } category={ category } />
           <Switch>
             <Route to="/cart" component={ Cart } />
           </Switch>
