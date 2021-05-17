@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import CommentForms from '../components/CommentForms';
 import CommentCard from '../components/CommentCard';
+import Loading from '../components/Loading';
+
 import { getProductById } from '../services/api';
 
 class ProductDetails extends Component {
@@ -9,9 +12,10 @@ class ProductDetails extends Component {
     super(props);
     this.state = {
       title: '',
-      value: '',
+      price: '',
       imgUrl: '',
       comments: [],
+      loading: true,
     };
   }
 
@@ -23,11 +27,23 @@ class ProductDetails extends Component {
 
   getProduct = async () => {
     const { match: { params: { id } } } = this.props;
-    const product = await getProductById(id);
+    const { title, price, thumbnail } = await getProductById(id);
+    this.setState({
+      title,
+      price,
+      imgUrl: thumbnail,
+      loading: false,
+    });
   }
 
   render() {
-    const { comments } = this.state;
+    const { title, price, imgUrl, comments, loading } = this.state;
+
+    if (loading) {
+      return (
+        <Loading />
+      );
+    }
 
     return (
       <section>
@@ -35,9 +51,10 @@ class ProductDetails extends Component {
         <p>
           R$
           {' '}
-          {value}
+          {price}
         </p>
         <img src={ imgUrl } alt={ title } />
+
         <CommentForms submitRating={ this.submitRating } />
         {comments.map(({ email, rating, comment }) => (
           <CommentCard
