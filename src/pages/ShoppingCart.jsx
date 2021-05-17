@@ -10,9 +10,13 @@ class ShoppingCart extends Component {
   }
 
   renderList() {
-    const { cart } = this.props;
+    const { cart, increaseProduct } = this.props;
     return cart.map((product, index) => (
-      <ProductCart key={ `${product.title} - ${index}` } product={ product } />
+      <ProductCart
+        increaseProduct={ increaseProduct }
+        key={ `${product.title} - ${index}` }
+        product={ product }
+      />
     ));
   }
 
@@ -28,6 +32,7 @@ class ShoppingCart extends Component {
 
 ShoppingCart.propTypes = {
   cart: PropTypes.arrayOf,
+  increaseProduct: PropTypes.func.isRequired,
 }.isRequired;
 
 export default ShoppingCart;
