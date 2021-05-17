@@ -23,9 +23,8 @@ class ProductCard extends Component {
             src={ thumbnail }
             width="150"
             alt={ title }
-            data-testid="product"
           />
-          <span data-testid="product">{ price }</span>
+          <span>{ price }</span>
         </div>
       );
     });
