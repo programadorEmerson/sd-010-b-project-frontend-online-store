@@ -1,0 +1,38 @@
+.Categoria {
+  background-color: rgb(231, 231, 233);
+  font-size: 15px;
+  height: 100%;
+  left: 0;
+  line-height: 40px;
+  overflow: auto;
+  position: absolute;
+  text-align: justify;
+  width: 25%;
+}
+
+.Categoria h2 {
+  text-align: center;
+}
+
+.pesquisa {
+  height: 100%;
+  left: 350px;
+  position: fixed;
+  width: 70%;
+  overflow: auto;
+}
+
+.input-pesquisa-produto {
+  border-radius: 15px;
+  font-size: 18px;
+  height: 32px;
+  width: 500px;
+}
+
+.button_cart {
+  margin: 15px 40px;  
+}
+
+.button_search {
+  margin: 15px 20px;
+}
