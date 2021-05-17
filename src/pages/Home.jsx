@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SearchBar from '../components/SearchBar';
 import { getCategories } from '../services/api';
+// import { SearchBar } from '../components/SearchBar';
 
 class Home extends React.Component {
   constructor() {
@@ -36,7 +38,7 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>
         <Link to="/shopping-cart" data-testid="shopping-cart-button">Cart</Link>
-
+        <SearchBar />
       </div>
     );
   }
