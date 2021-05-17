@@ -1,6 +1,5 @@
 import React from 'react';
 import * as api from '../services/api';
-import Categories from './Categories';
 import ProductCard from './ProductCart';
 
 class ProductList extends React.Component {
