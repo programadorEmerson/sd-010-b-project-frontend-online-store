@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import CartBtn from '../buttonsAndLinks/CartBtn';
-import { getCategories } from '../../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../../services/api';
 import ListCategories from '../ListCategories';
+import SearchBox from '../SearchBox';
 
 export default class Home extends Component {
   constructor() {
@@ -9,9 +10,11 @@ export default class Home extends Component {
 
     this.state = {
       listCategories: [],
+      listProducts: '',
     };
 
     this.fetchCategories = this.fetchCategories.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
   }
 
   componentDidMount() {
@@ -24,8 +27,15 @@ export default class Home extends Component {
     });
   }
 
+  async fetchProducts(event) {
+    const { value } = event.target;
+    this.setState({
+      listProducts: await getProductsFromCategoryAndQuery('', value),
+    });
+  }
+
   render() {
-    const { listCategories } = this.state;
+    const { listCategories, listProducts } = this.state;
     return (
       <>
         <CartBtn />
@@ -35,6 +45,7 @@ export default class Home extends Component {
           </p>
           <ListCategories categories={ listCategories } />
         </div>
+        <SearchBox onFetchProducts={ this.fetchProducts } listProducts={ listProducts } />
       </>
     );
   }
