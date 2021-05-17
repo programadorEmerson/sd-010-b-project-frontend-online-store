@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Category, SearchBar, ListProducts } from '../components';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import '../css/Home.css';
@@ -45,6 +46,7 @@ class Home extends Component {
 
   render() {
     const { products, listCategories } = this.state;
+    const { setCart } = this.props;
     return (
       <>
         <div className="list-category" onChange={ this.onChangeCategory }>
@@ -53,10 +55,14 @@ class Home extends Component {
           ))}
         </div>
         <SearchBar handleSubmit={ this.handleSubmit } />
-        <ListProducts products={ products } />
+        <ListProducts setCart={ setCart } products={ products } />
       </>
     );
   }
 }
+
+Home.propTypes = {
+  setCart: PropTypes.func.isRequired,
+};
 
 export default Home;
