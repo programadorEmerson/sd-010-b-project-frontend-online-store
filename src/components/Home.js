@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { getProductsFromCategoryAndQuery } from '../services/api';
-
 import CategoryList from './CategoryList';
+
 import ProductList from './ProductList';
 import SearchBar from './SearchBar';
 
@@ -15,12 +15,6 @@ class Home extends React.Component {
       search: '',
       filterCategory: false,
     };
-  }
-
-  componentDidMount() {
-    // this.getApiFromCategory();
-    // // verificar aqui
-    // this.getApiFromQuery();
   }
 
   getApiFromCategory = (param) => async () => {

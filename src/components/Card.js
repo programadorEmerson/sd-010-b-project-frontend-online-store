@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Card extends Component {
   render() {
@@ -9,6 +10,12 @@ class Card extends Component {
         <img src={ thumbnail } alt={ title } />
         <h1>{ title }</h1>
         <p>{ price }</p>
+        <Link
+          data-testid="product-detail-link"
+          to={ `/details/${encodeURIComponent(title)}` }
+        >
+          DETALHES DO PRODUTO
+        </Link>
       </div>
     );
   }
