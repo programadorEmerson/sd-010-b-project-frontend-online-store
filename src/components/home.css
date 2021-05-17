@@ -18,8 +18,8 @@
   height: 100%;
   left: 350px;
   position: fixed;
-  width: 70%;
   overflow: auto;
+  width: 70%;
 }
 
 .input-pesquisa-produto {
@@ -30,7 +30,7 @@
 }
 
 .button_cart {
-  margin: 15px 40px;  
+  margin: 15px 40px;
 }
 
 .button_search {
