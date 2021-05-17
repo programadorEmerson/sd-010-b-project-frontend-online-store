@@ -51,7 +51,7 @@ class Homepage extends React.Component {
   }
 
   render() {
-    const { handleClick, arrProducts, searchQuery, onChange } = this.props;
+    const { handleClick, arrProducts, searchQuery, onChange, addToCart } = this.props;
     return (
       <div>
         <input
@@ -77,6 +77,7 @@ class Homepage extends React.Component {
           key={ product.id }
           product={ product }
           id={ index }
+          addToCart={ addToCart }
         />))}
       </div>
     );
@@ -89,6 +90,7 @@ Homepage.propTypes = {
   onChange: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
   setCategory: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default Homepage;
