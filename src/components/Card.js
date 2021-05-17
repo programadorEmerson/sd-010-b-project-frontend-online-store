@@ -10,7 +10,12 @@ class Card extends Component {
         <img src={ thumbnail } alt={ title } />
         <h1>{ title }</h1>
         <p>{ price }</p>
-        <Link data-testid="product-detail-link" to="/details">DETALHES DO PRODUTO</Link>
+        <Link
+          data-testid="product-detail-link"
+          to={ `/details/${encodeURIComponent(title)}` }
+        >
+          DETALHES DO PRODUTO
+        </Link>
       </div>
     );
   }
