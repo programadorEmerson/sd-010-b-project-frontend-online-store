@@ -24,7 +24,6 @@ class SearchBar extends React.Component {
     const { results } = data;
     this.setState({
       products: results,
-      renderProduct: true,
     });
   }
 
