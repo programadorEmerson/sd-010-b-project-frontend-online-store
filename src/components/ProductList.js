@@ -2,26 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ProductList extends React.Component {
-  searchNotFound = (products) => {
+  render() {
+    const { products, onClick } = this.props;
     if (products.length === 0) {
       return <p>Nenhum produto foi encontrado</p>;
     }
     return (
       <div>
-        {products.map(({ id, title, thumbnail, price }) => (
-          <div key={ id } data-testid="product">
-            <h3>{ title }</h3>
-            <img src={ thumbnail } alt={ title } />
-            <p>{ price }</p>
+        {products.map((produto) => (
+          <div key={ produto.id } data-testid="product">
+            <h3>{ produto.title }</h3>
+            <img src={ produto.thumbnail } alt={ produto.title } />
+            <p>{ produto.price }</p>
+            <button
+              data-testid="product-add-to-cart"
+              type="button"
+              onClick={ () => onClick(produto) }
+            >
+              Adicionar ao carrinho
+            </button>
           </div>
         ))}
       </div>
     );
-  }
-
-  render() {
-    const { products } = this.props;
-    return this.searchNotFound(products);
   }
 }
 
@@ -32,6 +35,7 @@ ProductList.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ProductList;

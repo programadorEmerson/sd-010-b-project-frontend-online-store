@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductList from '../components/ProductList';
@@ -32,6 +33,7 @@ class Home extends React.Component {
 
   render() {
     const { searchQuery, products, isEmpty } = this.state;
+    const { onClick } = this.props;
 
     return (
       <div className="App">
@@ -48,7 +50,7 @@ class Home extends React.Component {
             <p data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
             </p>
-          ) : <ProductList products={ products } />}
+          ) : <ProductList products={ products } onClick={ onClick } />}
           <CatList />
         </div>
         <Link data-testid="shopping-cart-button" to="/cart">VER CARRINHO</Link>
@@ -56,5 +58,9 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Home;

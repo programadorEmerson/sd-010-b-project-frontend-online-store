@@ -5,12 +5,30 @@ import Cart from './pages/Cart';
 import './App.css';
 
 class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      addCart: [],
+    };
+  }
+
+  handleAddCartItem = (produto) => {
+    this.setState((oldState) => ({ addCart: [...oldState.addCart, produto] }));
+  }
+
   render() {
+    const { addCart } = this.state;
+
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ Home } />
-          <Route exact path="/cart" component={ Cart } />
+          <Route
+            exact
+            path="/"
+            render={ () => <Home onClick={ this.handleAddCartItem } /> }
+          />
+          <Route exact path="/cart" render={ () => <Cart addCart={ addCart } /> } />
         </Switch>
       </BrowserRouter>
     );
