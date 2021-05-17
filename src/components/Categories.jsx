@@ -24,7 +24,7 @@ class Categories extends Component {
     const { categories } = this.state;
     return (
       <div>
-        {console.log(categories)}
+        {/* {console.log(categories)} */}
         {categories.map((category) => (<Category
           key={ category.id }
           category={ category }
