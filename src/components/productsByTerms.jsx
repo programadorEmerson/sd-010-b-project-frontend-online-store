@@ -1,5 +1,5 @@
 import React from 'react';
-import * as api from '../services/api';
+import PropTypes from 'prop-types';
 
 class ProductsByTerms extends React.Component {
   render() {
@@ -14,5 +14,21 @@ class ProductsByTerms extends React.Component {
   }
 }
 
+ProductsByTerms.defaultProps = {
+  product: {
+    title: 'faltou titulo',
+    price: 9999999,
+    thumbnail: 'faltou imagem',
+  },
+
+};
+
+ProductsByTerms.propTypes = {
+  product: PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
+  }),
+};
+
 export default ProductsByTerms;
-j
