@@ -23,15 +23,24 @@ class Home extends React.Component {
     });
   }
 
+  handleCategory = (event) => {
+    console.log(event.target);
+  };
+
   render() {
     const { categories } = this.state;
+    const { handleCategory } = this;
     return (
       <div>
         <ul>
           { categories.map((catItem) => (
+
             <li data-testid="category" key={ catItem.id }>
-              { catItem.name }
-            </li>))}
+              <button type="button" onClick={ handleCategory }>
+                { catItem.name }
+              </button>
+            </li>
+          ))}
         </ul>
         <SearchBar />
         <Link to="/shopping-cart" data-testid="shopping-cart-button">Cart</Link>
