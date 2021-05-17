@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, Link, BrowserRouter } from 'react-router-dom';
-import { Header, ShoppingCart, ListCategory } from './components';
+import { Header } from './components';
+import { ShoppingCart, Home } from './pages';
 import { getCategories } from './services/api';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
       cart: [],
     };
-
-    this.updateCategory = this.updateCategory.bind(this);
   }
 
   componentDidMount() {
-    this.updateCategory();
+    this.updateCategories();
   }
 
-  async updateCategory() {
+  async updateCategories() {
     const categories = await getCategories();
+    this.setState({ categories });
+  }
+
+  updateCategory(categories) {
     this.setState({ categories });
   }
 
@@ -38,7 +40,7 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={ () => (<ListCategory
+            render={ () => (<Home
               categories={ categories }
             />) }
           />

@@ -1,0 +1,8 @@
+.list-category {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-category input {
+  margin: 10px 7px;
+}
