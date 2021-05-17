@@ -7,11 +7,17 @@ class Home extends React.Component {
     super();
     this.state = {
       categories: [],
+      search: '',
     };
   }
 
   componentDidMount() {
     this.fetchCategories();
+  }
+
+  handleChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({ [name]: value });
   }
 
   fetchCategories = async () => {
@@ -26,6 +32,14 @@ class Home extends React.Component {
     return (
       <div>
         <Mensagem />
+        <input
+          type="text"
+          name="search"
+          placeholder="buscar"
+          data-testid="query-input"
+          onChange={ this.handleChange }
+        />
+        <button type="button" data-testid="query-button">Search</button>
         {
           categories.map((category) => (
             <div key={ category.id } data-testid="category">
