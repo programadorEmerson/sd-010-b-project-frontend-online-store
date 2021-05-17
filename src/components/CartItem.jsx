@@ -5,6 +5,18 @@ import minusIcon from '../images/minus-icon.png';
 import plusIcon from '../images/plus-icon.png';
 
 class CartItem extends Component {
+  constructor(props) {
+    super(props);
+    const { cartProduct: { name, source, quantity, price } } = props;
+    this.state = {
+      name,
+      source,
+      quantity,
+      price,
+      totalPrice: price,
+    };
+  }
+
   renderRemoveProductsIcon() {
     return <Image source={ cancelIcon } alt="remover produto" width="50" />;
   }
