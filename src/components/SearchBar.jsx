@@ -6,7 +6,7 @@ class SeachBar extends React.Component {
     return (
       <section>
         <label htmlFor="input">
-          <input type="text" id="input" class="search-bar"/>
+          <input type="text" id="input" className="search-bar" />
         </label>
         <Button />
         <h1
