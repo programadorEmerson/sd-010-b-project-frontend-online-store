@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { GrCart } from 'react-icons/gr';
+
 import ProductList from './ProductList';
+import Categories from './Categories';
 import * as api from '../services/api';
+import Header from './Header';
 
 class Home extends Component {
   constructor(props) {
@@ -10,56 +11,67 @@ class Home extends Component {
     this.state = {
       noProducts: false,
       products: [],
+      categoryId: '',
+      search: '',
     };
   }
 
-   handleClick = async () => {
-     const inputSearch = document.querySelector('#input-search');
-     const { value } = inputSearch;
-     const responseProducts = await api.getProductsFromCategoryAndQuery('categId', value);
-     //  console.log(responseProducts.results);
-     if (responseProducts) {
-       if (responseProducts.results.length > 0) {
-         this.setState({
-           products: responseProducts.results,
-           noProducts: false,
-         });
-       } else {
-         this.setState({
-           noProducts: true,
-         });
-       }
-     }
-   }
+  handleChecked = ({ target: { id } }) => {
+    this.handleProducts(id);
+    this.setState({ categoryId: id });
+  }
 
-   render() {
-     const { products, noProducts } = this.state;
-     const noProduct = 'Nenhum produto encontrado';
-     return (
-       <div>
-         <input
-           id="input-search"
-           type="text"
-           placeholder="busca"
-           data-testid="query-input"
-         />
-         <button
-           data-testid="query-button"
-           onClick={ this.handleClick }
-           type="button"
-         >
-           Search
-         </button>
-         <Link to="/shopping-cart" data-testid="shopping-cart-button">
-           <GrCart />
-         </Link>
-         <p data-testid="home-initial-message">
-           Digite algum termo de pesquisa ou escolha uma categoria.
-         </p>
-         { noProducts ? <p>{ noProduct }</p> : <ProductList products={ products } /> }
-       </div>
-     );
-   }
+  handleInput = ({ target: { value } }) => {
+    this.setState({ search: value });
+  }
+
+  handleProducts = async (id) => {
+    const { search } = this.state;
+    const filterProducts = await api.getProductsFromCategoryAndQuery(id, search);
+    if (filterProducts) {
+      if (filterProducts.results.length > 0) {
+        this.setState({
+          products: filterProducts.results,
+          noProducts: false,
+        });
+      } else {
+        this.setState({
+          noProducts: true,
+        });
+      }
+    }
+  }
+
+  handleClick = async () => {
+    const { categoryId, search } = this.state;
+    const responseProduct = await api.getProductsFromCategoryAndQuery(categoryId, search);
+    //  console.log(this.state.productsId);
+    if (responseProduct) {
+      if (responseProduct.results.length > 0) {
+        this.setState({
+          products: responseProduct.results,
+          noProducts: false,
+        });
+      } else {
+        this.setState({
+          noProducts: true,
+        });
+      }
+    }
+  }
+
+  render() {
+    const { products, noProducts } = this.state;
+    
+    const noProduct = 'Nenhum produto encontrado';
+    return (
+      <div>
+      <Header handleInput={this.handleInput} handleClick={this.handleClick}/>
+      {noProducts ? <p>{noProduct}</p> : <ProductList products={products} />}
+      <Categories checked={this.handleChecked} />
+      </div>
+    );
+  }
 }
 
 export default Home;
