@@ -43,7 +43,6 @@ class ProductList extends React.Component {
         >
           Pesquisar
         </button>
-        <Categories />
         { product === []
           ? (<p>Nenhum produto foi encotrado</p>)
           : product.map((item) => (
