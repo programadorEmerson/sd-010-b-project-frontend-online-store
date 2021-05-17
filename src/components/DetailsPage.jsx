@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class DetailsPage extends React.Component {
+  /*  handleClick() {
+
+  } */
+
   render() {
-    const { match: { params: { id } }, arrProducts } = this.props;
+    const { match: { params: { id } }, arrProducts, addToCart } = this.props;
     const { thumbnail, title, price } = arrProducts[id];
     return (
       <div>
@@ -33,6 +37,13 @@ class DetailsPage extends React.Component {
             />
           </label>
         </form>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => addToCart(arrProducts[id]) }
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
@@ -49,6 +60,7 @@ DetailsPage.propTypes = {
     price: PropTypes.number,
     thumbnail: PropTypes.string,
   }).isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default DetailsPage;
