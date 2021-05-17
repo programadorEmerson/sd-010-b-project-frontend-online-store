@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getItemById } from '../services/api';
+import getItemById from '../services/newRequest';
 
 export default class ProductDetails extends Component {
   constructor() {
     super();
     this.renderDetails = this.renderDetails.bind(this);
+    this.getProduct = this.getProduct.bind(this);
     this.state = {
       loading: true,
       product: {},
@@ -14,20 +15,21 @@ export default class ProductDetails extends Component {
   }
 
   componentDidMount() {
-    const { match: { params: { id } } } = this.props;
+    this.getProduct();
+  }
 
-    getItemById(id).then((product) => {
-      this.setState({
-        loading: false,
-        product,
-      });
+  async getProduct() {
+    const { match: { params: { id } } } = this.props;
+    const result = await getItemById(id);
+    this.setState({
+      loading: false,
+      product: result,
     });
   }
 
   renderDetails() {
     const { product } = this.state;
     const { title, thumbnail, price } = product;
-    // this.setState({ loading: false });
 
     return (
       <div>
