@@ -17,8 +17,8 @@
 .pesquisa {
   height: 100%;
   left: 350px;
-  position: fixed;
   overflow: auto;
+  position: fixed;
   width: 70%;
 }
 
