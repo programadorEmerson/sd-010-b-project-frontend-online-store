@@ -7,10 +7,9 @@ class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      categories: [],
+      categories: null,
       search: '',
-      products: [],
-      loading: null,
+      searchResult: null,
     };
   }
 
@@ -23,8 +22,14 @@ class Home extends React.Component {
     this.setState({ [name]: value });
   }
 
-  // clickButtonSearch = async () => {
-  // }
+  clickButtonSearch = async () => {
+    const { search } = this.state;
+    const searchResult = await api.getProductsFromCategoryAndQuery(search);
+    this.setState({
+      searchResult,
+      products: searchResult.results,
+    });
+  }
 
   fetchCategories = async () => {
     const categories = await api.getCategories();
@@ -34,8 +39,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { search } = this.state;
-    const { categories, products, loading } = this.state;
+    const { categories, products } = this.state;
     return (
       <div>
         <Mensagem />
@@ -49,20 +53,17 @@ class Home extends React.Component {
         <button
           type="button"
           data-testid="query-button"
-          onClick={ async () => {
-            const resultProducts = await api.getProductsFromCategoryAndQuery(search)
-              .then((result) => this.setState({ products: result, loading: true }));
-          } }
+          onClick={ this.clickButtonSearch }
         >
           Search
         </button>
-        {
-          categories.map((category) => (
+        { categories
+          && categories.map((category) => (
             <div key={ category.id } data-testid="category">
               { category.name }
             </div>))}
-        { loading
-          && products.result.map((product) => (
+        { products
+          && products.map((product) => (
             <Card product={ product } key={ product.id } />))}
       </div>
     );
