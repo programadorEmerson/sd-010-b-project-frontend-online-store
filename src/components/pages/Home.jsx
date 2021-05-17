@@ -14,7 +14,7 @@ export default class Home extends Component {
     };
 
     this.fetchCategories = this.fetchCategories.bind(this);
-    this.fetchProducts = this.fetchProducts.bind(this);
+    this.fetchCategoryAndProducts = this.fetchCategoryAndProducts.bind(this);
   }
 
   componentDidMount() {
@@ -27,8 +27,7 @@ export default class Home extends Component {
     });
   }
 
-  async fetchProducts(event) {
-    const { value } = event.target;
+  async fetchCategoryAndProducts({ target: { value } }) {
     this.setState({
       listProducts: await getProductsFromCategoryAndQuery('', value),
     });
@@ -45,7 +44,10 @@ export default class Home extends Component {
           </p>
           <ListCategories categories={ listCategories } />
         </div>
-        <SearchBox onFetchProducts={ this.fetchProducts } listProducts={ listProducts } />
+        <SearchBox
+          onFetchProducts={ this.fetchCategoryAndProducts }
+          listProducts={ listProducts }
+        />
       </>
     );
   }
