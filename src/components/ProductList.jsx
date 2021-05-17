@@ -9,11 +9,13 @@ class ProductList extends Component {
       <div>
         {products.map((product) => (
           <div data-testid="product" key={ product.id }>
-          
-          <Link data-testid="product-detail-link" to={`details/${product.id}`}>
-            <h3>{ product.title }</h3>
-            {<img width="200px" src={ product.thumbnail } alt={ product.title } />}
-            <p>R$ { product.price }</p>
+            <Link data-testid="product-detail-link" to={ `details/${product.id}` }>
+              <h3>{ product.title }</h3>
+              <img width="200px" src={ product.thumbnail } alt={ product.title } />
+              <p>
+                R$
+                { product.price }
+              </p>
             </Link>
           </div>
         ))}

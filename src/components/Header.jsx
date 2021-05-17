@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { GrCart } from 'react-icons/gr';
 
@@ -8,6 +8,7 @@ class Header extends Component {
     super(props);
     this.state = {};
   }
+
   render() {
     const { handleInput, handleClick } = this.props;
     return (
@@ -17,11 +18,11 @@ class Header extends Component {
           type="text"
           placeholder="busca"
           data-testid="query-input"
-          onChange={handleInput}
+          onChange={ handleInput }
         />
         <button
           data-testid="query-button"
-          onClick={handleClick}
+          onClick={ handleClick }
           type="button"
         >
           Search
@@ -32,10 +33,15 @@ class Header extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-       
+
       </div>
     );
   }
 }
+
+Header.propTypes = {
+  handleInput: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default Header;
