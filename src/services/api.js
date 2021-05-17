@@ -15,9 +15,3 @@ export async function getProductsByQuery(query) {
   const reqQueryObj = await reqQuery.json();
   return reqQueryObj;
 }
-
-// export async function getProductsByQuery(query) {
-//   fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${query}`)
-//     .then((data) => data.json())
-//     .then((result) => result.results)
-// }
