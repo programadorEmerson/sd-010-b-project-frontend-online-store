@@ -6,10 +6,8 @@ import ShoppingCart from './pages/ShoppingCart';
 import ShoppingHome from './pages/ShoppingHome';
 
 import './App.css';
-// import * as api from './services/api';
 
 function App() {
-  // console.log(api.getCategories());
   return (
     <main>
       <BrowserRouter>
