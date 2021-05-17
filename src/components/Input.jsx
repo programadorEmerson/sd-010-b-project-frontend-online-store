@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Input extends Component {
   constructor(props) {
@@ -32,5 +33,9 @@ class Input extends Component {
     );
   }
 }
+
+Input.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Input;
