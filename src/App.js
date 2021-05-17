@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 // import { render } from '@testing-library/react';
 import ProductList from './components/ProductList';
 import ShoppingCart from './components/ShoppingCart';
+import CategoryList from './components/CategoryList';
 
 class App extends React.Component {
   constructor() {
@@ -35,6 +36,7 @@ class App extends React.Component {
              Digite algum termo de pesquisa ou escolha uma categoria.
            </label>
          </div>
+         <CategoryList />
          <BrowserRouter>
            <div>
              <Link to="/shopping-cart" data-testid="shopping-cart-button" />
