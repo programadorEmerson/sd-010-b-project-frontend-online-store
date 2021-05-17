@@ -1,3 +1,27 @@
+.product-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.product-card {
+  align-items: center;
+  border: solid rgb(170, 168, 168) 1px;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  padding: 15px;
+  width: 300px;
+}
+
+.product-card img {
+  height: 150px;
+}
+
 .App {
   text-align: center;
 }
