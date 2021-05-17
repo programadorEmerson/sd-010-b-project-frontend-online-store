@@ -37,10 +37,9 @@ export default class Home extends Component {
   }
 
   async fetchProductsByCategories(categoryId) {
-    const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`);
-    const categories = await response.json();
+    const products = await getProductsFromCategoryAndQuery(categoryId, '');
     this.setState({
-      listProducts: categories.results,
+      listProducts: products.results,
     });
   }
 
@@ -57,7 +56,10 @@ export default class Home extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <div>
-          <ListCategories categories={ listCategories } fecthProducts={ this.fetchProductsByCategories } />
+          <ListCategories
+            categories={ listCategories }
+            fecthProducts={ this.fetchProductsByCategories }
+          />
         </div>
       </>
     );

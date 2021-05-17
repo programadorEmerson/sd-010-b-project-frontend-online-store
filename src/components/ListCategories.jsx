@@ -26,6 +26,7 @@ class ListCategories extends Component {
 
 ListCategories.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fecthProducts: PropTypes.func.isRequired,
 };
 
 export default ListCategories;
