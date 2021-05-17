@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class ShoppingCart extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      quantity: 0,
-    };
-  }
-
    RenderProducts = () => {
      const value = JSON.parse(localStorage.getItem('cartItems'));
      if (value !== null) {

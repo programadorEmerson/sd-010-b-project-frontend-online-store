@@ -7,8 +7,6 @@ import {
 
 import './App.css';
 
-// import { getCategories } from './services/api';
-// import { Home, ShoppingCart } from './component';
 import Home from './components/Home';
 import ShoppingCart from './components/ShoppingCart';
 
