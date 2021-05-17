@@ -21,6 +21,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
+    const { cart } = this.props;
     return <div>{cart.length < 1 ? this.renderIsEmpty() : this.renderList()}</div>;
   }
 }
