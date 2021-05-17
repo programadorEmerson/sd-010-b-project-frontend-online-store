@@ -1,24 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>Edit src/App.js and save to reload.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import DetailsCard from './components/DetailsCard';
+
+// import { getCategories } from './services/api';
+// import { Home, ShoppingCart } from './component';
+import Home from './components/Home';
+import ShoppingCart from './components/ShoppingCart';
+
+class App extends React.Component {
+  // constructor() {
+  //   super();
+
+  //   this.state = {
+  //     result: {},
+  //   };
+  // }
+
+  // componentDidMount() {
+  //   this.getApi();
+  // }
+
+  // getApi = async () => {
+  //   const api = await getCategories();
+  //   this.setState({
+  //     result: api,
+  //   });
+  // }
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" component={ Home } />
+          <Route path="/cart" component={ ShoppingCart } />
+          <Route path="/details" component={ DetailsCard } />
+        </Switch>
+      </Router>
+    );
+  }
 }
 
 export default App;
