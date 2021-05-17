@@ -32,9 +32,9 @@ class App extends React.Component {
                data-testid="query-input"
                onChange={ this.setSearchText }
              />
-
              Digite algum termo de pesquisa ou escolha uma categoria.
            </label>
+           <button type="button" data-testid="query-button">Pesquisar</button>
          </div>
          <CategoryList />
          <BrowserRouter>

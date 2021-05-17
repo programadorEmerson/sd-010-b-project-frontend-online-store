@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getProductsFromQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -12,7 +12,11 @@ class ProductList extends React.Component {
 
   componentDidUpdate() {
     const { searchText } = this.props;
-    getProductsFromQuery(searchText).then((products) => {
+    this.apiCall(searchText);
+  }
+
+  apiCall = (searchText) => {
+    getProductsFromCategoryAndQuery('', searchText).then((products) => {
       const { results } = products;
       this.setState({
         results,
