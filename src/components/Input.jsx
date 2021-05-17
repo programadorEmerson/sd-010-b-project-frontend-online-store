@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Input extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class Input extends Component {
   }
 
   render() {
+    const { onChange } = this.props;
     const { urlfinal } = this.state;
     return (
       <div className="header-separator">
@@ -23,11 +25,17 @@ class Input extends Component {
             type="text"
             placeholder="Procurar &#xF002;"
             autoComplete="off"
+            onChange={ onChange }
+            data-testid="query-input"
           />
         </header>
       </div>
     );
   }
 }
+
+Input.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Input;
