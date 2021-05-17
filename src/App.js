@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import ProductList from './components/ProductList';
 import ShoppingCart from './components/ShoppingCart';
+import CategoryList from './components/CategoryList';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
 
           Digite algum termo de pesquisa ou escolha uma categoria.
         </label>
+        <CategoryList />
       </div>
       <BrowserRouter>
         <div>
