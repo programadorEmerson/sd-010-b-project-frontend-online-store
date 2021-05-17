@@ -20,7 +20,7 @@ class ProductDetaills extends Component {
   // getProductsById(id)
 
   render() {
-    const { product: { title, thumbnail, price, warranty } } = this.state;
+    const { product: { id, title, thumbnail, price, warranty } } = this.state;
     // console.log(this.state.product);
     return (
       <div>
@@ -33,6 +33,13 @@ class ProductDetaills extends Component {
           R$
           { price }
         </p>
+        <button
+          onClick={ () => handleAddCartItem({ id, title, price, thumbnail, qtd: 1 }) }
+          type="button"
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
