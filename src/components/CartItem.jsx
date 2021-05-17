@@ -17,6 +17,10 @@ class CartItem extends Component {
     };
   }
 
+  shouldComponentUpdate(_, nextState) {
+    return nextState.quantity >= 0;
+  }
+
   decreaseQuantity = () => {
     this.setState((prevState) => ({
       quantity: (prevState.quantity >= 0) ? prevState.quantity - 1 : 0,
