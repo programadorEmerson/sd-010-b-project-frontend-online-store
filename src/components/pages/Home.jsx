@@ -10,11 +10,12 @@ export default class Home extends Component {
 
     this.state = {
       listCategories: [],
-      listProducts: '',
+      listProducts: [],
     };
 
     this.fetchCategories = this.fetchCategories.bind(this);
     this.fetchCategoryAndProducts = this.fetchCategoryAndProducts.bind(this);
+    this.fetchProductsByCategories = this.fetchProductsByCategories.bind(this);
   }
 
   componentDidMount() {
@@ -28,9 +29,18 @@ export default class Home extends Component {
   }
 
   async fetchCategoryAndProducts({ target: { value } }) {
+    const getProducts = await getProductsFromCategoryAndQuery('', value);
+    const arrayProducts = getProducts.results;
     this.setState({
-      listProducts: await getProductsFromCategoryAndQuery('', value),
+      listProducts: arrayProducts,
     });
+  }
+
+  async fetchProductsByCategories(categoryId) {
+    const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`);
+    const categories = await response.json();
+
+    console.log(categories);
   }
 
   render() {
@@ -38,16 +48,16 @@ export default class Home extends Component {
     return (
       <>
         <CartBtn />
-        <div>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          <ListCategories categories={ listCategories } />
-        </div>
         <SearchBox
           onFetchProducts={ this.fetchCategoryAndProducts }
           listProducts={ listProducts }
         />
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+        <div>
+          <ListCategories categories={ listCategories } fecthProducts={ this.fetchProductsByCategories } />
+        </div>
       </>
     );
   }

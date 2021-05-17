@@ -3,18 +3,20 @@ import PropTypes from 'prop-types';
 
 class ListCategories extends Component {
   render() {
-    const { categories } = this.props;
+    const { categories, fecthProducts } = this.props;
     return (
       <aside>
         <ul>
           {
             categories.map((category) => (
-              <li
+              <button
+                type="button"
                 key={ category.id }
                 data-testid="category"
+                onClick={ () => fecthProducts(category.id) }
               >
                 {category.name}
-              </li>))
+              </button>))
           }
         </ul>
       </aside>
