@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ProductsByTerms from './productsByTerms';
 import * as api from '../services/api';
 import CategoryList from './CategoryList';

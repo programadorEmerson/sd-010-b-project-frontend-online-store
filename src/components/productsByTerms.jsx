@@ -7,9 +7,11 @@ class ProductsByTerms extends React.Component {
     const { product: { title, price, thumbnail }, id } = this.props;
     return (
       <Link to={ `/details/${id}` } data-testid="product-detail-link">
-        <p>{title}</p>
-        <p>{price}</p>
-        <img src={ thumbnail } alt={ title } />
+        <div data-testid="product">
+          <p>{title}</p>
+          <p>{price}</p>
+          <img src={ thumbnail } alt={ title } />
+        </div>
       </Link>
     );
   }
