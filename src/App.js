@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, Link, BrowserRouter } from 'react-router-dom';
 import { Header } from './components';
-import { ShoppingCart, Home } from './pages';
+import { ShoppingCart, Home, ProductDetails } from './pages';
 import { getCategories } from './services/api';
 
 class App extends Component {
@@ -45,6 +45,10 @@ class App extends Component {
             />) }
           />
           <Route path="/cart" render={ () => <ShoppingCart cart={ cart } /> } />
+          <Route
+            path="/product/:id"
+            render={ (props) => <ProductDetails { ...props } /> }
+          />
         </Switch>
       </BrowserRouter>
     );
