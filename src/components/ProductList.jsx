@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 
 class ProductList extends Component {
   render() {
-    const { products } = this.props;
+    const { products, onClick } = this.props;
+
     return (
       <div>
         {products.map((product) => (
           <div data-testid="product" key={ product.id }>
-            <Link data-testid="product-detail-link" to={ `details/${product.id}` }>
+            <Link
+              data-testid="product-detail-link"
+              to={ `details/${product.id }`}
+            >
               <h3>{ product.title }</h3>
               <img width="200px" src={ product.thumbnail } alt={ product.title } />
               <p>
@@ -17,12 +21,20 @@ class ProductList extends Component {
                 { product.price }
               </p>
             </Link>
+            <button
+              data-testid="product-add-to-cart"
+              type="button"
+              onClick={ () => onClick(product) }
+            >
+              Adicionar ao carrinho
+            </button>
           </div>
         ))}
       </div>
     );
   }
 }
+
 ProductList.propTypes = {
   map: PropTypes.arrayOf({
     products: PropTypes.shape({
@@ -31,7 +43,8 @@ ProductList.propTypes = {
       id: PropTypes.string,
       thumbnail: PropTypes.string,
     }),
-  }),
-}.isRequired;
+  }).isRequired,
+  onClick: PropTypes.func.isRequired
+}
 
 export default ProductList;
