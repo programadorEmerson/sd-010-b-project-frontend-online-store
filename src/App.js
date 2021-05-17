@@ -3,7 +3,6 @@ import './App.css';
 import { Route, Switch, Link, BrowserRouter } from 'react-router-dom';
 import { Header } from './components';
 import { ShoppingCart, Home, ProductDetails } from './pages';
-import { getCategories } from './services/api';
 
 class App extends Component {
   constructor(props) {
@@ -11,19 +10,22 @@ class App extends Component {
     this.state = {
       cart: [],
     };
+    this.setCart = this.setCart.bind(this);
+    this.updateQuant = this.updateQuant.bind(this);
   }
 
-  componentDidMount() {
-    this.updateCategories();
+  setCart(product) {
+    this.setState((state) => ({ cart: [...state.cart, product] }));
   }
 
-  async updateCategories() {
-    const categories = await getCategories();
-    this.setState({ categories });
-  }
-
-  updateCategory(categories) {
-    this.setState({ categories });
+  updateQuant(id, bool) {
+    this.setState((state) => ({
+      cart: state.cart.map((elem) => {
+        if (!bool && elem.id === id) return { ...elem, quant: elem.quant - 1 };
+        if (bool && elem.id === id) return { ...elem, quant: elem.quant + 1 };
+        return elem;
+      }),
+    }));
   }
 
   render() {
@@ -40,14 +42,18 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={ () => (<Home
-              categories={ categories }
+            render={ () => <Home setCart={ this.setCart } categories={ categories } /> }
+          />
+          <Route
+            path="/cart"
+            render={ () => (<ShoppingCart
+              updateQuant={ this.updateQuant }
+              cart={ cart }
             />) }
           />
-          <Route path="/cart" render={ () => <ShoppingCart cart={ cart } /> } />
           <Route
             path="/product/:id"
-            render={ (props) => <ProductDetails { ...props } /> }
+            render={ (props) => <ProductDetails setCart={ this.setCart } { ...props } /> }
           />
         </Switch>
       </BrowserRouter>

@@ -27,18 +27,24 @@ class ProductDetails extends Component {
   }
 
   render() {
+    const { setCart } = this.props;
     const { product } = this.state;
-    const { title, thumbnail, price } = product;
+    const { title, thumbnail, price, id } = product;
 
     return (
-      <>
-        <div className="product-detail-container">
-          <p data-testid="product-detail-name">{title}</p>
-          <img src={ thumbnail } alt={ title } />
-          <p>{price}</p>
-        </div>
+      <div className="product-detail-container">
+        <p data-testid="product-detail-name">{title}</p>
+        <img src={ thumbnail } alt={ title } />
+        <p>{price}</p>
         <Rating />
-      </>
+        <button
+          onClick={ () => setCart({ id, title, price, thumbnail, quant: 1 }) }
+          type="button"
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicionar ao Carrinho
+        </button>
+      </div>
     );
   }
 }
