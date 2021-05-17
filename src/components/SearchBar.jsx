@@ -1,5 +1,5 @@
 import React from 'react';
-import { getProductsByQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductList from './ProductList';
 
 class SearchBar extends React.Component {
@@ -7,8 +7,8 @@ class SearchBar extends React.Component {
     super();
     this.state = {
       searchText: '',
-      renderProduct: false,
       products: '',
+      pageNotFound: false, // passamos uhuuuuuuuuuuuuuuuu
     };
   }
 
@@ -29,7 +29,7 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    const { handleClick, handleSearchText, state: { renderProduct, products } } = this;
+    const { handleClick, handleSearchText, state: { pageNotFound, products } } = this;
     return (
       <div>
         <label htmlFor="searchBar" data-testid="home-initial-message">
@@ -44,7 +44,8 @@ class SearchBar extends React.Component {
         <button type="button" data-testid="query-button" onClick={ handleClick }>
           Pesquisar
         </button>
-        { renderProduct && <ProductList products={ products } /> }
+        { products.length > 0 && <ProductList products={ products } /> }
+        { pageNotFound && <span>Nenhum produto foi encontrado.</span> }
       </div>
     );
   }
