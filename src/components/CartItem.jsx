@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Image from './Image';
-import cancelIcon from '../images/cancel-icon.png';
-import minusIcon from '../images/minus-icon.png';
-import plusIcon from '../images/plus-icon.png';
+import CustomButton from './CustomButton';
 
 class CartItem extends Component {
   constructor(props) {
