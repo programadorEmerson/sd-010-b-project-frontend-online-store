@@ -11,14 +11,14 @@ class App extends Component {
       cart: [],
     };
     this.setCart = this.setCart.bind(this);
-    this.increaseProduct = this.increaseProduct.bind(this);
+    this.updateQuant = this.updateQuant.bind(this);
   }
 
   setCart(product) {
     this.setState((state) => ({ cart: [...state.cart, product] }));
   }
 
-  increaseProduct(id, bool) {
+  updateQuant(id, bool) {
     this.setState((state) => ({
       cart: state.cart.map((elem) => {
         if (!bool && elem.id === id) return { ...elem, quant: elem.quant - 1 };
@@ -47,7 +47,7 @@ class App extends Component {
           <Route
             path="/cart"
             render={ () => (<ShoppingCart
-              increaseProduct={ this.increaseProduct }
+              updateQuant={ this.updateQuant }
               cart={ cart }
             />) }
           />

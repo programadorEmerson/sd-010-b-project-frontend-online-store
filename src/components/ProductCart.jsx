@@ -5,7 +5,7 @@ class ProductCart extends Component {
   render() {
     const {
       product: { title, quant, id },
-      increaseProduct,
+      updateQuant,
     } = this.props;
     const checkLength = quant <= 0 ? null : true;
     return (
@@ -14,13 +14,13 @@ class ProductCart extends Component {
         <button
           type="button"
           data-testid="product-increase-quantity"
-          onClick={ () => increaseProduct(id, true) }
+          onClick={ () => updateQuant(id, true) }
         >
           +
         </button>
         <button
           type="button"
-          onClick={ () => increaseProduct(id, false) }
+          onClick={ () => updateQuant(id, false) }
           data-testid="product-decrease-quantity"
           disabled={ !checkLength }
         >
@@ -38,7 +38,7 @@ ProductCart.propTypes = {
     quant: PropTypes.number,
     id: PropTypes.string,
   }).isRequired,
-  increaseProduct: PropTypes.func.isRequired,
+  updateQuant: PropTypes.func.isRequired,
 };
 
 export default ProductCart;
