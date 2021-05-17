@@ -8,40 +8,16 @@ class Homepage extends React.Component {
   constructor() {
     super();
 
-    this.handleClick = this.handleClick.bind(this);
-
     this.state = {
-      searchQuery: '',
       categories: [],
-      arrProducts: [],
-      category: '',
     };
 
     this.LoadCategories = this.LoadCategories.bind(this);
-    this.setCategory = this.setCategory.bind(this);
     this.renderCategories = this.renderCategories.bind(this);
   }
 
   componentDidMount() {
     this.LoadCategories();
-  }
-
-  async handleClick() {
-    const { searchQuery, category } = this.state;
-    console.log(searchQuery, category);
-    const productTerms = await api.getProductsFromCategoryAndQuery(category, searchQuery);
-    this.setState({
-      arrProducts: productTerms.results,
-    });
-  }
-
-  // Passando essa função como prop para a lista de categorias renderizadas.
-  // Essa função basicamente pega o valor do input Radio, atualiza o state com esse valor e faz uma nova chamada para API do mercado Livre
-  setCategory(e) {
-    const { target: { value } } = e;
-    this.setState({ category: value }, () => {
-      this.handleClick();
-    });
   }
 
   async LoadCategories() {
@@ -52,6 +28,7 @@ class Homepage extends React.Component {
   }
 
   renderCategories() {
+    const { setCategory } = this.props;
     const { categories } = this.state;
     return (
       <section className="category-list">
@@ -64,7 +41,7 @@ class Homepage extends React.Component {
               key={ id }
               id={ id }
               name={ name }
-              onClick={ this.setCategory }
+              onClick={ setCategory }
             />);
           })
         )}
@@ -73,14 +50,15 @@ class Homepage extends React.Component {
   }
 
   render() {
-    const { searchQuery, arrProducts } = this.state;
+    const { handleClick, arrProducts, searchQuery, onChange } = this.props;
     return (
       <div>
         <input
           data-testid="query-input"
           type="text"
+          name="searchQuery"
           value={ searchQuery }
-          onChange={ (e) => this.setState({ searchQuery: e.target.value }) }
+          onChange={ onChange }
         />
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
@@ -89,18 +67,27 @@ class Homepage extends React.Component {
         <button
           type="button"
           data-testid="query-button"
-          onClick={ this.handleClick }
+          onClick={ handleClick }
         >
           Pesquisar
         </button>
         {this.renderCategories()}
-        {arrProducts.map((product) => (<ProductsByTerms
+        {arrProducts.map((product, index) => (<ProductsByTerms
           key={ product.id }
           product={ product }
+          id={ index }
         />))}
       </div>
     );
   }
 }
+
+Homepage.propTypes = {
+  arrProducts: PropTypes.arrayOf.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  searchQuery: PropTypes.string.isRequired,
+  setCategory: PropTypes.func.isRequired,
+};
 
 export default Homepage;
