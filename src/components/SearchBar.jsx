@@ -1,7 +1,7 @@
 import React from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductList from './ProductList';
-//iniciando 06
+//  iniciando 06
 class SearchBar extends React.Component {
   constructor() {
     super();
