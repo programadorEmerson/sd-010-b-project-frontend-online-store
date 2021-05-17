@@ -43,6 +43,7 @@ class ProductsList extends Component {
 
 ProductsList.propTypes = {
   query: PropTypes.string.isRequired,
+  categoryID: PropTypes.string.isRequired,
 };
 
 export default ProductsList;
