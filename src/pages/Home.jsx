@@ -19,10 +19,17 @@ class Home extends React.Component {
           <CategoryBar />
         </section>
         <section className="result-page">
-          <Input />
+          <Input datatestid="query-input" />
           <p className="text-search" data-testid="home-initial-message">
-            Digite algum termo de Pesquisa ou escolha uma categoria.
+            Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
+          <input
+            className="btn-search"
+            type="button"
+            datatestid="query-button"
+            onClick={ this.handleClick }
+            value="Buscar"
+          />
           <section className="products-list">
             <ProductsList />
           </section>
