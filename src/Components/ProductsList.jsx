@@ -18,8 +18,10 @@ class ProductsList extends Component {
   }
 
   getList = async () => {
-    const { query } = this.props;
-    const { results } = await getProductsFromCategoryAndQuery('', query);
+
+    const { query, categoryID } = this.props;
+    const { results } = await getProductsFromCategoryAndQuery(categoryID, query);
+
     this.setState({
       products: results,
     });
@@ -43,6 +45,8 @@ class ProductsList extends Component {
 
 ProductsList.propTypes = {
   query: PropTypes.string.isRequired,
+  categoryID: PropTypes.string.isRequired,
+
 };
 
 export default ProductsList;

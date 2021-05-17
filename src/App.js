@@ -20,4 +20,4 @@ function App() {
 }
 
 export default App;
-// Agradecimentos ao Daniel Roberto Turma 10 Tribo B
+// Agradecimentos ao Daniel Roberto Turma 10 Tribo B, Lucas Martins Turma 10 Tribo B

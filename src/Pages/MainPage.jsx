@@ -11,8 +11,15 @@ class MainPage extends Component {
     this.state = {
       query: '',
       doQuery: false,
-      // products: [],
+      categoryID: '',
     };
+  }
+
+  handleCategoryClick = (categoryID) => {
+    this.setState({
+      categoryID,
+      doQuery: true,
+    });
   }
 
   searchWords = (event) => {
@@ -53,16 +60,16 @@ class MainPage extends Component {
   );
 
   render() {
-    const { query, doQuery } = this.state;
+    const { query, doQuery, categoryID } = this.state;
 
     return (
       <main>
-        <ListCategories />
+        <ListCategories handleCategoryClick={ this.handleCategoryClick } />
         <section>
           <CartButton />
           { this.renderInitialPhrase() }
           { this.renderSearchBar() }
-          { doQuery ? <ProductsList query={ query } />
+          { doQuery ? <ProductsList query={ query } categoryID={ categoryID } />
             : <p>Does not render ProductList</p>}
         </section>
       </main>
