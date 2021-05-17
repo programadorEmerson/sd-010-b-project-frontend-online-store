@@ -1,10 +1,10 @@
-*{
+* {
   text-align: center;
 }
 
 #search-bar-input {
-  margin: 0.5rem;
+  border-radius: 25px;
   height: 1.5rem;
   width: 60rem;
-  border-radius: 25px;
+  margin: 0.5rem;
 }
