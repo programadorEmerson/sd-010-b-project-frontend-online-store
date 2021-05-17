@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 class ListCategories extends Component {
   render() {
-    const { handlerChange, categories } = this.props;
+    const { handlerChange, handlerClick, categories } = this.props;
     return (
       <section className="select-categorie-component">
-        <select onChange={ handlerChange } name="category">
+        <select onChange={ handlerChange } onClick={ handlerClick } name="category">
           <option>Selecione uma categoria</option>
           { categories.map(({ name, id }) => (
             <option key={ id } data-testid="category" value={ id }>
@@ -21,6 +21,7 @@ class ListCategories extends Component {
 
 ListCategories.propTypes = {
   handlerChange: PropTypes.func.isRequired,
+  handlerClick: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
