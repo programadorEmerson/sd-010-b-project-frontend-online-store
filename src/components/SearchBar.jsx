@@ -8,7 +8,7 @@ class SearchBar extends React.Component {
     this.state = {
       searchText: '',
       products: '',
-      pageNotFound: false,
+      pageNotFound: false, // passamos uhuuuuuuuuuuuuuuuu
     };
   }
 
