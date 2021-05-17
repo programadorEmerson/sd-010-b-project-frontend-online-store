@@ -27,7 +27,7 @@ class Home extends React.Component {
     console.log('getApiFromCategory');
     this.setState({
       filterCategory: await getProductsFromCategoryAndQuery(param, ''),
-      filtered: [],
+      filtered: false,
     });
   }
 
@@ -35,7 +35,7 @@ class Home extends React.Component {
     const { search } = this.state;
     this.setState({
       filtered: await getProductsFromCategoryAndQuery('', search),
-      filterCategory: [],
+      filterCategory: false,
     });
   }
 
