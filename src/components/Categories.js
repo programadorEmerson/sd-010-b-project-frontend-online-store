@@ -1,6 +1,7 @@
 import React from 'react';
 import * as api from '../services/api';
 import './categories.css';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Categories extends React.Component {
   constructor() {
@@ -8,12 +9,28 @@ class Categories extends React.Component {
     this.state = {
       categories: [],
       loading: true,
+      categoryFilter: '',
+      productCategoria: [],
     };
     this.recuperarCategorias = this.recuperarCategorias.bind(this);
+    this.onClickCategor = this.onClickCategor.bind(this);
   }
 
   componentDidMount() {
     this.recuperarCategorias();
+  }
+
+  onClickCategor(event) {
+    this.setState({
+      categoryFilter: event.target.value,
+    }, () => {
+      const { categoryFilter, productCategoria } = this.state;
+      getProductsFromCategoryAndQuery(categoryFilter, null)
+        .then((productCategoria) => this.setState({
+          productCategoria,
+        }));
+        
+    });
   }
 
   recuperarCategorias() {
@@ -31,27 +48,34 @@ class Categories extends React.Component {
     const { loading, categories } = this.state;
     return (
       <div>
-        <ul>
-          {
-            loading ? <p>Carregando</p>
-              : categories.map((result) => (
-                <li
-                  key={ result.id }
-                  data-testid="category"
-                >
-                  <label htmlFor={ result.name }>
-                    <input
-                      type="radio"
-                      name="category"
-                      id={ result.name }
-                      value={ result.name }
-                    />
-                    {result.name}
-                  </label>
-                </li>
-              ))
-          }
-        </ul>
+
+        { loading ? <p>Carregando</p>
+
+          : <ul key="ulLinsta">
+            <form onChange={ this.onClickCategor }>
+              {
+
+                categories.map((result) => (
+                  <li
+                    key={ result.id }
+                    data-testid="category"
+                  >
+                    <label htmlFor={ result.name } key={ result.id }>
+                      <input
+                        type="radio"
+                        name="category"
+                        id={ result.name }
+                        value={ result.id }
+                      />
+                      {result.name}
+                    </label>
+                  </li>
+                ))
+              }
+
+            </form>
+          </ul>
+        }
       </div>
     );
   }

@@ -26,7 +26,7 @@ class Home extends React.Component {
   onClickHandle(event) {
     event.preventDefault();
     const { inputfilter } = this.state;
-    getProductsFromCategoryAndQuery(null, inputfilter)
+    getProductsFromCategoryAndQuery(inputfilter, null)
       .then((products) => this.setState({
         products,
       }));
