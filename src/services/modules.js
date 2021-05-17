@@ -1,4 +1,5 @@
 let arrayCart = [];
+let arrReviews = [];
 
 export const addProductCart = (item) => {
   const itemProduct = { ...item, qty: 1 };
@@ -12,7 +13,8 @@ export const handleAmount = (prod, bool) => {
       ? { ...elem, qty: elem.qty + 1 } : elem));
   } else {
     arrayCart = arrayCart.map((elem) => (elem.id === prod.id
-      ? { ...elem, qty: elem.qty > 0 && elem.qty - 1 } : elem));
+      ? { ...elem, qty: elem.qty - 1 }
+      : elem));
   }
 };
 
@@ -27,5 +29,15 @@ export const handleDelete = (prod) => {
 //     return total;
 //   }, 0);
 // };
+
+export const setReview = (obj) => {
+  arrReviews = [...arrReviews, obj];
+  console.log(arrReviews);
+};
+
+export const getReviews = (id) => {
+  const product = arrReviews.filter((item) => item.id === id);
+  return product;
+};
 
 export const getCartState = () => arrayCart;

@@ -16,7 +16,6 @@ export default class Home extends Component {
       products: [],
       foundProducts: true,
       value: '',
-      // cart: [],
     };
 
     this.getCategories = this.getCategories.bind(this);
@@ -72,12 +71,6 @@ export default class Home extends Component {
     const getCategoriesFromApi = await api.getCategories();
     this.setState({ categories: getCategoriesFromApi });
   }
-
-  // addProductIntoCart(item) {
-  //   const { cart } = this.state;
-  //   const itemProduct = { ...item, qty: 1 };
-  //   // this.setState({ cart: [...cart, itemProduct] });
-  // }
 
   render() {
     const { categories, foundProducts, cart } = this.state;
