@@ -2,21 +2,24 @@ import React from 'react';
 import * as API from '../services/api';
 
 class ProductList extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      allProductsApi: {},
+      results: [],
     };
   }
 
   componentDidMount() {
     const { getProductsFromQuery } = API;
-    // eslint-disable-next-line react/prop-types
     const { searchText } = this.props;
+    console.log(searchText);
 
-    getProductsFromQuery(searchText).then((products) => this.setState({
-      allProductsApi: products,
-    }));
+    getProductsFromQuery(searchText).then((products) => {
+      const { results } = products;
+      this.setState({
+        results,
+      });
+    });
   }
 
   constructorCard = (item) => (
@@ -33,15 +36,13 @@ class ProductList extends React.Component {
   )
 
   render() {
-    const { allProductsApi } = this.state;
-    const { results } = allProductsApi;
-    console.log(this.state);
+    const { results } = this.state;
     return (
       <div>
         <ol>
-          { results.map((item, index) => (
+          { (results.length === 0) ? <p>Nenhum produto foi encontrado</p> : results.map((item, index) => (
             <li key={ index }>
-              {results.length === 0 ? <p>Nenhum produto foi encontrado</p> : this.constructorCard(item) }
+              {this.constructorCard(item)}
             </li>))}
         </ol>
       </div>

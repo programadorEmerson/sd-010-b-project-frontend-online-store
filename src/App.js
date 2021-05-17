@@ -43,7 +43,7 @@ class App extends React.Component {
                exact
                path="/"
                render={
-                 () => <ProductList searchText={ searchText } />
+                 (props) => <ProductList { ...props } searchText={ searchText } />
                }
              />
              <Route path="/shopping-cart" render={ () => <ShoppingCart /> } />
