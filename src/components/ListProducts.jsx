@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ListProducts extends Component {
-  renderProduct({ title, price, thumbnail }, index) {
+  renderProduct({ title, price, thumbnail, id }, index) {
     return (
-      <div data-testid="product" key={ `${index} - ${title}` }>
-        <p>{title}</p>
-        <img src={ thumbnail } alt={ title } />
-        <p>{price}</p>
-      </div>
+      <Link to={ `/product/${id}` } data-testid="product-detail-link">
+        <div data-testid="product" key={ `${index} - ${title}` }>
+          <p>{title}</p>
+          <img src={ thumbnail } alt={ title } />
+          <p>{price}</p>
+        </div>
+      </Link>
     );
   }
 
