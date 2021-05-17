@@ -1,24 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CartButton from './CartButton';
-import ProductList from './ProductList';
+import * as api from '../services/api';
 
 class Input extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      products: [],
-      loading: false,
+      query: undefined,
     };
+  }
+
+  onChange({ target: { value } }) {
+    this.setState({ query: value });
+    console.log(value);
   }
 
   // Ao clicar no botão faz requisição na API buscando o que foi inserido no input
   fetchAPI = async () => {
-    const { value, products } = this.state;
-    this.setState({ loading: true });
-    const { results } = await getProductsFromCategoryAndQuery(value);
-    this.setState({ products: results, loading: false });
-    return <ProductList products={ products } />;
+    const { callback } = this.props;
+    const { query } = this.state;
+    const category = 'all';
+    console.log(query);
+    const results = await api.getProductsFromCategoryAndQuery(category, query);
+    callback(results);
   }
 
   render() {
@@ -50,5 +56,9 @@ class Input extends React.Component {
     );
   }
 }
+
+Input.propTypes = {
+  callback: PropTypes.func.isRequired,
+};
 
 export default Input;
