@@ -6,7 +6,6 @@ class CardProduct extends React.Component {
     const { product: { title, thumbnail, price } } = this.props;
     return (
       <section data-testid="product">
-
         <p>{ title }</p>
         <img src={ thumbnail } alt={ title } />
         <p>{ `R$${price}` }</p>
