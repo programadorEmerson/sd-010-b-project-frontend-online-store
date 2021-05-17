@@ -10,9 +10,9 @@ class ProductList extends React.Component {
     };
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const { searchText } = this.props;
-    this.apiCall(searchText);
+    if (prevProps.searchText !== searchText) this.apiCall(searchText);
   }
 
   apiCall = (searchText) => {
@@ -41,13 +41,11 @@ class ProductList extends React.Component {
     const { results } = this.state;
     return (
       <div>
-        <ol>
-          { (results.length === 0)
-            ? <p>Nenhum produto foi encontrado</p> : results.map((item, index) => (
-              <li key={ index }>
-                {this.constructorCard(item)}
-              </li>))}
-        </ol>
+        { (results.length === 0)
+          ? <p>Nenhum produto foi encontrado</p> : results.map((item, index) => (
+            <div data-testid="product" key={ index }>
+              {this.constructorCard(item)}
+            </div>))}
       </div>
     );
   }
