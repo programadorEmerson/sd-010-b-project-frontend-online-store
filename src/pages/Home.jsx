@@ -50,7 +50,11 @@ class Home extends React.Component {
           query={ query }
         />
 
-        <ListCategories handlerChange={ this.handlerChange } categories={ categories } />
+        <ListCategories
+          handlerChange={ this.handlerChange }
+          handlerClick={ this.handlerClick }
+          categories={ categories }
+        />
 
         <section className="list-component">
           {products.map((product) => (
