@@ -14,9 +14,8 @@ class App extends Component {
     this.setCart = this.setCart.bind(this);
   }
 
-  setCart(product, qtd) {
-    const newProduct = { ...product, qtd };
-    this.setState((state) => ({ cart: [...state.cart, newProduct] }));
+  setCart(product) {
+    this.setState((state) => ({ cart: [...state.cart, product] }));
   }
 
   render() {
