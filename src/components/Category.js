@@ -1,41 +1,23 @@
-import React from 'react';
-import * as getProducts from '../services/api';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class Category extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      filters: [],
-      searchInput: '',
-    };
-  }
-
-  componentDidMount() {
-    getProducts.getCategories()
-      .then((filter) => this.setState({ filters: filter }));
-  }
-
-  filterCategory(search) {
-    const { filters } = this.state;
-    return filters.filter(({ name }) => {
-      return name.includes(search);
-    });
-  }
-
+class Category extends Component {
   render() {
-    const { searchInput } = this.state;
+    const { category: { name, id } } = this.props;
     return (
-      <div>
-        <h3>Categorias</h3>
-        <select>
-          {this.filterCategory(searchInput).map(({ name }) => (
-            <option key={ name } value={ searchInput }>{ name }</option>
-          ))}
-        </select>
-      </div>
+      <label htmlFor={ name }>
+        <input data-testid="category" type="radio" value={ id } name="category" />
+        {name}
+      </label>
     );
   }
 }
+
+Category.propTypes = {
+  category: PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.string,
+  }).isRequired,
+};
 
 export default Category;
