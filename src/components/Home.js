@@ -12,12 +12,21 @@ class Home extends React.Component {
       filtered: [],
       search: '',
       filterCategory: false,
+      nameItems: [],
+      title: '',
     };
   }
 
   componentDidMount() {
     this.getApiFromCategory();
     this.requestApi2();
+  }
+
+  componentDidUpdate(_, previousState) {
+    const { nameItems } = this.state;
+    if (nameItems !== previousState.nameItems) {
+      localStorage.setItem('cartItems', JSON.stringify(nameItems));
+    }
   }
 
   getApiFromCategory = (param) => async () => {
@@ -37,6 +46,12 @@ class Home extends React.Component {
     this.setState({
       filtered: result1,
     });
+  }
+
+  getName = (title) => () => {
+    this.setState((oldState) => ({
+      nameItems: [...oldState.nameItems, title],
+    }));
   }
 
   render() {
@@ -68,13 +83,13 @@ class Home extends React.Component {
             {!resultFilter || resultFilter.length === 0
               ? 'Nenhum produto a ser encontrado'
               : (filtered.results.map(
-                (product) => (<Card key={ product.id } product={ product } />),
+                (product) => (<Card getName={ this.getName } key={ product.id } product={ product } />),
               ))}
           </div>) }
         {filterCategory && (
           <div id="products-category">
             {filterCategory.results
-              .map((product) => (<Card key={ product.id } product={ product } />))}
+              .map((product) => (<Card getName={ this.getName } key={ product.id } product={ product } />))}
           </div>)}
       </main>
     );
