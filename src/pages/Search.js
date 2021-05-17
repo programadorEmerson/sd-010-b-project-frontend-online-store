@@ -21,16 +21,22 @@ class Search extends React.Component {
     });
   }
 
-  handlerClick = async () => {
+  componentDidUpdate = (prev, ant) => {
     const { query, category } = this.state;
     api.getProductsFromCategoryAndQuery(category, query)
       .then((response) => {
         this.setState({ products: response.results });
       });
+    console.log(prev);
+    console.log(ant);
+  }
+
+  handlerClick = async () => {
+
   }
 
   render() {
-    const { products } = this.state;
+    const { products/* , query, category */ } = this.state;
     return (
       <section>
         <input
