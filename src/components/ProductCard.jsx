@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import * as modules from '../services/modules';
 
 export default class ProductCard extends Component {
   render() {
-    const { item, addProductIntoCart } = this.props;
+    const { item } = this.props;
     const { title, thumbnail, price } = item;
 
     return (
@@ -16,7 +17,7 @@ export default class ProductCard extends Component {
         <p>{price}</p>
         <button
           type="button"
-          onClick={ () => addProductIntoCart(item) }
+          onClick={ () => modules.addProductCart(item) }
           data-testid="product-add-to-cart"
         >
           Adicionar
@@ -39,5 +40,4 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
-  addProductIntoCart: PropTypes.func.isRequired,
 };

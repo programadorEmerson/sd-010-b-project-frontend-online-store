@@ -1,42 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as modules from '../services/modules';
+import BtnDecrement from '../components/BtnDecrement';
+import BtnIncrement from '../components/BtnIncrement';
+import BtnDel from '../components/BtnDel';
 
 class Cart extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleTotalCart = this.handleTotalCart.bind(this);
-    this.handleAmount = this.handleAmount.bind(this);
-    this.handleState = this.handleState.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-
     this.state = {
-      cart: [],
+      // cart: [],
+      reload: false,
     };
+    this.handleReload = this.handleReload.bind(this);
   }
 
-  componentDidMount() {
-    this.handleState();
+  handleReload() {
+    const { reload } = this.state;
+    this.setState({ reload });
   }
 
-  handleState() {
-    const {
-      location: {
-        state: { cart },
-      },
-    } = this.props;
+  // componentDidMount() {
 
-    this.setState({ cart });
-  }
+  //   this.handleState();
+  // }
 
-  handleQuantity() {
-    const { cart } = this.state;
+  // handleState() {
+  //   // const {
+  //   //   location: {
+  //   //     state: { cart },
+  //   //   },
+  //   // } = this.props;
 
-    return cart.reduce((total, item) => {
-      total += item.qty;
-      return total;
-    }, 0);
-  }
+  //   // this.setState({ cart });
+  // }
 
   handleTotalCart() {
     const { cart } = this.state;
@@ -46,67 +44,29 @@ class Cart extends React.Component {
     }, 0);
   }
 
-  handleAmount(prod, bool) {
-    const { cart } = this.state;
-
-    let newCart = [];
-
-    if (bool) {
-      newCart = cart.map((elem) => (elem.id === prod.id
-        ? { ...elem, qty: elem.qty + 1 } : elem));
-    } else {
-      newCart = cart.map((elem) => (elem.id === prod.id
-        ? { ...elem, qty: elem.qty > 0 && elem.qty - 1 } : elem));
-    }
-
-    this.setState({ cart: newCart });
-  }
-
-  handleDelete(prod) {
-    this.setState((preveState) => ({
-      cart: preveState.cart.filter((item) => item.id !== prod.id),
-    }));
-  }
-
   render() {
-    const { cart } = this.state;
+    const cart = modules.getCartState();
 
     return cart.length ? (
       <div>
         {cart.map((product) => (
           <div key={ product.id }>
-            <button
-              data-testid="product-decrease-quantity"
-              type="button"
-              onClick={ () => this.handleAmount(product, false) }
-            >
-              -
-            </button>
+            <BtnIncrement product={ product } handleReload={ this.handleReload } />
             <span data-testid="shopping-cart-product-name">
               {product.title}
             </span>
-            <button
-              data-testid="product-increase-quantity"
-              type="button"
-              onClick={ () => this.handleAmount(product, true) }
-            >
-              +
-            </button>
-            <button
-              type="button"
-              onClick={ () => this.handleDelete(product) }
-            >
-              X
-            </button>
             <p data-testid="shopping-cart-product-quantity">
               {product.qty}
             </p>
+            <BtnDecrement product={ product } handleReload={ this.handleReload } />
+
+            <BtnDel product={ product } handleReload={ this.handleReload } />
           </div>
         ))}
-        <p>{this.handleQuantity()}</p>
-        <p>
+        {/* <p>{this.handleQuantity()}</p> */}
+        {/* <p>
           {this.handleTotalCart()}
-        </p>
+        </p> */}
       </div>
     ) : (
       <span data-testid="shopping-cart-empty-message">

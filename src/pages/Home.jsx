@@ -16,14 +16,14 @@ export default class Home extends Component {
       products: [],
       foundProducts: true,
       value: '',
-      cart: [],
+      // cart: [],
     };
 
     this.getCategories = this.getCategories.bind(this);
     this.handleInputSearch = this.handleInputSearch.bind(this);
     this.handleSubmitFetch = this.handleSubmitFetch.bind(this);
     this.handleSelectCategory = this.handleSelectCategory.bind(this);
-    this.addProductIntoCart = this.addProductIntoCart.bind(this);
+    // this.addProductIntoCart = this.addProductIntoCart.bind(this);
   }
 
   componentDidMount() {
@@ -73,11 +73,11 @@ export default class Home extends Component {
     this.setState({ categories: getCategoriesFromApi });
   }
 
-  addProductIntoCart(item) {
-    const { cart } = this.state;
-    const itemProduct = { ...item, qty: 1 };
-    this.setState({ cart: [...cart, itemProduct] });
-  }
+  // addProductIntoCart(item) {
+  //   const { cart } = this.state;
+  //   const itemProduct = { ...item, qty: 1 };
+  //   // this.setState({ cart: [...cart, itemProduct] });
+  // }
 
   render() {
     const { categories, foundProducts, cart } = this.state;
