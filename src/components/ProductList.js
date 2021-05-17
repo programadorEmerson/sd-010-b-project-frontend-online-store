@@ -42,10 +42,10 @@ class ProductList extends React.Component {
     return (
       <div>
         <ol>
-          { results.map((item, index) => (
+          {/* { results.map((item, index) => (
             <li key={ index }>
               { this.constructorCard(item) }
-            </li>))}
+            </li>))} */}
         </ol>
       </div>
     );
