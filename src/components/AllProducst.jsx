@@ -34,6 +34,7 @@ class AllProducst extends Component {
 
     return (
       <div>
+        {console.log(prod)}
         {prod.map((product) => (
           // (console.log(product.id)
           <Product
