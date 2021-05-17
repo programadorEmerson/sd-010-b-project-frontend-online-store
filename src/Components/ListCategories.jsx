@@ -10,28 +10,32 @@ class ListCategories extends Component {
   }
 
   componentDidMount() {
-    this.HandleListCategories();
+    this.handleListCategories();
   }
 
-  HandleListCategories = async () => {
-    const categories = await getCategories();
-    if (categories.length === 0) {
-      return null;
-    }
-    console.log(categories);
-    this.setState({ categories });
+  handleListCategories = async () => {
+    const cat = await getCategories();
+    this.setState({
+      categories: cat,
+    });
+  }
+
+  renderCategory = () => {
+    const { categories } = this.state;
+    return (
+      categories.map((category) => (
+        <li key={ category.id } data-testid="category">
+          { category.name }
+        </li>
+      ))
+    );
   }
 
   render() {
-    const { categories } = this.state;
     return (
       <div>
         <ul>
-          {categories.map((category) => (
-            <li key={ category.id } data-testid="category">
-              { category.name }
-            </li>
-          ))}
+          { this.renderCategory() }
         </ul>
       </div>
     );

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Card extends Component {
+class Product extends Component {
   render() {
-    const { title, img, price } = this.props;
+    const { title, img, price, id } = this.props;
     return (
-      <div data-testid="product">
+      <div data-testid="product" key={ id }>
         <div>{ title }</div>
         <img src={ img } alt={ title } />
         <div>{ price }</div>
@@ -14,10 +14,10 @@ class Card extends Component {
   }
 }
 
-Card.propTypes = {
+Product.propTypes = {
   title: PropTypes.string,
   price: PropTypes.number,
   img: PropTypes.string,
 }.isRequired;
 
-export default Card;
+export default Product;
