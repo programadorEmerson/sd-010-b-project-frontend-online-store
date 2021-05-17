@@ -1,5 +1,3 @@
-// Não está sendo utilizado
-
 import React from 'react';
 import * as api from '../services/api';
 

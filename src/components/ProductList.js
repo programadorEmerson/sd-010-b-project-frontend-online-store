@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 class ProductList extends React.Component {
   searchNotFound = (products) => {
     if (!products) {
+
       return <p>Nenhum produto foi encontrado</p>;
     }
     return (
