@@ -5,7 +5,7 @@ import Categories from './Categories';
 
 class Search extends Component {
   render() {
-    const { onChange, onClick } = this.props;
+    const { onChange, onClick, funct } = this.props;
     return (
       <section>
         <input
@@ -33,7 +33,7 @@ class Search extends Component {
             Carrinho
           </Link>
         </button>
-        <Categories />
+        <Categories funct={ funct } />
       </section>
     );
   }
@@ -42,6 +42,7 @@ class Search extends Component {
 Search.propTypes = {
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
+  funct: PropTypes.func.isRequired,
 };
 
 export default Search;

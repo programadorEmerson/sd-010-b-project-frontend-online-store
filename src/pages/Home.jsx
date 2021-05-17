@@ -8,11 +8,20 @@ export default class Home extends Component {
     super();
     this.handleSearch = this.handleSearch.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleSearchCategory = this.handleSearchCategory.bind(this);
     this.state = {
       search: '',
       results: [],
       showCard: false,
     };
+  }
+
+  handleSearchCategory({ target: { id } }) {
+    getProductsFromCategoryAndQuery(id, '')
+      .then(({ results }) => this.setState({
+        results,
+        showCard: true,
+      }));
   }
 
   handleInput({ target }) {
@@ -35,7 +44,11 @@ export default class Home extends Component {
     const { results, showCard } = this.state;
     return (
       <div>
-        <Search onChange={ this.handleInput } onClick={ this.handleSearch } />
+        <Search
+          onChange={ this.handleInput }
+          onClick={ this.handleSearch }
+          funct={ this.handleSearchCategory }
+        />
         { (showCard && <ProductCard results={ results } />) }
       </div>
     );
