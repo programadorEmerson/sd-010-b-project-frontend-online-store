@@ -1,56 +1,53 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import ButtonToCart from '../components/ButtonToCart';
+// import ButtonToCart from '../components/ButtonToCart';
+import * as api from '../services/api';
 
 class ProductDetails extends Component {
   constructor() {
     super();
 
     this.state = {
-      cart: [],
+      productDetail: {},
     };
-    this.addProductIntoCart = this.addProductIntoCart.bind(this);
+    this.searchProduct = this.searchProduct.bind(this);
   }
 
-  addProductIntoCart(item) {
-    const { cart } = this.state;
-    this.setState({ cart: [...cart, item] });
+  // addProductIntoCart(item) {
+  //   const { cart } = this.state;
+  //   this.setState({ cart: [...cart, item] });
+  // }
+
+  componentDidMount() {
+    this.searchProduct();
+  }
+
+  async searchProduct() {
+    const { match: { params: { id, categoryId, title } } } = this.props;
+    const { results } = await api.getProductsFromCategoryAndQuery(categoryId, title);
+    const findProduct = results.find((result) => result.id === id);
+    this.setState({ productDetail: findProduct });
   }
 
   render() {
-    const { location: { state: { item } } } = this.props;
-    const { title } = item;
-    const { cart } = this.state;
+    const { productDetail: { title, price, thumbnail } } = this.state;
     return (
       <div>
-        <Link
-          to={ { pathname: '/cart', state: { cart } } }
-          data-testid="shopping-cart-button"
-        >
-          <ButtonToCart />
-        </Link>
-        <p data-testid="product-detail-name">{ title }</p>
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ () => this.addProductIntoCart(item) }
-        >
-          Adicionar
-
-        </button>
+        <h1 data-testid="product-detail-name">{title}</h1>
+        <h1>{price}</h1>
+        <img src={ thumbnail } alt={ title } />
       </div>
     );
   }
 }
 
 ProductDetails.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      item: PropTypes.shape({
-        title: PropTypes.string,
-      }),
-    }),
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+      categoryId: PropTypes.string,
+      title: PropTypes.string,
+    }).isRequired,
   }).isRequired,
 };
 

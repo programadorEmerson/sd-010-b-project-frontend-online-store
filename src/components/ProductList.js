@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ProductList extends React.Component {
   searchNotFound = (products) => {
@@ -8,11 +9,16 @@ class ProductList extends React.Component {
     }
     return (
       <div>
-        {products.map(({ id, title, thumbnail, price }) => (
+        {products.map(({ id, title, thumbnail, price, categoryId }) => (
           <div key={ id } data-testid="product">
-            <h3>{ title }</h3>
-            <img src={ thumbnail } alt={ title } />
-            <p>{ price }</p>
+            <Link
+              data-testid="product-detail-link"
+              to={ `/details/${id}/${categoryId}/${title}` }
+            >
+              <h3>{ title }</h3>
+              <img src={ thumbnail } alt={ title } />
+              <p>{ price }</p>
+            </Link>
           </div>
         ))}
       </div>
@@ -21,6 +27,7 @@ class ProductList extends React.Component {
 
   render() {
     const { products } = this.props;
+    console.log(products);
     return this.searchNotFound(products);
   }
 }
