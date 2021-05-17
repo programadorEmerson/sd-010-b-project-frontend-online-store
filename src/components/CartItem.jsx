@@ -78,7 +78,7 @@ class CartItem extends Component {
           <div className="product-quantity">{ quantity }</div>
           {this.renderIncreaseQuantityIcon()}
         </div>
-        <div className="product-price">{ price }</div>
+        <div className="product-price">{ totalPrice }</div>
       </div>
     );
   }
