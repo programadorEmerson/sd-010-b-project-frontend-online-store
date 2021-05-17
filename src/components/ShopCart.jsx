@@ -1,23 +1,77 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ShoppingCartCard from './ShoppingCartCard'
 
 class ShopCart extends React.Component {
-  render() {
+  constructor() {
+    super();
+
+    this.state = {
+      shoppingCartProducts: [],
+      totalPriceShoppingCart: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.setTotalPriceValue();
+    this.populateShoppingCart();
+  }
+
+  // Popula o state carrinho com os itens da rota anterior
+  populateShoppingCart = () => {
     const { location: { state: { shoppingCart } } } = this.props;
 
-    if (shoppingCart.length) {
+    this.setState({ shoppingCartProducts: shoppingCart })
+  }
+
+  // Seta o valor total da compra
+  setTotalPriceValue = () => {
+    const { location: { state: { shoppingCart } } } = this.props;
+    console.log(shoppingCart)
+    const totalPrice = shoppingCart.reduce((productCart) => {
+      return productCart.price + productCart.price;
+    })
+
+    this.setState({ totalPriceShoppingCart: totalPrice })
+  }
+
+  // Deleta produto do carrinho
+  deleteProductAtShoppingCart = () => {
+    const { location: { state: { shoppingCart } } } = this.props;
+  }
+
+  // Escolhe a quantidade do produto
+  changeProductQuantity = (symbol) => {
+    if (symbol === '+') {
+
+    }
+
+    if (symbol === '-') {
+
+    }
+  }
+
+  render() {
+    const { totalPriceShoppingCart, shoppingCartProducts } = this.state;
+    if (shoppingCartProducts.length) {
       return (
-        <div>
-          {shoppingCart.map((productCart) => (
-            <div key={ productCart.id } div data-testid="shopping-cart-product-name">
-              <h2>{productCart.title}</h2>
-            </div>
+        <main>
+          <h1>Carrinho de compras</h1>
+          {shoppingCartProducts.map((productCart) => (
+            <ShoppingCartCard key={ productCart.id } productCart={ productCart } />
           ))}
-          <p data-testid="shopping-cart-product-quantity">
-            <h3>Quantidade de Itens no carrinho:</h3>
-            {shoppingCart.length}
-          </p>
-        </div>
+          <span data-testid="shopping-cart-product-quantity">
+            <p>Quantidade de Itens no carrinho:</p>
+            {shoppingCartProducts.length}
+          </span>
+          <span>
+            <p>Valor total da compra:</p>
+            {totalPriceShoppingCart}
+          </span>
+          <button type="submit">
+            FINALIZAR COMPRA
+          </button>
+        </main>
       );
     }
 
