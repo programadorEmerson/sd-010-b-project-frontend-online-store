@@ -1,6 +1,7 @@
 import React from 'react';
-import './ShoppingCartCard.css';
+import PropTypes from 'prop-types';
 
+import './ShoppingCartCard.css';
 
 class ShoppingCartCard extends React.Component {
   render() {
@@ -12,8 +13,8 @@ class ShoppingCartCard extends React.Component {
         <section className="shopping-cart-card-item button">
           <button type="submit" className="card-button">X</button>
         </section>
-        <section className="shopping-cart-card-item image">
-          <img src={ thumbnail } alt={ title } />
+        <section className="shopping-cart-card-item">
+          <img className="image" src={ thumbnail } alt={ title } />
         </section>
         <section
           className="shopping-cart-card-item title"
@@ -23,23 +24,40 @@ class ShoppingCartCard extends React.Component {
         </section>
         <section className="shopping-cart-card-item button">
           <button
-            onClick={ () => changeProductQuantity('-', productCart) }
-            data-testid="product-decreate-quantity"
-            className="card-button" type="submit"
-          >-</button>
+            onClick={ (event) => changeProductQuantity('-', productCart, event) }
+            data-testid="product-decrease-quantity"
+            className="card-button"
+            type="submit"
+          >
+            -
+          </button>
         </section>
-        <section className="shopping-cart-card-item"><input value={quantity} className="input" type="text"/></section>
+        <section className="shopping-cart-card-item">
+          <span data-testid="shopping-cart-product-quantity">{quantity}</span>
+        </section>
         <section className="shopping-cart-card-item button">
           <button
-            onClick={ () => changeProductQuantity('+', productCart) }
+            onClick={ (event) => changeProductQuantity('+', productCart, event) }
             data-testid="product-increase-quantity"
-            className="card-button" type="submit"
-          >+</button>
+            className="card-button"
+            type="submit"
+          >
+            +
+          </button>
         </section>
         <section className="shopping-cart-card-item price">{ price }</section>
       </main>
     );
   }
 }
+
+ShoppingCartCard.propTypes = {
+  productCart: PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    thimbnail: PropTypes.string,
+    quantity: PropTypes.number,
+  }),
+}.isRequired;
 
 export default ShoppingCartCard;

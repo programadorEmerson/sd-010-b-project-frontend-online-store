@@ -9,11 +9,12 @@ class ShopCart extends React.Component {
     this.state = {
       shoppingCartProducts: [],
       totalPriceShoppingCart: 0,
+      totalQuantityItems: 0,
     };
   }
 
   componentDidMount() {
-    // this.setTotalPriceValue();
+    this.setTotalPriceValue();
     this.populateShoppingCart();
   }
 
@@ -21,40 +22,49 @@ class ShopCart extends React.Component {
   populateShoppingCart = () => {
     const { location: { state: { shoppingCart } } } = this.props;
 
-    this.setState({ shoppingCartProducts: shoppingCart });
+    this.setState(
+      { shoppingCartProducts: shoppingCart }, () => this.updateProductsQuantity(),
+    );
   }
 
-  // Seta o valor total da compra
-  // setTotalPriceValue = () => {
-  //   const { location: { state: { shoppingCart } } } = this.props;
-  //   console.log(shoppingCart)
-  //   const totalPrice = shoppingCart.reduce((productCart) => {
-  //     return productCart.price + productCart.price;
-  //   })
-
-  //   this.setState({ totalPriceShoppingCart: totalPrice })
-  // }
-
-  // Deleta produto do carrinho
-  deleteProductAtShoppingCart = () => {
+  //  Seta o valor total da compra
+  setTotalPriceValue = () => {
     const { location: { state: { shoppingCart } } } = this.props;
+    const totalPrice = shoppingCart.reduce(
+      (totalAccumulator, productCart) => totalAccumulator + productCart.price, 0,
+    );
+
+    this.setState({ totalPriceShoppingCart: totalPrice });
   }
 
-  // Escolhe a quantidade do produto
-  changeProductQuantity = (symbol, product, { target }) => {
+  //  Escolhe a quantidade do produto
+  changeProductQuantity = (symbol, product) => {
     if (symbol === '+') {
-      console.log(product.quantity);
       product.quantity += 1;
     }
 
-    if (symbol === '-') {
+    if ((symbol === '-') && (product.quantity > 1)) {
       product.quantity -= 1;
-      // console.log(target);
     }
+
+    this.updateProductsQuantity();
+  }
+
+  //  Captura a quantidade de produtos no carrinho
+  updateProductsQuantity = () => {
+    const { shoppingCartProducts } = this.state;
+    const totalQuantity = shoppingCartProducts.reduce(
+      (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
+    );
+
+    this.setState({ totalQuantityItems: totalQuantity });
   }
 
   render() {
-    const { totalPriceShoppingCart, shoppingCartProducts } = this.state;
+    const {
+      totalPriceShoppingCart, shoppingCartProducts, totalQuantityItems,
+    } = this.state;
+
     if (shoppingCartProducts.length) {
       return (
         <main>
@@ -66,9 +76,8 @@ class ShopCart extends React.Component {
               changeProductQuantity={ this.changeProductQuantity }
             />
           ))}
-          <span data-testid="shopping-cart-product-quantity">
-            <p>Quantidade de Itens no carrinho:</p>
-            {shoppingCartProducts.length}
+          <span>
+            {totalQuantityItems}
           </span>
           <span>
             <p>Valor total da compra:</p>

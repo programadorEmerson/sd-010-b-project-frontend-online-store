@@ -49,3 +49,7 @@
   justify-content: center;
   width: 16vh;
 }
+
+.image {
+  max-width: 70px;
+}

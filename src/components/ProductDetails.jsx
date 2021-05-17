@@ -25,14 +25,14 @@ class ProductDetails extends React.Component {
   addProductToShoppingCart = (product) => {
     const { shoppingCart } = this.state;
 
-    const testIfProductExist = shoppingCart.find((oldProduct) => {
-      return oldProduct.id === product.id;
-    })
+    const testIfProductExist = shoppingCart.find(
+      (oldProduct) => oldProduct.id === product.id,
+    );
 
-    if(testIfProductExist === undefined) {
+    if (testIfProductExist === undefined) {
       product.quantity = 1;
       this.setState({ shoppingCart: [...shoppingCart, product] });
-     } else {
+    } else {
       product.quantity += 1;
     }
   }
@@ -48,7 +48,7 @@ class ProductDetails extends React.Component {
       return (
         <main className="product-details">
           <section className="product-details-left">
-            <h1 data-testid="product-detail-name">{ title }</h1>
+            <h1 data-testid="product-detail-name">{title}</h1>
             <img className="product-details-image" src={ thumbnail } alt={ title } />
           </section>
 
@@ -62,7 +62,7 @@ class ProductDetails extends React.Component {
               <li>{ state }</li>
             </ul>
             <button
-              type="submit"
+              type="button"
               data-testid="product-detail-add-to-cart"
               onClick={ () => this.addProductToShoppingCart(result) }
             >
