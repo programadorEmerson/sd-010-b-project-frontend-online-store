@@ -20,7 +20,7 @@ class SearchBar extends React.Component {
 
   handleClick = async () => {
     const { state: { searchText } } = this;
-    const data = await getProductsByQuery(searchText);
+    const data = await getProductsFromCategoryAndQuery(searchText);
     const { results } = data;
     this.setState({
       products: results,

@@ -10,7 +10,7 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
     const reqQueryObj = await reqQuery.json();
     return reqQueryObj;
   }
-  const reqCat = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId.id}&q=${query.query}`);
+  const reqCat = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId.id}&q=${query}`);
   const reqCatObj = await reqCat.json();
   return reqCatObj;
 }
