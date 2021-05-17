@@ -34,7 +34,9 @@ class CartItem extends Component {
   };
 
   renderRemoveProductsIcon() {
-    return <Image source={ cancelIcon } alt="remover produto" width="50" />;
+    return (
+      <CustomButton customStyle="remove" clickFunction="" dataTestId="">X</CustomButton>
+    );
   }
 
   renderImageProduct(source) {
@@ -42,11 +44,26 @@ class CartItem extends Component {
   }
 
   renderDecreaseQuantityIcon() {
-    return <Image source={ minusIcon } alt="diminuir quantidade" width="50" />;
+    return (
+      <CustomButton
+        customStyle="decrease"
+        clickFunction={ this.decreaseQuantity }
+        dataTestId="product-decrease-quantity"
+      >
+        -
+      </CustomButton>);
   }
 
   renderIncreaseQuantityIcon() {
-    return <Image source={ plusIcon } alt="aumentar quantidade" width="50" />;
+    return (
+      <CustomButton
+        customStyle="increase"
+        clickFunction={ this.increaseQuantity }
+        dataTestId="product-increase-quantity"
+      >
+        +
+      </CustomButton>
+    );
   }
 
   render() {
