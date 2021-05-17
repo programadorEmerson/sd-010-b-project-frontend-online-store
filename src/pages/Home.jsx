@@ -14,7 +14,7 @@ class Home extends React.Component {
     this.onClickHandle = this.onClickHandle.bind(this);
     this.state = {
       isLoading: false,
-      products: [],
+      products: {},
       inputfilter: null,
     };
   }
@@ -59,13 +59,6 @@ class Home extends React.Component {
           <p className="text-search" data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <input
-            className="btn-search"
-            type="button"
-            datatestid="query-button"
-            onClick={ this.handleClick }
-            value="Buscar"
-          />
           <section className="products-list">
             <ProductsList products={ products } isLoading={ isLoading } />
           </section>

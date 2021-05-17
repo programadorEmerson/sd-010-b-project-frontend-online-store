@@ -12,12 +12,10 @@ class ProductsList extends React.Component {
       if (results.length === 0) return 'Nenhum produto foi encontrado';
       return (
         <section>
-          <p>
-            {results.map((product) => (<ProductCard
-              key={ product.index }
-              product={ product }
-            />))}
-          </p>
+          {results.map((product) => (<ProductCard
+            key={ product.id }
+            product={ product }
+          />))}
         </section>
       );
     }
@@ -27,7 +25,7 @@ class ProductsList extends React.Component {
 
 ProductsList.propTypes = {
   products: PropTypes.shape({
-    results: PropTypes.arrayOf(PropTypes.object).isRequired,
+    results: PropTypes.arrayOf(),
   }).isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
