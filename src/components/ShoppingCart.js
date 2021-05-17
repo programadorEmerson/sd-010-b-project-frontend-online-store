@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ShoppingCart extends Component {
   constructor() {
     super();
 
     this.state = {
-      empty: true,
       quantity: 0,
-      product: [],
     };
   }
 
@@ -18,7 +17,25 @@ class ShoppingCart extends Component {
          empty: false,
        };
        value.sort();
-       const products = value.map((product, index) => <li data-testid="shopping-cart-product-name" key={ index }>{product}</li>);
+       let count = 1;
+       const products = value.map((product, index) => {
+         if (value[index] === value[index + 1] && value.length !== null) {
+           count += 1;
+         } else {
+           const num = count;
+           count = 1;
+           return (
+             <div>
+               <li data-testid="shopping-cart-product-name" key={ index }>{product}</li>
+               <p data-testid="shopping-cart-product-quantity">
+                 Quantidade:
+                 {num}
+               </p>
+             </div>
+           );
+         }
+         return null;
+       });
        return products;
      } return (
        <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
@@ -29,6 +46,7 @@ class ShoppingCart extends Component {
      return (
        <main>
          {this.RenderProducts()}
+         <Link to="/">Home</Link>
        </main>
      );
    }

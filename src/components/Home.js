@@ -13,7 +13,6 @@ class Home extends React.Component {
       search: '',
       filterCategory: false,
       nameItems: [],
-      title: '',
     };
   }
 
@@ -83,13 +82,20 @@ class Home extends React.Component {
             {!resultFilter || resultFilter.length === 0
               ? 'Nenhum produto a ser encontrado'
               : (filtered.results.map(
-                (product) => (<Card getName={ this.getName } key={ product.id } product={ product } />),
+                (product) => (
+                  <Card getName={ this.getName } key={ product.id } product={ product } />
+                ),
               ))}
           </div>) }
         {filterCategory && (
           <div id="products-category">
             {filterCategory.results
-              .map((product) => (<Card getName={ this.getName } key={ product.id } product={ product } />))}
+              .map((product) => (
+                <Card
+                  getName={ this.getName }
+                  key={ product.id }
+                  product={ product }
+                />))}
           </div>)}
       </main>
     );
