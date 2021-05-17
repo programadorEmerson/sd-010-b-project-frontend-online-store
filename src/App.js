@@ -11,19 +11,13 @@ class App extends Component {
     this.state = {
       cart: [],
     };
+
+    this.setCart = this.setCart.bind(this);
   }
 
-  componentDidMount() {
-    this.updateCategories();
-  }
-
-  async updateCategories() {
-    const categories = await getCategories();
-    this.setState({ categories });
-  }
-
-  updateCategory(categories) {
-    this.setState({ categories });
+  setCart(product, qtd) {
+    const newProduct = { ...product, qtd };
+    this.setState((state) => ({ cart: [...state.cart, newProduct] }));
   }
 
   render() {
@@ -37,14 +31,8 @@ class App extends Component {
           </Link>
         </p>
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={ () => (<Home
-              categories={ categories }
-            />) }
-          />
-          <Route path="/cart" render={ () => <ShoppingCart cart={ cart } /> } />
+          <Route exact path="/" render={() => <Home categories={categories} />} />
+          <Route path="/cart" render={() => <ShoppingCart cart={cart} />} />
         </Switch>
       </BrowserRouter>
     );
