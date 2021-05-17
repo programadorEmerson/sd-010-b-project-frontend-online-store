@@ -1,6 +1,7 @@
 import React from 'react';
 import * as api from '../services/api';
 import Mensagem from '../components/Mensagem';
+import Card from '../components/Card';
 
 class Home extends React.Component {
   constructor() {
@@ -8,6 +9,8 @@ class Home extends React.Component {
     this.state = {
       categories: [],
       search: '',
+      products: [],
+      loading: null,
     };
   }
 
@@ -20,6 +23,15 @@ class Home extends React.Component {
     this.setState({ [name]: value });
   }
 
+  clickButtonSearch = async () => {
+    const { search } = this.state;
+    const products = await api.getProductsFromCategoryAndQuery(search);
+    this.setState({
+      products,
+      loading: true,
+    });
+  }
+
   fetchCategories = async () => {
     const categories = await api.getCategories();
     this.setState({
@@ -28,7 +40,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories } = this.state;
+    const { categories, products, loading } = this.state;
     return (
       <div>
         <Mensagem />
@@ -39,13 +51,22 @@ class Home extends React.Component {
           data-testid="query-input"
           onChange={ this.handleChange }
         />
-        <button type="button" data-testid="query-button">Search</button>
-        {
-          categories.map((category) => (
+        <button
+          type="button"
+          data-testid="query-button"
+          onClick={ this.clickButtonSearch }
+        >
+          Search
+        </button>
+        { products
+          && categories.map((category) => (
             <div key={ category.id } data-testid="category">
               { category.name }
             </div>))
         }
+        { loading
+          && products.result.map((product) => (
+            <Card product={ product } key={ product.id } />))}
       </div>
     );
   }
