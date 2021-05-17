@@ -5,27 +5,25 @@ class ProductsByCategory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        productId: [],
-    }
-    
-}
+      products: [],
+    };
+  }
 
-async componentDidMount() {
-    const productId = await getProductsFromCategoryAndQuery();
-    this.addCategories(productId);
-    console.log(productId);
+  async componentDidMount() {
+    const products = await getProductsFromCategoryAndQuery();
+    this.searchProducts(products);
+    console.log(products);
   }
 
   searchProducts = (productId) => {
     this.setState({ productId });
   }
 
-    render() {
+  render() {
     return (
-        <div></div>
-    ); 
-
-    }
+      <div />
+    );
+  }
 }
 
 export default ProductsByCategory;

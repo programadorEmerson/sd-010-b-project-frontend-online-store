@@ -15,9 +15,9 @@ function App() {
 
           Digite algum termo de pesquisa ou escolha uma categoria.
         </label>
-        <CategoryList />
       </div>
       <BrowserRouter>
+        <CategoryList />
         <div>
           <Link to="/shopping-cart" data-testid="shopping-cart-button" />
         </div>
