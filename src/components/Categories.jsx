@@ -1,6 +1,7 @@
 import React from 'react';
-import * as api from '../services/api';
 import { Link } from 'react-router-dom';
+import * as api from '../services/api';
+import ProductCart from './ProductCart';
 
 class Categories extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class Categories extends React.Component {
     this.categoriesOnState = this.categoriesOnState.bind(this);
     this.state = {
       categories: [],
-      categorieSelect: '',
+      categorieSelect: [],
     };
   }
 
@@ -31,16 +32,17 @@ class Categories extends React.Component {
   }
 
   render() {
-    const { categories } = this.state;
+    const { categories, categorieSelect } = this.state;
     return (
       <div>
         <div>
-        <h2>Categorias:</h2>          
+          <h2>Categorias:</h2>
         </div>
-        <div> 
-          {categories.map((category) => (          
-            <Link to="/" onClick={this.handleClick} key={ category.id } data-testid="category">
+        <div>
+          {categories.map((category) => (
+            <Link to="/" onClick={ this.handleClick } key={ category.id } data-testid="category">
               {category.name}
+              {categorieSelect.map((item) => <ProductCart key={ item.id } product={ item } />)}
             </Link>))}
         </div>
       </div>
