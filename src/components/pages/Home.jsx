@@ -39,7 +39,9 @@ export default class Home extends Component {
   async fetchProductsByCategories(categoryId) {
     const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`);
     const categories = await response.json();
-    return categories;
+    this.setState({
+      listProducts: categories.results,
+    });
   }
 
   render() {
