@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Categories from './Categories';
 import AllProducts from './AllProducts';
 
+
 class Search extends Component {
   constructor() {
     super()
@@ -28,6 +29,7 @@ class Search extends Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
+
           
           {/* Trabalhando aqui */}
 
@@ -49,6 +51,7 @@ class Search extends Component {
         <AllProducts 
         filterText={ filterText } 
         />
+
       </div>
     );
   }
