@@ -48,14 +48,14 @@ class App extends React.Component {
   }
 
   addToCart(product) {
-    this.setState((prevState) => ({
-      cart: [...prevState.cart, product],
-    }));
+    this.setState((prevState) => (
+      { cart: [...prevState.cart, product],
+      }
+    ));
   }
 
   render() {
     const { arrProducts, searchQuery, cart } = this.state;
-    console.log(cart);
     return (
       <BrowserRouter>
         <Switch>
@@ -68,9 +68,13 @@ class App extends React.Component {
               setCategory={ this.setCategory }
               onChange={ this.handleOnChange }
               searchQuery={ searchQuery }
+              addToCart={ this.addToCart }
             />) }
           />
-          <Route path="/pagecart" component={ PageCart } />
+          <Route
+            path="/pagecart"
+            render={ (props) => <PageCart { ...props } cart={ cart } /> }
+          />
           <Route
             path="/details/:id"
             render={ (props) => (<DetailsPage

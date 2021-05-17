@@ -40,6 +40,7 @@ DetailsPage.propTypes = {
     price: PropTypes.number,
     thumbnail: PropTypes.string,
   }).isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default DetailsPage;
