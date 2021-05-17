@@ -9,7 +9,7 @@ class Home extends React.Component {
     this.state = {
       categories: null,
       search: '',
-      searchResult: null,
+      // searchResult: null,
     };
   }
 
@@ -26,7 +26,7 @@ class Home extends React.Component {
     const { search } = this.state;
     const searchResult = await api.getProductsFromCategoryAndQuery(search);
     this.setState({
-      searchResult,
+      // searchResult,
       products: searchResult.results,
     });
   }
