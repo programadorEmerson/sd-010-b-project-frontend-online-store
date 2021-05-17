@@ -14,12 +14,9 @@ class ProductList extends React.Component {
     // eslint-disable-next-line react/prop-types
     const { searchText } = this.props;
 
-    getProductsFromQuery(searchText).then((products) => {
-      console.log(products);
-      this.setState({
-        allProductsApi: products,
-      });
-    });
+    getProductsFromQuery(searchText).then((products) => this.setState({
+      allProductsApi: products,
+    }));
   }
 
   constructorCard = (item) => (
@@ -38,14 +35,14 @@ class ProductList extends React.Component {
   render() {
     const { allProductsApi } = this.state;
     const { results } = allProductsApi;
-    console.log(results);
+    console.log(this.state);
     return (
       <div>
         <ol>
-          {/* { results.map((item, index) => (
+          { results.map((item, index) => (
             <li key={ index }>
-              { this.constructorCard(item) }
-            </li>))} */}
+              {results.length === 0 ? <p>Nenhum produto foi encontrado</p> : this.constructorCard(item) }
+            </li>))}
         </ol>
       </div>
     );
