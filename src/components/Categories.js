@@ -29,6 +29,7 @@ class Categories extends React.Component {
         .then((productCategoria) => this.setState({
           productCategoria,
         }));
+        
     });
   }
 
