@@ -63,28 +63,28 @@ class ProductDetails extends React.Component {
         <>
           <main className="product-details">
             <section className="product-details-left">
-              <h1 data-testid="product-detail-name">{title}</h1>
-              <img className="product-details-image" src={thumbnail} alt={title} />
+              <h1 data-testid="product-detail-name">{ title }</h1>
+              <img className="product-details-image" src={ thumbnail } alt={ title } />
             </section>
 
             <section className="product-details-right">
               <ul>
                 <h1>Descrição do Produto</h1>
-                <li>{title}</li>
-                <li>{price}</li>
+                <li>{ title }</li>
+                <li>{ price }</li>
                 <h4>Localização do Produto</h4>
-                <li>{city}</li>
-                <li>{state}</li>
+                <li>{ city }</li>
+                <li>{ state }</li>
               </ul>
               <button
                 type="submit"
                 data-testid="product-detail-add-to-cart"
-                onClick={() => this.addProductToShoppingCart(result)}
+                onClick={ () => this.addProductToShoppingCart(result) }
               >
                 Adicionar ao Carrinho
               </button>
               <Link
-                to={{ pathname: '/ShopCart', state: { shoppingCart } }}
+                to={ { pathname: '/ShopCart', state: { shoppingCart } } }
                 data-testid="shopping-cart-button"
               >
                 Ver Carrinho
@@ -93,20 +93,20 @@ class ProductDetails extends React.Component {
 
           </main>
           <section>
-            <Form updateComments={this.updateComments} />
+            <Form updateComments={ this.updateComments } />
           </section>
           <section id="comments">
             <h1>Comentários</h1>
-            {listComments.map((coment) => {
+            { listComments.map((coment) => {
               const { email, rating, comment } = coment;
               return (
                 <>
-                  <h2 key={email}>{email}</h2>
-                  {comment && <p>{comment}</p>}
-                  <p key={rating}>{rating}</p>
+                  <h2 key={ email }>{ email }</h2>
+                  { comment && <p>{ comment }</p> }
+                  <p key={ rating }>{ rating }</p>
                 </>
               );
-            })}
+            }) }
           </section>
         </>
       );
