@@ -13,7 +13,7 @@ class ShopCart extends React.Component {
   }
 
   componentDidMount() {
-    this.setTotalPriceValue();
+    // this.setTotalPriceValue();
     this.populateShoppingCart();
   }
 
@@ -25,15 +25,15 @@ class ShopCart extends React.Component {
   }
 
   // Seta o valor total da compra
-  setTotalPriceValue = () => {
-    const { location: { state: { shoppingCart } } } = this.props;
-    console.log(shoppingCart)
-    const totalPrice = shoppingCart.reduce((productCart) => {
-      return productCart.price + productCart.price;
-    })
+  // setTotalPriceValue = () => {
+  //   const { location: { state: { shoppingCart } } } = this.props;
+  //   console.log(shoppingCart)
+  //   const totalPrice = shoppingCart.reduce((productCart) => {
+  //     return productCart.price + productCart.price;
+  //   })
 
-    this.setState({ totalPriceShoppingCart: totalPrice })
-  }
+  //   this.setState({ totalPriceShoppingCart: totalPrice })
+  // }
 
   // Deleta produto do carrinho
   deleteProductAtShoppingCart = () => {
