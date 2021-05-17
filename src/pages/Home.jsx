@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { getCategories } from '../services/api';
+import SearchBar from '../components/SearchBar';
 
 class Home extends React.Component {
   constructor() {
@@ -32,11 +32,7 @@ class Home extends React.Component {
               { catItem.name }
             </li>))}
         </ul>
-        <span data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </span>
-        <Link to="/shopping-cart" data-testid="shopping-cart-button">Cart</Link>
-
+        <SearchBar />
       </div>
     );
   }
