@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class ListCategories extends Component {
@@ -22,11 +23,18 @@ class ListCategories extends Component {
 
   renderCategory = () => {
     const { categories } = this.state;
+    const { handleCategoryClick } = this.props;
+
     return (
-      categories.map((category) => (
-        <li key={ category.id } data-testid="category">
-          { category.name }
-        </li>
+      categories.map(({ name, id }) => (
+        <button
+          type="button"
+          key={ id }
+          data-testid="category"
+          onClick={ () => handleCategoryClick(id) }
+        >
+          { name }
+        </button>
       ))
     );
   }
@@ -41,5 +49,8 @@ class ListCategories extends Component {
     );
   }
 }
+ListCategories.propTypes = {
+  handleCategoryClick: PropTypes.func.isRequired,
+};
 
 export default ListCategories;
