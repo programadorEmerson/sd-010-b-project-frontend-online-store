@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Header from './components/Header';
 import Cart from './pages/Cart';
+import Details from './pages/Details';
 import './App.css';
 
 function App() {
@@ -13,8 +14,21 @@ function App() {
         <Header />
         <main className="App">
           <Switch>
-            <Route exact path="/" component={ Home } />
-            <Route exact path="/cart" component={ Cart } />
+            <Route
+              exact
+              path="/"
+              render={ (props) => <Home { ...props } /> }
+            />
+            <Route
+              exact
+              path="/cart"
+              render={ (props) => <Cart { ...props } /> }
+            />
+            <Route
+              exact
+              path="/details/:id"
+              render={ (props) => <Details { ...props } /> }
+            />
           </Switch>
         </main>
         <footer>
