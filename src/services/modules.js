@@ -1,19 +1,27 @@
 let arrayCart = [];
 let arrReviews = [];
-
-export const addProductCart = (item) => {
-  const itemProduct = { ...item, qty: 1 };
-  arrayCart = [...arrayCart, itemProduct];
-  console.log(arrayCart);
-};
+// const estoque = available_quantity;
 
 export const handleAmount = (prod, bool) => {
   if (bool) {
-    arrayCart = arrayCart.map((elem) => (elem.id === prod.id
-      ? { ...elem, qty: elem.qty + 1 } : elem));
+    if (prod.qty < prod.available_quantity) {
+      arrayCart = arrayCart.map((elem) => (elem.id === prod.id
+        ? { ...elem, qty: elem.qty + 1 } : elem));
+    }
   } else {
     arrayCart = arrayCart.map((elem) => (elem.id === prod.id
       ? { ...elem, qty: elem.qty - 1 } : elem));
+  }
+};
+
+export const addProductCart = (item) => {
+  const product = arrayCart.find((obj) => obj.id === item.id);
+  if (product) {
+    handleAmount(product, true);
+  } else {
+    const itemProduct = { ...item, qty: 1 };
+    arrayCart = [...arrayCart, itemProduct];
+    console.log(arrayCart);
   }
 };
 
