@@ -47,7 +47,7 @@ class App extends Component {
           <Route
             exact
             path="/checkout"
-            component={ Checkout }
+            render={ () => <Checkout cart={ cart } /> }
           />
           <Route
             path="/cart"

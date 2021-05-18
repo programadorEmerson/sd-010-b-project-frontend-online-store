@@ -9,10 +9,11 @@ class Checkout extends Component {
   }
 
   render() {
+    const { cart } = this.props;
     return (
       <div>
 
-        <ProductsReview />
+        <ProductsReview cart={ cart } />
         <BuyerReview />
         <PaymentMethod />
 
@@ -23,8 +24,6 @@ class Checkout extends Component {
 }
 
 Checkout.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.object,
-  }).isRequired,
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 export default Checkout;
