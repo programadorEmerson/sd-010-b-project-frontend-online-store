@@ -12,15 +12,23 @@ class Detail extends React.Component {
     };
 
     this.recuperarProduto = this.recuperarProduto.bind(this);
+    this.getProductsFromId = this.getProductsFromId.bind(this);
   }
 
   componentDidMount() {
     this.recuperarProduto();
   }
 
+  async getProductsFromId(productId) {
+    const URL = `https://api.mercadolibre.com/items/${productId}`;
+    return fetch(URL)
+      .then((result) => result.json())
+      .catch((error) => { console.log(`Erro na requisição: ${error}`); });
+  }
+
   recuperarProduto() {
     const { match: { params: { id } } } = this.props;
-    api.getProductsFromId(id).then((searchProduto) => {
+    this.getProductsFromId(id).then((searchProduto) => {
       this.setState({ produto: searchProduto, loading: false });
     });
   }
