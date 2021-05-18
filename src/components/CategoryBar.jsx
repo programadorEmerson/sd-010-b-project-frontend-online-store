@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { getCategories } from '../services/api';
 
 class CategoryBar extends Component {
@@ -16,24 +18,34 @@ class CategoryBar extends Component {
   }
 
   render() {
+    const { onChange } = this.props;
     const { categorieslist } = this.state;
     return (
       <div>
         <h1>Categorias</h1>
-        <ul>
+        <form>
           {categorieslist.map(({ id, name }) => (
-            <li
-              key={ id }
-              data-testid="category"
-            >
+            <label htmlFor={ name } className="categories-labels" key={ id }>
+              <input
+                key={ id }
+                data-testid="category"
+                type="radio"
+                name="category"
+                id={ id }
+                value={ name }
+                onChange={ onChange }
+              />
               { name }
-            </li>
+            </label>
           ))}
-          ;
-        </ul>
+        </form>
       </div>
     );
   }
 }
+
+CategoryBar.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
 
 export default CategoryBar;
