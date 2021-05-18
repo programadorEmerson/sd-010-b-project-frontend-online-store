@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import CheckoutPage from './components/CheckoutPage';
 import Homepage from './components/Homepage';
 import PageCart from './components/PageCart';
 import DetailsPage from './components/DetailsPage';
@@ -81,6 +82,13 @@ class App extends React.Component {
               { ...props }
               arrProducts={ arrProducts }
               addToCart={ this.addToCart }
+            />) }
+          />
+          <Route
+            path="/checkout"
+            render={ (props) => (<CheckoutPage
+              { ...props }
+              cart={ cart }
             />) }
           />
         </Switch>
