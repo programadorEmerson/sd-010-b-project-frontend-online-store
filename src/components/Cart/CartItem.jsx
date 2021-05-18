@@ -54,7 +54,7 @@ class CartItem extends Component {
   }
 
   render() {
-    const { name, source, quantity, totalPrice } = this.state;
+    const { cartProduct: { name, source, quantity, price } } = this.props;
     return (
       <div className="cart-item">
         {this.renderRemoveProductsIcon()}
