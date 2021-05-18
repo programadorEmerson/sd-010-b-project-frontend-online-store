@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
 
 class PageCart extends React.Component {
@@ -35,6 +36,7 @@ class PageCart extends React.Component {
             handleCartBtnEvent={ handleCartBtnEvent }
           />
         ))}
+        <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
       </div>
     );
   }
