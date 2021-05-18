@@ -22,6 +22,7 @@ class ProductList extends Component {
                 { product.price }
               </p>
             </Link>
+            { product.shipping.free_shipping ? <p>Frete Grátis</p> : null}
 
             <button
               data-testid="product-add-to-cart"
