@@ -31,7 +31,6 @@ render() {
             <label htmlFor={ category.id }>
               <input
                 onClick={ onClick }
-                // name="categories"
                 data-testid="category"
                 type="radio"
                 id={ category.id }

@@ -33,8 +33,6 @@ class App extends React.Component {
      this.setState({
        category: id,
      });
-     const {category} = this.state
-     console.log(category);
    }
 
    render() {
@@ -52,7 +50,13 @@ class App extends React.Component {
              />
              Digite algum termo de pesquisa ou escolha uma categoria.
            </label>
-           <button type="button" data-testid="query-button" onClick={ this.setSearchText }> Pesquisar </button>
+           <button
+             type="button"
+             data-testid="query-button"
+             onClick={ this.setSearchText }
+           >
+             Pesquisar
+           </button>
          </div>
          <BrowserRouter>
            <div>
@@ -64,9 +68,10 @@ class App extends React.Component {
                exact
                path="/"
                render={
-                 () => <ProductList
-                        searchText={ searchText }
-                        category={ category } />
+                 () => (<ProductList
+                   searchText={ searchText }
+                   category={ category }
+                 />)
                }
              />
              <Route path="/shopping-cart" render={ () => <ShoppingCart /> } />
