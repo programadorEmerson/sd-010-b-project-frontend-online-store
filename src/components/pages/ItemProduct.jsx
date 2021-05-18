@@ -43,6 +43,7 @@ export default class ItemProduct extends Component {
         <img src={ item.thumbnail } alt="imagem do produto" />
         <div>
           <button
+            data-testid="product-detail-add-to-cart"
             type="submit"
             onClick={ () => getProduct(item) }
           >

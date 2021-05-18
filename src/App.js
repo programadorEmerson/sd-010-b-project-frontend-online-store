@@ -31,17 +31,20 @@ class App extends Component {
             <Route
               exact
               path="/shopping-cart"
-              component={ ShoppingCartPage }
-              itemShoppingCart={ shoppingCart }
+              render={ (props) => (<ShoppingCartPage
+                { ...props }
+                itemShoppingCart={ shoppingCart }
+              />) }
             />
             <Route
               exact
               path="/:id"
               render={
-                (props) => (<ItemProduct
-                  { ...props }
-                  getProduct={ this.getProduct }
-                />)
+                (props) => (
+                  <ItemProduct
+                    { ...props }
+                    getProduct={ this.getProduct }
+                  />)
               }
             />
           </Switch>
