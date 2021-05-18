@@ -28,7 +28,7 @@ class ProductCard extends React.Component {
             { price }
           </h2>
           <button
-            type="submit"
+            type="button"
             onClick={ () => addToCart(result) }
             data-testid="product-add-to-cart"
           >
