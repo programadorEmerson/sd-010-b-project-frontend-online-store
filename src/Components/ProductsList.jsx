@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -18,7 +19,6 @@ class ProductsList extends Component {
   }
 
   getList = async () => {
-
     const { query, categoryID } = this.props;
     const { results } = await getProductsFromCategoryAndQuery(categoryID, query);
 
