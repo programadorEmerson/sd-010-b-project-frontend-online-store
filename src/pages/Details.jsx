@@ -2,42 +2,46 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Loading from '../components/Loading';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Details extends Component {
   constructor() {
     super();
     this.state = {
-      thumbnail: '',
-      title: '',
-      price: 0,
-      isLoading: true,
+      product: { attributes: [] },
     };
   }
 
   componentDidMount() {
-    getCategories();
-    const { match: { params: { query } } } = this.props;
-    getProductsFromCategoryAndQuery('', query)
-      .then((product) => this.setState(
-        {
-          isLoading: false,
-          thumbnail: product,
-        },
-      ));
+    const { match: { params: { id, title } } } = this.props;
+    getProductsFromCategoryAndQuery(null, title)
+      .then((products) => {
+        const finalProduct = products.results.find((product) => id === product.id);
+        this.setState(
+          {
+            product: finalProduct,
+          },
+        );
+      });
   }
 
   render() {
-    const { title, price, thumbnail, isLoading } = this.state;
-    if (isLoading) return <Loading />;
-
+    const { product: { title, price, thumbnail, attributes } } = this.state;
     return (
       <section>
-        <img src={ `Imagem/Produto: ${thumbnail}` } alt={ `Texto da Imagem: ${title}` } />
         <section>
-          <p>{ `Título: ${title}` }</p>
-          <p>{ `Preço: R$${price}` }</p>
+          <img src={ thumbnail } alt={ title } />
+          <h2 data-testid="product-detail-name">{title}</h2>
+          <p>{`R$ ${price}`}</p>
+          <p>Descrição:</p>
+          <ul>
+            {attributes.map((atribut) => (
+              <li
+                key={ atribut.id }
+              >
+                {`${atribut.name} - ${atribut.value_name}`}
+              </li>))}
+          </ul>
           <Link to="/">Voltar</Link>
         </section>
       </section>
@@ -47,7 +51,7 @@ class Details extends Component {
 
 Details.propTypes = {
   match: PropTypes.object,
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
 }.isRequired;
 
 export default Details;

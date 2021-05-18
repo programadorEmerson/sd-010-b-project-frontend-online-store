@@ -5,8 +5,7 @@ import AddToCart from './AddToCart';
 
 class ProductCard extends React.Component {
   render() {
-<<<<<<< HEAD
-    const { product, product: { title, thumbnail, price } } = this.props;
+    const { product, product: { id, title, thumbnail, price } } = this.props;
     return (
       <section className="products-section">
         <section data-testid="product" className="product-box">
@@ -21,22 +20,13 @@ class ProductCard extends React.Component {
           </div>
           <div>
             <AddToCart data-testid="product-add-to-cart" product={ product } />
+            <Link
+              to={ `/details/${id}/${title.replace('%', '')}` }
+            >
+              <span data-testid="product-detail-link">VER DETALHES</span>
+            </Link>
           </div>
         </section>
-=======
-    const { product: { id, title, thumbnail, price } } = this.props;
-    return (
-      <section data-testid="product">
-        <p>{ title }</p>
-        <img src={ thumbnail } alt={ title } />
-        <p>{ `R$${price}` }</p>
-        <Link
-          to={ `/details/${id}` }
-          id={ id }
-        >
-          VER DETALHES
-        </Link>
->>>>>>> main-group-11-2
       </section>
     );
   }
