@@ -18,20 +18,43 @@ class ProductDetails extends React.Component {
     this.setRenderedState();
   }
 
+  // Salva os comentarios no LocalStorage
+  saveLocalStorage = () => {
+    const { location: { state: { result } } } = this.props;
+    const { id } = result;
+    const { listComments } = this.state;
+    localStorage.setItem(id, JSON.stringify(listComments));
+  }
+
   updateComments = (newComment) => {
-    this.setState((oldState) => (
-      { listComments: [newComment, ...oldState.listComments] }
-    ), () => {
-      const { shoppingCart } = this.state;
-      // storage.clear();
-      // storage.setItem(listComments, listComments);
-      console.log(shoppingCart);
-    });
+    // Salva os Cometarios no LocalStorage
+    const { listComments } = this.state;
+    // se a lista de comentarios for null, ele salva o primeiro comentario
+    // caso contrario, faz o spread do oldState e add o novo cometário.
+    if (listComments === null) {
+      this.setState({ listComments: [newComment] },
+        () => {
+          this.saveLocalStorage();
+        });
+    } else {
+      this.setState((oldState) => (
+        { listComments: [newComment, ...oldState.listComments] }
+      ), () => {
+        this.saveLocalStorage();
+      });
+    }
   }
 
   //  Seta o estado Rendenizar para VERDADEIRO
+  //  Faz o get dos comentarios do LocalStorage
   setRenderedState = () => {
-    this.setState({ render: true });
+    const { match: { params: { id } } } = this.props;
+    const localStorageComments = localStorage.getItem(id);
+    const localStorageCommentsParse = JSON.parse(localStorageComments);
+    this.setState({
+      render: true,
+      listComments: localStorageCommentsParse,
+    });
   }
 
   //  Adiciona o produto ao carrinho de compras
@@ -51,6 +74,10 @@ class ProductDetails extends React.Component {
   }
 
   render() {
+    // Teste para o caso de colar o link no navegador e redireciona para a pagina principal
+    // if (!this.props.location.state) {
+    //   return (<Redirect to="/" />);
+    // }
     const { render, shoppingCart } = this.state;
     const { location: { state: { result } } } = this.props;
     const {
@@ -90,23 +117,23 @@ class ProductDetails extends React.Component {
                 Ver Carrinho
               </Link>
             </section>
-
           </main>
           <section>
             <Form updateComments={ this.updateComments } />
           </section>
           <section id="comments">
             <h1>Comentários</h1>
-            { listComments.map((coment) => {
-              const { email, rating, comment } = coment;
-              return (
-                <>
-                  <h2 key={ email }>{ email }</h2>
-                  { comment && <p>{ comment }</p> }
-                  <p key={ rating }>{ rating }</p>
-                </>
-              );
-            }) }
+            { listComments !== null
+              ? listComments.map((coment) => {
+                const { email, rating, comment } = coment;
+                return (
+                  <>
+                    <h2 key={ email }>{ email }</h2>
+                    { comment && <p>{ comment }</p> }
+                    <p key={ rating }>{ rating }</p>
+                  </>
+                );
+              }) : <h2>Sem Comentários!</h2>}
           </section>
         </>
       );
