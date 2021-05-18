@@ -48,7 +48,11 @@ class SearchBox extends React.Component {
 
 SearchBox.propTypes = {
   onFetchProducts: PropTypes.func.isRequired,
+<<<<<<< HEAD
   listProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
+=======
+  listProducts: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+>>>>>>> c8718613c3cb6bdf51858de698597890d5c341bd
 };
 
 export default SearchBox;
