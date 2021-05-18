@@ -11,62 +11,23 @@ class Home extends Component {
     this.state = {
       noProducts: false,
       products: [],
-      categoryId: undefined,
-      search: undefined,
+      categoryId: '',
+      search: '',
     };
   }
 
   handleChecked = ({ target: { id } }) => {
     const { search } = this.state;
     this.setState({ categoryId: id });
-    if (search) {
-      this.handleCheckedSearch(id, search);
-    } else { this.handleCategory(id); }
+    this.handleCheckedSearch(id, search);
   }
 
   handleInput = ({ target: { value } }) => {
     this.setState({ search: value });
   }
 
-  // chamada quando clica na categoria
-  handleCategory = async (id) => {
-    // const { categoryId } = this.state;
-    const filterProducts = await api.getProductsFromCategoryAndQuery(id, '');
-    if (filterProducts) {
-      if (filterProducts.results.length > 0) {
-        this.setState({
-          products: filterProducts.results,
-          noProducts: false,
-        });
-      } else {
-        this.setState({
-          noProducts: true,
-        });
-      }
-    }
-  }
-
-  // chamada quando faz a busca no input
-  handleClick = async (id, search) => {
-    // const { search } = this.state;
-    const responseProduct = await api.getProductsFromCategoryAndQuery(id, search);
-    if (responseProduct) {
-      if (responseProduct.results.length > 0) {
-        this.setState({
-          products: responseProduct.results,
-          noProducts: false,
-        });
-      } else {
-        this.setState({
-          noProducts: true,
-        });
-      }
-    }
-  }
-
   // chamada com categoria e imput
   handleCheckedSearch = async (id, search) => {
-    // const {categoryId, search } = this.state;
     const response = await api.getProductsFromCategoryAndQuery(id, search);
     if (response) {
       if (response.results.length > 0) {
@@ -90,11 +51,8 @@ class Home extends Component {
       <div>
         <Header
           handleInput={ this.handleInput }
-          handleClick={ () => (
-            categoryId
-              ? this.handleCheckedSearch(categoryId, search) : this.handleClick(search)) }
+          handleClick={ () => this.handleCheckedSearch(categoryId, search) }
         />
-
         { noProducts ? <p>{ noProduct }</p> : <ProductList
           products={ products }
           onClick={ onClick }

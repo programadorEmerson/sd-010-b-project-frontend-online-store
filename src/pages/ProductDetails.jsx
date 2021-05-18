@@ -69,6 +69,6 @@ ProductDetaills.propTypes = {
     warranty: PropTypes.string,
     thumbnail: PropTypes.string,
   }).isRequired,
-};
+}.isRequired;
 
 export default ProductDetaills;
