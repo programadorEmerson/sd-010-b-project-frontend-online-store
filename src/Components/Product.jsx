@@ -18,7 +18,7 @@ class Product extends Component {
           onClick={ () => addToCartHandler(id, title, price) }
           onKeyUp={ (event) => {
             if (event.key === 'Enter') {
-              addToCartHandler(id);
+              addToCartHandler(id, title, price);
             }
           } }
           role="button"
