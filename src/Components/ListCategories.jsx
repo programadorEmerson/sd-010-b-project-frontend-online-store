@@ -32,6 +32,7 @@ class ListCategories extends Component {
           key={ id }
           data-testid="category"
           onClick={ () => handleCategoryClick(id) }
+          className="category-btn"
         >
           { name }
         </button>
@@ -41,20 +42,8 @@ class ListCategories extends Component {
 
   render() {
     return (
-      categories.map((category) => (
-        <li key={ category.id } data-testid="category">
-          { category.name }
-        </li>
-      ))
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        <ul>
-          { this.renderCategory() }
-        </ul>
+      <div className="category-list">
+        { this.renderCategory() }
       </div>
     );
   }

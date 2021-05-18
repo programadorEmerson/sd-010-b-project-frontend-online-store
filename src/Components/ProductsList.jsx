@@ -18,7 +18,6 @@ class ProductsList extends Component {
   }
 
   getList = async () => {
-
     const { query, categoryID } = this.props;
     const { results } = await getProductsFromCategoryAndQuery(categoryID, query);
 
@@ -31,7 +30,7 @@ class ProductsList extends Component {
     const { products } = this.state;
 
     return (
-      <div>
+      <div className="products-list">
         { products.map((product) => (<Product
           key={ product.id }
           title={ product.title }
