@@ -18,7 +18,7 @@ export default class ProductCard extends Component {
 
   render() {
     const { item } = this.props;
-    const { title, thumbnail, price } = item;
+    const { title, thumbnail, price, shipping } = item;
 
     return (
       <div className="card" data-testid="product">
@@ -27,6 +27,7 @@ export default class ProductCard extends Component {
           <img src={ thumbnail } alt="img" />
         </div>
         <p>{price}</p>
+        { shipping.free_shipping ? <p data-testid="free-shipping">Frete grátis</p> : ''}
         <button
           type="button"
           onClick={ this.handleAddToCart }
@@ -51,6 +52,9 @@ ProductCard.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool.isRequired,
+    }),
   }).isRequired,
   handleReload: PropTypes.func.isRequired,
 };
