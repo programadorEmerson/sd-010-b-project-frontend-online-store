@@ -32,9 +32,9 @@ class Checkout extends React.Component {
             key={ element }
           >
             { element }
-            <p data-testid="shopping-cart-product-quantity">
+            <span data-testid="shopping-cart-product-quantity">
               { count }
-            </p>
+            </span>
           </p>
         ))}
       </div>
