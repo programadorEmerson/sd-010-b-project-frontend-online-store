@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class DetailsPage extends React.Component {
+  /*  handleClick() {
+
+  } */
+
   render() {
     const { match: { params: { id } }, arrProducts, addToCart } = this.props;
     const { thumbnail, title, price } = arrProducts[id];
