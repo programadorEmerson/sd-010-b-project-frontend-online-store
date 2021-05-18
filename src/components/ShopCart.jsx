@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ShopCart extends React.Component {
   render() {
     const { location: { state: { shoppingCart } } } = this.props;
-
     if (shoppingCart.length) {
       return (
         <div>
@@ -17,6 +17,12 @@ class ShopCart extends React.Component {
             <h3>Quantidade de Itens no carrinho:</h3>
             {shoppingCart.length}
           </p>
+          <Link
+            data-testid="checkout-products"
+            to={ { pathname: '/ShopCart/Checkout', state: { shoppingCart } } }
+          >
+            checkout
+          </Link>
         </div>
       );
     }
