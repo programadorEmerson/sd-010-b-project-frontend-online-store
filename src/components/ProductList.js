@@ -62,7 +62,7 @@ class ProductList extends React.Component {
 
   render() {
     const { results } = this.state;
-    const { getResultFromProductList } = this.props;
+    const { getResultFromProductList, getProductList } = this.props;
     return (
       <div>
         { (results.length === 0)
@@ -84,6 +84,13 @@ class ProductList extends React.Component {
               >
                 Ver Detalhes
               </Link>
+              <button
+                type="button"
+                onClick={ () => getProductList(item.title, item.thumbnail, item.price) }
+                data-testid="product-add-to-cart"
+              >
+                AddCart
+              </button>
             </div>
           ))}
       </div>

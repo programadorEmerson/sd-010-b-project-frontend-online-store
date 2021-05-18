@@ -27,7 +27,6 @@ class ShoppingCart extends React.Component {
               { price }
             </p>
             <p data-testid="shopping-cart-product-quantity">
-              Quantidade:
               { quantity }
             </p>
           </div>

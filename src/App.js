@@ -49,7 +49,8 @@ class App extends React.Component {
    }
 
    render() {
-     const { userInput, searchText, itemUserWantDetail, category, productsCart } = this.state;
+     const { userInput,
+       searchText, itemUserWantDetail, category, productsCart } = this.state;
 
      return (
        <div className="App">
@@ -109,11 +110,7 @@ class App extends React.Component {
                  itemUserWantDetail={ itemUserWantDetail }
                />) }
              />
-             <Route
-               path="/shopping-cart"
-               render={ () => <ShoppingCart /> }
-             />
-             <Route path="/product/:id" render={ (props) => <ProductDetails { ...props } /> } />
+
              <Route
                path="/shopping-cart"
                render={ () => <ShoppingCart productsCart={ productsCart } /> }
