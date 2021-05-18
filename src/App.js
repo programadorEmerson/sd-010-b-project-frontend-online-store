@@ -12,10 +12,27 @@ class App extends Component {
     };
     this.setCart = this.setCart.bind(this);
     this.increaseProduct = this.increaseProduct.bind(this);
+    this.getFromLocalStorage = this.getFromLocalStorage.bind(this);
+  }
+
+  componentDidMount() {
+    if (localStorage.cartItems) {
+      this.getFromLocalStorage();
+    }
+  }
+
+  getFromLocalStorage() {
+    const previousCart = JSON.parse(localStorage.getItem('cartItems'));
+    this.setState({
+      cart: previousCart,
+    });
   }
 
   setCart(product) {
-    this.setState((state) => ({ cart: [...state.cart, product] }));
+    this.setState((state) => ({ cart: [...state.cart, product] }), () => {
+      const { cart } = this.state;
+      localStorage.setItem('cartItems', JSON.stringify(cart));
+    });
   }
 
   increaseProduct(id, bool) {
