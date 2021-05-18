@@ -8,7 +8,7 @@ class Avaliacao extends React.Component {
       email: '',
       estrela: 1,
       mensagem: '',
-//      loading: true,
+      //  loading: true,
     };
 
     this.recuperarLocalStorage = this.recuperarLocalStorage.bind(this);

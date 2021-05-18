@@ -58,7 +58,8 @@ class Detail extends React.Component {
               </ol>
             </div>
             <div>
-            <Avaliacao id={ id }/>
+            <Avaliacao
+              id={ id }/>
             </div>
             </div>
           )}
