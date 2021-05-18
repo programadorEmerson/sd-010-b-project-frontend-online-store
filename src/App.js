@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Homepage from './components/Homepage';
-import PageCart from './components/PageCart';
 import DetailsPage from './components/DetailsPage';
+import Homepage from './components/Homepage';
 import * as api from './services/api';
+import PageCart from './components/PageCart';
+import CheckoutPage from './components/CheckoutPage';
 
 class App extends React.Component {
   constructor() {
@@ -183,6 +184,13 @@ class App extends React.Component {
                 quantity={ this.getQuantity() }
               />
             ) }
+          />
+          <Route
+            path="/checkout"
+            render={ (props) => (<CheckoutPage
+              { ...props }
+              cart={ cart }
+            />) }
           />
         </Switch>
       </BrowserRouter>
