@@ -9,6 +9,7 @@ export class ProductDetails extends Component {
 
     this.state = {
       product: [],
+      productList: [],
     };
   }
 
@@ -25,20 +26,22 @@ export class ProductDetails extends Component {
   }
 
   addToCart = () => {
-    const { state: { product } } = this;
-    const productObj = product[0].body; // pensar em um jeito melhor de acessar essas infos;
-    const { id, thumbnail, title, price } = productObj;
+    const { state: { product, productList } } = this;
+    const productObj = product[0].body;
+    const { thumbnail, title, price } = productObj;
     const itemObjInfo = {
       thumbnail,
       title,
       quantity: 1,
       price,
     };
-    localStorage.setItem(id, JSON.stringify(itemObjInfo));
+    this.setState({ productList: [...productList, itemObjInfo] });
+    localStorage.setItem('shoppingCart', JSON.stringify(productList));
   }
 
   render() {
     const { product } = this.state;
+    const { addToCart } = this;
     return (
       product.map(({ body }) => (
         <div key={ body.title }>
@@ -55,6 +58,7 @@ export class ProductDetails extends Component {
               </li>))}
           </ul>
           <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link>
+          <button type="button" onClick={ addToCart }>add to cart</button>
         </div>
       )));
   }
