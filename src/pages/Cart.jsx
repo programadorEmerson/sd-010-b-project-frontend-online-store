@@ -46,6 +46,13 @@ class Cart extends Component {
     return products.slice(0);
   }
 
+  removeProduct = (id) => {
+    const productsCopy = this.cloneProducts();
+    const indexProductFound = productsCopy.findIndex((product) => product.id === id);
+    productsCopy.splice(indexProductFound, 1);
+    this.setState({ products: productsCopy });
+  };
+
   render() {
     const { products } = this.state;
     return (
