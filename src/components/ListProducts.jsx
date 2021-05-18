@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ListProducts extends React.Component {
   render() {
@@ -18,11 +19,17 @@ class ListProducts extends React.Component {
       <aside className="listProducts">
         {
           listProducts.map((product) => (
-            <div className="cardProduct" key={ product.id } data-testid="product">
-              <h3>{product.title}</h3>
-              <img src={ product.thumbnail } alt={ product.site_id } width="100%" />
-              <p>{`R$ ${product.price}`}</p>
-            </div>
+            <Link
+              key={ product.id }
+              to={ `/${product.id}` }
+              data-testid="product-detail-link"
+            >
+              <div className="cardProduct" data-testid="product">
+                <h3>{product.title}</h3>
+                <img src={ product.thumbnail } alt={ product.site_id } />
+                <p>{`R$ ${product.price}`}</p>
+              </div>
+            </Link>
           ))
         }
       </aside>
@@ -31,7 +38,7 @@ class ListProducts extends React.Component {
 }
 
 ListProducts.propTypes = {
-  listProducts: PropTypes.arrayOf().isRequired,
+  listProducts: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export default ListProducts;

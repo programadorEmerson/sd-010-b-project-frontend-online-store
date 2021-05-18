@@ -17,6 +17,7 @@
   width: 90%;
 }
 
+
 .searchBox input {
   height: 20px;
   width: 90%;
@@ -30,6 +31,7 @@
   border: 1px solid black;
   margin-right: 15px;
   width: 20%;
+
 }
 
 .listProducts {
@@ -50,4 +52,12 @@
 
 .initialMenssage {
   display: block;
+}
+
+.item {
+  cursor: pointer;
+}
+
+img {
+  width: 100px;
 }
