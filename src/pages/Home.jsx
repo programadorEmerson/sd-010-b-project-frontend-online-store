@@ -5,22 +5,22 @@ import CategoryBar from '../components/CategoryBar';
 import Input from '../components/Input';
 import ProductsList from '../components/ProductsList';
 
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
   constructor() {
     super();
+    this.fetchProducts = this.fetchProducts.bind(this);
     this.onChangeHandle = this.onChangeHandle.bind(this);
     this.onClickHandle = this.onClickHandle.bind(this);
+    this.onChangeCategoryHandle = this.onChangeCategoryHandle.bind(this);
     this.state = {
       isLoading: false,
       products: {},
-      inputfilter: null,
-    };
-  }
+      inputfilter: '',
+      categoryfilter: null,
 
-  componentDidMount() {
-    getCategories().then((categories) => console.log(categories));
+    };
   }
 
   onChangeHandle({ target }) {
@@ -31,9 +31,22 @@ class Home extends React.Component {
 
   onClickHandle(event) {
     event.preventDefault();
-    const { inputfilter } = this.state;
+    this.fetchProducts();
+  }
+
+  async onChangeCategoryHandle({ target }) {
+    if (target.checked) {
+      await this.setState({
+        categoryfilter: target.id,
+      });
+    }
+    this.fetchProducts();
+  }
+
+  fetchProducts() {
+    const { inputfilter, categoryfilter } = this.state;
     this.setState({ isLoading: true });
-    getProductsFromCategoryAndQuery(null, inputfilter)
+    getProductsFromCategoryAndQuery(categoryfilter, inputfilter)
       .then((products) => this.setState({
         products,
         isLoading: false,
@@ -41,11 +54,11 @@ class Home extends React.Component {
   }
 
   render() {
-    const { products, isLoading } = this.state;
+    const { products, isLoading, inputfilter, categoryfilter } = this.state;
     return (
       <div className="homepage">
         <section className="categories-bar">
-          <CategoryBar />
+          <CategoryBar onChange={ this.onChangeCategoryHandle } />
         </section>
         <section className="result-page">
           <Input onChange={ this.onChangeHandle } />
@@ -53,6 +66,7 @@ class Home extends React.Component {
             data-testid="query-button"
             type="submit"
             onClick={ this.onClickHandle }
+            disabled={ inputfilter === '' && categoryfilter === null }
           >
             &#9740;
           </button>
@@ -60,7 +74,11 @@ class Home extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
           <section className="products-list">
-            <ProductsList products={ products } isLoading={ isLoading } />
+            <ProductsList
+              products={ products }
+              categoryfilter={ categoryfilter }
+              isLoading={ isLoading }
+            />
           </section>
         </section>
       </div>
