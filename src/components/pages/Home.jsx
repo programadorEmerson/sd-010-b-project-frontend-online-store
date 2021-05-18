@@ -58,7 +58,7 @@ export default class Home extends Component {
         <div>
           <ListCategories
             categories={ listCategories }
-            fecthProducts={ this.fetchProductsByCategories }
+            fetchProducts={ this.fetchProductsByCategories }
           />
         </div>
       </>
