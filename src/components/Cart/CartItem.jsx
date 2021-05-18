@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Image from './Image';
 import CustomButton from './CustomButton';
 
@@ -70,4 +71,17 @@ class CartItem extends Component {
     );
   }
 }
+
+CartItem.propTypes = {
+  cartProduct: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    source: PropTypes.string,
+    quantity: PropTypes.number,
+    price: PropTypes.number,
+  }).isRequired,
+  removeProduct: PropTypes.func.isRequired,
+  updateQuantity: PropTypes.func.isRequired,
+};
+
 export default CartItem;
