@@ -5,11 +5,13 @@ import './App.css';
 
 import MainPage from './Pages/MainPage';
 import ShoppingCart from './Pages/ShoppingCart';
+import Header from './Components/Header';
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <Header />
         <Switch>
           <Route path="/shopping-cart" component={ ShoppingCart } />
           <Route exact path="/" component={ MainPage } />
