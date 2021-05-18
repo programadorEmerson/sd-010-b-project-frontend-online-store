@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
-// import PropTypes from 'prop-types';
 
 class CategoryList extends React.Component {
   constructor(props) {
@@ -21,23 +22,35 @@ addCategories = (categories) => {
 
 render() {
   const { categories } = this.state;
+  const { onClick } = this.props;
   return (
     <div>
       { categories.map((category) => (
         <div key={ category.id }>
-          <label htmlFor={ category.id }>
-            <input
-              data-testid="category"
-              type="radio"
-              id={ category.id }
-            />
-            { category.name }
-          </label>
+          <Link to="/">
+            <label htmlFor={ category.id }>
+              <input
+                onClick={ onClick }
+                data-testid="category"
+                type="radio"
+                id={ category.id }
+              />
+              { category.name }
+            </label>
+          </Link>
         </div>
       )) }
     </div>
   );
 }
 }
+
+CategoryList.propTypes = {
+  onClick: PropTypes.func,
+};
+
+CategoryList.defaultProps = {
+  onClick: () => {},
+};
 
 export default CategoryList;
