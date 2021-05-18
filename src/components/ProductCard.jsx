@@ -4,6 +4,18 @@ import PropTypes from 'prop-types';
 import * as modules from '../services/modules';
 
 export default class ProductCard extends Component {
+  constructor(props) {
+    super(props);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.state = {};
+  }
+
+  handleAddToCart() {
+    const { item, handleReload } = this.props;
+    modules.addProductCart(item);
+    handleReload();
+  }
+
   render() {
     const { item } = this.props;
     const { title, thumbnail, price } = item;
@@ -17,7 +29,7 @@ export default class ProductCard extends Component {
         <p>{price}</p>
         <button
           type="button"
-          onClick={ () => modules.addProductCart(item) }
+          onClick={ this.handleAddToCart }
           data-testid="product-add-to-cart"
         >
           Adicionar
@@ -40,4 +52,5 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
+  handleReload: PropTypes.func.isRequired,
 };

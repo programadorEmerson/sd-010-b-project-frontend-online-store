@@ -13,8 +13,7 @@ export const handleAmount = (prod, bool) => {
       ? { ...elem, qty: elem.qty + 1 } : elem));
   } else {
     arrayCart = arrayCart.map((elem) => (elem.id === prod.id
-      ? { ...elem, qty: elem.qty - 1 }
-      : elem));
+      ? { ...elem, qty: elem.qty - 1 } : elem));
   }
 };
 
@@ -25,7 +24,7 @@ export const handleDelete = (prod) => {
 
 // export const handleQuantity = () => {
 //   return arrayCart.reduce((total, item) => {
-//     total += item.qty;
+//     total += item.price * item.qty;
 //     return total;
 //   }, 0);
 // };
@@ -41,3 +40,12 @@ export const getReviews = (id) => {
 };
 
 export const getCartState = () => arrayCart;
+
+export const getLength = () => {
+  const reduceArr = arrayCart.reduce((total, item) => {
+    total += item.qty;
+    return total;
+  }, 0);
+
+  return reduceArr;
+};

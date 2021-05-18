@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
+import * as modules from '../services/modules';
 
 import InputSearch from '../components/InputSearch';
 import Categories from '../components/Categories';
@@ -16,17 +17,23 @@ export default class Home extends Component {
       products: [],
       foundProducts: true,
       value: '',
+      reload: true,
     };
 
     this.getCategories = this.getCategories.bind(this);
     this.handleInputSearch = this.handleInputSearch.bind(this);
     this.handleSubmitFetch = this.handleSubmitFetch.bind(this);
     this.handleSelectCategory = this.handleSelectCategory.bind(this);
-    // this.addProductIntoCart = this.addProductIntoCart.bind(this);
+    this.handleReload = this.handleReload.bind(this);
   }
 
   componentDidMount() {
     this.getCategories();
+  }
+
+  handleReload() {
+    const { reload } = this.state;
+    this.setState({ reload });
   }
 
   handleSubmitFetch() {
@@ -61,6 +68,7 @@ export default class Home extends Component {
             item={ item }
             addProductIntoCart={ this.addProductIntoCart }
             data-testid="product"
+            handleReload={ this.handleReload }
           />
         ))}
       </div>
@@ -92,6 +100,7 @@ export default class Home extends Component {
           >
             <ButtonToCart />
           </Link>
+          <p data-testid="shopping-cart-size">{modules.getLength()}</p>
           <p data-testid="home-initial-message">
             {foundProducts
               ? 'Digite algum termo de pesquisa ou escolha uma categoria.'
