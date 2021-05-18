@@ -12,7 +12,7 @@ class CardProduct extends React.Component {
         <p>{ `R$${price}` }</p>
         <Link
           data-testid="product-detail-link"
-          to={ `/detail/${id}-${title}` }
+          to={ `/detail/${id}` }
         >
           {' '}
           Detalhes

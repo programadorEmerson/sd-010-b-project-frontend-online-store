@@ -40,6 +40,7 @@ Categories.propTypes = {
   categories: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    map: PropTypes.string,
   }).isRequired,
 };
 

@@ -34,7 +34,7 @@ class Home extends React.Component {
     });
   }
 
-  onClickHandle(arg = null) {
+  onClickHandle(arg = '') {
     const { inputfilter } = this.state;
     getProductsFromCategoryAndQuery(arg, inputfilter)
       .then((products) => {

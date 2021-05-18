@@ -18,14 +18,11 @@ class Detail extends React.Component {
     this.recuperarProduto();
   }
 
-  async recuperarProduto() {
+  recuperarProduto() {
     const { match: { params: { id } } } = this.props;
-    const title = id.split('-')[1];
-    const idProduto = id.split('-')[0];
-    const search = await api.getProductsFromCategoryAndQuery(null, title);
-    const produto = Object.entries(search.results);
-    produto.find((resultado) => resultado[1].id === idProduto);
-    this.setState({ produto: produto[1], loading: false });
+    api.getProductsFromId(id).then((searchProduto) => {
+      this.setState({ produto: searchProduto, loading: false });
+    });
   }
 
   render() {
@@ -33,20 +30,22 @@ class Detail extends React.Component {
     return (
       <div>
         { !loading
-          && <div>
-            <img src={ produto[1].thumbnail } alt={ produto[1].title } />
-            <span data-testid="product-detail-name">{ produto[1].title }</span>
-            <span>{ produto[1].price }</span>
-            <ol>
-              {
-                produto[1].attributes.map((atributos) => (
-                  <li key={ atributos.id }>
-                    { `${atributos.name}: ${atributos.value_name}` }
-                  </li>
-                ))
-              }
-            </ol>
-             </div>}
+          && (
+            <div>
+              <img src={ produto.thumbnail } alt={ produto.title } />
+              <span data-testid="product-detail-name">{ produto.title }</span>
+              <span>{ produto.price }</span>
+              <ol>
+                {
+                  produto.attributes.map((atributos) => (
+                    <li key={ atributos.id }>
+                      { `${atributos.name}: ${atributos.value_name}` }
+                    </li>
+                  ))
+                }
+              </ol>
+            </div>
+          )}
       </div>
     );
   }
