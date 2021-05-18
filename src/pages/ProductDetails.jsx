@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Link } from 'react-router-dom';
 import CommentForms from '../components/CommentForms';
 import CommentCard from '../components/CommentCard';
 import Loading from '../components/Loading';
@@ -11,6 +10,7 @@ import getProductById from '../services/getProducts';
 class ProductDetails extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       title: '',
       price: '',
@@ -18,6 +18,10 @@ class ProductDetails extends Component {
       comments: [],
       loading: true,
     };
+
+    if (!localStorage.getItem('cartProducts')) {
+      localStorage.setItem('cartProducts', '[]');
+    }
   }
 
   submitRating = (email, rating, comment) => {
@@ -41,6 +45,16 @@ class ProductDetails extends Component {
     await this.getProduct();
   }
 
+  saveAtLocalstorage = (objectToSave) => {
+    let localObj = JSON.parse(localStorage.getItem('cartProducts'));
+    localObj = [...localObj, objectToSave];
+
+    localStorage.setItem('cartProducts', JSON.stringify(localObj));
+    // Navegação para o cart
+    const { history: { push } } = this.props;
+    push('/cart');
+  }
+
   render() {
     const { title, price, imgUrl, comments, loading } = this.state;
 
@@ -59,16 +73,13 @@ class ProductDetails extends Component {
           {price}
         </p>
         <img src={ imgUrl } alt={ title } />
-
-        <Link
-          to={ {
-            pathname: '/cart',
-            state: { title, price, imgUrl },
-          } }
-          data-testid="product-detail-add-to-cart"
+        <button
+          type="button"
+          onClick={ () => { this.saveAtLocalstorage({ title, price, imgUrl }); } }
         >
           Adicionar ao Carrinho
-        </Link>
+
+        </button>
 
         <CommentForms submitRating={ this.submitRating } />
         {comments.map(({ email, rating, comment }) => (
@@ -89,6 +100,9 @@ ProductDetails.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }).isRequired,
 };
 
