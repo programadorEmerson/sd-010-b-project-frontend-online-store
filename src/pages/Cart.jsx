@@ -6,28 +6,28 @@ import '../css/Cart/Cart.css';
 const fakeCartItems = [
   {
     id: '01',
-    name: 'Máquina de lavar',
+    name: 'Produto 1',
     source: '',
     quantity: 1,
     price: 4000,
   },
   {
     id: '02',
-    name: 'Máquina de lavar',
+    name: 'Produto 2',
     source: '',
     quantity: 1,
     price: 2000,
   },
   {
     id: '04',
-    name: 'Máquina de lavar',
+    name: 'Produto 4',
     source: '',
     quantity: 1,
     price: 5500,
   },
   {
     id: '03',
-    name: 'Máquina de lavar',
+    name: 'Produto 3',
     source: '',
     quantity: 1,
     price: 5250,
