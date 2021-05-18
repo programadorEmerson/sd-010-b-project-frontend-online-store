@@ -53,12 +53,12 @@ class Categories extends React.Component {
       <section>
         <label
           key="all"
-          htmlFor="idCategory"
+          htmlFor="all"
         >
           <input
             defaultChecked
             type="radio"
-            id="idCategory"
+            id="all"
             key="all"
             name="idCategory"
             value="all"
@@ -69,12 +69,12 @@ class Categories extends React.Component {
         {categories.map(((category) => (
           <label
             key={ category.id }
-            htmlFor="idCategory"
+            htmlFor={ category.id }
           >
             <input
               data-testid="category"
               type="radio"
-              id="idCategory"
+              id={ category.id }
               key={ category.id }
               name="idCategory"
               value={ category.id }
