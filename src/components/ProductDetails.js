@@ -3,13 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class ProductDetails extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     item: {},
-  //   };
-  // }
-
   searchAndRenderItemDetais = () => {
     const { itemUserWantDetail } = this.props;
     return (
@@ -29,6 +22,8 @@ class ProductDetails extends React.Component {
           {' '}
           {itemUserWantDetail.available_quantity}
         </p>
+        <Link to="/shopping-cart">Adicionar ao Carrinho</Link>
+        {' '}
         <Link to="/">VOLTAR</Link>
       </div>);
   }
