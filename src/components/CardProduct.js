@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 class CardProduct extends React.Component {
   constructor() {
     super();
-    this.state = {
-      cartItem: {},
-    };
     this.addToCart = this.addToCart.bind(this);
   }
 
@@ -50,6 +47,7 @@ CardProduct.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
 };
 
 export default CardProduct;
