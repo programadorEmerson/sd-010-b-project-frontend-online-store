@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 import ProductsSearchBar from '../components/ProductsSearchBar';
-import ListCategories from '../components/ListCategories';
+import CategoriesList from '../components/CategoriesList';
 import ProductsList from '../components/ProductsList';
 
 import './styles/ShoppingHome.css';
@@ -13,14 +13,34 @@ class ShoppingHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      categoryID: undefined,
       products: undefined,
+      query: undefined,
     };
 
     this.handleQueryChange = this.handleQueryChange.bind(this);
+    this.updateState = this.updateState.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
 
-  async handleQueryChange(query) {
-    const request = await getProductsFromCategoryAndQuery(undefined, query);
+  handleQueryChange(inputedQuery) {
+    this.setState(
+      { query: inputedQuery },
+      () => this.updateState(),
+    );
+  }
+
+  handleCategoryChange(inputedCategory) {
+    this.setState({
+      categoryID: inputedCategory,
+      query: undefined,
+    },
+    () => this.updateState());
+  }
+
+  async updateState() {
+    const { categoryID, query } = this.state;
+    const request = await getProductsFromCategoryAndQuery(categoryID, query);
     this.setState({ products: request.results });
   }
 
@@ -30,7 +50,7 @@ class ShoppingHome extends Component {
       <section className="ShoppingHome">
         <aside>
           <ul>
-            <ListCategories />
+            <CategoriesList handleCategorySearch={ this.handleCategoryChange } />
           </ul>
         </aside>
         <main>
