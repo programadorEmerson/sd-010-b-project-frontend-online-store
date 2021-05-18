@@ -3,36 +3,6 @@ import { Link } from 'react-router-dom';
 import CartItem from '../components/Cart/CartItem';
 import '../css/Cart/Cart.css';
 
-const fakeCartItems = [
-  {
-    id: '01',
-    name: 'Produto 1',
-    source: '',
-    quantity: 1,
-    price: 4000,
-  },
-  {
-    id: '02',
-    name: 'Produto 2',
-    source: '',
-    quantity: 1,
-    price: 2000,
-  },
-  {
-    id: '04',
-    name: 'Produto 4',
-    source: '',
-    quantity: 1,
-    price: 5500,
-  },
-  {
-    id: '03',
-    name: 'Produto 3',
-    source: '',
-    quantity: 1,
-    price: 5250,
-  },
-];
 class Cart extends Component {
   constructor(props) {
     super(props);
