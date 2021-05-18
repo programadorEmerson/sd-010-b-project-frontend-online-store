@@ -72,7 +72,7 @@ class ProductDetails extends Component {
         state: { item },
       },
     } = this.props;
-    const { title } = item;
+    const { title, shipping } = item;
     const { rating } = this.state;
     return (
       <div>
@@ -80,6 +80,7 @@ class ProductDetails extends Component {
           <ButtonToCart />
         </Link>
         <p data-testid="product-detail-name">{title}</p>
+        { shipping.free_shipping ? <p data-testid="free-shipping">Frete Grátis</p> : ''}
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
@@ -104,6 +105,9 @@ ProductDetails.propTypes = {
       item: PropTypes.shape({
         title: PropTypes.string,
         id: PropTypes.string,
+        shipping: PropTypes.shape({
+          free_shipping: PropTypes.bool.isRequired,
+        }),
       }),
     }),
   }).isRequired,
