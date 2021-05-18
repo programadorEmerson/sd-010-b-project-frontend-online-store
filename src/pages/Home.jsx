@@ -19,6 +19,7 @@ class Home extends React.Component {
       products: {},
       inputfilter: '',
       categoryfilter: null,
+
     };
   }
 
