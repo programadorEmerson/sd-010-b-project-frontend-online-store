@@ -4,6 +4,8 @@ import getProductById from '../services/api2';
 import * as api from '../services/api';
 import Loading from '../components/Loading';
 
+//teste
+
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +38,7 @@ class ProductDetails extends React.Component {
         <ul>
           {attributes?.map((attribute) => (
             <li key={ attribute.id }>
-              {`${attribute.name}: ${attribute.value_name}`}
+              { `${attribute.name}: ${attribute.value_name}` }
             </li>))}
         </ul>
       </div>
