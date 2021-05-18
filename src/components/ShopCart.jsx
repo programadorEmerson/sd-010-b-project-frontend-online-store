@@ -1,29 +1,97 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ShoppingCartCard from './ShoppingCartCard';
 import { Link } from 'react-router-dom';
 
 class ShopCart extends React.Component {
-  render() {
+  constructor() {
+    super();
+
+    this.state = {
+      shoppingCartProducts: [],
+      totalPriceShoppingCart: 0,
+      totalQuantityItems: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.setTotalPriceValue();
+    this.populateShoppingCart();
+  }
+
+  // Popula o state carrinho com os itens da rota anterior
+  populateShoppingCart = () => {
     const { location: { state: { shoppingCart } } } = this.props;
-    if (shoppingCart.length) {
+
+    this.setState(
+      { shoppingCartProducts: shoppingCart }, () => this.updateProductsQuantity(),
+    );
+  }
+
+  //  Seta o valor total da compra
+  setTotalPriceValue = () => {
+    const { location: { state: { shoppingCart } } } = this.props;
+    const totalPrice = shoppingCart.reduce(
+      (totalAccumulator, productCart) => totalAccumulator + productCart.price, 0,
+    );
+
+    this.setState({ totalPriceShoppingCart: totalPrice });
+  }
+
+  //  Escolhe a quantidade do produto
+  changeProductQuantity = (symbol, product) => {
+    if ((symbol === '+') && (product.quantity < product.available_quantity)) {
+      product.quantity += 1;
+    }
+
+    if ((symbol === '-') && (product.quantity > 1)) {
+      product.quantity -= 1;
+    }
+
+    this.updateProductsQuantity();
+  }
+
+  //  Captura a quantidade de produtos no carrinho
+  updateProductsQuantity = () => {
+    const { shoppingCartProducts } = this.state;
+    const totalQuantity = shoppingCartProducts.reduce(
+      (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
+    );
+
+    this.setState({ totalQuantityItems: totalQuantity });
+  }
+
+  render() {
+    const {
+      totalPriceShoppingCart, shoppingCartProducts, totalQuantityItems,
+    } = this.state;
+    const { location: { state: { shoppingCart } } } = this.props;
+
+    if (shoppingCartProducts.length) {
       return (
-        <div>
-          {shoppingCart.map((productCart) => (
-            <div key={ productCart.id } div data-testid="shopping-cart-product-name">
-              <h2>{productCart.title}</h2>
-            </div>
+        <main>
+          <h1>Carrinho de compras</h1>
+          {shoppingCartProducts.map((productCart) => (
+            <ShoppingCartCard
+              key={ productCart.id }
+              productCart={ productCart }
+              changeProductQuantity={ this.changeProductQuantity }
+            />
           ))}
-          <p data-testid="shopping-cart-product-quantity">
-            <h3>Quantidade de Itens no carrinho:</h3>
-            {shoppingCart.length}
-          </p>
+          <span>
+            {totalQuantityItems}
+          </span>
+          <span>
+            <p>Valor total da compra:</p>
+            {totalPriceShoppingCart}
+          </span>
           <Link
             data-testid="checkout-products"
             to={ { pathname: '/ShopCart/Checkout', state: { shoppingCart } } }
           >
             checkout
           </Link>
-        </div>
+        </main>
       );
     }
 

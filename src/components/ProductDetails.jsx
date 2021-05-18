@@ -37,7 +37,17 @@ class ProductDetails extends React.Component {
   //  Adiciona o produto ao carrinho de compras
   addProductToShoppingCart = (product) => {
     const { shoppingCart } = this.state;
-    this.setState({ shoppingCart: [...shoppingCart, product] });
+
+    const testIfProductExist = shoppingCart.find(
+      (oldProduct) => oldProduct.id === product.id,
+    );
+
+    if (testIfProductExist === undefined) {
+      product.quantity = 1;
+      this.setState({ shoppingCart: [...shoppingCart, product] });
+    } else {
+      product.quantity += 1;
+    }
   }
 
   render() {
@@ -87,16 +97,16 @@ class ProductDetails extends React.Component {
           </section>
           <section id="comments">
             <h1>Comentários</h1>
-            {listComments.map((coment) => {
+            { listComments.map((coment) => {
               const { email, rating, comment } = coment;
               return (
                 <>
                   <h2 key={ email }>{ email }</h2>
-                  {comment && <p>{ comment }</p>}
+                  { comment && <p>{ comment }</p> }
                   <p key={ rating }>{ rating }</p>
                 </>
               );
-            })}
+            }) }
           </section>
         </>
       );
