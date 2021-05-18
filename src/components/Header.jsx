@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 class Header extends Component {
   render() {
     const { cartItems } = this.props;
+    const totalItems = cartItems.reduce((acc, curr) => acc + curr.quant, 0);
     return (
       <div className="main-container">
         <p data-testid="home-initial-message">
@@ -14,7 +15,7 @@ class Header extends Component {
           to="/cart"
           data-testid="shopping-cart-size"
         >
-          {cartItems.length}
+          {totalItems}
         </Link>
       </div>
     );
