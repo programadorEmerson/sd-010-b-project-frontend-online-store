@@ -36,6 +36,9 @@ class SearchBar extends React.Component {
 
   handleClick = async () => {
     console.log('opa');
+    this.setState({
+      products: '',
+    });
     const { state: { searchText, filter } } = this;
     const data = await getProductsFromCategoryAndQuery(filter, searchText);
     const { results } = data;
@@ -45,8 +48,8 @@ class SearchBar extends React.Component {
   }
 
   handleCategory = ({ target }) => {
-    const { parentElement: { attributes } } = target;
-    const value = attributes[1].nodeValue;
+    const { attributes } = target;
+    const value = attributes[3].nodeValue;
     this.setState(() => ({
       filter: value,
     }));
@@ -59,15 +62,15 @@ class SearchBar extends React.Component {
       handleCategory, state: { pageNotFound, products, categories } } = this;
     return (
       <div>
-        <ul>
+        <div onChange={ handleCategory }>
           { categories.map((catItem) => (
-            <li data-testid="category" key={ catItem.id } cat={ catItem.id }>
-              <button type="button" onClick={ handleCategory }>
-                { catItem.name }
-              </button>
-            </li>
+            <div key={ catItem.id }>
+              { catItem.name }
+              <input type="radio" name="cat" data-testid="category" cat={ catItem.id } />
+            </div>
+
           ))}
-        </ul>
+        </div>
         <label htmlFor="searchBar" data-testid="home-initial-message">
           <input
             type="text"
