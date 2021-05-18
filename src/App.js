@@ -30,12 +30,12 @@ class App extends React.Component {
     const { products, queryTerm } = this.state;
     return (
       <main>
-        <Categories
-          handleQuery={ this.handleQuery }
-          query={ queryTerm }
-        />
         <BrowserRouter>
           <Input handleQuery={ this.handleQuery } />
+          <Categories
+            handleQuery={ this.handleQuery }
+            query={ queryTerm }
+          />
           <Switch>
             <Route to="/cart" component={ Cart } />
           </Switch>
