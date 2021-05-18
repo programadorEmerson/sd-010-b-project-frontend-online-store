@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import CategoryList from './CategoryList';
 
+import CategoryList from './CategoryList';
 import ProductList from './ProductList';
 import SearchBar from './SearchBar';
 
@@ -14,11 +14,18 @@ class Home extends React.Component {
       filtered: [],
       search: '',
       filterCategory: false,
+      nameItems: [],
     };
   }
 
+  componentDidUpdate(_, previousState) {
+    const { nameItems } = this.state;
+    if (nameItems !== previousState.nameItems) {
+      localStorage.setItem('cartItems', JSON.stringify(nameItems));
+    }
+  }
+
   getApiFromCategory = (param) => async () => {
-    console.log('getApiFromCategory');
     this.setState({
       filterCategory: await getProductsFromCategoryAndQuery(param, ''),
       filtered: false,
@@ -31,6 +38,12 @@ class Home extends React.Component {
       filtered: await getProductsFromCategoryAndQuery('', search),
       filterCategory: false,
     });
+  }
+
+  getName = (title) => () => {
+    this.setState((oldState) => ({
+      nameItems: [...oldState.nameItems, title],
+    }));
   }
 
   getResult = ({ target: { value } }) => {
@@ -55,12 +68,12 @@ class Home extends React.Component {
           <div id="products">
             {!resultFilter || resultFilter.length === 0
               ? 'Nenhum produto a ser encontrado'
-              : <ProductList products={ filtered.results } /> }
+              : <ProductList getName={ this.getName } products={ filtered.results } /> }
           </div>) }
 
         {filterCategory && (
           <div id="products-category">
-            <ProductList products={ filterCategory.results } />
+            <ProductList getName={ this.getName } products={ filterCategory.results } />
           </div>)}
       </main>
     );
