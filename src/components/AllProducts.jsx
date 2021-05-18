@@ -30,6 +30,7 @@ class AllProducts extends Component {
     });
   } 
 
+  
   render() {
     const { prod, loading } = this.state;
     if (loading) return <Loading />;
