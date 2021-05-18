@@ -15,12 +15,11 @@ class App extends React.Component {
     };
   }
 
-  handleAddCartItem = async ({ category_id, title, id }) => {
-    const { results } = await api.getProductsFromCategoryAndQuery(category_id, title)
-    const result = results.find((result) => result.id === id)     
-    this.setState((oldState) => ({ addCart: [...oldState.addCart, result] }));
-    
-  }
+  handleAddCartItem = async ({ categoryId, title, id }) => {
+    const { results } = await api.getProductsFromCategoryAndQuery(categoryId, title);
+    const findProduct = results.find((result) => result.id === id);
+    this.setState((oldState) => ({ addCart: [...oldState.addCart, findProduct] }));
+  };
 
   render() {
     const { addCart } = this.state;
@@ -32,8 +31,11 @@ class App extends React.Component {
             path="/"
             render={ () => <Home onClick={ this.handleAddCartItem } /> }
           />
-          <Route exact path="/cart" render={ () => <Cart addCart={ addCart } /> } />          
-          <Route path="/details/:id/:category_id/:title" component={ ProductDetails } />
+          <Route exact path="/cart" render={ () => <Cart addCart={ addCart } /> } />
+          <Route
+            path="/details/:id/:category_id/:title"
+            component={ ProductDetails }
+          />
         </Switch>
       </BrowserRouter>
     );

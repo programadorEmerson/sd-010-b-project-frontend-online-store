@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Category from './Category';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ProductList from './ProductList';
@@ -36,6 +37,7 @@ class GetProducts extends React.Component {
 
   render() {
     const { products, listCategories } = this.state;
+    const { onClick } = this.props;
     return (
       <div>
         <div className="list-category" onChange={ this.changeCategory }>
@@ -43,10 +45,14 @@ class GetProducts extends React.Component {
             <Category key={ product.name } category={ product } />
           ))}
         </div>
-        <ProductList products={ products } />
+        <ProductList products={ products } onClick={ onClick } />
       </div>
     );
   }
 }
+
+GetProducts.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default GetProducts;

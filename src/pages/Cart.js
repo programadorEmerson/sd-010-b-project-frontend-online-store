@@ -19,10 +19,11 @@ class Cart extends React.Component {
               <p>{ price }</p>
             </div>
           ))}
-          <p 
+          <p
             data-testid="shopping-cart-product-quantity"
           >
-            Quantidade de produtos: {addCart.length}
+            Quantidade de produtos:
+            {addCart.length}
           </p>
         </div>
       </div>

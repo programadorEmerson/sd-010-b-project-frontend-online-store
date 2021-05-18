@@ -37,7 +37,7 @@ class Home extends React.Component {
 
     return (
       <div className="App">
-        <GetProducts />
+        <GetProducts onClick={ onClick } />
 
         <div>
           <input data-testid="query-input" type="text" onChange={ this.handleSearch } />
@@ -52,7 +52,7 @@ class Home extends React.Component {
             <p data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
             </p>
-          ) : <ProductList products={ products } onClick={ onClick } />}      
+          ) : <ProductList products={ products } onClick={ onClick } />}
         </div>
         <Link data-testid="shopping-cart-button" to="/cart">VER CARRINHO</Link>
       </div>
