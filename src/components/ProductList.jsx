@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductCard from './ProductCart';
 
@@ -46,13 +45,8 @@ class ProductList extends React.Component {
         { product === []
           ? (<p>Nenhum produto foi encotrado</p>)
           : product.map((item) => (
-            <Link
-              data-testid="product-detail-link"
-              key={ item.id }
-              to={ `/product-details/${item.id}` }
-            >
-              <ProductCard product={ item } />
-            </Link>
+
+            <ProductCard key={ item.id } product={ item } />
 
           ))}
       </div>

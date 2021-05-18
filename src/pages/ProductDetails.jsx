@@ -22,7 +22,7 @@ class ProductDetails extends React.Component {
     const { match: { params: { id } } } = this.props;
     const productDetails = await getProductById(id);
     this.setState({ productDetails, fetched: true });
-    api.getProductsFromCategoryAndQuery();
+    await api.getProductsFromCategoryAndQuery();
   }
 
   render() {
@@ -34,7 +34,7 @@ class ProductDetails extends React.Component {
         <h3 data-testid="product-detail-name">{title}</h3>
         <img src={ thumbnail } alt={ title } />
         <ul>
-          {attributes.map((attribute) => (
+          {attributes?.map((attribute) => (
             <li key={ attribute.id }>
               {`${attribute.name}: ${attribute.value_name}`}
             </li>))}
