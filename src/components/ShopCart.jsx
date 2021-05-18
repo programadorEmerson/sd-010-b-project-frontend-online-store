@@ -39,7 +39,7 @@ class ShopCart extends React.Component {
 
   //  Escolhe a quantidade do produto
   changeProductQuantity = (symbol, product) => {
-    if (symbol === '+') {
+    if ((symbol === '+') && (product.quantity < product.available_quantity)) {
       product.quantity += 1;
     }
 

@@ -81,7 +81,7 @@ class Main extends React.Component {
     if (testIfProductExist === undefined) {
       product.quantity = 1;
       this.setState({ shoppingCart: [...shoppingCart, product] });
-    } else {
+    } else if (product.quantity < product.available_quantity) {
       product.quantity += 1;
     }
   }
