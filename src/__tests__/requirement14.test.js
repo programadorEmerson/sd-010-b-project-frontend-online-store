@@ -27,7 +27,7 @@ describe(`14 - Limite a quantidade de produtos adicionados ao carrinho pela quan
       mockedQueryResult.results[1].title,
     );
     expect(screen.getAllByTestId('shopping-cart-product-quantity')[0]).toHaveTextContent(
-      '1',
+     '1',
     );
     fireEvent.click(screen.getAllByTestId('product-increase-quantity')[0]);
     fireEvent.click(screen.getAllByTestId('product-increase-quantity')[0]);

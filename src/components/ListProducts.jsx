@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class ListProducts extends Component {
-  renderProduct({ title, price, thumbnail, id }, index) {
+  renderProduct(product, index) {
+    const { title, price, thumbnail, id, available_quantity: available } = product;
     const { setCart } = this.props;
     return (
       <div key={ `${index} - ${title}` }>
@@ -19,7 +20,7 @@ class ListProducts extends Component {
           </div>
         </Link>
         <button
-          onClick={ () => setCart({ id, title, price, thumbnail, quant: 1 }) }
+          onClick={ () => setCart({ id, title, price, thumbnail, quant: 1, available }) }
           type="button"
           data-testid="product-add-to-cart"
         >
