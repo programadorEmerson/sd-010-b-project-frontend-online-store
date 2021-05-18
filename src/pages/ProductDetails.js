@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import ButtonToCart from '../components/ButtonToCart';
 import * as api from '../services/api';
 
 class ProductDetails extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       productDetail: {},
@@ -13,35 +14,41 @@ class ProductDetails extends Component {
     this.searchProduct = this.searchProduct.bind(this);
   }
 
-  // addProductIntoCart(item) {
-  //   const { cart } = this.state;
-  //   this.setState({ cart: [...cart, item] });
-  // }
-
   componentDidMount() {
     this.searchProduct();
   }
 
   async searchProduct() {
-    const { match: { params: { id, categoryId, title } } } = this.props;
+    const { match: { params: { categoryId, id, title } } } = this.props;
     const { results } = await api.getProductsFromCategoryAndQuery(categoryId, title);
     const findProduct = results.find((result) => result.id === id);
     this.setState({ productDetail: findProduct });
   }
 
   render() {
-    const { productDetail: { title, price, thumbnail } } = this.state;
+    const { match: { params: { categoryId, id, title } }, addCart } = this.props;
+    const { productDetail } = this.state;
+    const { price, thumbnail } = productDetail;
     return (
       <div>
         <h1 data-testid="product-detail-name">{title}</h1>
         <h1>{price}</h1>
         <img src={ thumbnail } alt={ title } />
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          onClick={ () => addCart(categoryId, title, id) }
+        >
+          ADICIONAR AO CARRINHO
+        </button>
+        <Link data-testid="shopping-cart-button" to="/cart">VER CARRINHO</Link>
       </div>
     );
   }
 }
 
 ProductDetails.propTypes = {
+  addCart: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,

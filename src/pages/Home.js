@@ -23,6 +23,7 @@ class Home extends React.Component {
   }
 
   handleClick = (categoryId, search) => {
+    console.log(categoryId, 'categoriaId');
     api.getProductsFromCategoryAndQuery(categoryId, search).then(({ results }) => (
       this.setState({
         isEmpty: false,
