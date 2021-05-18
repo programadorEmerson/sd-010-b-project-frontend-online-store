@@ -7,7 +7,7 @@ import Product from './Product';
 class AllProducts extends Component {
   constructor() {
     super();
-
+    this.buscafunc=this.buscafunc.bind(this)
     this.state = {
       prod: [],
       loading: true,
@@ -15,29 +15,20 @@ class AllProducts extends Component {
   }
 
   componentDidMount() {
-    const { id, product } = this.props;
+    const { id, product} = this.props
+    this.buscafunc(id, product)
+  }
+
+  buscafunc(id, product) {
+    const { filterText } = this.props
+    console.log('DidMount')
     api.getProductsFromCategoryAndQuery(id, product).then((response) => {
       this.setState({
         prod: response.results,
         loading: false,
       });
     });
-  }
-
-  filterOnClick() {
-    const { vaipassar } = this.props;
-    console.log(vaipassar);
-    api.getProductsFromQuery(vaipassar).then((response) => {
-      this.setState({
-        prod: response.results,
-        loading: false,
-      });
-    });
-  }
-
-  // SearchOnChange(text) {
-  //   console.log(text);
-  // }
+  } 
 
   render() {
     const { prod, loading } = this.state;
@@ -45,8 +36,8 @@ class AllProducts extends Component {
 
     return (
       <div>
+        {console.log(prod)}
         {prod.map((product) => (
-          // (console.log(product.id)
           <Product
             key={ product.id }
             product={ product }
@@ -62,15 +53,3 @@ AllProducts.propTypes = {
 }.isRequired;
 
 export default AllProducts;
-
-// import React, { Component } from 'react';
-
-// class AllProducts extends Component {
-//   render() {
-//     return (
-//       <p>vai saber</p>
-//     );
-//   }
-// }
-
-// export default AllProducts;
