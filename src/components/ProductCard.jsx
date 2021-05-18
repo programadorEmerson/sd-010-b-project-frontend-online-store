@@ -11,7 +11,7 @@ class ProductCard extends React.Component {
     return (
       <section className="product-card" data-testid="product">
         <header className="product-card-header">
-          <h1>{ title }</h1>
+          <h1>{title}</h1>
         </header>
 
         { /*  *SOURCE* https://stackoverflow.com/questions/41466055/how-do-i-pass-state-through-react-router */}
@@ -20,7 +20,13 @@ class ProductCard extends React.Component {
           to={ { pathname: `/product-details/${categoryId}/${id}`, state: { result } } }
         >
           <main className="product-card-main">
-          { (freeShipping && <img data-testid="free-shipping" width="50" height="50" src="https://pngimage.net/wp-content/uploads/2018/06/frete-gr%C3%A1tis-png-1.png" />) }
+            { (freeShipping && <img
+              alt="free shipping"
+              data-testid="free-shipping"
+              width="50"
+              height="50"
+              src="https://pngimage.net/wp-content/uploads/2018/06/frete-gr%C3%A1tis-png-1.png"
+            />) }
             <img className="product-card-image" src={ thumbnail } alt={ title } />
           </main>
         </Link>
