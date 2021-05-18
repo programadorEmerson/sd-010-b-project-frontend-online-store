@@ -52,7 +52,7 @@ class SearchBox extends React.Component {
 
 SearchBox.propTypes = {
   fetchProducts: PropTypes.func.isRequired,
-  listProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  listProducts: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   msgPruductsNotFound: PropTypes.string.isRequired,
 };
 
