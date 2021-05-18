@@ -12,7 +12,8 @@ class ProductList extends Component {
           <div data-testid="product" key={ product.id }>
             <Link
               data-testid="product-detail-link"
-              to={ `details/${product.id }`}
+              to={ `details/${product.id}` }
+              key={ `${product.title}` }
             >
               <h3>{ product.title }</h3>
               <img width="200px" src={ product.thumbnail } alt={ product.title } />
@@ -21,6 +22,7 @@ class ProductList extends Component {
                 { product.price }
               </p>
             </Link>
+
             <button
               data-testid="product-add-to-cart"
               type="button"
@@ -35,16 +37,26 @@ class ProductList extends Component {
   }
 }
 
+// ProductList.propTypes = {
+//   map: PropTypes.arrayOf({
+//     products: PropTypes.shape({
+//       title: PropTypes.string,
+//       price: PropTypes.number,
+//       id: PropTypes.string,
+//       thumbnail: PropTypes.string,
+//     }),
+//   }).isRequired,
+//   onClick: PropTypes.func.isRequired,
+// };
+
 ProductList.propTypes = {
-  map: PropTypes.arrayOf({
-    products: PropTypes.shape({
-      title: PropTypes.string,
-      price: PropTypes.number,
-      id: PropTypes.string,
-      thumbnail: PropTypes.string,
-    }),
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
-}
+  products: PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    id: PropTypes.string,
+    thumbnail: PropTypes.string,
+  }),
+  onClick: PropTypes.func.isRequired,
+}.isRequired;
 
 export default ProductList;

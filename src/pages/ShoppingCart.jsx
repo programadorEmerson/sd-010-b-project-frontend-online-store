@@ -15,7 +15,7 @@ class ShoppingCart extends Component {
           {addCart.map(({ id, title, thumbnail, price }) => (
             <li key={ id }>
               <h4 data-testid="shopping-cart-product-name">{ title }</h4>
-              <img src={ thumbnail } alt={ title }/>
+              <img src={ thumbnail } alt={ title } />
               <p>
                 R$
                 { price }
@@ -29,14 +29,12 @@ class ShoppingCart extends Component {
 }
 
 ShoppingCart.propTypes = {
-  map: PropTypes.arrayOf({
-    products: PropTypes.shape({
-      title: PropTypes.string,
-      price: PropTypes.number,
-      id: PropTypes.string,
-      thumbnail: PropTypes.string,
-    }),
-  }).isRequired, 
-}
+  addCart: PropTypes.objectOf({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    id: PropTypes.string,
+    thumbnail: PropTypes.string,
+  }).isRequired,
+};
 
 export default ShoppingCart;

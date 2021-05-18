@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import ProductList from '../components/ProductList';
 import Categories from '../components/Categories';
@@ -11,23 +11,27 @@ class Home extends Component {
     this.state = {
       noProducts: false,
       products: [],
-      categoryId: '',
-      search: '',
+      categoryId: undefined,
+      search: undefined,
     };
   }
 
   handleChecked = ({ target: { id } }) => {
-    this.handleProducts(id);
+    const { search } = this.state;
     this.setState({ categoryId: id });
+    if (search) {
+      this.handleCheckedSearch(id, search);
+    } else { this.handleCategory(id); }
   }
 
   handleInput = ({ target: { value } }) => {
     this.setState({ search: value });
   }
 
-  handleProducts = async (id) => {
-    const { search } = this.state;
-    const filterProducts = await api.getProductsFromCategoryAndQuery(id, search);
+  // chamada quando clica na categoria
+  handleCategory = async (id) => {
+    // const { categoryId } = this.state;
+    const filterProducts = await api.getProductsFromCategoryAndQuery(id, '');
     if (filterProducts) {
       if (filterProducts.results.length > 0) {
         this.setState({
@@ -42,10 +46,10 @@ class Home extends Component {
     }
   }
 
-  handleClick = async () => {
-    const { categoryId, search } = this.state;
-    const responseProduct = await api.getProductsFromCategoryAndQuery(categoryId, search);
-    //  console.log(this.state.productsId);
+  // chamada quando faz a busca no input
+  handleClick = async (id, search) => {
+    // const { search } = this.state;
+    const responseProduct = await api.getProductsFromCategoryAndQuery(id, search);
     if (responseProduct) {
       if (responseProduct.results.length > 0) {
         this.setState({
@@ -60,24 +64,41 @@ class Home extends Component {
     }
   }
 
+  // chamada com categoria e imput
+  handleCheckedSearch = async (id, search) => {
+    // const {categoryId, search } = this.state;
+    const response = await api.getProductsFromCategoryAndQuery(id, search);
+    if (response) {
+      if (response.results.length > 0) {
+        this.setState({
+          products: response.results,
+          noProducts: false,
+        });
+      } else {
+        this.setState({
+          noProducts: true,
+        });
+      }
+    }
+  }
+
   render() {
-    const { products, noProducts } = this.state;
+    const { products, noProducts, categoryId, search } = this.state;
     const { onClick } = this.props;
     const noProduct = 'Nenhum produto encontrado';
     return (
       <div>
-        <Header handleInput={ this.handleInput } handleClick={ this.handleClick } />
-        { noProducts ? <p>{ noProduct }</p> :
-        <ProductList products={ products }
-         onClick={onClick}/> }
+        <Header
+          handleInput={ this.handleInput }
+          handleClick={ () => (
+            categoryId
+              ? this.handleCheckedSearch(categoryId, search) : this.handleClick(search)) }
+        />
+        { noProducts ? <p>{ noProduct }</p> : <ProductList products={ products } onClick={onClick} /> }
         <Categories checked={ this.handleChecked } />
       </div>
     );
   }
-}
-
-Home.propTypes = {
-  onClick: PropTypes.func.isRequired,
 }
 
 export default Home;
