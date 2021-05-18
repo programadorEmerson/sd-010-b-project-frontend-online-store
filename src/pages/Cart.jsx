@@ -53,6 +53,20 @@ class Cart extends Component {
     this.setState({ products: productsCopy });
   };
 
+  updateQuantity = (operation, id) => {
+    const productsCopy = this.cloneProducts();
+    const indexProductFound = productsCopy.findIndex((product) => product.id === id);
+    let prodQuantity = productsCopy[indexProductFound].quantity;
+    if (operation === 'sum') {
+      prodQuantity += 1;
+    }
+    if (operation === 'subtract') {
+      prodQuantity = (prodQuantity > 1) ? prodQuantity - 1 : 0;
+    }
+    productsCopy[indexProductFound].quantity = prodQuantity;
+    this.setState({ products: productsCopy });
+  };
+
   render() {
     const { products } = this.state;
     return (
