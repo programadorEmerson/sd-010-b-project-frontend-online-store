@@ -94,6 +94,7 @@ class Home extends Component {
             categoryId
               ? this.handleCheckedSearch(categoryId, search) : this.handleClick(search)) }
         />
+
         { noProducts ? <p>{ noProduct }</p> : <ProductList
           products={ products }
           onClick={ onClick }
