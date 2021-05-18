@@ -1,17 +1,14 @@
 import React from 'react';
 
 class Avaliacao extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      formulario: {
-        email: '',
-        estrela: 0,
-        mensagem: '',
-        id: '',
-      },
-      loading: true,
+      email: '',
+      estrela: 1,
+      mensagem: '',
+//      loading: true,
     };
 
     this.recuperarLocalStorage = this.recuperarLocalStorage.bind(this);
@@ -22,6 +19,13 @@ class Avaliacao extends React.Component {
 
   componentDidMount() {
     this.recuperarLocalStorage();
+  }
+
+  handleChange({ target }) {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    });
   }
 
   recuperarLocalStorage() {
@@ -36,27 +40,41 @@ class Avaliacao extends React.Component {
     return null;
   }
 
-  handleChange = ({ target }) => {
-    const { name } = target;
-    const { value } = target;
-
-    this.setState((oldState) => ({
-      formulario: [...oldState, formulario: { [name]: value }],
-    }));
-  }
-
   render() {
-    const { formulario: { email, estrela, mensagem }, loading } = this.state;
+    const { email, estrela, mensagem } = this.state;
     return (
       <div>
         <h3>Avaliações</h3>
         <div>
           <div>
-            <input type="email" placeholder="Email" name="email" value={ email } onChange={ (e) => this.handleChange(e) } />
-            <p>Estrelinhas da Alessandra</p>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={ email }
+              onChange={ (e) => this.handleChange(e) }
+            />
+            <label htmlFor="avaliacao">
+              Nota
+              <input
+                type="number"
+                min="0"
+                max="5"
+                name="estrela"
+                value={ estrela }
+                onChange={ (e) => this.handleChange(e) }
+              />
+            </label>
           </div>
           <div>
-            <textarea type="text" name="mensagem" placeholder="Mensagem (opcional)" value={ mensagem } onChange={ (e) => this.handleChange(e) } />
+            <textarea
+              type="text"
+              data-testid="product-detail-evaluation"
+              name="mensagem"
+              placeholder="Mensagem (opcional)"
+              value={ mensagem }
+              onChange={ (e) => this.handleChange(e) } 
+            />
           </div>
           <div>
             <button type="button">Avaliar</button>
