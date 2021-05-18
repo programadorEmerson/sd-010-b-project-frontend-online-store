@@ -1,8 +1,9 @@
 import React from 'react';
+import { BiCart } from 'react-icons/bi';
 
 class ButtonToCart extends React.Component {
   render() {
-    return <button type="button">Cart</button>;
+    return <BiCart className="btn-cart" type="button">Cart</BiCart>;
   }
 }
 

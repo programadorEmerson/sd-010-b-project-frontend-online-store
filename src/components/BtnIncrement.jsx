@@ -12,6 +12,7 @@ export default class BtnIncrement extends Component {
     const { product, handleReload } = this.props;
     modules.handleAmount(product, true);
     handleReload();
+    console.log(product);
   }
 
   render() {

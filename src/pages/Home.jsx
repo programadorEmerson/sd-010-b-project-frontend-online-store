@@ -7,6 +7,7 @@ import InputSearch from '../components/InputSearch';
 import Categories from '../components/Categories';
 import ButtonToCart from '../components/ButtonToCart';
 import ProductCard from '../components/ProductCard';
+import './Home.css';
 
 export default class Home extends Component {
   constructor() {
@@ -84,31 +85,44 @@ export default class Home extends Component {
     const { categories, foundProducts, cart } = this.state;
 
     return (
-      <div>
-        <Categories
-          handleSelectCategory={ this.handleSelectCategory }
-          categories={ categories }
-        />
-        <div>
-          <InputSearch
-            handleInputSearch={ this.handleInputSearch }
-            handleSubmitFetch={ this.handleSubmitFetch }
+      <section className="container">
+        <aside className="content-left">
+          <Categories
+            handleSelectCategory={ this.handleSelectCategory }
+            categories={ categories }
           />
-          <Link
-            to={ { pathname: '/cart', state: { cart } } }
-            data-testid="shopping-cart-button"
-          >
-            <ButtonToCart />
-          </Link>
-          <p data-testid="shopping-cart-size">{modules.getLength()}</p>
-          <p data-testid="home-initial-message">
-            {foundProducts
-              ? 'Digite algum termo de pesquisa ou escolha uma categoria.'
-              : 'Nenhum produto foi encontrado'}
-          </p>
-        </div>
-        {this.handleCard()}
-      </div>
+        </aside>
+        <section className="content-right">
+          <section className="header-home">
+            <InputSearch
+              handleInputSearch={ this.handleInputSearch }
+              handleSubmitFetch={ this.handleSubmitFetch }
+            />
+            <section className="cart-container">
+              <div className="cart-icon">
+                <Link
+                  to={ { pathname: '/cart', state: { cart } } }
+                  data-testid="shopping-cart-button"
+                >
+                  <ButtonToCart />
+                </Link>
+              </div>
+              <div className="cart-number">
+                <p data-testid="shopping-cart-size">{modules.getLength()}</p>
+              </div>
+            </section>
+          </section>
+          <section className="content-card">
+
+            <p className="home-initial-message" data-testid="home-initial-message">
+              {foundProducts
+                ? 'Digite algum termo de pesquisa ou escolha uma categoria.'
+                : 'Nenhum produto foi encontrado'}
+            </p>
+            {this.handleCard()}
+          </section>
+        </section>
+      </section>
     );
   }
 }
