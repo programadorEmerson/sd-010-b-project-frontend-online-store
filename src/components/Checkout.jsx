@@ -106,7 +106,6 @@ class Checkout extends Component {
   }
 }
 
-
 Checkout.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({

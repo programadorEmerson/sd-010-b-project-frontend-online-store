@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ShoppingCartCard from './ShoppingCartCard';
 import { Link } from 'react-router-dom';
+import ShoppingCartCard from './ShoppingCartCard';
 
 class ShopCart extends React.Component {
   constructor() {
