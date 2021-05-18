@@ -1,10 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import CartItem from './CartItem';
 
 class PageCart extends React.Component {
-  render() {
+  // Faz a soma total do preço dos items que chegaram da props
+  getTotalPrice = () => {
     const { cart } = this.props;
+    return cart.reduce((acc, { qty, product: { price } }) => {
+      acc += qty * price;
+      return acc;
+    }, 0);
+  }
+
+  render() {
+    const { cart, handleCartBtnEvent } = this.props;
     if (!cart.length) {
       return (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
@@ -12,17 +22,21 @@ class PageCart extends React.Component {
     }
     return (
       <div>
-        <h3 data-testid="shopping-cart-product-quantity">{cart.length}</h3>
-        {cart.map((item) => {
-          const { title, id, price } = item;
-          return (
-            <div key={ id }>
-              <p key={ id } data-testid="shopping-cart-product-name">{title}</p>
-              <p>{price}</p>
-            </div>
-          );
-        })}
-        <Link to="/checkout">Finalizar Compra</Link>
+        <h3>
+          Total: R$
+          {this.getTotalPrice()}
+        </h3>
+        {cart.map(({ qty, product: { title, price }, id }) => (
+          <CartItem
+            key={ id }
+            id={ id }
+            name={ title }
+            qty={ qty }
+            price={ price }
+            handleCartBtnEvent={ handleCartBtnEvent }
+          />
+        ))}
+        <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
       </div>
     );
   }
@@ -30,6 +44,7 @@ class PageCart extends React.Component {
 
 PageCart.propTypes = {
   cart: PropTypes.arrayOf.isRequired,
+  handleCartBtnEvent: PropTypes.func.isRequired,
 };
 
 export default PageCart;
