@@ -9,7 +9,11 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={ Home } />
-        <Route exact path="/shopping-cart" component={ ShoppingCartPage } />
+        <Route
+          exact
+          path="/shopping-cart"
+          render={ (props) => <ShoppingCartPage { ...props } /> }
+        />
       </Switch>
     </Router>
   );

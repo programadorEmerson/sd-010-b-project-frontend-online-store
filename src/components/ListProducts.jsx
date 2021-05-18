@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class ListProducts extends React.Component {
   render() {
-    const { listProducts } = this.props;
+    const { listProducts, addItemToCart } = this.props;
     if (listProducts.length === 0) {
       return (<p>Nenhum produto foi encontrado</p>);
     }
@@ -15,6 +15,13 @@ class ListProducts extends React.Component {
               <h3>{product.title}</h3>
               <img src={ product.thumbnail } alt={ product.site_id } />
               <p>{`R$ ${product.price}`}</p>
+              <button
+                onClick={ () => addItemToCart(product) }
+                data-testid="product-add-to-cart"
+                type="button"
+              >
+                Add to Cart
+              </button>
             </div>
           ))
         }
@@ -25,6 +32,7 @@ class ListProducts extends React.Component {
 
 ListProducts.propTypes = {
   listProducts: PropTypes.arrayOf().isRequired,
+  addItemToCart: PropTypes.func.isRequired,
 };
 
 export default ListProducts;

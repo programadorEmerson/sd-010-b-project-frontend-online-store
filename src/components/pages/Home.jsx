@@ -11,11 +11,13 @@ export default class Home extends Component {
     this.state = {
       listCategories: [],
       listProducts: [],
+      shoppingCart: [],
     };
 
     this.fetchCategories = this.fetchCategories.bind(this);
     this.fetchCategoryAndProducts = this.fetchCategoryAndProducts.bind(this);
     this.fetchProductsByCategories = this.fetchProductsByCategories.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   componentDidMount() {
@@ -43,13 +45,19 @@ export default class Home extends Component {
     });
   }
 
+  addItemToCart(event) {
+    const { shoppingCart } = this.state;
+    this.setState({ shoppingCart: [...shoppingCart, event] });
+  }
+
   render() {
-    const { listCategories, listProducts } = this.state;
+    const { listCategories, listProducts, shoppingCart } = this.state;
     return (
       <>
-        <CartBtn />
+        <CartBtn shoppingCart={ shoppingCart } />
         <SearchBox
           onFetchProducts={ this.fetchCategoryAndProducts }
+          addItemToCart={ this.addItemToCart }
           listProducts={ listProducts }
         />
         <p data-testid="home-initial-message">
