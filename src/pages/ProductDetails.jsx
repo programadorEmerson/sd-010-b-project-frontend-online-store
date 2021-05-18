@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import getProductById from '../services/api2';
 import * as api from '../services/api';
 import Loading from '../components/Loading';
 
@@ -19,7 +20,7 @@ class ProductDetails extends React.Component {
 
   async fetchProduct() {
     const { match: { params: { id } } } = this.props;
-    const productDetails = await api.getProducById(id);
+    const productDetails = await getProductById(id);
     this.setState({ productDetails, fetched: true });
     api.getProductsFromCategoryAndQuery();
   }
