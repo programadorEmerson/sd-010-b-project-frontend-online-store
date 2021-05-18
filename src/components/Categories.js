@@ -13,10 +13,10 @@ class Categories extends React.Component {
               : categories.map((result) => (
                 <li
                   key={ result.id }
-                  data-testid="category"
                 >
                   <label htmlFor={ result.name }>
                     <input
+                      data-testid="category"
                       type="radio"
                       name="category"
                       id={ result.id }
