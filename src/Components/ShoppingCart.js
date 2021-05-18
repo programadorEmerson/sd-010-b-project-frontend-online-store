@@ -25,7 +25,8 @@ class ShoppingCart extends React.Component {
     this.setState({
       [name]: id,
     });
-    const { search } = this.state;
+    const { search,
+    } = this.state;
     this.fetchItems(id, search);
   }
 
