@@ -41,6 +41,26 @@ class ProductDetails extends Component {
         >
           ADICIONAR AO CARRINHO
         </button>
+        <form>
+          <label htmlFor="rating">
+            <input
+              id="rating"
+              type="number"              
+              max={ 5 }
+              min={ 0 }
+              required
+            />
+          </label>
+          <br />
+          <label htmlFor="comment">
+            <textarea
+              id="comment"
+              data-testid="product-detail-evaluation"
+              rows="10"
+              cols="50"
+            />
+          </label>
+        </form>
         <Link data-testid="shopping-cart-button" to="/cart">VER CARRINHO</Link>
       </div>
     );
