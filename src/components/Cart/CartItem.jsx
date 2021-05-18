@@ -60,10 +60,15 @@ class CartItem extends Component {
       <div className="cart-item">
         {this.renderRemoveProductsIcon()}
         {this.renderImageProduct(source)}
-        <div>{ name }</div>
+        <div data-testid="shopping-cart-product-name">{ name }</div>
         <div className="config-product-quantity">
           {this.renderDecreaseQuantityIcon()}
-          <div className="product-quantity">{ quantity }</div>
+          <div
+            className="product-quantity"
+            dataTestId="shopping-cart-product-quantity"
+          >
+            { quantity }
+          </div>
           {this.renderIncreaseQuantityIcon()}
         </div>
         <div className="product-price">{ `R$ ${price * quantity}` }</div>
