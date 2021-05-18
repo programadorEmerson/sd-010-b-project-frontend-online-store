@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import * as modules from '../services/modules';
 import BtnDecrement from '../components/BtnDecrement';
 import BtnIncrement from '../components/BtnIncrement';
@@ -21,16 +22,9 @@ class Cart extends React.Component {
     this.setState({ reload });
   }
 
-  handleTotalCart() {
-    const { cart } = this.state;
-    return cart.reduce((total, item) => {
-      total += item.price * item.qty;
-      return total;
-    }, 0);
-  }
-
   render() {
     const cart = modules.getCartState();
+    const totalPrice = modules.handleTotalCart();
 
     return cart.length ? (
       <div>
@@ -50,6 +44,18 @@ class Cart extends React.Component {
         {/* <p>
           {this.handleTotalCart()}
         </p> */}
+        <span>
+          Preço total:
+          { totalPrice }
+        </span>
+        <Link to={ { pathname: '/checkout' } }>
+          <button
+            type="button"
+            data-testid="checkout-products"
+          >
+            Finalizar compra
+          </button>
+        </Link>
       </div>
     ) : (
       <span data-testid="shopping-cart-empty-message">

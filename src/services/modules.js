@@ -49,3 +49,12 @@ export const getLength = () => {
 
   return reduceArr;
 };
+
+export const handleTotalCart = () => {
+  const reduceTotalPrice = arrayCart.reduce((total, item) => {
+    total += item.price * item.qty;
+    return total;
+  }, 0);
+
+  return reduceTotalPrice;
+};
