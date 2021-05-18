@@ -21,21 +21,6 @@ class Cart extends React.Component {
     this.setState({ reload });
   }
 
-  // componentDidMount() {
-
-  //   this.handleState();
-  // }
-
-  // handleState() {
-  //   // const {
-  //   //   location: {
-  //   //     state: { cart },
-  //   //   },
-  //   // } = this.props;
-
-  //   // this.setState({ cart });
-  // }
-
   handleTotalCart() {
     const { cart } = this.state;
     return cart.reduce((total, item) => {
@@ -55,9 +40,7 @@ class Cart extends React.Component {
             <span data-testid="shopping-cart-product-name">
               {product.title}
             </span>
-            <p data-testid="shopping-cart-product-quantity">
-              {product.qty}
-            </p>
+            <p data-testid="shopping-cart-product-quantity">{product.qty}</p>
             <BtnDecrement product={ product } handleReload={ this.handleReload } />
 
             <BtnDel product={ product } handleReload={ this.handleReload } />

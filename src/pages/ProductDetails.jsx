@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { AiFillStar } from 'react-icons/ai';
 import ButtonToCart from '../components/ButtonToCart';
 import * as modules from '../services/modules';
 import StarRating from '../components/StarRating';
@@ -14,6 +15,7 @@ class ProductDetails extends Component {
     this.handleEmailMsgRating = this.handleEmailMsgRating.bind(this);
     this.handleSubmitRating = this.handleSubmitRating.bind(this);
     this.handleAvaliation = this.handleAvaliation.bind(this);
+    this.handleRealodAddToCart = this.handleRealodAddToCart.bind(this);
 
     this.state = {
       rating: 0,
@@ -46,6 +48,19 @@ class ProductDetails extends Component {
     this.setState({ rating: value });
   }
 
+  handleRealodAddToCart() {
+    const {
+      location: {
+        state: { item },
+      },
+    } = this.props;
+
+    const { reaload } = this.state;
+    modules.addProductCart(item);
+
+    this.setState({ reaload });
+  }
+
   handleAvaliation() {
     const {
       location: {
@@ -59,7 +74,10 @@ class ProductDetails extends Component {
           <div key={ index }>
             <p>{prod.email}</p>
             <p>{prod.avaliation}</p>
-            <StarRating rating={ prod.rating } />
+            {[...Array(prod.rating)].map((_, index2) => (<AiFillStar
+              key={ index + index2 }
+              color="#FFD700"
+            />))}
           </div>
         ))}
       </div>
@@ -79,11 +97,12 @@ class ProductDetails extends Component {
         <Link to={ { pathname: '/cart' } } data-testid="shopping-cart-button">
           <ButtonToCart />
         </Link>
+        <p data-testid="shopping-cart-size">{modules.getLength()}</p>
         <p data-testid="product-detail-name">{title}</p>
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => modules.addProductCart(item) }
+          onClick={ this.handleRealodAddToCart }
         >
           Adicionar
         </button>
