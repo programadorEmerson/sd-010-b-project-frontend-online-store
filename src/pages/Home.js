@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductList from '../components/ProductList';
-import CatList from '../components/CatList';
+import GetProducts from '../components/GetProducts';
 
 class Home extends React.Component {
   constructor() {
@@ -37,6 +37,8 @@ class Home extends React.Component {
 
     return (
       <div className="App">
+        <GetProducts />
+
         <div>
           <input data-testid="query-input" type="text" onChange={ this.handleSearch } />
           <button
@@ -50,8 +52,7 @@ class Home extends React.Component {
             <p data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
             </p>
-          ) : <ProductList products={ products } onClick={ onClick } />}
-          <CatList />
+          ) : <ProductList products={ products } onClick={ onClick } />}      
         </div>
         <Link data-testid="shopping-cart-button" to="/cart">VER CARRINHO</Link>
       </div>
