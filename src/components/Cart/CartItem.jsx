@@ -8,22 +8,6 @@ class CartItem extends Component {
     return id;
   }
 
-  shouldComponentUpdate(_, nextState) {
-    return nextState.quantity >= 0;
-  }
-
-  decreaseQuantity = () => {
-    this.setState((prevState) => ({
-      quantity: (prevState.quantity >= 0) ? prevState.quantity - 1 : 0,
-    }));
-  };
-
-  increaseQuantity = () => {
-    this.setState((prevState) => ({
-      quantity: prevState.quantity + 1,
-    }));
-  };
-
   renderRemoveProductsIcon() {
     return (
       <CustomButton customStyle="remove" clickFunction="" dataTestId="">X</CustomButton>
