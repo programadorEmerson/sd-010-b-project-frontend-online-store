@@ -17,7 +17,7 @@ class SearchBox extends React.Component {
   }
 
   render() {
-    const { onFetchProducts, listProducts } = this.props;
+    const { onFetchProducts, listProducts, msgProductNotFound } = this.props;
     const { inputText } = this.state;
     return (
       <div>
@@ -40,7 +40,10 @@ class SearchBox extends React.Component {
             Lupa
           </button>
         </form>
-        <ListProducts listProducts={ listProducts } />
+        <ListProducts
+          listProducts={ listProducts }
+          msgProductNotFound={ msgProductNotFound }
+        />
       </div>
     );
   }
@@ -49,6 +52,7 @@ class SearchBox extends React.Component {
 SearchBox.propTypes = {
   onFetchProducts: PropTypes.func.isRequired,
   listProducts: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  msgProductNotFound: PropTypes.string.isRequired,
 };
 
 export default SearchBox;
