@@ -10,11 +10,12 @@ export default class Home extends Component {
 
     this.state = {
       listCategories: [],
-      listProducts: '',
+      listProducts: [],
     };
 
     this.fetchCategories = this.fetchCategories.bind(this);
-    this.fetchProducts = this.fetchProducts.bind(this);
+    this.fetchCategoryAndProducts = this.fetchCategoryAndProducts.bind(this);
+    this.fetchProductsByCategories = this.fetchProductsByCategories.bind(this);
   }
 
   componentDidMount() {
@@ -27,10 +28,18 @@ export default class Home extends Component {
     });
   }
 
-  async fetchProducts(event) {
-    const { value } = event.target;
+  async fetchCategoryAndProducts({ target: { value } }) {
+    const getProducts = await getProductsFromCategoryAndQuery('', value);
+    const arrayProducts = getProducts.results;
     this.setState({
-      listProducts: await getProductsFromCategoryAndQuery('', value),
+      listProducts: arrayProducts,
+    });
+  }
+
+  async fetchProductsByCategories(categoryId) {
+    const products = await getProductsFromCategoryAndQuery(categoryId, '');
+    this.setState({
+      listProducts: products.results,
     });
   }
 
@@ -39,13 +48,19 @@ export default class Home extends Component {
     return (
       <>
         <CartBtn />
+        <SearchBox
+          onFetchProducts={ this.fetchCategoryAndProducts }
+          listProducts={ listProducts }
+        />
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
         <div>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          <ListCategories categories={ listCategories } />
+          <ListCategories
+            categories={ listCategories }
+            fecthProducts={ this.fetchProductsByCategories }
+          />
         </div>
-        <SearchBox onFetchProducts={ this.fetchProducts } listProducts={ listProducts } />
       </>
     );
   }
