@@ -28,14 +28,17 @@ class ProductsList extends Component {
 
   render() {
     const { products } = this.state;
-
+    const { addToCartHandler } = this.props;
+    console.log(products); // testes
     return (
       <div className="products-list">
         { products.map((product) => (<Product
           key={ product.id }
+          id={ product.id }
           title={ product.title }
           img={ product.thumbnail }
           price={ product.price }
+          addToCartHandler={ addToCartHandler }
         />)) }
       </div>
     );
@@ -45,7 +48,7 @@ class ProductsList extends Component {
 ProductsList.propTypes = {
   query: PropTypes.string.isRequired,
   categoryID: PropTypes.string.isRequired,
-
+  addToCartHandler: PropTypes.func.isRequired,
 };
 
 export default ProductsList;
