@@ -49,7 +49,7 @@ class Cart extends React.Component {
         {/* <p>{this.handleQuantity()}</p> */}
         {/* <p>
           {this.handleTotalCart()}
-        </p> */}
+        </p>  */}
       </div>
     ) : (
       <span data-testid="shopping-cart-empty-message">
