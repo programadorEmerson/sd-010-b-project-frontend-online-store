@@ -14,17 +14,15 @@ class Input extends React.Component {
 
   onChange({ target: { value } }) {
     this.setState({ query: value });
-    console.log(value);
   }
 
   // Ao clicar no botão faz requisição na API buscando o que foi inserido no input
   fetchAPI = async () => {
-    const { callback } = this.props;
+    const { handleQuery } = this.props;
     const { query } = this.state;
-    const category = 'all';
-    console.log(query);
-    const results = await api.getProductsFromCategoryAndQuery(category, query);
-    callback(results);
+    const results = await api.getProductsFromCategoryAndQuery('all', query);
+    console.log('Input fetch');
+    handleQuery(results, query);
   }
 
   render() {
@@ -58,7 +56,7 @@ class Input extends React.Component {
 }
 
 Input.propTypes = {
-  callback: PropTypes.func.isRequired,
+  handleQuery: PropTypes.func.isRequired,
 };
 
 export default Input;
