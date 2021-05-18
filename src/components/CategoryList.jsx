@@ -43,7 +43,11 @@ class CategoryList extends React.Component {
           </ol>
         </aside>
         <ol>
-          {searchText.map((item) => <SearchList key={ item.id } item={ item } />)}
+          {searchText.map((item) => (<SearchList
+            key={ item.id }
+            item={ item }
+            searchText={ searchText }
+          />))}
         </ol>
       </section>
     );
