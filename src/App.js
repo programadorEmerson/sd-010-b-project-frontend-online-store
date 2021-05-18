@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, Link, BrowserRouter } from 'react-router-dom';
 import { Header } from './components';
-import { ShoppingCart, Home, ProductDetails } from './pages';
+import { ShoppingCart, Home, ProductDetails, Checkout } from './pages';
 
 class App extends Component {
   constructor(props) {
@@ -43,6 +43,11 @@ class App extends Component {
             exact
             path="/"
             render={ () => <Home setCart={ this.setCart } categories={ categories } /> }
+          />
+          <Route
+            exact
+            path="/checkout"
+            render={ () => <Checkout cart={ cart } /> }
           />
           <Route
             path="/cart"
