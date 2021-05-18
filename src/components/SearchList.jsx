@@ -20,4 +20,8 @@ class SearchList extends React.Component {
   }
 }
 
+SearchList.propTypes = {
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
 export default SearchList;
