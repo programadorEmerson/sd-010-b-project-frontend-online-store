@@ -13,9 +13,9 @@ class ShoppingHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryID: undefined,
+      categoryID: '',
       products: undefined,
-      query: undefined,
+      query: '',
     };
 
     this.handleQueryChange = this.handleQueryChange.bind(this);
@@ -33,7 +33,7 @@ class ShoppingHome extends Component {
   handleCategoryChange(inputedCategory) {
     this.setState({
       categoryID: inputedCategory,
-      query: undefined,
+      query: '',
     },
     () => this.updateState());
   }
