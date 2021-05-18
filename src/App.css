@@ -12,6 +12,10 @@ header {
   text-align: center;
 }
 
+.submit-line {
+  display: flex;
+}
+
 .input-search {
   display: flex;
   font-family: FontAwesome , serif;
@@ -20,7 +24,18 @@ header {
   justify-content: flex-start;
   margin: 5px;
   text-align: center;
-  width: 99%;
+  width: 95%;
+}
+
+.btn-search {
+  display: flex;
+  font-family: FontAwesome , serif;
+  font-size: 20px;
+  height: 32px;
+  justify-content: flex-end;
+  margin: 8px;
+  text-align: center;
+  text-decoration: none;
 }
 
 .cart-block {
@@ -52,14 +67,11 @@ header {
   display: flex;
 }
 
-input .btn-search {
-  width: 90px;
-}
-
 /* Componente CategoryBar */
 .categories-bar {
   border-style: solid;
   border-width: 1px;
+  font-size: 17px;
   width: 300px;
 }
 
@@ -72,18 +84,6 @@ input .btn-search {
   margin-bottom: 5px;
 }
 
-/* Componente CategoryBar */
-.result-page {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.products-list {
-  background-color: #dddadaab;
-  text-align: center;
-}
-
 footer {
   background-color: #f6f6f6;
   height: 70px;
@@ -94,4 +94,71 @@ footer {
 
 footer p {
   margin-top: 25px;
+}
+
+/* Componente CategoryBar */
+.result-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Componente Product */
+.products-list {
+  background-color: #dddadaab;
+  text-align: center;
+}
+
+.products-section {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+
+.product-box {
+  align-items: center;
+  border-style: solid;
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  width: 500px;
+}
+
+.product-image img {
+  height: 200px;
+  width: 200px;
+}
+
+/* cart page */
+.top-cart {
+  background-color: lightgray;
+  display: flex;
+  justify-content: space-around;
+}
+
+.item-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-wrap {
+  align-items: center;
+  display: flex;
+  width: 750px;
+}
+
+.info-wrap img {
+  margin-right: 10px;
+}
+
+.item-container span {
+  display: flex;
+}
+
+.prices {
+  width: 200px;
 }

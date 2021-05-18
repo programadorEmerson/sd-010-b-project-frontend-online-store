@@ -2,8 +2,8 @@ import React from 'react';
 import '../App.css';
 
 import CategoryBar from '../components/CategoryBar';
-import Input from '../components/Input';
 import ProductsList from '../components/ProductsList';
+import SearchArea from '../components/SearchArea';
 
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -19,7 +19,6 @@ class Home extends React.Component {
       products: {},
       inputfilter: '',
       categoryfilter: null,
-
     };
   }
 
@@ -61,15 +60,12 @@ class Home extends React.Component {
           <CategoryBar onChange={ this.onChangeCategoryHandle } />
         </section>
         <section className="result-page">
-          <Input onChange={ this.onChangeHandle } />
-          <button
-            data-testid="query-button"
-            type="submit"
+          <SearchArea
+            onChange={ this.onChangeHandle }
             onClick={ this.onClickHandle }
-            disabled={ inputfilter === '' && categoryfilter === null }
-          >
-            &#9740;
-          </button>
+            inputfilter={ inputfilter }
+            categoryfilter={ categoryfilter }
+          />
           <p className="text-search" data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
