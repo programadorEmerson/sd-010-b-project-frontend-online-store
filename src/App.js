@@ -38,7 +38,10 @@ class App extends Component {
             <Route
               exact
               path="/details/:id"
-              render={ (props) => <ProductDetaills { ...props } /> }
+              render={ (props) => (<ProductDetaills
+                { ...props }
+                onClick={ this.handleAddCartItem }
+              />) }
             />
           </Switch>
         </BrowserRouter>
