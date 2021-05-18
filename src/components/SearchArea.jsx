@@ -10,7 +10,7 @@ class SearchArea extends Component {
   }
 
   render() {
-    const { onChange, onClick } = this.props;
+    const { onChange, onClick, inputfilter, categoryfilter } = this.props;
     const { urlfinal } = this.state;
     return (
       <div className="header-separator">
@@ -33,6 +33,7 @@ class SearchArea extends Component {
             data-testid="query-button"
             type="submit"
             onClick={ onClick }
+            disabled={ inputfilter === '' && categoryfilter === null }
           >
             <span role="img" aria-label="lupa"> &#128269;</span>
           </button>
@@ -42,9 +43,15 @@ class SearchArea extends Component {
   }
 }
 
+SearchArea.defaultProps = {
+  categoryfilter: null,
+};
+
 SearchArea.propTypes = {
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
+  inputfilter: PropTypes.string.isRequired,
+  categoryfilter: PropTypes.string,
 };
 
 export default SearchArea;
