@@ -17,14 +17,7 @@ class ShoppingCart extends React.Component {
   render() {
     // const { products } = this.state;
     return (
-      <ol>
-        <li>bodega</li>
-        {/* {products.map((item) => (<li key={ item.title }>
-          { item.title }
-          { item.thumbnail }
-          { item.price }
-        </li>))} */}
-      </ol>
+      <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
     );
   }
 }
