@@ -1,38 +1,54 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import * as productsApi from '../services/api';
+// import { getProductsById } from "../services/api";
 
 class ProductDetaills extends Component {
   constructor(props) {
     super(props);
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
     this.state = {
-      product: {},
+      product: [],
+      productId: id,
     };
+    this.requestDetails = this.requestDetails.bind(this);
   }
 
   componentDidMount() {
-    const { match: { params: { id } } } = this.props;
-    productsApi.getProductsById(id).then((product) => this.setState({
-      product,
-    }));
+    this.requestDetails();
   }
-  // getProductsById(id)
+
+  async requestDetails() {
+    const { productId } = this.state;
+    const returnRequest = await fetch(`https://api.mercadolibre.com/items/${productId}`);
+    const returnJson = await returnRequest.json();
+    this.setState({
+      product: returnJson,
+    });
+  }
 
   render() {
-    const { product: { title, thumbnail, price, warranty } } = this.state;
-    // console.log(this.state.product);
+    const {
+      product: { title, thumbnail, price, warranty },
+    } = this.state;
+
     return (
+
       <div>
-        <Link to="/">Voltar para a tela inicial</Link>
         <h3>Especificações Técnicas</h3>
-        <h4 data-testid="product-detail-name">{ title }</h4>
+        <h3 data-testid="product-detail-name">{title}</h3>
         <img src={ thumbnail } alt={ title } />
-        <p>{ warranty }</p>
         <p>
           R$
-          { price }
+          {price}
         </p>
+        {/* <p>Especificações:</p> */}
+        <p>{warranty}</p>
+        <Link to="/">Voltar para a tela inicial</Link>
       </div>
     );
   }
@@ -43,6 +59,15 @@ ProductDetaills.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     }),
+  }).isRequired,
+};
+
+ProductDetaills.propTypes = {
+  product: PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    warranty: PropTypes.string,
+    thumbnail: PropTypes.string,
   }).isRequired,
 };
 
