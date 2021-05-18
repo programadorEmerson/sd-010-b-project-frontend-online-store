@@ -43,13 +43,7 @@ class App extends React.Component {
              />
              Digite algum termo de pesquisa ou escolha uma categoria.
            </label>
-           <button
-             type="button"
-             data-testid="query-button"
-             onClick={ this.setSearchText }
-           >
-             Pesquisar
-           </button>
+           <button type="button" data-testid="query-button" onClick={ this.setSearchText }> Pesquisar </button>
          </div>
          <BrowserRouter>
            <div>
