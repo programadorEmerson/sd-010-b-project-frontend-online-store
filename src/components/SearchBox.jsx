@@ -20,8 +20,16 @@ class SearchBox extends React.Component {
     const { onFetchProducts, listProducts } = this.props;
     const { inputText } = this.state;
     return (
-      <div>
+      <div className="searchBox">
         <form>
+          <button
+            type="button"
+            value={ inputText }
+            data-testid="query-button"
+            onClick={ onFetchProducts }
+          >
+            Lupa
+          </button>
           <label htmlFor="searchBox">
             <input
               type="text"
@@ -31,14 +39,6 @@ class SearchBox extends React.Component {
               id="searchBox"
             />
           </label>
-          <button
-            type="button"
-            value={ inputText }
-            data-testid="query-button"
-            onClick={ onFetchProducts }
-          >
-            Lupa
-          </button>
         </form>
         <ListProducts listProducts={ listProducts } />
       </div>

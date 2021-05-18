@@ -31,6 +31,12 @@ export default class Home extends Component {
   async fetchCategoryAndProducts({ target: { value } }) {
     const getProducts = await getProductsFromCategoryAndQuery('', value);
     const arrayProducts = getProducts.results;
+    if (arrayProducts.length === 0) {
+      const pNot = document.querySelector('.notProduct');
+      pNot.style.display = 'block';
+      const pMenssage = document.querySelector('.initialMenssage');
+      pMenssage.style.display = 'none';
+    }
     this.setState({
       listProducts: arrayProducts,
     });
@@ -46,22 +52,19 @@ export default class Home extends Component {
   render() {
     const { listCategories, listProducts } = this.state;
     return (
-      <>
-        <CartBtn />
-        <SearchBox
-          onFetchProducts={ this.fetchCategoryAndProducts }
-          listProducts={ listProducts }
+      <main className="contendMainStore">
+        <ListCategories
+          categories={ listCategories }
+          fecthProducts={ this.fetchProductsByCategories }
         />
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        <div>
-          <ListCategories
-            categories={ listCategories }
-            fecthProducts={ this.fetchProductsByCategories }
+        <section className="searchHeader">
+          <SearchBox
+            onFetchProducts={ this.fetchCategoryAndProducts }
+            listProducts={ listProducts }
           />
-        </div>
-      </>
+          <CartBtn />
+        </section>
+      </main>
     );
   }
 }

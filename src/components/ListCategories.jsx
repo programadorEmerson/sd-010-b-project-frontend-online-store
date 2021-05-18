@@ -5,7 +5,7 @@ class ListCategories extends Component {
   render() {
     const { categories, fecthProducts } = this.props;
     return (
-      <aside>
+      <aside className="asideCategories">
         <ul>
           {
             categories.map((category) => (
