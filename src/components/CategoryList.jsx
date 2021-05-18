@@ -12,8 +12,8 @@ class CategoryList extends React.Component {
     };
   }
 
-  search = (id, name) => {
-    api.getProductsFromCategoryAndQuery(id, name).then(({ results }) => {
+  search = async (id, name) => {
+    await api.getProductsFromCategoryAndQuery(id, name).then(({ results }) => {
       this.setState({
         searchText: results,
       });
@@ -29,10 +29,10 @@ class CategoryList extends React.Component {
           <ol>
             { categories.map(({ id, name }) => (
               <li
-                data-testid="category"
                 key={ id }
               >
                 <button
+                  data-testid="category"
                   type="button"
                   onClick={ () => this.search(id, name) }
                 >
