@@ -52,6 +52,16 @@ class App extends React.Component {
     return cart.findIndex(({ id }) => id === idParam);
   }
 
+  getQuantity() {
+    const { cart } = this.state;
+    const quantity = cart.reduce((acc, { qty }) => {
+      acc += qty;
+      return acc;
+    }, 0);
+    if (!quantity) return '';
+    return quantity;
+  }
+
   // Passando essa função como prop para a lista de categorias renderizadas.
   // Essa função basicamente pega o valor do input Radio, atualiza o state com esse valor e faz uma nova chamada para API do mercado Livre
   setCategory(e) {
@@ -93,7 +103,10 @@ class App extends React.Component {
   addToCart(product) {
     const { id } = product;
     const hasItem = this.verifyCart(id);
-    if (hasItem) return;
+    if (hasItem) {
+      this.updateQty('plus', id);
+      return;
+    }
     const newProduct = {
       id,
       qty: 1,
@@ -123,6 +136,7 @@ class App extends React.Component {
                 onChange={ this.handleOnChange }
                 searchQuery={ searchQuery }
                 addToCart={ this.addToCart }
+                quantity={ this.getQuantity() }
               />
             ) }
           />
@@ -141,6 +155,7 @@ class App extends React.Component {
                 { ...props }
                 arrProducts={ arrProducts }
                 addToCart={ this.addToCart }
+                quantity={ this.getQuantity() }
               />
             ) }
           />
