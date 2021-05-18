@@ -20,12 +20,14 @@ class ProductList extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { searchText } = this.props;
-    if (prevProps.searchText !== searchText) this.apiCall(searchText);
+    const { searchText, category } = this.props;
+    if (prevProps.searchText !== searchText || prevProps.category !== category) {
+      this.apiCall(searchText, category);
+    }
   }
 
-  apiCall = (searchText) => {
-    getProductsFromCategoryAndQuery('', searchText).then((products) => {
+  apiCall = (searchText, category) => {
+    getProductsFromCategoryAndQuery(category, searchText).then((products) => {
       const { results } = products;
       const resultsToSave = JSON.stringify(results);
       this.setState({
@@ -68,5 +70,7 @@ class ProductList extends React.Component {
 
 ProductList.propTypes = {
   searchText: PropTypes.string,
+  category: PropTypes.string,
 }.isRequired;
+
 export default ProductList;

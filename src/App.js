@@ -13,6 +13,7 @@ class App extends React.Component {
       userInput: '',
       searchText: '',
       itemUserWantDetail: {},
+      category: '',
     };
   }
 
@@ -36,8 +37,14 @@ class App extends React.Component {
      });
    }
 
+   handleClick = ({ target: { id } }) => {
+     this.setState({
+       category: id,
+     });
+   }
+
    render() {
-     const { userInput, searchText, itemUserWantDetail } = this.state;
+     const { userInput, searchText, itemUserWantDetail, category } = this.state;
      return (
        <div className="App">
          <div>
@@ -62,7 +69,6 @@ class App extends React.Component {
              {' '}
              Pesquisar
              {' '}
-
            </button>
          </div>
          <BrowserRouter>
@@ -75,7 +81,7 @@ class App extends React.Component {
 
              </Link>
            </div>
-           <CategoryList />
+           <CategoryList onClick={ this.handleClick } />
            <Switch>
              <Route
                exact
@@ -84,6 +90,7 @@ class App extends React.Component {
                  () => (<ProductList
                    searchText={ searchText }
                    getResultFromProductList={ this.getResultFromProductList }
+                   category={ category }
                  />)
                }
 

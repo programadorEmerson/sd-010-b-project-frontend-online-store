@@ -7,7 +7,7 @@ class ProductDetails extends React.Component {
     const { itemUserWantDetail } = this.props;
     return (
       <div>
-        <p data-test-id="product-detail-name`">
+        <p data-testid="product-detail-name">
           Nome:
           {' '}
           {itemUserWantDetail.title}
