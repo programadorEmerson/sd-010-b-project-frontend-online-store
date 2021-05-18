@@ -24,9 +24,9 @@ class Home extends React.Component {
     });
   }
 
-  onClickHandle() {
+  onClickHandle(arg = null) {
     const { inputfilter } = this.state;
-    getProductsFromCategoryAndQuery(null, inputfilter)
+    getProductsFromCategoryAndQuery(arg, inputfilter)
       .then((products) => {
         this.setState({
           products,
@@ -35,7 +35,7 @@ class Home extends React.Component {
   }
 
   checked(arg) {
-    return console.log(arg.target.id);
+    this.onClickHandle(arg.target.id);
   }
 
   render() {
