@@ -14,14 +14,15 @@ class Detail extends React.Component {
     this.getProductsFromId = this.getProductsFromId.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.updateCart = this.updateCart.bind(this);
   }
 
   componentDidMount() {
-    this.recuperarProduto();
+    this.updateCart();
   }
 
   handleAddToCart(cardProps) {
-    const cartItems1 = JSON.parse(localStorage.getItem('cartState'));
+
     this.setState((oldState) => ({
       cartState: [
         ...oldState.cartState, { cardProps },
@@ -38,6 +39,13 @@ class Detail extends React.Component {
     return fetch(URL)
       .then((result) => result.json())
       .catch((error) => { console.log(`Erro na requisição: ${error}`); });
+  }
+
+  updateCart() {
+    this.recuperarProduto();
+    this.setState({
+      cartState: JSON.parse(localStorage.getItem('cartState')),
+    });
   }
 
   addToCart() {
