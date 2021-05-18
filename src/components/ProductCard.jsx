@@ -4,12 +4,17 @@ import PropTypes from 'prop-types';
 class ProductCard extends Component {
   render() {
     const {
-      product: { title, qtd },
+      product: { title, price, thumbnail },
     } = this.props;
+
     return (
       <div>
         <p data-testid="shopping-cart-product-name">{title}</p>
-        <p data-testid="shopping-cart-product-quantity">{qtd}</p>
+        <img src={ thumbnail } alt={ title } />
+        <p>
+          R$
+          { price }
+        </p>
       </div>
     );
   }
@@ -18,7 +23,8 @@ class ProductCard extends Component {
 ProductCard.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
-    qtd: PropTypes.number,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
   }).isRequired,
 };
 

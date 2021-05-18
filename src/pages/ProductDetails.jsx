@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import { getProductsById } from "../services/api";
+import { GrCart } from 'react-icons/gr';
 
 class ProductDetaills extends Component {
   constructor(props) {
@@ -32,13 +32,15 @@ class ProductDetaills extends Component {
   }
 
   render() {
-    const {
-      product: { title, thumbnail, price, warranty },
-    } = this.state;
+    const { product } = this.state;
+    const { title, thumbnail, price, warranty } = product;
+    const { onClick } = this.props;
 
     return (
-
       <div>
+        <Link to="/shopping-cart" data-testid="shopping-cart-button">
+          <GrCart />
+        </Link>
         <h3>Especificações Técnicas</h3>
         <h3 data-testid="product-detail-name">{title}</h3>
         <img src={ thumbnail } alt={ title } />
@@ -46,6 +48,13 @@ class ProductDetaills extends Component {
           R$
           {price}
         </p>
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          onClick={ () => onClick(product) }
+        >
+          Adicionar ao carrinho
+        </button>
         {/* <p>Especificações:</p> */}
         <p>{warranty}</p>
         <Link to="/">Voltar para a tela inicial</Link>
@@ -69,6 +78,10 @@ ProductDetaills.propTypes = {
     warranty: PropTypes.string,
     thumbnail: PropTypes.string,
   }).isRequired,
+
+  onClick: PropTypes.func.isRequired,
+};
 }.isRequired;
+
 
 export default ProductDetaills;
