@@ -11,22 +11,31 @@ class App extends React.Component {
     super();
     this.state = {
       products: [],
+      queryTerm: '',
     };
+
     this.handleQuery = this.handleQuery.bind(this);
   }
 
-  handleQuery(value) {
-    this.setState({ products: value.results });
-    // console.log(value.results);
+  handleQuery(products, query) {
+    this.setState({
+      products: products.results,
+      queryTerm: query,
+    });
+    console.log(`HandleQuery (APP): ${query}`);
+    console.log(products);
   }
 
   render() {
-    const { products } = this.state;
+    const { products, queryTerm } = this.state;
     return (
       <main>
-        <Categories />
+        <Categories
+          handleQuery={ this.handleQuery }
+          query={ queryTerm }
+        />
         <BrowserRouter>
-          <Input callback={ this.handleQuery } />
+          <Input handleQuery={ this.handleQuery } />
           <Switch>
             <Route to="/cart" component={ Cart } />
           </Switch>
