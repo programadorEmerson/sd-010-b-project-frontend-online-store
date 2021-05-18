@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       userInput: '',
       searchText: '',
+      category: '',
     };
   }
 
@@ -28,8 +29,14 @@ class App extends React.Component {
      });
    }
 
+   handleClick = ({ target: { id } }) => {
+     this.setState({
+       category: id,
+     });
+   }
+
    render() {
-     const { userInput, searchText } = this.state;
+     const { userInput, searchText, category } = this.state;
      return (
        <div className="App">
          <div>
@@ -43,19 +50,28 @@ class App extends React.Component {
              />
              Digite algum termo de pesquisa ou escolha uma categoria.
            </label>
-           <button type="button" data-testid="query-button" onClick={ this.setSearchText }> Pesquisar </button>
+           <button
+             type="button"
+             data-testid="query-button"
+             onClick={ this.setSearchText }
+           >
+             Pesquisar
+           </button>
          </div>
          <BrowserRouter>
            <div>
              <Link to="/shopping-cart" data-testid="shopping-cart-button">Carrinho</Link>
            </div>
-           <CategoryList />
+           <CategoryList onClick={ this.handleClick } />
            <Switch>
              <Route
                exact
                path="/"
                render={
-                 () => <ProductList searchText={ searchText } />
+                 () => (<ProductList
+                   searchText={ searchText }
+                   category={ category }
+                 />)
                }
              />
              <Route path="/shopping-cart" render={ () => <ShoppingCart /> } />
