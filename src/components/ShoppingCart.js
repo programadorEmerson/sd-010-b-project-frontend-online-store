@@ -47,7 +47,6 @@ class ShoppingCart extends Component {
         break;
       }
     }
-
     localStorage.setItem('cartItems', JSON.stringify(value));
     const itensCart = value.length === 0 ? false : this.countItens(value);
     this.setState({ itensCart });
