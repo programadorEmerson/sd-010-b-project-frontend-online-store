@@ -17,7 +17,7 @@ export default class ItemCard extends Component {
 
 ItemCard.propTypes = {
   product: PropTypes.shape({
-    product: PropTypes.arrayOf(Object),
+    product: PropTypes.shape(),
     quantity: PropTypes.number,
   }).isRequired,
 };

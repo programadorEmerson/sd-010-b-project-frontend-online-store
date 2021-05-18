@@ -43,7 +43,7 @@ export default class CartItems extends Component {
         <div>
           {products.map((product) => (
             <ItemCard
-              key={ product.index }
+              key={ product.product.id }
               product={ product }
             />
           ))}
