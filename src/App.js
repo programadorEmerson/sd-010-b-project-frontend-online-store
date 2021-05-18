@@ -76,9 +76,7 @@ class App extends React.Component {
                  () => (<ProductList
                    searchText={ searchText }
                    category={ category }
-
                    getProductList={ this.getProductList }
-
                  />)
                }
              />
