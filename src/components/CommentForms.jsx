@@ -33,13 +33,22 @@ class CommentForms extends Component {
           value={ email }
           name="email"
         />
-        <input type="number" min="0" max="5" step="0.1" value={ rating } name="rating" />
+        <input
+          type="number"
+          min="0"
+          max="5"
+          step="0.1"
+          value={ rating }
+          onChange={ this.handleOnChange }
+          name="rating"
+        />
         <textarea
           cols="30"
           rows="10"
           value={ comment }
           name="comment"
           data-testid="product-detail-evaluation"
+          onChange={ this.handleOnChange }
         />
         <button
           type="button"

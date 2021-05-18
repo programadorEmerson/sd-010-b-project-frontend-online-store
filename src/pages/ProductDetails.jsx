@@ -36,6 +36,10 @@ class ProductDetails extends Component {
     });
   }
 
+  componentDidMount = async () => {
+    await this.getProduct();
+  }
+
   render() {
     const { title, price, imgUrl, comments, loading } = this.state;
 
