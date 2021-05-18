@@ -33,7 +33,12 @@ class CardProduct extends React.Component {
             {' '}
             Detalhes
           </Link>
-          <button type="button" onClick={ this.addToCart }>Adicionar ao Carrinho</button>
+          <button
+            data-testid="product-add-to-cart"
+            type="button"
+            onClick={ this.addToCart }>
+            Adicionar ao Carrinho
+          </button>
         </fieldset>
       </section>
     );

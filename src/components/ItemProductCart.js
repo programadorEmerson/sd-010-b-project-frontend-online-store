@@ -7,7 +7,7 @@ class ItemProductCart extends React.Component {
     return (
       <section data-testid="product">
         <fieldset>
-          <p>{title}</p>
+          <p data-testid="shopping-cart-product-name">{title}</p>
           <p>{ id }</p>
           <img src={ thumbnail } alt={ title } />
           <p>{`R$${price}`}</p>
