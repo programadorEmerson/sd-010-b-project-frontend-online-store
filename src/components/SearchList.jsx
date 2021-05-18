@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class SearchList extends React.Component {
   render() {
@@ -17,5 +18,9 @@ class SearchList extends React.Component {
     );
   }
 }
+
+SearchList.propTypes = {
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default SearchList;
