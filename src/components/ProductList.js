@@ -3,32 +3,34 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class ProductList extends React.Component {
-  searchNotFound = (products) => {
-    if (!products) {
+  render() {
+    const { products, onClick } = this.props;
+    if (products.length === 0) {
       return <p>Nenhum produto foi encontrado</p>;
     }
     return (
       <div>
-        {products.map(({ id, title, thumbnail, price, categoryId }) => (
-          <div key={ id } data-testid="product">
+        {products.map((product) => (
+          <div key={ product.id } data-testid="product">
             <Link
               data-testid="product-detail-link"
-              to={ `/details/${id}/${categoryId}/${title}` }
+              to={ `/details/${product.id}/${product.categoryId}/${product.title}` }
             >
-              <h3>{ title }</h3>
-              <img src={ thumbnail } alt={ title } />
-              <p>{ price }</p>
+              <h3>{ product.title }</h3>
+              <img src={ product.thumbnail } alt={ product.title } />
+              <p>{ product.price }</p>
             </Link>
+            <button
+              data-testid="product-add-to-cart"
+              type="button"
+              onClick={ () => onClick(product) }
+            >
+              Adicionar ao carrinho
+            </button>
           </div>
         ))}
       </div>
     );
-  }
-
-  render() {
-    const { products } = this.props;
-    console.log(products);
-    return this.searchNotFound(products);
   }
 }
 
@@ -39,6 +41,7 @@ ProductList.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ProductList;
