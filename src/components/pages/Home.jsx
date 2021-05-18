@@ -47,6 +47,7 @@ export default class Home extends Component {
 
   addItemToCart(event) {
     const { shoppingCart } = this.state;
+    console.log(event);
     this.setState({ shoppingCart: [...shoppingCart, event] });
   }
 
@@ -66,7 +67,7 @@ export default class Home extends Component {
         <div>
           <ListCategories
             categories={ listCategories }
-            fecthProducts={ this.fetchProductsByCategories }
+            fetchProducts={ this.fetchProductsByCategories }
           />
         </div>
       </>
