@@ -9,6 +9,8 @@ class CartItem extends Component {
   }
 
   renderRemoveProductsIcon() {
+    const { removeProduct } = this.props;
+    const id = this.getCartItemId();
     return (
       <CustomButton customStyle="remove" clickFunction="" dataTestId="">X</CustomButton>
     );
@@ -19,6 +21,8 @@ class CartItem extends Component {
   }
 
   renderDecreaseQuantityIcon() {
+    const { updateQuantity } = this.props;
+    const id = this.getCartItemId();
     return (
       <CustomButton
         customStyle="decrease"
@@ -30,6 +34,8 @@ class CartItem extends Component {
   }
 
   renderIncreaseQuantityIcon() {
+    const { updateQuantity } = this.props;
+    const id = this.getCartItemId();
     return (
       <CustomButton
         customStyle="increase"
