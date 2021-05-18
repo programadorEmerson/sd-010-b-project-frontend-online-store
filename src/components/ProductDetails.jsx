@@ -11,21 +11,42 @@ class ProductDetails extends React.Component {
       render: false,
       shoppingCart: [],
       listComments: [],
+      totalQuantityItems: 0,
     };
   }
 
   componentDidMount() {
+    this.populateShoppingCart();
     this.setRenderedState();
+  }
+
+  // Recarrega o carrinho de compras
+  populateShoppingCart = () => {
+    const { location: { state: { shoppingCart: items } } } = this.props;
+
+    this.setState(
+      { shoppingCart: items }, () => this.updateProductsQuantity(),
+    );
+  }
+
+  // Atualiza a quantidade total de produtos no carrinho
+  updateProductsQuantity = () => {
+    const { shoppingCart } = this.state;
+    const totalQuantity = shoppingCart.reduce(
+      (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
+    );
+
+    this.setState({ totalQuantityItems: totalQuantity });
   }
 
   updateComments = (newComment) => {
     this.setState((oldState) => (
       { listComments: [newComment, ...oldState.listComments] }
     ), () => {
-      const { shoppingCart } = this.state;
+      // const { shoppingCart } = this.state;
       // storage.clear();
       // storage.setItem(listComments, listComments);
-      console.log(shoppingCart);
+      // console.log(shoppingCart);
     });
   }
 
@@ -44,14 +65,15 @@ class ProductDetails extends React.Component {
 
     if (testIfProductExist === undefined) {
       product.quantity = 1;
-      this.setState({ shoppingCart: [...shoppingCart, product] });
+      this.setState({ shoppingCart: [...shoppingCart, product] }, () => this.updateProductsQuantity());
     } else {
       product.quantity += 1;
+      this.updateProductsQuantity();
     }
   }
 
   render() {
-    const { render, shoppingCart } = this.state;
+    const { render, shoppingCart,totalQuantityItems } = this.state;
     const { location: { state: { result } } } = this.props;
     const {
       title, thumbnail, price, address: { city_name: city, state_name: state },
@@ -89,6 +111,10 @@ class ProductDetails extends React.Component {
               >
                 Ver Carrinho
               </Link>
+              <span data-testid="shopping-cart-size">
+                Produtos no carrinho:
+                { totalQuantityItems }
+              </span>
             </section>
 
           </main>

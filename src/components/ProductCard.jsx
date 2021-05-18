@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 class ProductCard extends React.Component {
   render() {
-    const { result, addToCart } = this.props;
+    const { result, addToCart, shoppingCart } = this.props;
     const { id, title, category_id: categoryId, price, thumbnail, shipping } = result;
     const { free_shipping: freeShipping } = shipping;
 
@@ -17,7 +17,7 @@ class ProductCard extends React.Component {
         { /*  *SOURCE* https://stackoverflow.com/questions/41466055/how-do-i-pass-state-through-react-router */}
         <Link
           data-testid="product-detail-link"
-          to={ { pathname: `/product-details/${categoryId}/${id}`, state: { result } } }
+          to={ { pathname: `/product-details/${categoryId}/${id}`, state: { result, shoppingCart } } }
         >
           <main className="product-card-main">
             { (freeShipping && <img

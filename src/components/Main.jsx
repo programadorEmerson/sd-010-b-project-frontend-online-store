@@ -16,11 +16,23 @@ class Main extends React.Component {
       typedProduct: '',
       searchResult: [],
       shoppingCart: [],
+      totalQuantityItems: 0,
     };
   }
 
   componentDidMount = () => {
     this.saveState();
+    this.updateProductsQuantity();
+  }
+
+  // Atualiza a quantidade total de produtos no carrinho
+  updateProductsQuantity = () => {
+    const { shoppingCart } = this.state;
+    const totalQuantity = shoppingCart.reduce(
+      (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
+    );
+
+    this.setState({ totalQuantityItems: totalQuantity });
   }
 
   saveState = async () => {
@@ -56,7 +68,7 @@ class Main extends React.Component {
 
   //  Rendeniza 1 card para cada produto
   renderProductCards = () => {
-    const { searchResult } = this.state;
+    const { searchResult, shoppingCart } = this.state;
 
     return searchResult.map((result) => {
       const { id } = result;
@@ -65,6 +77,7 @@ class Main extends React.Component {
           key={ id }
           result={ result }
           addToCart={ this.addProductToShoppingCart }
+          shoppingCart={ shoppingCart }
         />
       );
     });
@@ -80,14 +93,15 @@ class Main extends React.Component {
 
     if (testIfProductExist === undefined) {
       product.quantity = 1;
-      this.setState({ shoppingCart: [...shoppingCart, product] });
+      this.setState({ shoppingCart: [...shoppingCart, product] }, () => this.updateProductsQuantity());
     } else if (product.quantity < product.available_quantity) {
       product.quantity += 1;
+      this.updateProductsQuantity();
     }
   }
 
   render() {
-    const { categories, shoppingCart } = this.state;
+    const { categories, shoppingCart, totalQuantityItems } = this.state;
 
     return (
       <main>
@@ -106,6 +120,11 @@ class Main extends React.Component {
         >
           Ver Carrinho
         </Link>
+        <span data-testid="shopping-cart-size">
+          Produtos no carrinho:
+          {/* { console.log(totalQuantityItems) }  */}
+          { totalQuantityItems }
+        </span>
         <section className="product-card-list">
           {this.renderProductCards()}
         </section>
