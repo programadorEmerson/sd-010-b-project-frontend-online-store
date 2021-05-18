@@ -46,9 +46,9 @@ class Home extends Component {
   }
 
   // chamada quando faz a busca no input
-  handleClick = async (search) => {
+  handleClick = async (id, search) => {
     // const { search } = this.state;
-    const responseProduct = await api.getQuery(search);
+    const responseProduct = await api.getProductsFromCategoryAndQuery(id, search);
     if (responseProduct) {
       if (responseProduct.results.length > 0) {
         this.setState({
