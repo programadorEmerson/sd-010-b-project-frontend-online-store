@@ -5,22 +5,44 @@ import ShoppingCart from './pages/ShoppingCart';
 import Index from './pages/Index';
 import ProductDetails from './pages/ProductDetails';
 
-function App() {
-  return (
-    <main>
-      <BrowserRouter>
-        <Switch>
-          {/* <Route path="/cart" componet={ Button } /> */}
-          <Route exact path="/" component={ Index } />
-          <Route path="/ShoppingCart" component={ ShoppingCart } />
-          <Route
-            path="/details/:idc/:idp"
-            render={ (props) => <ProductDetails { ...props } /> }
-          />
-        </Switch>
-      </BrowserRouter>
-    </main>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      itenCart: [],
+    };
+  }
+
+  addToCart = (produto) => {
+    const { itenCart } = this.state;
+    this.setState({ itenCart: [...itenCart, produto] });
+  }
+
+  render() {
+    const { itenCart } = this.state;
+    return (
+      <main>
+        <BrowserRouter>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={ () => <Index addToCart={ this.addToCart } /> }
+            />
+            <Route
+              path="/ShoppingCart"
+              render={ () => <ShoppingCart itenCart={ itenCart } /> }
+            />
+            <Route
+              path="/details/:idc/:idp"
+              render={ (props) => <ProductDetails { ...props } /> }
+            />
+          </Switch>
+        </BrowserRouter>
+      </main>
+    );
+  }
 }
 
 export default App;

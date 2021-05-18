@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from './Button';
 import SearchButton from './SearchButton';
 import * as api from '../services/api';
@@ -33,6 +34,7 @@ class SeachBar extends React.Component {
 
   render() {
     const { searchText, searchNotFound } = this.state;
+    const { addToCart } = this.props;
     return (
       <div>
         <section>
@@ -55,11 +57,19 @@ class SeachBar extends React.Component {
         </section>
         <ol>
           {searchNotFound && <div>Nenhum produto foi encontrado</div>}
-          {searchText.map((item) => (<SearchList key={ item.id } item={ item } />))}
+          {searchText.map((item) => (<SearchList
+            key={ item.id }
+            item={ item }
+            addToCart={ addToCart }
+          />))}
         </ol>
       </div>
     );
   }
 }
+
+SeachBar.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default SeachBar;

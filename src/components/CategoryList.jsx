@@ -21,7 +21,7 @@ class CategoryList extends React.Component {
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories, addToCart } = this.props;
     const { searchText } = this.state;
     return (
       <section>
@@ -47,6 +47,7 @@ class CategoryList extends React.Component {
             key={ item.id }
             item={ item }
             searchText={ searchText }
+            addToCart={ addToCart }
           />))}
         </ol>
       </section>
@@ -55,7 +56,7 @@ class CategoryList extends React.Component {
 }
 
 CategoryList.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+  categories: PropTypes.arrayOf(PropTypes.object),
+}.isRequired;
 
 export default CategoryList;

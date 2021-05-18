@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ShoppingCart from '../pages/ShoppingCart';
 
 class SearchList extends React.Component {
   render() {
-    const { item } = this.props;
+    const { item, addToCart } = this.props;
     const { title, thumbnail, price, id } = item;
     return (
       <li data-testid="product">
@@ -26,9 +25,10 @@ class SearchList extends React.Component {
         </button>
         <button
           type="button"
-          onClick={ () => <ShoppingCart key={ title } produto={ item } /> }
+          data-testid="product-add-to-cart"
+          onClick={ () => addToCart(item) }
         >
-          Carrinho
+          Comprar
         </button>
       </li>
     );
@@ -37,6 +37,7 @@ class SearchList extends React.Component {
 
 SearchList.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default SearchList;
