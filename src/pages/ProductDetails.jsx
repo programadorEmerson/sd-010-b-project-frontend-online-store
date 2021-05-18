@@ -29,16 +29,17 @@ class ProductDetails extends Component {
   render() {
     const { setCart } = this.props;
     const { product } = this.state;
-    const { title, thumbnail, price, id } = product;
+    const { title, thumbnail, price, id, available_quantity: available } = product;
 
     return (
       <div className="product-detail-container">
         <p data-testid="product-detail-name">{title}</p>
         <img src={ thumbnail } alt={ title } />
         <p>{price}</p>
+        <p>{ available}</p>
         <Rating />
         <button
-          onClick={ () => setCart({ id, title, price, thumbnail, quant: 1 }) }
+          onClick={ () => setCart({ id, title, price, thumbnail, quant: 1, available }) }
           type="button"
           data-testid="product-detail-add-to-cart"
         >
