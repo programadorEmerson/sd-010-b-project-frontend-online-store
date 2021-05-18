@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Rating from '../components/Rating';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class ProductDetails extends Component {
         <p data-testid="product-detail-name">{title}</p>
         <img src={ thumbnail } alt={ title } />
         <p>{price}</p>
+        <Rating />
         <button
           onClick={ () => setCart({ id, title, price, thumbnail, quant: 1 }) }
           type="button"
