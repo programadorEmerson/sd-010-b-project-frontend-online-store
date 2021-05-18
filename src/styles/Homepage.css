@@ -1,29 +1,35 @@
-.header__container {
+.hp-header__container {
+  align-items: center;
   box-sizing: border-box;
   display: flex;
-  justify-content: center;
   margin-top: 1rem;
-}
-
-.header__container input {
-  font-size: 1vw;
-  height: 2.4vh;
-  width: 30vw;
-}
-
-.cart__container {
-  margin-left: 4rem;
   position: relative;
 }
 
-.cart__icon {
+.hp-header__container input {
+  font-size: 1vw;
+  height: 2.4vh;
+  margin: auto;
+  width: 30vw;
+}
+
+.hp-cart__container {
+  position: absolute;
+  right: 30vw;
+}
+
+.hp-cart__icon {
   width: 2rem;
 }
 
-.cart__number {
+.hp-cart__number {
   background-color: yellow;
   border-radius: 50%;
   position: absolute;
   right: -1rem;
   top: -1rem;
+}
+
+.hp-text {
+  text-align: center;
 }

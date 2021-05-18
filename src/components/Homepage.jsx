@@ -65,7 +65,7 @@ class Homepage extends React.Component {
     } = this.props;
     return (
       <div>
-        <div className="header__container">
+        <div className="hp-header__container">
           <input
             data-testid="query-input"
             type="text"
@@ -73,16 +73,18 @@ class Homepage extends React.Component {
             value={ searchQuery }
             onChange={ onChange }
           />
-          <div className="cart__container">
-            <img className="cart__icon" src={ cartIcon } alt="Cart" />
-            <p data-testid="shopping-cart-size" className="cart__number">
+          <div className="hp-cart__container">
+            <img className="hp-cart__icon" src={ cartIcon } alt="Cart" />
+            <p data-testid="shopping-cart-size" className="hp-cart__number">
               {quantity}
             </p>
           </div>
+
         </div>
-        <h3 data-testid="home-initial-message">
+        <h3 className="hp-text" data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
+
         <Link to="/pagecart" data-testid="shopping-cart-button">Page Cart</Link>
         <button
           type="button"
