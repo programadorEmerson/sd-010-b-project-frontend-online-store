@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class Avaliacao extends React.Component {
   constructor() {
     super();
@@ -39,11 +38,11 @@ class Avaliacao extends React.Component {
 
   handleChange = ({ target }) => {
     const { name } = target;
-    const value = target.value;
+    const { value } = target;
 
     this.setState((oldState) => ({
-       formulario: [...oldState.formulario, {[name]: value }]
-      }));
+      formulario: [...oldState, formulario: { [name]: value }],
+    }));
   }
 
   render() {
@@ -57,7 +56,7 @@ class Avaliacao extends React.Component {
             <p>Estrelinhas da Alessandra</p>
           </div>
           <div>
-            <textarea type="text" name="mensagem" placeholder="Mensagem (opcional)" value={ mensagem } onChange={ (e) => this.handleChange(e) }/>
+            <textarea type="text" name="mensagem" placeholder="Mensagem (opcional)" value={ mensagem } onChange={ (e) => this.handleChange(e) } />
           </div>
           <div>
             <button type="button">Avaliar</button>
