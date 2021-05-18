@@ -13,7 +13,7 @@ class Input extends Component {
     const { onChange } = this.props;
     const { urlfinal } = this.state;
     return (
-      <div className="header-separator">
+      <div>
         <header className="submit-line">
           <link
             rel="stylesheet"

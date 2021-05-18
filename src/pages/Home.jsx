@@ -61,17 +61,18 @@ class Home extends React.Component {
         </section>
         <section className="result-page">
           <Input onChange={ this.onChangeHandle } />
+          <p className="text-search" data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
           <button
             data-testid="query-button"
             type="submit"
             onClick={ this.onClickHandle }
             disabled={ inputfilter === '' && categoryfilter === null }
+            className="btn-search"
           >
             &#9740;
           </button>
-          <p className="text-search" data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
           <section className="products-list">
             <ProductsList
               products={ products }

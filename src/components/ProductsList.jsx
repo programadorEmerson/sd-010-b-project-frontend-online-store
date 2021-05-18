@@ -7,11 +7,12 @@ import ProductCard from './ProductCard';
 class ProductsList extends React.Component {
   render() {
     const { products: { results }, isLoading } = this.props;
+    console.log(results);
     if (isLoading) return <Loading />;
     if (results) {
       if (results.length === 0) return 'Nenhum produto foi encontrado';
       return (
-        <section>
+        <section className="products-list">
           {results.map((product) => (<ProductCard
             key={ product.id }
             product={ product }

@@ -25,7 +25,7 @@ class CategoryBar extends Component {
         <h1>Categorias</h1>
         <form>
           {categorieslist.map(({ id, name }) => (
-            <label htmlFor={ name } className="categories-labels" key={ id }>
+            <label htmlFor={ id } className="categories-labels" key={ id }>
               <input
                 key={ id }
                 data-testid="category"
