@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Categories from './Categories';
+// import Categories from './Categories';
 
 class Search extends Component {
   render() {
@@ -12,7 +12,7 @@ class Search extends Component {
           <input type="text" />
         </form>
         <div>
-          <Categories />
+          {/* <Categories /> */}
         </div>
       </div>
     );
