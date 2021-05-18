@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import AddToCart from '../components/AddToCart';
 
 class Details extends Component {
   constructor() {
@@ -26,7 +27,7 @@ class Details extends Component {
   }
 
   render() {
-    const { product: { title, price, thumbnail, attributes } } = this.state;
+    const { product: { title, price, thumbnail, attributes }, product } = this.state;
     return (
       <section>
         <section>
@@ -42,6 +43,9 @@ class Details extends Component {
                 {`${atribut.name} - ${atribut.value_name}`}
               </li>))}
           </ul>
+          <section>
+            <AddToCart data-testid="product-detail-add-to-cart" product={ product } />
+          </section>
           <Link to="/">Voltar</Link>
         </section>
       </section>
