@@ -10,12 +10,15 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 class Home extends React.Component {
   constructor() {
     super();
+    this.fetchProducts = this.fetchProducts.bind(this);
     this.onChangeHandle = this.onChangeHandle.bind(this);
     this.onClickHandle = this.onClickHandle.bind(this);
+    this.onChangeCategoryHandle = this.onChangeCategoryHandle.bind(this);
     this.state = {
       isLoading: false,
       products: {},
-      inputfilter: null,
+      inputfilter: '',
+      categoryfilter: null,
     };
   }
 
@@ -27,9 +30,22 @@ class Home extends React.Component {
 
   onClickHandle(event) {
     event.preventDefault();
-    const { inputfilter } = this.state;
+    this.fetchProducts();
+  }
+
+  async onChangeCategoryHandle({ target }) {
+    if (target.checked) {
+      await this.setState({
+        categoryfilter: target.id,
+      });
+    }
+    this.fetchProducts();
+  }
+
+  fetchProducts() {
+    const { inputfilter, categoryfilter } = this.state;
     this.setState({ isLoading: true });
-    getProductsFromCategoryAndQuery(null, inputfilter)
+    getProductsFromCategoryAndQuery(categoryfilter, inputfilter)
       .then((products) => this.setState({
         products,
         isLoading: false,
@@ -37,19 +53,28 @@ class Home extends React.Component {
   }
 
   render() {
-    const { products, isLoading } = this.state;
+    const { products, isLoading, inputfilter, categoryfilter } = this.state;
     return (
       <div className="homepage">
         <section className="categories-bar">
-          <CategoryBar />
+          <CategoryBar onChange={ this.onChangeCategoryHandle } />
         </section>
         <section className="result-page">
-          <SearchArea onChange={ this.onChangeHandle } onClick={ this.onClickHandle } />
+          <SearchArea
+            onChange={ this.onChangeHandle }
+            onClick={ this.onClickHandle }
+            inputfilter={ inputfilter }
+            categoryfilter={ categoryfilter }
+          />
           <p className="text-search" data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
           <section className="products-list">
-            <ProductsList products={ products } isLoading={ isLoading } />
+            <ProductsList
+              products={ products }
+              categoryfilter={ categoryfilter }
+              isLoading={ isLoading }
+            />
           </section>
         </section>
       </div>

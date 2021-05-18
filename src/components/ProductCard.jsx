@@ -18,7 +18,6 @@ class ProductCard extends React.Component {
             <p>{ `R$${price}` }</p>
           </div>
           <div>
-
             <AddToCart data-testid="product-add-to-cart" product={ product } />
           </div>
         </section>
