@@ -5,13 +5,16 @@ import { Link } from 'react-router-dom';
 class DetailsPage extends React.Component {
   render() {
     const { match: { params: { id } }, arrProducts, addToCart } = this.props;
-    const { thumbnail, title, price } = arrProducts[id];
+    const { thumbnail, title, price, shipping } = arrProducts[id];
+    const { free_shipping: freeShipping } = shipping;
+
     return (
       <div>
         <p>Detalhe do Produto</p>
         <img src={ thumbnail } alt={ title } />
         <p data-testid="product-detail-name">{ title }</p>
         <p>{ price }</p>
+        { freeShipping && <p data-testid="free-shipping">frete grátis</p> }
         <Link to="/pagecart" data-testid="shopping-cart-button">Page Cart</Link>
         <form action="GET">
           <label htmlFor="rating_id">
