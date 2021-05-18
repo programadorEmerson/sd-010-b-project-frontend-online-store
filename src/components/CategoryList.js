@@ -27,11 +27,11 @@ render() {
     <div>
       { categories.map((category) => (
         <div key={ category.id }>
-          <Link to={ `/${category.id}` }>
+          <Link to="/">
             <label htmlFor={ category.id }>
               <input
                 onClick={ onClick }
-                name="category"
+                // name="categories"
                 data-testid="category"
                 type="radio"
                 id={ category.id }

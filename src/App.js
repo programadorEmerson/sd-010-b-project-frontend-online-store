@@ -33,6 +33,8 @@ class App extends React.Component {
      this.setState({
        category: id,
      });
+     const {category} = this.state
+     console.log(category);
    }
 
    render() {
