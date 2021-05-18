@@ -81,7 +81,5 @@ ProductDetaills.propTypes = {
 
   onClick: PropTypes.func.isRequired,
 };
-}.isRequired;
-
 
 export default ProductDetaills;
