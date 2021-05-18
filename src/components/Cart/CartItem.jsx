@@ -3,16 +3,9 @@ import Image from './Image';
 import CustomButton from './CustomButton';
 
 class CartItem extends Component {
-  constructor(props) {
-    super(props);
-    const { cartProduct: { name, source, quantity, price } } = props;
-    this.state = {
-      name,
-      source,
-      quantity,
-      price,
-      totalPrice: price,
-    };
+  getCartItemId = () => {
+    const { cartProduct: { id } } = this.props;
+    return id;
   }
 
   shouldComponentUpdate(_, nextState) {
