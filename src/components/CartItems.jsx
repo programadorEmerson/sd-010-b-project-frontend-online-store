@@ -34,7 +34,7 @@ export default class CartItems extends Component {
     return (
       <div>
         <div>
-          <p data-testid="shopping-cart-product-quantity">
+          <p>
             Itens no carrinho:
             {' '}
             { products.length }
