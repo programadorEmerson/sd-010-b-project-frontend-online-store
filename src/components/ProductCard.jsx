@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { getItemById } from '../services/newRequest';
 
 class ProductCard extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class ProductCard extends Component {
     const { results } = this.props;
     this.state = {
       results,
+      itemToCart: '',
     };
 
     this.showResults = this.showResults.bind(this);
@@ -28,10 +30,41 @@ class ProductCard extends Component {
             />
           </Link>
           <span>{ price }</span>
+          <span>{ id }</span>
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ this.makeDivCart }
+          >Adicionar ao carrinho</button>
         </div>
       );
     });
     return card;
+  }
+
+  makeDivCart({ target }) {
+    const id = target.previousSibling;
+
+    getItemById(id).then(({ title, }) => (<div key={ title } data-testid="product">
+      <h4>{ title }</h4>
+      <Link to={ `/product/${id}` } data-testid="product-detail-link">
+        <img
+          src={ thumbnail }
+          width="150"
+          alt={ title }
+        />
+      </Link>
+      <span>{ price }</span>
+      <span>{ id }</span>
+      <button
+        type="button"
+        data-testid="product-add-to-cart"
+        onClick={ this.makeDivCart }
+      >
+        Adicionar ao carrinho
+      </button>
+    </div>);
+    );
   }
 
   noResult() {
