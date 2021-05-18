@@ -37,7 +37,11 @@ class App extends React.Component {
               path="/checkout"
               render={ () => <Checkout name={ name } /> }
             />
-            <Route exact path="/info/:Name" component={ Info } />
+            <Route
+              exact
+              path="/info/:Name"
+              render={ (props) => <Info { ...props } funt={ this.onClick } /> }
+            />
           </Switch>
         </BrowserRouter>
       </div>

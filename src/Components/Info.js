@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default class Info extends React.Component {
   constructor() {
@@ -22,19 +23,29 @@ export default class Info extends React.Component {
     ));
   }
 
-  firstMap = (lista) => lista.map(({ body: { thumbnail, title, id, attributes } }) => (
-    <div key={ id }>
-      <img src={ thumbnail } alt={ title } />
-      <h3 data-testid="product-detail-name">{ title }</h3>
-      { attributes.map((item) => <li key={ item.id }>{ item.name }</li>) }
-    </div>
-  ))
+  firstMap = (lista, funt) => (
+    lista.map(({ body: { thumbnail, title, id, attributes } }) => (
+      <div key={ id }>
+        <img src={ thumbnail } alt={ title } />
+        <h3 data-testid="product-detail-name">{ title }</h3>
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          onClick={ () => funt(title) }
+        >
+          Colocar no carrinho
+        </button>
+        { attributes.map((item) => <li key={ item.id }>{ item.name }</li>) }
+      </div>
+    )))
 
   render() {
+    const { funt } = this.props;
     const { lista, loading } = this.state;
     return (
       <div>
-        { loading && this.firstMap(lista) }
+        <Link data-testid="shopping-cart-button" to="/checkout">Compra</Link>
+        { loading && this.firstMap(lista, funt) }
       </div>
     );
   }
@@ -46,7 +57,8 @@ Info.propTypes = {
       Name: PropTypes.string,
     }),
   }),
-};
+  funt: PropTypes.func,
+}.isRequired;
 
 Info.defaultProps = {
   match: {
