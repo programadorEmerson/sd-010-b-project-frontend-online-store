@@ -35,7 +35,11 @@ class Home extends React.Component {
       cartState: [
         ...oldState.cartState, { cardProps },
       ],
-    }));
+    }),
+    () => {
+      const { cartState } = this.state;
+      localStorage.setItem('cartState', JSON.stringify(cartState));
+    });
   }
 
   onClickHandle(arg = '') {

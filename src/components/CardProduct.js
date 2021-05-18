@@ -12,8 +12,14 @@ class CardProduct extends React.Component {
   }
 
   addToCart() {
-    const { handleAddToCart } = this.props;
-    handleAddToCart(this.props);
+    const { product: { title, thumbnail, price, id }, handleAddToCart } = this.props;
+    const cartItem = {
+      title,
+      thumbnail,
+      price,
+      id,
+    };
+    handleAddToCart(cartItem);
   }
 
   render() {
