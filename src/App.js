@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
+import * as api from './services/api';
 import './App.css';
 
 class App extends React.Component {
@@ -13,13 +14,15 @@ class App extends React.Component {
     };
   }
 
-  handleAddCartItem = (produto) => {
-    this.setState((oldState) => ({ addCart: [...oldState.addCart, produto] }));
+  handleAddCartItem = async ({ category_id, title, id }) => {
+    const { results } = await api.getProductsFromCategoryAndQuery(category_id, title)
+    const result = results.find((result) => result.id === id)     
+    this.setState((oldState) => ({ addCart: [...oldState.addCart, result] }));
+    
   }
 
   render() {
     const { addCart } = this.state;
-
     return (
       <BrowserRouter>
         <Switch>
