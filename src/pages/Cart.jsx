@@ -41,6 +41,11 @@ class Cart extends Component {
     };
   }
 
+  cloneProducts = () => {
+    const { products } = this.state;
+    return products.slice(0);
+  }
+
   render() {
     const { products } = this.state;
     return (
@@ -50,8 +55,18 @@ class Cart extends Component {
         <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
         <div className="cart-item-container">
           { products.map((product) => (
-            <CartItem key={ product.id } cartProduct={ product } />)) }
+            <CartItem
+              key={ product.id }
+              cartProduct={ product }
+              removeProduct={ this.removeProduct }
+              updateQuantity={ this.updateQuantity }
+            />)) }
         </div>
+        <p>
+          Valor total da compra: R$
+          { this.updateTotalPurchase() }
+        </p>
+        <button type="button">Finalizar compra</button>
       </>
     );
   }
