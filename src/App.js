@@ -10,6 +10,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+        <CartButton />
         <Switch>
           <Route
             path="/product/:id"
@@ -18,7 +19,6 @@ function App() {
           <Route path="/cart" component={ Cart } />
           <Route exact path="/" component={ Home } />
         </Switch>
-        <CartButton />
       </BrowserRouter>
     </div>
   );

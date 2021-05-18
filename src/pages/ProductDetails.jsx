@@ -18,7 +18,7 @@ class ProductDetails extends Component {
 
   fetchProduct = async () => {
     const { match: { params: { id } } } = this.props;
-    const product = await api2.default(id);
+    const product = await api2.getProductsFromId(id);
 
     this.setState({ product });
   }

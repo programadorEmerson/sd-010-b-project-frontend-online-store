@@ -3,6 +3,7 @@ import * as api from '../services/api';
 import Mensagem from '../components/Mensagem';
 import Card from '../components/Card';
 import CategoryFilter from '../components/CategoryFilter';
+import * as api2 from '../services/api2';
 
 class Home extends React.Component {
   constructor() {
@@ -10,13 +11,19 @@ class Home extends React.Component {
     this.state = {
       categories: null,
       search: '',
-      // searchResult: null,
+      cart: api2.readCartLocalStorage(),
       categorySelected: [],
     };
   }
 
   componentDidMount() {
     this.fetchCategories();
+  }
+
+  componentDidUpdate() {
+    const { cart } = this.state;
+
+    api2.saveCartLocalStorage(cart);
   }
 
   handleChange = ({ target }) => {
@@ -52,6 +59,13 @@ class Home extends React.Component {
     if (result) this.setState({ products: result.results });
   }
 
+  handleAddClick = ({ target }) => {
+    const { id } = target;
+    const { products, cart } = this.state;
+    const product = products.find((item) => item.id === id);
+    if (cart) { this.setState({ cart: [...cart, product] }); }
+  }
+
   render() {
     const { categories, products, search } = this.state;
     return (
@@ -85,7 +99,11 @@ class Home extends React.Component {
         </label>
         { products
           && products.map((product) => (
-            <Card product={ product } key={ product.id } />))}
+            <Card
+              product={ product }
+              key={ product.id }
+              onClick={ this.handleAddClick }
+            />))}
       </div>
     );
   }

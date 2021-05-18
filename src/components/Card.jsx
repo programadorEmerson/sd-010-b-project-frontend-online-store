@@ -4,15 +4,23 @@ import { Link } from 'react-router-dom';
 
 class Card extends React.Component {
   render() {
-    const { product: { title, thumbnail, price, id } } = this.props;
+    const { product: { title, thumbnail, price, id }, onClick } = this.props;
     return (
-      <Link to={ `product/${id}` } data-testid="product-detail-link">
-        <div data-testid="product">
+      <div data-testid="product">
+        <Link to={ `product/${id}` } data-testid="product-detail-link">
           <img src={ thumbnail } alt={ title } />
           <h4>{ title }</h4>
           <h5>{ price }</h5>
-        </div>
-      </Link>
+        </Link>
+        <button
+          id={ id }
+          type="button"
+          onClick={ onClick }
+          data-testid="product-add-to-cart"
+        >
+          Add
+        </button>
+      </div>
     );
   }
 }
@@ -24,6 +32,7 @@ Card.propTypes = {
     price: PropTypes.number,
     id: PropTypes.string,
   }).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Card;
