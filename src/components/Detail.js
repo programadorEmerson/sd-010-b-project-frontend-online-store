@@ -42,25 +42,26 @@ class Detail extends React.Component {
           && (
             <div>
               <div>
-              <img src={ produto.thumbnail } alt={ produto.title } />
-              <span data-testid="product-detail-name">{ produto.title }</span>
-              <span>{ produto.price }</span>
-            </div>
-            <div>
-              <ol>
-                {
-                  produto.attributes.map((atributos) => (
-                    <li key={ atributos.id }>
-                      { `${atributos.name}: ${atributos.value_name}` }
-                    </li>
-                  ))
-                }
-              </ol>
-            </div>
-            <div>
-            <Avaliacao
-              id={ id }/>
-            </div>
+                <img src={ produto.thumbnail } alt={ produto.title } />
+                <span data-testid="product-detail-name">{ produto.title }</span>
+                <span>{ produto.price }</span>
+              </div>
+              <div>
+                <ol>
+                  {
+                    produto.attributes.map((atributos) => (
+                      <li key={ atributos.id }>
+                        { `${atributos.name}: ${atributos.value_name}` }
+                      </li>
+                    ))
+                  }
+                </ol>
+              </div>
+              <div>
+                <Avaliacao
+                  id={ id }
+                />
+              </div>
             </div>
           )}
       </div>

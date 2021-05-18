@@ -73,7 +73,7 @@ class Avaliacao extends React.Component {
               name="mensagem"
               placeholder="Mensagem (opcional)"
               value={ mensagem }
-              onChange={ (e) => this.handleChange(e) } 
+              onChange={ (e) => this.handleChange(e) }
             />
           </div>
           <div>
