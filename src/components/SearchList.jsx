@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ButtonSendCart from './ButtonSendCart';
 
 class SearchList extends React.Component {
   render() {
@@ -23,13 +24,7 @@ class SearchList extends React.Component {
             Ver Detalhes
           </Link>
         </button>
-        <button
-          type="button"
-          data-testid="product-add-to-cart"
-          onClick={ () => addToCart(item) }
-        >
-          Comprar
-        </button>
+        <ButtonSendCart addToCart={ addToCart } item={ item } id="product-add-to-cart" />
       </li>
     );
   }
