@@ -29,14 +29,24 @@ class ProductDetails extends React.Component {
     );
   }
 
+  updateLocalStorage =(product) => {
+    // localStorage.setItem('shoppingCart', JSON.stringify(totalQuantity))
+
+    // // receber os itens e verificar a quantidade 
+    // localStorage.setItem('totalQuantityItems', JSON.stringify(totalQuantity))
+
+
+  }
+
   // Atualiza a quantidade total de produtos no carrinho
   updateProductsQuantity = () => {
     const { shoppingCart } = this.state;
+    console.log(shoppingCart)
     const totalQuantity = shoppingCart.reduce(
       (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
     );
 
-    this.setState({ totalQuantityItems: totalQuantity });
+    this.setState({ totalQuantityItems: totalQuantity }, () => localStorage.setItem('totalQuantityItems', JSON.stringify(totalQuantity)));
   }
 
   updateComments = (newComment) => {
@@ -65,10 +75,15 @@ class ProductDetails extends React.Component {
 
     if (testIfProductExist === undefined) {
       product.quantity = 1;
-      this.setState({ shoppingCart: [...shoppingCart, product] }, () => this.updateProductsQuantity());
+      this.setState({ shoppingCart: [...shoppingCart, product] },
+         () => {
+          this.updateProductsQuantity();
+          // localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+         });
     } else {
       product.quantity += 1;
       this.updateProductsQuantity();
+      // localStorage.setItem('shoppingCart', JSON.stringify(product))
     }
   }
 

@@ -21,6 +21,12 @@ class Main extends React.Component {
   }
 
   componentDidMount = () => {
+    
+    const localStorageShop = localStorage.getItem('shoppingCart');
+    if (localStorageShop ) {
+      this.setState({ shoppingCart: localStorageShop })
+    }
+
     this.saveState();
     this.updateProductsQuantity();
   }
