@@ -32,11 +32,11 @@ class App extends React.Component {
       <main>
         <BrowserRouter>
           <Input handleQuery={ this.handleQuery } />
+          <Categories
+            handleQuery={ this.handleQuery }
+            query={ queryTerm }
+          />
           <Switch>
-            <Categories
-              handleQuery={ this.handleQuery }
-              query={ queryTerm }
-            />
             <Route to="/cart" component={ Cart } />
           </Switch>
           <ProductList products={ products } />
