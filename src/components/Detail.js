@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class Detail extends React.Component {
   constructor() {
     super();
-
     this.state = {
       produto: {},
       loading: true,
@@ -22,6 +21,7 @@ class Detail extends React.Component {
   }
 
   handleAddToCart(cardProps) {
+    const cartItems1 = JSON.parse(localStorage.getItem('cartState'));
     this.setState((oldState) => ({
       cartState: [
         ...oldState.cartState, { cardProps },
