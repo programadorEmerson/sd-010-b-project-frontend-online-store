@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-// import { render } from '@testing-library/react';
 import ProductList from './components/ProductList';
 import ShoppingCart from './components/ShoppingCart';
 import CategoryList from './components/CategoryList';
