@@ -28,7 +28,14 @@ export default class Cart extends Component {
     );
     return (
       <div>
-        <Link to="/"><button type="submit">Voltar</button></Link>
+        <Link to="/" style={ { textDecoration: 'none' } }>
+          <button
+            className="btn-search"
+            type="button"
+          >
+            Voltar &#10550;
+          </button>
+        </Link>
         <br />
         {cartEmpty ? MSG_FROM_EMPTY
           : <CartItems /> }
