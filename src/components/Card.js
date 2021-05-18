@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 class Card extends Component {
   render() {
     const { product: { title, thumbnail, price }, getName } = this.props;
-    console.log(getName);
     return (
       <div data-testid="product">
         <img src={ thumbnail } alt={ title } />

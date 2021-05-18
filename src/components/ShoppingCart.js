@@ -2,6 +2,29 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class ShoppingCart extends Component {
+  constructor() {
+    super();
+    this.state = {
+      ForcedRender: 'Xablau',
+    };
+  }
+
+  componentDidUpdate(_, previousState) {
+    const { ForcedRender } = this.state;
+    if (ForcedRender !== previousState.ForcedRender) {
+      this.setState = ({ ForcedRender: 'Bruno' });
+    }
+    console.log(ForcedRender);
+  }
+
+  increment = () => {
+    const { ForcedRender } = this.state;
+    this.setState = ({
+      ForcedRender: 'Fabio',
+    });
+    console.log(ForcedRender);
+  }
+
    RenderProducts = () => {
      const value = JSON.parse(localStorage.getItem('cartItems'));
      if (value !== null) {
@@ -23,6 +46,8 @@ class ShoppingCart extends Component {
                  Quantidade:
                  {num}
                </p>
+               <button type="button">+</button>
+               <button onClick={ this.increment(product) } type="button">-</button>
              </div>
            );
          }
@@ -35,10 +60,14 @@ class ShoppingCart extends Component {
    }
 
    render() {
+     const { ForcedRender } = this.state;
+     console.log(ForcedRender);
      return (
        <main>
+         {/* {ForcedRender} */}
          {this.RenderProducts()}
          <Link to="/">Home</Link>
+         <button onClick={ this.increment } type="button">-</button>
        </main>
      );
    }
