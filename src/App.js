@@ -11,7 +11,10 @@ function App() {
     <div>
       <BrowserRouter>
         <Switch>
-          <Route path="/product/:id" render={ (props) => <ProductDetails { ...props } /> } />
+          <Route
+            path="/product/:id"
+            render={ (props) => <ProductDetails { ...props } /> }
+          />
           <Route path="/cart" component={ Cart } />
           <Route exact path="/" component={ Home } />
         </Switch>
