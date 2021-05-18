@@ -72,7 +72,6 @@ class Home extends React.Component {
           <section className="products-list">
             <ProductsList
               products={ products }
-              categoryfilter={ categoryfilter }
               isLoading={ isLoading }
             />
           </section>
