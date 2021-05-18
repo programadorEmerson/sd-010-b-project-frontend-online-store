@@ -12,7 +12,13 @@ class CartItem extends Component {
     const { removeProduct } = this.props;
     const id = this.getCartItemId();
     return (
-      <CustomButton customStyle="remove" clickFunction="" dataTestId="">X</CustomButton>
+      <CustomButton
+        customStyle="remove"
+        clickFunction={ () => removeProduct(id) }
+        dataTestId=""
+      >
+        X
+      </CustomButton>
     );
   }
 
