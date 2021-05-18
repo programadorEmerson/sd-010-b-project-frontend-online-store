@@ -24,6 +24,19 @@ export class ProductDetails extends Component {
     });
   }
 
+  addToCart = () => {
+    const { state: { product } } = this;
+    const productObj = product[0].body; // pensar em um jeito melhor de acessar essas infos;
+    const { id, thumbnail, title, price } = productObj;
+    const itemObjInfo = {
+      thumbnail,
+      title,
+      quantity: 1,
+      price,
+    };
+    localStorage.setItem(id, JSON.stringify(itemObjInfo));
+  }
+
   render() {
     const { product } = this.state;
     return (
