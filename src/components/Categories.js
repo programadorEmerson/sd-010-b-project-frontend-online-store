@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import './categories.css';
 
@@ -29,7 +30,7 @@ class Categories extends React.Component {
 
   render() {
     const { loading, categories } = this.state;
-    const { onSelectedHandle } = this.props;
+    const { checked } = this.props;
     return (
       <div>
         <ul>
@@ -45,8 +46,8 @@ class Categories extends React.Component {
                       type="radio"
                       name="category"
                       id={ result.id }
-                      value={ result.id }
-                      onChange={ onSelectedHandle }
+                      value={ result.name }
+                      onChange={ checked }
                     />
                     {result.name}
                   </label>
@@ -58,5 +59,9 @@ class Categories extends React.Component {
     );
   }
 }
+
+Categories.propTypes = {
+  checked: PropTypes.func.isRequired,
+};
 
 export default Categories;

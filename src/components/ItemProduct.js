@@ -33,3 +33,9 @@ ItemProduct.propTypes = {
 };
 
 export default ItemProduct;
+
+ItemProduct.propTypes = {
+  products: PropTypes.shape({
+    results: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }).isRequired,
+};
