@@ -11,18 +11,18 @@ class Home extends React.Component {
     this.state = {
       categories: null,
       search: '',
-      cart: api2.readCartLocalStorage(),
+      cart: [],
       categorySelected: [],
     };
   }
 
   componentDidMount() {
     this.fetchCategories();
+    this.fetchCart();
   }
 
   componentDidUpdate() {
     const { cart } = this.state;
-
     api2.saveCartLocalStorage(cart);
   }
 
@@ -46,6 +46,11 @@ class Home extends React.Component {
     this.setState({
       categories,
     });
+  }
+
+  fetchCart = () => {
+    const cart = api2.readCartLocalStorage();
+    if (cart) this.setState({ cart });
   }
 
   handleCategory = ({ target }) => {
