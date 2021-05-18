@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-// import { render } from '@testing-library/react';
 import ProductList from './components/ProductList';
 import ShoppingCart from './components/ShoppingCart';
 import CategoryList from './components/CategoryList';
@@ -12,6 +11,7 @@ class App extends React.Component {
       userInput: '',
       searchText: '',
       category: '',
+      productsCart: [],
     };
   }
 
@@ -35,8 +35,13 @@ class App extends React.Component {
      });
    }
 
+   getProductList = (title, img, price) => {
+     this.setState((oldState) => (
+       { productsCart: [...oldState.productsCart, { title, img, price, quantity: 1 }] }));
+   }
+
    render() {
-     const { userInput, searchText, category } = this.state;
+     const { userInput, searchText, category, productsCart } = this.state;
      return (
        <div className="App">
          <div>
@@ -71,10 +76,14 @@ class App extends React.Component {
                  () => (<ProductList
                    searchText={ searchText }
                    category={ category }
+                   getProductList={ this.getProductList }
                  />)
                }
              />
-             <Route path="/shopping-cart" render={ () => <ShoppingCart /> } />
+             <Route
+               path="/shopping-cart"
+               render={ () => <ShoppingCart productsCart={ productsCart } /> }
+             />
            </Switch>
          </BrowserRouter>
        </div>
