@@ -8,7 +8,7 @@ class CustomButton extends Component {
       <button
         type="button"
         className={ customStyle }
-        onClick={ () => clickFunction() }
+        onClick={ clickFunction }
         data-testid={ dataTestId }
       >
         { children }
