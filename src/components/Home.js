@@ -31,7 +31,11 @@ class Home extends React.Component {
   }
 
   handleAddToCart(cardProps) {
-    console.log(cardProps);
+    this.setState((oldState) => ({
+      cartState: [
+        ...oldState.cartState, { cardProps },
+      ],
+    }));
   }
 
   onClickHandle(arg = '') {
