@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 class CardList extends Component {
   render() {
-    const { product: { title, thumbnail, price, id } } = this.props;
+    const { product: { title, thumbnail, price, id }, onclick } = this.props;
     const link = `/info/${id}`;
 
     return (
@@ -13,8 +13,18 @@ class CardList extends Component {
           { title }
         </h2>
         <Link data-testid="product-detail-link" to={ link }>Detalhes</Link>
+        <button
+          data-testid="product-add-to-cart"
+          type="button"
+          onClick={ () => onclick(title) }
+        >
+          Colocar no carrinho
+
+        </button>
         <img src={ thumbnail } alt={ title } width="200px" />
-        <h3>{ `R$ ${price}` }</h3>
+        <h3>
+          { `R$ ${price}` }
+        </h3>
       </div>
     );
   }
@@ -26,7 +36,8 @@ CardList.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
     id: PropTypes.string,
-  }).isRequired,
-};
+  }),
+  onclick: PropTypes.func,
+}.isRequired;
 
 export default CardList;
