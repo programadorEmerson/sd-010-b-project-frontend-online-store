@@ -9,11 +9,18 @@ class ProductDetails extends Component {
 
     this.state = {
       product: {},
+      cart: [],
     };
   }
 
   componentDidMount() {
     this.fetchProduct();
+    this.fetchCart();
+  }
+
+  componentDidUpdate() {
+    const { cart } = this.state;
+    api2.saveCartLocalStorage(cart);
   }
 
   fetchProduct = async () => {
@@ -23,8 +30,19 @@ class ProductDetails extends Component {
     this.setState({ product });
   }
 
+  fetchCart = () => {
+    const cart = api2.readCartLocalStorage();
+    if (cart) this.setState({ cart });
+  }
+
+  handleAddClick = () => {
+    const { product, cart } = this.state;
+
+    if (cart) { this.setState({ cart: [...cart, product] }); }
+  }
+
   render() {
-    const { product: { title, thumbnail, price, attributes } } = this.state;
+    const { product: { title, thumbnail, price, attributes, id } } = this.state;
     return (
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>
@@ -45,6 +63,14 @@ class ProductDetails extends Component {
             return <div key={ index } />;
           })}
         </ul>
+        <button
+          id={ id }
+          type="button"
+          onClick={ this.handleAddClick }
+          data-testid="product-detail-add-to-cart"
+        >
+          add
+        </button>
       </div>
     );
   }
