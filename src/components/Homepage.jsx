@@ -36,7 +36,8 @@ class Homepage extends React.Component {
     const { setCategory } = this.props;
     const { categories } = this.state;
     return (
-      <section className="category-list">
+      <section className="category-list__container">
+        <h2>Categorias</h2>
         {categories.length === 0 ? (
           <span>Nenhuma categoria foi encontrada</span>
         ) : (
@@ -65,6 +66,9 @@ class Homepage extends React.Component {
     } = this.props;
     return (
       <div>
+        <h3 className="hp-text" data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h3>
         <div className="hp-header__container">
           <input
             data-testid="query-input"
@@ -74,32 +78,38 @@ class Homepage extends React.Component {
             onChange={ onChange }
           />
           <div className="hp-cart__container">
-            <img className="hp-cart__icon" src={ cartIcon } alt="Cart" />
-            <p data-testid="shopping-cart-size" className="hp-cart__number">
-              {quantity}
-            </p>
+            <Link to="/pagecart" data-testid="shopping-cart-button">
+              <img className="hp-cart__icon" src={ cartIcon } alt="Cart" />
+              <p data-testid="shopping-cart-size" className="hp-cart__number">
+                {quantity}
+              </p>
+            </Link>
+
           </div>
 
         </div>
-        <h3 className="hp-text" data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h3>
+        <div className="hp-btn-text__container">
+          <button
+            className="hp-searchbtn"
+            type="button"
+            data-testid="query-button"
+            onClick={ handleClick }
+          >
+            <span>Pesquisar</span>
+          </button>
+        </div>
+        <div className="category-items__container">
+          {this.renderCategories()}
 
-        <Link to="/pagecart" data-testid="shopping-cart-button">Page Cart</Link>
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ handleClick }
-        >
-          Pesquisar
-        </button>
-        {this.renderCategories()}
-        {arrProducts.map((product, index) => (<ProductsByTerms
-          key={ product.id }
-          product={ product }
-          id={ index }
-          addToCart={ addToCart }
-        />))}
+          <div className="card-list__container">
+            {arrProducts.map((product, index) => (<ProductsByTerms
+              key={ product.id }
+              product={ product }
+              id={ index }
+              addToCart={ addToCart }
+            />))}
+          </div>
+        </div>
       </div>
     );
   }
