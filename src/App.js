@@ -5,6 +5,7 @@ import Cart from './pages/Cart';
 import Input from './components/Input';
 import Categories from './components/Categories';
 import ProductList from './components/ProductList';
+import EvaluationTest from './pages/EvaluationTest';
 
 class App extends React.Component {
   constructor() {
@@ -37,7 +38,8 @@ class App extends React.Component {
             query={ queryTerm }
           />
           <Switch>
-            <Route to="/cart" component={ Cart } />
+            <Route path="/cart" component={ Cart } />
+            <Route path="/evaluation" component={ EvaluationTest } />
           </Switch>
           <ProductList products={ products } />
         </BrowserRouter>
