@@ -5,7 +5,7 @@ import CommentForms from '../components/CommentForms';
 import CommentCard from '../components/CommentCard';
 import Loading from '../components/Loading';
 
-import { getProductById } from '../services/api';
+import getProductById from '../services/getProducts';
 
 class ProductDetails extends Component {
   constructor(props) {
