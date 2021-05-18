@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Product extends Component {
   render() {
@@ -9,6 +10,7 @@ class Product extends Component {
         <div>{ title }</div>
         <img src={ img } alt={ title } />
         <div>{ price }</div>
+        <Link to={ `/${id}` }>Ver Detalhes</Link>
       </div>
     );
   }
