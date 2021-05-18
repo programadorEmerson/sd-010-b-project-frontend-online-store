@@ -10,7 +10,13 @@ class CardProduct extends React.Component {
         <p>{ title }</p>
         <img src={ thumbnail } alt={ title } />
         <p>{ `R$${price}` }</p>
-        <Link data-testid="product-detail-link" to={ `/detail/${id}-${title}` }>Detalhes</Link>
+        <Link
+          data-testid="product-detail-link"
+          to={ `/detail/${id}-${title}` }
+        >
+          {' '}
+          Detalhes
+        </Link>
       </section>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './home.css';
+import * as api from '../services/api';
 import Img from '../images/cart.png';
 import Category from './Categories';
 import ItemProduct from './ItemProduct';
@@ -13,11 +14,18 @@ class Home extends React.Component {
     this.onChangeHandle = this.onChangeHandle.bind(this);
     this.onClickHandle = this.onClickHandle.bind(this);
     this.checked = this.checked.bind(this);
+    this.recuperarCategorias = this.recuperarCategorias.bind(this);
+
     this.state = {
+      categories: [],
+      loading: true,
       products: [],
       inputfilter: '',
-      selected: '',
     };
+  }
+
+  componentDidMount() {
+    this.recuperarCategorias();
   }
 
   onChangeHandle({ target }) {
@@ -32,8 +40,20 @@ class Home extends React.Component {
       .then((products) => {
         this.setState({
           products,
+          loading: false,
         });
       });
+  }
+
+  recuperarCategorias() {
+    api.getCategories().then((result) => {
+      result.map((obj) => this.setState((oldState) => ({
+        categories: [...oldState.categories, obj],
+      })));
+      this.setState({
+        loading: false,
+      });
+    });
   }
 
   checked(arg) {
@@ -41,12 +61,13 @@ class Home extends React.Component {
   }
 
   render() {
-    const { inputfilter, products } = this.state;
+    const { inputfilter, products, loading, categories } = this.state;
     return (
       <div className="App">
         <div className="Categoria">
           <h2>Categorias</h2>
-          <Category checked={ this.checked } />
+          { loading ? <p>Carregando</p>
+            : <Category categories={ categories } checked={ this.checked } />}
         </div>
         <div className="pesquisa">
           <input

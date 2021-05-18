@@ -1,36 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as api from '../services/api';
 import './categories.css';
 
 class Categories extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      categories: [],
-      loading: true,
-    };
-    this.recuperarCategorias = this.recuperarCategorias.bind(this);
-  }
-
-  componentDidMount() {
-    this.recuperarCategorias();
-  }
-
-  recuperarCategorias() {
-    api.getCategories().then((result) => {
-      result.map((obj) => this.setState((oldState) => ({
-        categories: [...oldState.categories, obj],
-      })));
-      this.setState({
-        loading: false,
-      });
-    });
-  }
-
   render() {
-    const { loading, categories } = this.state;
-    const { checked } = this.props;
+    const { loading, categories, checked } = this.props;
     return (
       <div>
         <ul>
@@ -62,6 +36,11 @@ class Categories extends React.Component {
 
 Categories.propTypes = {
   checked: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  categories: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Categories;
