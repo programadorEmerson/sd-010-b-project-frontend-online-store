@@ -3,6 +3,7 @@ import Button from './Button';
 import SearchButton from './SearchButton';
 import * as api from '../services/api';
 import SearchList from './SearchList';
+import CategoryList from './CategoryList';
 
 class SeachBar extends React.Component {
   constructor() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import ShoppingCart from '../pages/ShoppingCart';
 
 class SearchList extends React.Component {
   render() {
@@ -10,9 +11,10 @@ class SearchList extends React.Component {
           title
         }
         {' '}
-        <img alt="foto" src={ thumbnail } />
+        <img alt="foto" width="100px" src={ thumbnail } />
         {' '}
         {price}
+        <button type="button" onClick={ () => <ShoppingCart key={ title } produto={ item } /> }>Carrinho</button>
       </li>
     );
   }
