@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 class ListProducts extends React.Component {
   render() {
-    const { listProducts, msgPruductsNotFound } = this.props;
-    if (msgPruductsNotFound) {
+    const { listProducts } = this.props;
+    if (listProducts.length === 0) {
       return (<p>Nenhum produto foi encontrado</p>);
     }
     return (
-      <section>
+      <aside>
         {
           listProducts.map((product) => (
             <Link
@@ -25,14 +25,13 @@ class ListProducts extends React.Component {
             </Link>
           ))
         }
-      </section>
+      </aside>
     );
   }
 }
 
 ListProducts.propTypes = {
   listProducts: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  msgPruductsNotFound: PropTypes.string.isRequired,
 };
 
 export default ListProducts;

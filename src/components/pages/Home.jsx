@@ -11,7 +11,6 @@ export default class Home extends Component {
     this.state = {
       listCategories: [],
       listProducts: [],
-      msgProductsNotFound: '',
     };
 
     this.fetchCategories = this.fetchCategories.bind(this);
@@ -30,44 +29,38 @@ export default class Home extends Component {
   }
 
   async fetchCategoryAndProducts({ target: { value } }) {
-    const getProducts = await getProductsFromCategoryAndQuery(value);
+    const getProducts = await getProductsFromCategoryAndQuery('', value);
     const arrayProducts = getProducts.results;
-    if (value) {
-      this.setState({
-        listProducts: arrayProducts,
-      });
-    } else {
-      this.setState({
-        msgProductsNotFound: 'Nenhum produto foi encontrado',
-      });
-    }
+    this.setState({
+      listProducts: arrayProducts,
+    });
   }
 
   async fetchProductsByCategories(categoryId) {
-    const products = await getProductsFromCategoryAndQuery(categoryId);
+    const products = await getProductsFromCategoryAndQuery(categoryId, '');
     this.setState({
       listProducts: products.results,
     });
   }
 
   render() {
-    const { listCategories, listProducts, msgProductsNotFound } = this.state;
+    const { listCategories, listProducts } = this.state;
     return (
       <>
         <CartBtn />
+        <SearchBox
+          onFetchProducts={ this.fetchCategoryAndProducts }
+          listProducts={ listProducts }
+        />
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <SearchBox
-          fetchProducts={ this.fetchCategoryAndProducts }
-          listProducts={ listProducts }
-          msgPruductsNotFound={ msgProductsNotFound }
-        />
-        <ListCategories
-          categories={ listCategories }
-          fecthProducts={ this.fetchProductsByCategories }
-        />
-        <div />
+        <div>
+          <ListCategories
+            categories={ listCategories }
+            fetchProducts={ this.fetchProductsByCategories }
+          />
+        </div>
       </>
     );
   }
