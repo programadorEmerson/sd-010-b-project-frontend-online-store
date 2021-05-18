@@ -48,7 +48,7 @@ class Cart extends React.Component {
         ))}
         {/* <p>{this.hand*leQuantity()} </p> */}
         {/* <p>
-          {this.handleTotalCart()}
+          {this.handleTotalC art()}
         </p>  */}
       </div>
     ) : (
