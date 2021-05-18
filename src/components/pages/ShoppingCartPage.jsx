@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class ShoppingCartPage extends Component {
   render() {
     const { location: { state: { shoppingCart } } } = this.props;
-    if (shoppingCart) {
+    if (shoppingCart.length) {
       return (
         <div>
           {shoppingCart.map((productCart) => (
