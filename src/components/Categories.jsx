@@ -40,10 +40,17 @@ class Categories extends React.Component {
         </div>
         <div>
           {categories.map((category) => (
-            <Link to="/" onClick={ this.handleClick } key={ category.id } data-testid="category">
+            <Link
+              to="/"
+              onClick={ this.handleClick }
+              key={ category.id }
+              data-testid="category"
+            >
               {category.name}
-              {categorieSelect.map((item) => <ProductCart key={ item.id } product={ item } />)}
             </Link>))}
+          {categorieSelect.map((item) => (
+            <ProductCart key={ item.id } product={ item } />
+          ))}
         </div>
       </div>
     );
