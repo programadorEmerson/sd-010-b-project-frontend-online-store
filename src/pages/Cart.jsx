@@ -96,7 +96,12 @@ class Cart extends Component {
           Valor total da compra: R$
           { this.updateTotalPurchase() }
         </p>
-        <button type="button">Finalizar compra</button>
+        <Link
+          data-testid="checkout-products"
+          to={ { pathname: '/checkout', state: { products } } }
+        >
+          Finalizar compra
+        </Link>
       </>
     );
   }
