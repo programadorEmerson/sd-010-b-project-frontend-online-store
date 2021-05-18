@@ -28,7 +28,17 @@ class CategoryList extends React.Component {
         <aside>
           <ol>
             { categories.map(({ id, name }) => (
-              <li data-testid="category" key={ id }><button type="button" onClick={ () => this.search(id, name) }>{ name }</button></li>
+              <li
+                data-testid="category"
+                key={ id }
+              >
+                <button
+                  type="button"
+                  onClick={ () => this.search(id, name) }
+                >
+                  { name }
+                </button>
+              </li>
             )) }
           </ol>
         </aside>

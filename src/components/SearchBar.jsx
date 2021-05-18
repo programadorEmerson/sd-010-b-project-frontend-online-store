@@ -37,7 +37,13 @@ class SeachBar extends React.Component {
       <div>
         <section>
           <label htmlFor="input">
-            <input name="search" data-testid="query-input" type="text" id="input" onChange={ this.textChange } />
+            <input
+              name="search"
+              data-testid="query-input"
+              type="text"
+              id="input"
+              onChange={ this.textChange }
+            />
           </label>
           <SearchButton search={ this.search } />
           <Button />
