@@ -17,17 +17,18 @@ class DetailsCard extends React.Component {
     this.getAPI();
   }
 
-  componentDidUpdate(_, previousState) {
+  componentDidUpdate() {
     const { nameItems } = this.state;
-    if (nameItems !== previousState.nameItems) {
-      localStorage.setItem('cartItems', JSON.stringify(nameItems));
+    console.log(nameItems);
+    if (nameItems.length !== 0) {
+      const value = JSON.parse(localStorage.getItem('cartItems'));
+      const result = !value ? [] : value;
+      localStorage.setItem('cartItems', JSON.stringify([...result, nameItems]));
     }
   }
 
   getName = (title) => () => {
-    this.setState((oldState) => ({
-      nameItems: [...oldState.nameItems, title],
-    }));
+    this.setState({ nameItems: title });
   }
 
   getAPI = async () => {
