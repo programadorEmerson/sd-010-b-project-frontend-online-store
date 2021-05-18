@@ -46,16 +46,11 @@ class Home extends React.Component {
     this.setState({ categorySelected: value });
   }
 
-  // handleClick = async () => {
-  //   const { categorySelected, search, products } = this.state;
-  //   const catAndQuery = await api
-  //     .getProductsFromCategoryAndQuery(search, categorySelected);
-  //   console.log(catAndQuery);
-  //   if (catAndQuery) {
-  //     this
-  //       .setState({ products: catAndQuery.results });
-  //   }
-  // }
+  handleCategoryClick = async (search, categoryId) => {
+    const result = await api
+      .getProductsFromCategoryAndQuery(search, categoryId);
+    if (result) this.setState({ products: result.results });
+  }
 
   render() {
     const { categories, products, search } = this.state;
@@ -68,6 +63,7 @@ class Home extends React.Component {
           placeholder="buscar"
           data-testid="query-input"
           onChange={ this.handleChange }
+          autoComplete="off"
         />
         <button
           type="button"
@@ -83,11 +79,7 @@ class Home extends React.Component {
               key={ category.id }
               category={ category }
               handleCategory={ this.handleCategory }
-              onClick={ async () => {
-                const result = await api
-                  .getProductsFromCategoryAndQuery(search, category.id);
-                if (result) this.setState({ products: result.results });
-              } }
+              onClick={ () => this.handleCategoryClick(search, category.id) }
             />
           ))}
         </label>
