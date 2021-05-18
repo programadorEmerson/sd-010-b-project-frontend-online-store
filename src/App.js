@@ -15,11 +15,15 @@ class App extends React.Component {
     };
   }
 
-  handleAddCartItem = async ({ categoryId, title, id }) => {
+  handleAddCartItem = async (categoryId, title, id) => {
     const { results } = await api.getProductsFromCategoryAndQuery(categoryId, title);
     const findProduct = results.find((result) => result.id === id);
     this.setState((oldState) => ({ addCart: [...oldState.addCart, findProduct] }));
   };
+
+  addProdToCart = async (product) => {
+    this.setState((oldState) => ({ cart: [...oldState.cart, product] }));
+  }
 
   render() {
     const { addCart } = this.state;
@@ -33,8 +37,11 @@ class App extends React.Component {
           />
           <Route exact path="/cart" render={ () => <Cart addCart={ addCart } /> } />
           <Route
-            path="/details/:id/:category_id/:title"
-            component={ ProductDetails }
+            path="/details/:id/:categoryId/:title"
+            render={ (props) => (<ProductDetails
+              { ...props }
+              addCart={ this.handleAddCartItem }
+            />) }
           />
         </Switch>
       </BrowserRouter>

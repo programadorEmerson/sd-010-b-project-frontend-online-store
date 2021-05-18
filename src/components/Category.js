@@ -6,7 +6,13 @@ class Category extends Component {
     const { category: { name, id } } = this.props;
     return (
       <label htmlFor={ name }>
-        <input data-testid="category" type="radio" value={ id } name="category" />
+        <input
+          id={ name }
+          data-testid="category"
+          type="radio"
+          value={ id }
+          name="category"
+        />
         {name}
       </label>
     );

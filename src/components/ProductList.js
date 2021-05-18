@@ -14,7 +14,7 @@ class ProductList extends React.Component {
           <div key={ product.id } data-testid="product">
             <Link
               data-testid="product-detail-link"
-              to={ `/details/${product.id}/${product.categoryId}/${product.title}` }
+              to={ `/details/${product.id}/${product.category_id}/${product.title}` }
             >
               <h3>{ product.title }</h3>
               <img src={ product.thumbnail } alt={ product.title } />
@@ -23,7 +23,7 @@ class ProductList extends React.Component {
             <button
               data-testid="product-add-to-cart"
               type="button"
-              onClick={ () => onClick(product) }
+              onClick={ () => onClick(product.category_id, product.title, product.id) }
             >
               Adicionar ao carrinho
             </button>

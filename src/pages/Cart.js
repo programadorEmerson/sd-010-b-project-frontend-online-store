@@ -12,11 +12,11 @@ class Cart extends React.Component {
     return (
       <div>
         <div>
-          {addCart.map(({ id, title, thumbnail, price }) => (
-            <div key={ id }>
-              <h3 data-testid="shopping-cart-product-name">{ title }</h3>
-              <img src={ thumbnail } alt={ title } />
-              <p>{ price }</p>
+          {addCart.map((product) => (
+            <div key={ product.id }>
+              <h3 data-testid="shopping-cart-product-name">{ product.title }</h3>
+              <img src={ product.thumbnail } alt={ product.title } />
+              <p>{ product.price }</p>
             </div>
           ))}
           <p
