@@ -9,11 +9,25 @@ class DetailsCard extends React.Component {
 
     this.state = {
       details: {},
+      nameItems: [],
     };
   }
 
   componentDidMount() {
     this.getAPI();
+  }
+
+  componentDidUpdate(_, previousState) {
+    const { nameItems } = this.state;
+    if (nameItems !== previousState.nameItems) {
+      localStorage.setItem('cartItems', JSON.stringify(nameItems));
+    }
+  }
+
+  getName = (title) => () => {
+    this.setState((oldState) => ({
+      nameItems: [...oldState.nameItems, title],
+    }));
   }
 
   getAPI = async () => {
@@ -26,12 +40,20 @@ class DetailsCard extends React.Component {
 
   render() {
     const { details: { title, thumbnail, price } } = this.state;
+    // const { getApiFromQuery } = this.props;
     return (
       <div>
         <h2 data-testid=" product-detail-name">{ title }</h2>
         <img src={ thumbnail } alt={ title } />
         <p>{ price }</p>
         <Link data-testid="shopping-cart-button" id="cart" to="/cart">Carrinho</Link>
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          onClick={ this.getName(title) }
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
