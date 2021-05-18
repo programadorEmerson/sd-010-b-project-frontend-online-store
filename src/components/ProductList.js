@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class ProductList extends React.Component {
@@ -16,8 +17,10 @@ class ProductList extends React.Component {
   }
 
   apiCall = (searchText) => {
+    const { getResultFromProductList } = this.props;
     getProductsFromCategoryAndQuery('', searchText).then((products) => {
       const { results } = products;
+      getResultFromProductList(products);
       this.setState({
         results,
       });
@@ -34,6 +37,7 @@ class ProductList extends React.Component {
         R$
         { item.price }
       </p>
+      <Link to={ `/product/${item.id}` } data-testid="product-detail-link" />
     </div>
   )
 

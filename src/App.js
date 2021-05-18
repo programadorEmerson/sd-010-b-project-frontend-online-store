@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import ProductList from './components/ProductList';
 import ShoppingCart from './components/ShoppingCart';
 import CategoryList from './components/CategoryList';
+import ProductDetails from './components/ProductDetails';
 
 class App extends React.Component {
   constructor() {
@@ -11,6 +12,7 @@ class App extends React.Component {
     this.state = {
       userInput: '',
       searchText: '',
+      resultFromApi: [],
     };
   }
 
@@ -28,12 +30,21 @@ class App extends React.Component {
      });
    }
 
+   getResultFromProductList = (result) => {
+     this.setState({
+       resultFromApi: result,
+     });
+   }
+
    render() {
-     const { userInput, searchText } = this.state;
+     const { userInput, searchText, resultFromApi } = this.state;
      return (
        <div className="App">
          <div>
-           <label htmlFor="search" data-testid="home-initial-message">
+           <label
+             htmlFor="search"
+             data-testid="home-initial-message"
+           >
              <input
                type="text"
                name="search"
@@ -43,11 +54,26 @@ class App extends React.Component {
              />
              Digite algum termo de pesquisa ou escolha uma categoria.
            </label>
-           <button type="button" data-testid="query-button" onClick={ this.setSearchText }> Pesquisar </button>
+           <button
+             type="button"
+             data-testid="query-button"
+             onClick={ this.setSearchText }
+           >
+             {' '}
+             Pesquisar
+             {' '}
+
+           </button>
          </div>
          <BrowserRouter>
            <div>
-             <Link to="/shopping-cart" data-testid="shopping-cart-button">Carrinho</Link>
+             <Link
+               to="/shopping-cart"
+               data-testid="shopping-cart-button"
+             >
+               Carrinho
+
+             </Link>
            </div>
            <CategoryList />
            <Switch>
@@ -57,9 +83,19 @@ class App extends React.Component {
                render={
                  () => <ProductList searchText={ searchText } />
                }
+               getResultFromProductList={ this.getResultFromProductList }
              />
-             <Route path="/product/:id" render={ (props) => <ProductDetails {...props} /> } />
-             <Route path="/shopping-cart" render={ () => <ShoppingCart /> } />
+             <Route
+               path="/product/:id"
+               render={ (props) => (<ProductDetails
+                 { ...props }
+                 resultFromApi={ resultFromApi }
+               />) }
+             />
+             <Route
+               path="/shopping-cart"
+               render={ () => <ShoppingCart /> }
+             />
            </Switch>
          </BrowserRouter>
        </div>
