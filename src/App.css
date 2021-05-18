@@ -27,7 +27,7 @@ header {
   width: 95%;
 }
 
-.Btn-search {
+.btn-search {
   display: flex;
   font-family: FontAwesome , serif;
   font-size: 20px;
@@ -127,4 +127,9 @@ footer p {
   flex-direction: column;
   margin: 15px;
   width: 500px;
+}
+
+.product-image img {
+  height: 200px;
+  width: 200px;
 }

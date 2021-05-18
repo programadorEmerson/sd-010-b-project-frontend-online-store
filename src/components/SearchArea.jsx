@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Input extends Component {
+class SearchArea extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,7 @@ class Input extends Component {
   }
 
   render() {
-    const { onChange } = this.props;
+    const { onChange, onClick } = this.props;
     const { urlfinal } = this.state;
     return (
       <div className="header-separator">
@@ -28,14 +28,23 @@ class Input extends Component {
             onChange={ onChange }
             data-testid="query-input"
           />
+          <button
+            className="btn-search"
+            data-testid="query-button"
+            type="submit"
+            onClick={ onClick }
+          >
+            <span role="img" aria-label="lupa"> &#128269;</span>
+          </button>
         </header>
       </div>
     );
   }
 }
 
-Input.propTypes = {
+SearchArea.propTypes = {
   onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
-export default Input;
+export default SearchArea;
