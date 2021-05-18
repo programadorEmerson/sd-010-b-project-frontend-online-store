@@ -32,7 +32,7 @@ class CartItem extends Component {
     return (
       <CustomButton
         customStyle="decrease"
-        clickFunction={ this.decreaseQuantity }
+        clickFunction={ () => updateQuantity('subtract', id) }
         dataTestId="product-decrease-quantity"
       >
         -
@@ -45,7 +45,7 @@ class CartItem extends Component {
     return (
       <CustomButton
         customStyle="increase"
-        clickFunction={ this.increaseQuantity }
+        clickFunction={ () => updateQuantity('sum', id) }
         dataTestId="product-increase-quantity"
       >
         +
