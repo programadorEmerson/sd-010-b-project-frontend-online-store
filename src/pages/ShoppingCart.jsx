@@ -24,5 +24,5 @@ class ShoppingCart extends React.Component {
 ShoppingCart.propTypes = {
   itenCart: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
-
+// teste
 export default ShoppingCart;
