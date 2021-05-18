@@ -12,6 +12,7 @@ class App extends React.Component {
       userInput: '',
       searchText: '',
       category: '',
+      productsCart: [],
     };
   }
 
@@ -33,12 +34,15 @@ class App extends React.Component {
      this.setState({
        category: id,
      });
-     const {category} = this.state
-     console.log(category);
+   }
+
+   getProductList = (title, img, price) => {
+     this.setState((oldState) => (
+       { productsCart: [...oldState.productsCart, { title, img, price, quantity: 1 }] }));
    }
 
    render() {
-     const { userInput, searchText, category } = this.state;
+     const { userInput, searchText, category, productsCart } = this.state;
      return (
        <div className="App">
          <div>
@@ -52,7 +56,13 @@ class App extends React.Component {
              />
              Digite algum termo de pesquisa ou escolha uma categoria.
            </label>
-           <button type="button" data-testid="query-button" onClick={ this.setSearchText }> Pesquisar </button>
+           <button
+             type="button"
+             data-testid="query-button"
+             onClick={ this.setSearchText }
+           >
+             Pesquisar
+           </button>
          </div>
          <BrowserRouter>
            <div>
@@ -64,12 +74,17 @@ class App extends React.Component {
                exact
                path="/"
                render={
-                 () => <ProductList
-                        searchText={ searchText }
-                        category={ category } />
+                 () => (<ProductList
+                   searchText={ searchText }
+                   category={ category }
+                   getProductList={ this.getProductList }
+                 />)
                }
              />
-             <Route path="/shopping-cart" render={ () => <ShoppingCart /> } />
+             <Route
+               path="/shopping-cart"
+               render={ () => <ShoppingCart productsCart={ productsCart } /> }
+             />
            </Switch>
          </BrowserRouter>
        </div>

@@ -27,18 +27,28 @@ class ProductList extends React.Component {
     });
   }
 
-  constructorCard = (item) => (
-    <div>
-      <h3>
-        { item.title }
-      </h3>
-      <img src={ item.thumbnail } alt={ item.title } />
-      <p>
-        R$
-        { item.price }
-      </p>
-    </div>
-  )
+  constructorCard = ({ title, thumbnail, price, available_quantity: quantity }) => {
+    const { getProductList } = this.props;
+    return (
+      <div>
+        <h3>
+          { title }
+        </h3>
+        <img src={ thumbnail } alt={ title } />
+        <p>
+          R$
+          { price }
+        </p>
+        <button
+          type="button"
+          onClick={ () => getProductList(title, thumbnail, price, quantity) }
+          data-testid="product-add-to-cart"
+        >
+          AddCart
+        </button>
+      </div>
+    );
+  }
 
   render() {
     const { results } = this.state;
