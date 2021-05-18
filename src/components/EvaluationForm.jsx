@@ -30,6 +30,7 @@ class EvaluationForm extends React.Component {
           <label htmlFor="email">
             E-mail:
             <input
+              required
               type="text"
               name="email"
               onChange={ (event) => this.onChange(event) }
