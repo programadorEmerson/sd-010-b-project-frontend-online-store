@@ -1,20 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './home.css';
+import * as api from '../services/api';
 import Img from '../images/cart.png';
 import Category from './Categories';
 import ItemProduct from './ItemProduct';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.onChangeHandle = this.onChangeHandle.bind(this);
     this.onClickHandle = this.onClickHandle.bind(this);
+    this.checked = this.checked.bind(this);
+    this.recuperarCategorias = this.recuperarCategorias.bind(this);
+
     this.state = {
+      categories: [],
+      loading: true,
       products: [],
       inputfilter: '',
     };
+  }
+
+  componentDidMount() {
+    this.recuperarCategorias();
   }
 
   onChangeHandle({ target }) {
@@ -23,22 +34,40 @@ class Home extends React.Component {
     });
   }
 
-  onClickHandle(event) {
-    event.preventDefault();
+  onClickHandle(arg = '') {
     const { inputfilter } = this.state;
-    getProductsFromCategoryAndQuery(null, inputfilter)
-      .then((products) => this.setState({
-        products,
-      }));
+    getProductsFromCategoryAndQuery(arg, inputfilter)
+      .then((products) => {
+        this.setState({
+          products,
+          loading: false,
+        });
+      });
+  }
+
+  recuperarCategorias() {
+    api.getCategories().then((result) => {
+      result.map((obj) => this.setState((oldState) => ({
+        categories: [...oldState.categories, obj],
+      })));
+      this.setState({
+        loading: false,
+      });
+    });
+  }
+
+  checked(arg) {
+    this.onClickHandle(arg.target.id);
   }
 
   render() {
-    const { inputfilter, products } = this.state;
+    const { inputfilter, products, loading, categories } = this.state;
     return (
       <div className="App">
         <div className="Categoria">
           <h2>Categorias</h2>
-          <Category />
+          { loading ? <p>Carregando</p>
+            : <Category categories={ categories } checked={ this.checked } />}
         </div>
         <div className="pesquisa">
           <input
@@ -46,12 +75,12 @@ class Home extends React.Component {
             type="text"
             className="input-pesquisa-produto"
             data-testid="query-input"
-            onChange={ this.onChangeHandle }
+            onChange={ (e) => this.onChangeHandle(e) }
           />
           <button
             type="button"
             data-testid="query-button"
-            onClick={ this.onClickHandle }
+            onClick={ (e) => this.onClickHandle(e) }
             className="button_search"
           >
             Pesquisar

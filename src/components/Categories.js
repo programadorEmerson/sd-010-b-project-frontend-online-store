@@ -1,34 +1,10 @@
 import React from 'react';
-import * as api from '../services/api';
+import PropTypes from 'prop-types';
 import './categories.css';
 
 class Categories extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      categories: [],
-      loading: true,
-    };
-    this.recuperarCategorias = this.recuperarCategorias.bind(this);
-  }
-
-  componentDidMount() {
-    this.recuperarCategorias();
-  }
-
-  recuperarCategorias() {
-    api.getCategories().then((result) => {
-      result.map((obj) => this.setState((oldState) => ({
-        categories: [...oldState.categories, obj],
-      })));
-      this.setState({
-        loading: false,
-      });
-    });
-  }
-
   render() {
-    const { loading, categories } = this.state;
+    const { loading, categories, checked } = this.props;
     return (
       <div>
         <ul>
@@ -37,14 +13,15 @@ class Categories extends React.Component {
               : categories.map((result) => (
                 <li
                   key={ result.id }
-                  data-testid="category"
                 >
                   <label htmlFor={ result.name }>
                     <input
+                      data-testid="category"
                       type="radio"
                       name="category"
-                      id={ result.name }
+                      id={ result.id }
                       value={ result.name }
+                      onChange={ checked }
                     />
                     {result.name}
                   </label>
@@ -56,5 +33,15 @@ class Categories extends React.Component {
     );
   }
 }
+
+Categories.propTypes = {
+  checked: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  categories: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    map: PropTypes.string,
+  }).isRequired,
+};
 
 export default Categories;
