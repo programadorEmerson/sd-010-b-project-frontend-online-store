@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Avaliacao from './Avaliacao';
 
 class Detail extends React.Component {
   constructor() {
@@ -39,9 +40,12 @@ class Detail extends React.Component {
         { !loading
           && (
             <div>
+              <div>
               <img src={ produto.thumbnail } alt={ produto.title } />
               <span data-testid="product-detail-name">{ produto.title }</span>
               <span>{ produto.price }</span>
+            </div>
+            <div>
               <ol>
                 {
                   produto.attributes.map((atributos) => (
@@ -51,6 +55,10 @@ class Detail extends React.Component {
                   ))
                 }
               </ol>
+            </div>
+            <div>
+            <Avaliacao />
+            </div>
             </div>
           )}
       </div>
