@@ -11,7 +11,7 @@ class ProductCard extends React.Component {
         <img src={ thumbnail } alt={ title } />
         <p>{ `R$${price}` }</p>
         <Link
-          to={ `/details/${title}` }
+          to={ `/details/${id}` }
           id={ id }
         >
           VER DETALHES

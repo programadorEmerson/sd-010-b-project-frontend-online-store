@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Loading from '../components/Loading';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Details extends Component {
   constructor() {
@@ -17,15 +17,13 @@ class Details extends Component {
   }
 
   componentDidMount() {
+    getCategories();
     const { match: { params: { query } } } = this.props;
-    getProductsFromCategoryAndQuery(query)
-      .then(({ results }) => this.setState(
-        console.log(results),
+    getProductsFromCategoryAndQuery('', query)
+      .then((product) => this.setState(
         {
-          thumbnail: results.thumbnail,
-          title: results.title,
-          price: results.price,
           isLoading: false,
+          thumbnail: product,
         },
       ));
   }
@@ -36,10 +34,10 @@ class Details extends Component {
 
     return (
       <section>
-        <img src={ thumbnail } alt={ title } />
+        <img src={ `Imagem/Produto: ${thumbnail}` } alt={ `Texto da Imagem: ${title}` } />
         <section>
-          <p>{ title }</p>
-          <p>{ price }</p>
+          <p>{ `Título: ${title}` }</p>
+          <p>{ `Preço: R$${price}` }</p>
           <Link to="/">Voltar</Link>
         </section>
       </section>
