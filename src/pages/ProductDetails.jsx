@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
 import CommentForms from '../components/CommentForms';
 import CommentCard from '../components/CommentCard';
 import Loading from '../components/Loading';
@@ -19,7 +20,6 @@ class ProductDetails extends Component {
     };
   }
 
-  // a
   submitRating = (email, rating, comment) => {
     this.setState((oldState) => ({
       comments: [...oldState.comments, { email, rating, comment }],
@@ -59,6 +59,16 @@ class ProductDetails extends Component {
           {price}
         </p>
         <img src={ imgUrl } alt={ title } />
+
+        <Link
+          to={ {
+            pathname: '/cart',
+            state: { title, price, imgUrl },
+          } }
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicionar ao Carrinho
+        </Link>
 
         <CommentForms submitRating={ this.submitRating } />
         {comments.map(({ email, rating, comment }) => (
