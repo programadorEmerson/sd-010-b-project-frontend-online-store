@@ -4,8 +4,6 @@ import getProductById from '../services/api2';
 import * as api from '../services/api';
 import Loading from '../components/Loading';
 
-//teste
-
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +34,7 @@ class ProductDetails extends React.Component {
         <h3 data-testid="product-detail-name">{title}</h3>
         <img src={ thumbnail } alt={ title } />
         <ul>
-          {attributes?.map((attribute) => (
+          {attributes.map((attribute) => (
             <li key={ attribute.id }>
               { `${attribute.name}: ${attribute.value_name}` }
             </li>))}
