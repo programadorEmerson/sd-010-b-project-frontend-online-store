@@ -67,6 +67,15 @@ class Cart extends Component {
     this.setState({ products: productsCopy });
   };
 
+  updateTotalPurchase = () => {
+    const { products } = this.state;
+    return products.reduce((acc, { quantity, price }) => {
+      let totalPurchase = acc;
+      totalPurchase += quantity * price;
+      return totalPurchase;
+    }, 0);
+  }
+
   render() {
     const { products } = this.state;
     return (
