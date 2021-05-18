@@ -6,9 +6,17 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 class ProductList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      results: [],
-    };
+    let savedResults = localStorage.getItem('results');
+    savedResults = JSON.parse(savedResults);
+    if (savedResults) {
+      this.state = {
+        results: savedResults,
+      };
+    } else {
+      this.state = {
+        results: [],
+      };
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -17,39 +25,42 @@ class ProductList extends React.Component {
   }
 
   apiCall = (searchText) => {
-    const { getResultFromProductList } = this.props;
     getProductsFromCategoryAndQuery('', searchText).then((products) => {
       const { results } = products;
-      getResultFromProductList(products);
+      const resultsToSave = JSON.stringify(results);
       this.setState({
         results,
       });
+      localStorage.setItem('results', resultsToSave);
     });
   }
 
-  constructorCard = (item) => (
-    <div>
-      <h3>
-        { item.title }
-      </h3>
-      <img src={ item.thumbnail } alt={ item.title } />
-      <p>
-        R$
-        { item.price }
-      </p>
-      <Link to={ `/product/${item.id}` } data-testid="product-detail-link" />
-    </div>
-  )
-
   render() {
     const { results } = this.state;
+    const { getResultFromProductList } = this.props;
     return (
       <div>
         { (results.length === 0)
-          ? <p>Nenhum produto foi encontrado</p> : results.map((item, index) => (
+          ? (<p>Nenhum produto foi encontrado</p>)
+          : results.map((item, index) => (
             <div data-testid="product" key={ index }>
-              {this.constructorCard(item)}
-            </div>))}
+              <h3>
+                { item.title }
+              </h3>
+              <img src={ item.thumbnail } alt={ item.title } />
+              <p>
+                R$
+                { item.price }
+              </p>
+              <Link
+                to={ `/product/${item.id}` }
+                data-testid="product-detail-link"
+                onClick={ () => getResultFromProductList(item) }
+              >
+                Ver Detalhes
+              </Link>
+            </div>
+          ))}
       </div>
     );
   }

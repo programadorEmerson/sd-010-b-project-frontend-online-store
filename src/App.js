@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       userInput: '',
       searchText: '',
-      resultFromApi: [],
+      itemUserWantDetail: {},
     };
   }
 
@@ -30,14 +30,14 @@ class App extends React.Component {
      });
    }
 
-   getResultFromProductList = (result) => {
+   getResultFromProductList = (item) => {
      this.setState({
-       resultFromApi: result,
+       itemUserWantDetail: item,
      });
    }
 
    render() {
-     const { userInput, searchText, resultFromApi } = this.state;
+     const { userInput, searchText, itemUserWantDetail } = this.state;
      return (
        <div className="App">
          <div>
@@ -81,15 +81,18 @@ class App extends React.Component {
                exact
                path="/"
                render={
-                 () => <ProductList searchText={ searchText } />
+                 () => (<ProductList
+                   searchText={ searchText }
+                   getResultFromProductList={ this.getResultFromProductList }
+                 />)
                }
-               getResultFromProductList={ this.getResultFromProductList }
+
              />
              <Route
                path="/product/:id"
                render={ (props) => (<ProductDetails
                  { ...props }
-                 resultFromApi={ resultFromApi }
+                 itemUserWantDetail={ itemUserWantDetail }
                />) }
              />
              <Route

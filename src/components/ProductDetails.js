@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ProductDetails extends React.Component {
   // constructor(props) {
@@ -9,30 +10,24 @@ class ProductDetails extends React.Component {
   //   };
   // }
 
-  searchAndRenderItemDetais = (id) => {
-    const { resultFromApi } = this.props;
-    const productToShow = resultFromApi.find((product) => product.id === id);
-    // this.setState({ item: productToShow });
+  searchAndRenderItemDetais = () => {
+    const { itemUserWantDetail } = this.props;
     return (
       <div>
         <p data-test-id="product-detail-name`">
-          `Nome:
+          Nome:
           {' '}
-          $
-          {productToShow.title}
-          `
+          {itemUserWantDetail.title}
         </p>
-        <img src={ productToShow.thumbnail } alt={ productToShow.title } />
+        <img src={ itemUserWantDetail.thumbnail } alt={ itemUserWantDetail.title } />
         <p>
-          `R$
-          $
-          { productToShow.price }
-          `
+          R$
+          { itemUserWantDetail.price }
         </p>
         <p>
-          `Quantidade Disponível $
-          {productToShow.available_quantity}
-          `
+          Quantidade Disponível:
+          {' '}
+          {itemUserWantDetail.available_quantity}
         </p>
         <Link to="/">VOLTAR</Link>
       </div>);
