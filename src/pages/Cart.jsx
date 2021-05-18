@@ -46,7 +46,7 @@ class Cart extends React.Component {
             <BtnDel product={ product } handleReload={ this.handleReload } />
           </div>
         ))}
-        {/* <p>{this.handleQuantity()} </p> */}
+        {/* <p>{this.hand*leQuantity()} </p> */}
         {/* <p>
           {this.handleTotalCart()}
         </p>  */}
