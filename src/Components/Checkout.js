@@ -6,13 +6,13 @@ class Checkout extends React.Component {
     super();
 
     this.state = {
-      count: 0,
+      count: 1,
     };
   }
 
-  componentDidMount() {
-    this.addFun();
-  }
+  // componentDidMount() {
+  //   this.addFun();
+  // }
 
   // addFun = () => { Aqui não precisa mais porque o estado já começa em 1
   //   this.setState((prevState) => ({ count: prevState.count + 1 }));
