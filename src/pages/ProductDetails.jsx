@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { AiFillStar } from 'react-icons/ai';
 import ButtonToCart from '../components/ButtonToCart';
 import * as modules from '../services/modules';
 import StarRating from '../components/StarRating';
@@ -52,14 +53,15 @@ class ProductDetails extends Component {
         state: { item },
       },
     } = this.props;
-
     return (
       <div>
         {modules.getReviews(item.id).map((prod, index) => (
           <div key={ index }>
             <p>{prod.email}</p>
             <p>{prod.avaliation}</p>
-            <StarRating rating={ prod.rating } />
+            {[...Array(prod.rating)].map((_, index2) => (<AiFillStar
+              key={ index + index2 }
+            />))}
           </div>
         ))}
       </div>
