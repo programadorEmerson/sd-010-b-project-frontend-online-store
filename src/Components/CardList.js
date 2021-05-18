@@ -16,7 +16,7 @@ class CardList extends Component {
         <button
           data-testid="product-add-to-cart"
           type="button"
-          onClick={ () => onclick(title) }
+          onClick={ () => onclick(id, title) }
         >
           Colocar no carrinho
 
