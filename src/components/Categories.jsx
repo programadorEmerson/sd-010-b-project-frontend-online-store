@@ -25,19 +25,20 @@ class Categories extends Component {
     const { checked } = this.props;
     return (
       <div>
-        {categories.map((category) => (
+        {categories.map(({ id, name }) => (
           <li
-            key={ category.id }
-            data-testid="category"
+            key={ id }
           >
-            <label htmlFor={ category.id }>
+            <label htmlFor={ id }>
               <input
+                data-testid="category"
                 type="radio"
-                id={ category.id }
+                id={ id }
                 name="categories"
                 onChange={ checked }
+                value={ id }
               />
-              { category.name }
+              { name }
             </label>
           </li>))}
       </div>

@@ -30,7 +30,7 @@ class Home extends Component {
   // chamada quando clica na categoria
   handleCategory = async (id) => {
     // const { categoryId } = this.state;
-    const filterProducts = await api.getProductsById(id);
+    const filterProducts = await api.getProductsFromCategoryAndQuery(id, '');
     if (filterProducts) {
       if (filterProducts.results.length > 0) {
         this.setState({
