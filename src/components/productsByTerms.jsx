@@ -10,7 +10,7 @@ class ProductsByTerms extends React.Component {
 
     return (
       <div>
-        <Link to={ `/details/${id}` }>
+        <Link  data-testid="product-detail-link" to={ `/details/${id}` }>
           <div data-testid="product">
             <p>{title}</p>
             <p>{price}</p>
