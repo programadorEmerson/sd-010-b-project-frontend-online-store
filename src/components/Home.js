@@ -15,12 +15,14 @@ class Home extends React.Component {
     this.onClickHandle = this.onClickHandle.bind(this);
     this.checked = this.checked.bind(this);
     this.recuperarCategorias = this.recuperarCategorias.bind(this);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
 
     this.state = {
       categories: [],
       loading: true,
       products: [],
       inputfilter: '',
+      cartState: [],
     };
   }
 
@@ -28,9 +30,15 @@ class Home extends React.Component {
     this.recuperarCategorias();
   }
 
-  onChangeHandle({ target }) {
-    this.setState({
-      inputfilter: target.value,
+  handleAddToCart(cardProps) {
+    this.setState((oldState) => ({
+      cartState: [
+        ...oldState.cartState, { cardProps },
+      ],
+    }),
+    () => {
+      const { cartState } = this.state;
+      localStorage.setItem('cartState', JSON.stringify(cartState));
     });
   }
 
@@ -43,6 +51,12 @@ class Home extends React.Component {
           loading: false,
         });
       });
+  }
+
+  onChangeHandle({ target }) {
+    this.setState({
+      inputfilter: target.value,
+    });
   }
 
   recuperarCategorias() {
@@ -61,7 +75,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { inputfilter, products, loading, categories } = this.state;
+    const { inputfilter, products, loading, categories, cartState } = this.state;
     return (
       <div className="App">
         <div className="Categoria">
@@ -85,7 +99,7 @@ class Home extends React.Component {
           >
             Pesquisar
           </button>
-          <Link to="/cart">
+          <Link to="/cart" cartState={ cartState }>
             <button type="button" className="button_cart">
               <img
                 data-testid="shopping-cart-button"
@@ -99,7 +113,7 @@ class Home extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
           <div className="pesquisa">
-            <ItemProduct products={ products } />
+            <ItemProduct products={ products } handleAddToCart={ this.handleAddToCart } />
           </div>
         </div>
       </div>

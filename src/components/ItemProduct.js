@@ -4,7 +4,7 @@ import CardProduct from './CardProduct';
 
 class ItemProduct extends React.Component {
   render() {
-    const { products: { results }, isLoading } = this.props;
+    const { products: { results }, isLoading, handleAddToCart } = this.props;
     if (results) {
       if (results.length === 0) return 'Nenhum produto foi encontrado';
       return (
@@ -15,6 +15,7 @@ class ItemProduct extends React.Component {
                 <CardProduct
                   key={ product.index }
                   product={ product }
+                  handleAddToCart={ handleAddToCart }
                 />
               ))}
           </p>
@@ -38,4 +39,5 @@ ItemProduct.propTypes = {
   products: PropTypes.shape({
     results: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
 };
