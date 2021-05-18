@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import ProductList from '../components/ProductList';
 import Categories from '../components/Categories';
@@ -94,11 +94,18 @@ class Home extends Component {
             categoryId
               ? this.handleCheckedSearch(categoryId, search) : this.handleClick(search)) }
         />
-        { noProducts ? <p>{ noProduct }</p> : <ProductList products={ products } onClick={onClick} /> }
+        { noProducts ? <p>{ noProduct }</p> : <ProductList
+          products={ products }
+          onClick={ onClick }
+        />}
         <Categories checked={ this.handleChecked } />
       </div>
     );
   }
 }
+
+Home.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Home;
