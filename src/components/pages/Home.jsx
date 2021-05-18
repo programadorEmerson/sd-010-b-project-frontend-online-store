@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CartBtn from '../buttonsAndLinks/CartBtn';
 import { getCategories, getProductsFromCategoryAndQuery } from '../../services/api';
 import ListCategories from '../ListCategories';
@@ -12,11 +13,13 @@ export default class Home extends Component {
       listCategories: [],
       listProducts: [],
       msgProductNotFound: '',
+      shoppingCart: [],
     };
 
     this.fetchCategories = this.fetchCategories.bind(this);
     this.fetchCategoryAndProducts = this.fetchCategoryAndProducts.bind(this);
     this.fetchProductsByCategories = this.fetchProductsByCategories.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   componentDidMount() {
@@ -50,13 +53,20 @@ export default class Home extends Component {
     });
   }
 
+  addItemToCart(event) {
+    const { shoppingCart } = this.state;
+    this.setState({ shoppingCart: [...shoppingCart, event] });
+  }
+
   render() {
-    const { listCategories, listProducts, msgProductNotFound } = this.state;
+    const { listCategories, listProducts, msgProductNotFound, shoppingCart } = this.state;
+    const { getProduct } = this.props;
     return (
       <>
-        <CartBtn />
+        <CartBtn shoppingCart={ shoppingCart } />
         <SearchBox
           onFetchProducts={ this.fetchCategoryAndProducts }
+          getProduct={ getProduct }
           listProducts={ listProducts }
           msgProductNotFound={ msgProductNotFound }
         />
@@ -73,3 +83,7 @@ export default class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  getProduct: PropTypes.func.isRequired,
+};

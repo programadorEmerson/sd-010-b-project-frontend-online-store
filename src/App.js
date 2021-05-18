@@ -27,7 +27,14 @@ class App extends Component {
       <BrowserRouter>
         <Router>
           <Switch>
-            <Route exact path="/" component={ Home } />
+            <Route
+              exact
+              path="/"
+              render={ (props) => (<Home
+                { ...props }
+                getProduct={ this.getProduct }
+              />) }
+            />
             <Route
               exact
               path="/shopping-cart"

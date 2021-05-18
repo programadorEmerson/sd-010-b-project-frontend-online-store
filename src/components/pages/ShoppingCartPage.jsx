@@ -7,6 +7,7 @@ export default class ShoppingCartPage extends Component {
 
     this.state = {
       products: props.itemShoppingCart,
+
     };
     this.getAllProducts = this.getAllProducts.bind(this);
   }
@@ -54,3 +55,10 @@ export default class ShoppingCartPage extends Component {
 ShoppingCartPage.propTypes = {
   itemShoppingCart: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+
+/* ShoppingCartPage.defaultProps = {
+  location: {
+    pathname: '',
+    state: { shoppingCart: [] },
+  },
+}; */
