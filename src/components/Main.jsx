@@ -22,13 +22,18 @@ class Main extends React.Component {
 
   componentDidMount = () => {
     
-    const localStorageShop = localStorage.getItem('shoppingCart');
-    if (localStorageShop ) {
-      this.setState({ shoppingCart: localStorageShop })
+    const localStorageQuantity = localStorage.getItem('totalQuantity');
+    if (localStorageQuantity === null) {
+      this.setState({ totalQuantityItems: 0 }, () => {
+        this.saveState();
+        this.updateProductsQuantity();
+      })
+    } else {
+      this.setState({ totalQuantityItems: localStorageQuantity }, () => {
+        this.saveState();
+        this.updateProductsQuantity();
+      })
     }
-
-    this.saveState();
-    this.updateProductsQuantity();
   }
 
   // Atualiza a quantidade total de produtos no carrinho
@@ -38,7 +43,9 @@ class Main extends React.Component {
       (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
     );
 
-    this.setState({ totalQuantityItems: totalQuantity });
+    this.setState({ totalQuantityItems: totalQuantity }, () => {
+      localStorage.setItem('localStorageQuantity', totalQuantity)
+    });
   }
 
   saveState = async () => {
@@ -99,9 +106,13 @@ class Main extends React.Component {
 
     if (testIfProductExist === undefined) {
       product.quantity = 1;
-      this.setState({ shoppingCart: [...shoppingCart, product] }, () => this.updateProductsQuantity());
+      this.setState({ shoppingCart: [...shoppingCart, product] }, () => {
+        this.updateProductsQuantity()
+        // localStorage.setItem('localStorageQuantity', product.quantity)
+      });
     } else if (product.quantity < product.available_quantity) {
       product.quantity += 1;
+      // localStorage.setItem('localStorageQuantity', product.quantity)
       this.updateProductsQuantity();
     }
   }
