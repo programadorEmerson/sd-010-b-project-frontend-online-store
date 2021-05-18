@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Avaliacao from './Avaliacao';
 
 class Detail extends React.Component {
   constructor() {
@@ -34,23 +35,33 @@ class Detail extends React.Component {
 
   render() {
     const { produto, loading } = this.state;
+    const { id } = this.props;
     return (
       <div>
         { !loading
           && (
             <div>
-              <img src={ produto.thumbnail } alt={ produto.title } />
-              <span data-testid="product-detail-name">{ produto.title }</span>
-              <span>{ produto.price }</span>
-              <ol>
-                {
-                  produto.attributes.map((atributos) => (
-                    <li key={ atributos.id }>
-                      { `${atributos.name}: ${atributos.value_name}` }
-                    </li>
-                  ))
-                }
-              </ol>
+              <div>
+                <img src={ produto.thumbnail } alt={ produto.title } />
+                <span data-testid="product-detail-name">{ produto.title }</span>
+                <span>{ produto.price }</span>
+              </div>
+              <div>
+                <ol>
+                  {
+                    produto.attributes.map((atributos) => (
+                      <li key={ atributos.id }>
+                        { `${atributos.name}: ${atributos.value_name}` }
+                      </li>
+                    ))
+                  }
+                </ol>
+              </div>
+              <div>
+                <Avaliacao
+                  id={ id }
+                />
+              </div>
             </div>
           )}
       </div>
