@@ -16,7 +16,6 @@ class App extends React.Component {
   }
 
   handleAddCartItem = async (categoryId, title, id) => {
-    console.log(categoryId, id, title);
     const { results } = await api.getProductsFromCategoryAndQuery(categoryId, title);
     const findProduct = results.find((result) => result.id === id);
     this.setState((oldState) => ({ addCart: [...oldState.addCart, findProduct] }));
