@@ -58,6 +58,7 @@ class App extends React.Component {
                  () => <ProductList searchText={ searchText } />
                }
              />
+             <Route path="/product/:id" render={ (props) => <ProductDetails {...props} /> } />
              <Route path="/shopping-cart" render={ () => <ShoppingCart /> } />
            </Switch>
          </BrowserRouter>
