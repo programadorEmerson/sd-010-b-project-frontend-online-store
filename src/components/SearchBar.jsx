@@ -8,31 +8,42 @@ class SeachBar extends React.Component {
   constructor() {
     super();
 
-    this.search = this.search.bind(this);
-
     this.state = {
-      // search: '',
-      search: 'xablauxablauxablau',
+      search: '',
+      searchText: [],
+      searchNotFound: false,
     };
   }
 
-  search() {
+  search = () => {
     const { search } = this.state;
-    const retornoApi = api.getProductsFromQuery(search);
-    console.log(retornoApi);
-    console.log(retornoApi.length);
-    if (retornoApi.length === 0) {
-      return (<div>erro</div>);
-    }
-    return (retornoApi.map(({ id, title }) => (<li key={ id }>{ title }</li>)));
+    api.getProductsFromCategoryAndQuery(undefined, search).then(({ results }) => {
+      this.setState({
+        searchText: results,
+        searchNotFound: results.length === 0,
+      });
+    });
+  }
+
+  textChange = ({ target: { name, value } }) => {
+    this.setState({
+      [name]: value,
+    });
   }
 
   render() {
+    const { searchText, searchNotFound } = this.state;
     return (
       <div>
         <section>
           <label htmlFor="input">
-            <input data-testid="query-input" type="text" id="input" />
+            <input
+              name="search"
+              data-testid="query-input"
+              type="text"
+              id="input"
+              onChange={ this.textChange }
+            />
           </label>
           <SearchButton search={ this.search } />
           <Button />
@@ -43,7 +54,8 @@ class SeachBar extends React.Component {
           </h1>
         </section>
         <ol>
-          { this.search }
+          {searchNotFound && <div>Nenhum produto foi encontrado</div>}
+          {searchText.map((item) => (<SearchList key={ item.id } item={ item } />))}
         </ol>
       </div>
     );
