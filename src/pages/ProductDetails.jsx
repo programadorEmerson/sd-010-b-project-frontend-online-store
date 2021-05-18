@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { addLocalStorage } from '../services/dataLocalStorage';
 
 class ProductDetails extends Component {
   render() {
@@ -10,7 +11,7 @@ class ProductDetails extends Component {
       thumbnail,
       price,
       id,
-      address: { cityName: city, stateName: state } } = product;
+      address: { city_name: city, state_name: state } } = product;
 
     return (
       <>
@@ -33,6 +34,15 @@ class ProductDetails extends Component {
             Ir ao carrinho
           </Link>
         </section>
+        <section>
+          <button
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            onClick={ () => addLocalStorage('dataShoppingCart', product) }
+          >
+            Adicionar ao carrinho
+          </button>
+        </section>
       </>
     );
   }
@@ -47,8 +57,8 @@ ProductDetails.propTypes = {
         price: PropTypes.number,
         id: PropTypes.string,
         address: PropTypes.shape({
-          cityName: PropTypes.string,
-          stateName: PropTypes.string,
+          city_name: PropTypes.string,
+          state_name: PropTypes.string,
         }).isRequired,
       }).isRequired,
     }).isRequired,
