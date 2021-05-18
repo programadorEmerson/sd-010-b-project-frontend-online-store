@@ -26,6 +26,7 @@ class Home extends React.Component {
   }
 
   getApiFromCategory = (param) => async () => {
+    console.log(param);
     this.setState({
       filterCategory: await getProductsFromCategoryAndQuery(param, ''),
       filtered: false,

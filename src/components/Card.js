@@ -17,6 +17,7 @@ class Card extends Component {
         >
           Adicionar ao Carrinho
         </button>
+        <br />
         <Link
           data-testid="product-detail-link"
           to={ `/details/${encodeURIComponent(title)}` }
