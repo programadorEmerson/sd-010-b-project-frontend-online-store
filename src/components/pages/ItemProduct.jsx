@@ -42,7 +42,12 @@ export default class ItemProduct extends Component {
         </div>
         <img src={ item.thumbnail } alt="imagem do produto" />
         <div>
-          <button type="submit" onClick={ () => getProduct(item) }>Adicionar ao carrinho</button>
+          <button
+            type="submit"
+            onClick={ () => getProduct(item) }
+          >
+            Adicionar ao carrinho
+          </button>
         </div>
       </>
     );
@@ -52,4 +57,5 @@ ItemProduct.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({ id: PropTypes.string }),
   }).isRequired,
+  getProduct: PropTypes.func.isRequired,
 };
