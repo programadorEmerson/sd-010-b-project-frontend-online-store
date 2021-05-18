@@ -19,6 +19,7 @@ class ProductDetails extends Component {
     };
   }
 
+  // a
   submitRating = (email, rating, comment) => {
     this.setState((oldState) => ({
       comments: [...oldState.comments, { email, rating, comment }],
