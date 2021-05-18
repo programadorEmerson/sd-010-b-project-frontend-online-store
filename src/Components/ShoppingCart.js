@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import CardList from './CardList';
 
@@ -25,8 +26,7 @@ class ShoppingCart extends React.Component {
     this.setState({
       [name]: id,
     });
-    const { search,
-    } = this.state;
+    const { search } = this.state;
     this.fetchItems(id, search);
   }
 
@@ -60,11 +60,16 @@ class ShoppingCart extends React.Component {
   }
 
   renderProducts = () => {
+    const { funt } = this.props;
     const { products } = this.state;
     // if (products.length < 1) {
     //   return <p> Nenhum produto foi encontrado </p>;
     // }
-    return products.map((product) => <CardList key={ product.id } product={ product } />);
+    return products.map((product) => (<CardList
+      onclick={ funt }
+      key={ product.id }
+      product={ product }
+    />));
   }
 
   filterInput = async () => {
@@ -106,5 +111,9 @@ class ShoppingCart extends React.Component {
     );
   }
 }
+
+ShoppingCart.propTypes = {
+  funt: PropTypes.func,
+}.isRequired;
 
 export default ShoppingCart;
