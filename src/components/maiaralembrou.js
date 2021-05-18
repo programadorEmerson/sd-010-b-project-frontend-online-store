@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as api from '../services/api';
 
 class Detail extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       produto: {},
@@ -20,19 +19,18 @@ class Detail extends React.Component {
 
   async recuperarProduto() {
     const { match: { params: { id } } } = this.props;
-    const title = id.split('-')[1];
-    const idProduto = id.split('-')[0];
-    const search = await api.getProductsFromCategoryAndQuery(null, title);
-    const produto = Object.entries(search.results);
-    produto.find((resultado) => resultado[1].id === idProduto);
-    this.setState({ produto: produto[1], loading: false });
+    const search = await fetch(`https://api.mercadolibre.com/items/${id}`);
+    const searchProduto = await search.json();
+    console.log(searchProduto);
+
+    this.setState({ produto: search, loading: false });
   }
 
   render() {
     const { produto, loading } = this.state;
     return (
       <div>
-        { !loading
+        {/* { !loading
           && <div>
             <img src={ produto[1].thumbnail } alt={ produto[1].title } />
             <span data-testid="product-detail-name">{ produto[1].title }</span>
@@ -46,7 +44,7 @@ class Detail extends React.Component {
                 ))
               }
             </ol>
-             </div>}
+          </div>} */}
       </div>
     );
   }

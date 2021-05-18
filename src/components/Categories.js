@@ -29,6 +29,7 @@ class Categories extends React.Component {
 
   render() {
     const { loading, categories } = this.state;
+    const { onSelectedHandle } = this.props;
     return (
       <div>
         <ul>
@@ -43,8 +44,9 @@ class Categories extends React.Component {
                     <input
                       type="radio"
                       name="category"
-                      id={ result.name }
-                      value={ result.name }
+                      id={ result.id }
+                      value={ result.id }
+                      onChange={ onSelectedHandle }
                     />
                     {result.name}
                   </label>

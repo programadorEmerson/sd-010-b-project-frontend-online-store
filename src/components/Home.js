@@ -7,13 +7,16 @@ import ItemProduct from './ItemProduct';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.onChangeHandle = this.onChangeHandle.bind(this);
     this.onClickHandle = this.onClickHandle.bind(this);
+
     this.state = {
       products: [],
       inputfilter: '',
+      selected: '',
     };
   }
 
@@ -23,10 +26,15 @@ class Home extends React.Component {
     });
   }
 
-  onClickHandle(event) {
-    event.preventDefault();
-    const { inputfilter } = this.state;
-    getProductsFromCategoryAndQuery(null, inputfilter)
+  onSelectedHandle = event => {
+    const { id } = this.props;
+    this.setState({ selected: id });
+    this.onClickHandle();
+  }
+
+  onClickHandle() {
+    const { inputfilter, selected } = this.state;
+    getProductsFromCategoryAndQuery(selected, inputfilter)
       .then((products) => this.setState({
         products,
       }));
@@ -38,7 +46,7 @@ class Home extends React.Component {
       <div className="App">
         <div className="Categoria">
           <h2>Categorias</h2>
-          <Category />
+          <Category onChange={ this.onSelectedHandle } />
         </div>
         <div className="pesquisa">
           <input
