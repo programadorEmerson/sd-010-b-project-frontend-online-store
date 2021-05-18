@@ -22,6 +22,11 @@ class App extends React.Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.handleCartBtnEvent = this.handleCartBtnEvent.bind(this);
+    this.saveCart = this.saveCart.bind(this);
+  }
+
+  async componentDidMount() {
+    await this.loadFromStorage();
   }
 
   handleOnChange({ target: { value, name } }) {
@@ -52,6 +57,16 @@ class App extends React.Component {
     return cart.findIndex(({ id }) => id === idParam);
   }
 
+  getQuantity() {
+    const { cart } = this.state;
+    const quantity = cart.reduce((acc, { qty }) => {
+      acc += qty;
+      return acc;
+    }, 0);
+    if (!quantity) return '';
+    return quantity;
+  }
+
   // Passando essa função como prop para a lista de categorias renderizadas.
   // Essa função basicamente pega o valor do input Radio, atualiza o state com esse valor e faz uma nova chamada para API do mercado Livre
   setCategory(e) {
@@ -63,6 +78,21 @@ class App extends React.Component {
     });
   }
 
+  // Load the cart from storage
+  async loadFromStorage() {
+    const jsonItem = localStorage.getItem('cart');
+    const item = await JSON.parse(jsonItem);
+    if (!item) return;
+    this.setState({ cart: [...item] });
+  }
+
+  // Salva Cart no LocalStorage
+  saveCart() {
+    const { cart } = this.state;
+    const jsonCart = JSON.stringify(cart);
+    localStorage.setItem('cart', jsonCart);
+  }
+
   // Baseado no nome do botão, e no id recebido do produto é feito uma adição, subtração da propriedade qty.
   // se for remove, então remove por completo esse item do array.
   updateQty(name, id) {
@@ -71,7 +101,7 @@ class App extends React.Component {
     switch (name) {
     case 'plus':
       cart[index].qty += 1;
-      this.setState({ cart: [...cart] });
+      this.setState({ cart: [...cart] }, this.saveCart());
       break;
     case 'subtract':
       if (cart[index].qty - 1 > 0) {
@@ -79,11 +109,11 @@ class App extends React.Component {
       } else {
         cart.splice(index, 1);
       }
-      this.setState({ cart: [...cart] });
+      this.setState({ cart: [...cart] }, this.saveCart());
       break;
     case 'remove':
       cart.splice(index, 1);
-      this.setState({ cart: [...cart] });
+      this.setState({ cart: [...cart] }, this.saveCart());
       break;
     default:
       console.log('no button here');
@@ -93,13 +123,21 @@ class App extends React.Component {
   addToCart(product) {
     const { id } = product;
     const hasItem = this.verifyCart(id);
-    if (hasItem) return;
+    if (hasItem) {
+      this.updateQty('plus', id);
+      return;
+    }
     const newProduct = {
       id,
       qty: 1,
       product,
     };
-    this.setState((prevState) => ({ cart: [...prevState.cart, newProduct] }));
+    this.setState((prevState) => (
+      { cart: [...prevState.cart, newProduct] }
+    ),
+    () => {
+      this.saveCart();
+    });
   }
 
   verifyCart(idParam) {
@@ -123,6 +161,7 @@ class App extends React.Component {
                 onChange={ this.handleOnChange }
                 searchQuery={ searchQuery }
                 addToCart={ this.addToCart }
+                quantity={ this.getQuantity() }
               />
             ) }
           />
@@ -141,6 +180,7 @@ class App extends React.Component {
                 { ...props }
                 arrProducts={ arrProducts }
                 addToCart={ this.addToCart }
+                quantity={ this.getQuantity() }
               />
             ) }
           />

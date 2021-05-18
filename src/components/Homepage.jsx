@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import ProductsByTerms from './productsByTerms';
 import * as api from '../services/api';
 import CategoryList from './CategoryList';
+
+import cartIcon from '../img/cart/cart.svg';
+import '../styles/Homepage.css';
 
 class Homepage extends React.Component {
   constructor() {
@@ -51,16 +55,31 @@ class Homepage extends React.Component {
   }
 
   render() {
-    const { handleClick, arrProducts, searchQuery, onChange, addToCart } = this.props;
+    const {
+      handleClick,
+      arrProducts,
+      searchQuery,
+      onChange,
+      addToCart,
+      quantity,
+    } = this.props;
     return (
       <div>
-        <input
-          data-testid="query-input"
-          type="text"
-          name="searchQuery"
-          value={ searchQuery }
-          onChange={ onChange }
-        />
+        <div className="header__container">
+          <input
+            data-testid="query-input"
+            type="text"
+            name="searchQuery"
+            value={ searchQuery }
+            onChange={ onChange }
+          />
+          <div className="cart__container">
+            <img className="cart__icon" src={ cartIcon } alt="Cart" />
+            <p data-testid="shopping-cart-size" className="cart__number">
+              {quantity}
+            </p>
+          </div>
+        </div>
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
@@ -91,6 +110,7 @@ Homepage.propTypes = {
   searchQuery: PropTypes.string.isRequired,
   setCategory: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
 };
 
 export default Homepage;
