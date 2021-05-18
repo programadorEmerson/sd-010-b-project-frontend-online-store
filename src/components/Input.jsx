@@ -21,6 +21,7 @@ class Input extends React.Component {
     const { handleQuery } = this.props;
     const { query } = this.state;
     const results = await api.getProductsFromCategoryAndQuery('all', query);
+    console.log('Input fetch');
     handleQuery(results, query);
   }
 

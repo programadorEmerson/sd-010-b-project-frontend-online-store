@@ -19,7 +19,7 @@ class App extends React.Component {
 
   handleQuery(products, query) {
     this.setState({
-      products: [...products.results],
+      products: products.results,
       queryTerm: query,
     });
     console.log(`HandleQuery (APP): ${query}`);
