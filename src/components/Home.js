@@ -11,6 +11,7 @@ class Home extends React.Component {
     super();
     this.onChangeHandle = this.onChangeHandle.bind(this);
     this.onClickHandle = this.onClickHandle.bind(this);
+    this.checked = this.checked.bind(this);
     this.state = {
       products: [],
       inputfilter: '',
@@ -23,13 +24,18 @@ class Home extends React.Component {
     });
   }
 
-  onClickHandle(event) {
-    event.preventDefault();
+  onClickHandle() {
     const { inputfilter } = this.state;
-    getProductsFromCategoryAndQuery(inputfilter, null)
-      .then((products) => this.setState({
-        products,
-      }));
+    getProductsFromCategoryAndQuery(null, inputfilter)
+      .then((products) => {
+        this.setState({
+          products,
+        });
+      });
+  }
+
+  checked(arg) {
+    return console.log(arg.target.id);
   }
 
   render() {
@@ -38,7 +44,7 @@ class Home extends React.Component {
       <div className="App">
         <div className="Categoria">
           <h2>Categorias</h2>
-          <Category />
+          <Category checked={ this.checked } />
         </div>
         <div className="pesquisa">
           <input
@@ -46,12 +52,12 @@ class Home extends React.Component {
             type="text"
             className="input-pesquisa-produto"
             data-testid="query-input"
-            onChange={ this.onChangeHandle }
+            onChange={ (e) => this.onChangeHandle(e) }
           />
           <button
             type="button"
             data-testid="query-button"
-            onClick={ this.onClickHandle }
+            onClick={ (e) => this.onClickHandle(e) }
             className="button_search"
           >
             Pesquisar
