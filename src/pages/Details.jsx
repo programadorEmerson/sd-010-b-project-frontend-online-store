@@ -1,0 +1,57 @@
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { getProductsFromCategoryAndQuery } from '../services/api';
+
+class Details extends Component {
+  constructor() {
+    super();
+    this.state = {
+      product: { attributes: [] },
+    };
+  }
+
+  componentDidMount() {
+    const { match: { params: { id, title } } } = this.props;
+    getProductsFromCategoryAndQuery(null, title)
+      .then((products) => {
+        const finalProduct = products.results.find((product) => id === product.id);
+        this.setState(
+          {
+            product: finalProduct,
+          },
+        );
+      });
+  }
+
+  render() {
+    const { product: { title, price, thumbnail, attributes } } = this.state;
+    return (
+      <section>
+        <section>
+          <img src={ thumbnail } alt={ title } />
+          <h2 data-testid="product-detail-name">{title}</h2>
+          <p>{`R$ ${price}`}</p>
+          <p>Descrição:</p>
+          <ul>
+            {attributes.map((atribut) => (
+              <li
+                key={ atribut.id }
+              >
+                {`${atribut.name} - ${atribut.value_name}`}
+              </li>))}
+          </ul>
+          <Link to="/">Voltar</Link>
+        </section>
+      </section>
+    );
+  }
+}
+
+Details.propTypes = {
+  match: PropTypes.object,
+  id: PropTypes.string.isRequired,
+}.isRequired;
+
+export default Details;
