@@ -7,10 +7,8 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
 
-    const { category } = this.props;
     this.state = {
       query: undefined,
-      categories: category,
     };
   }
 
@@ -21,22 +19,9 @@ class Input extends React.Component {
   // Ao clicar no botão faz requisição na API buscando o que foi inserido no input
   fetchAPI = async () => {
     const { handleQuery } = this.props;
-    const { query, categories } = this.state;
-    let categories2;
-    if (categories.length === 0) {
-      categories2 = 'all';
-    } else {
-      categories2 = categories.toString(',');
-    }
-    console.log(categories2);
-    let results;
-    if (query === undefined) {
-      results = await api.getProductsFromCategories(categories2);
-    }
-    if (query !== undefined && categories !== 'all') {
-      results = await api.getProductsFromCategoryAndQuery(categories, query);
-    }
-    handleQuery(results);
+    const { query } = this.state;
+    const results = await api.getProductsFromCategoryAndQuery('all', query);
+    handleQuery(results, query);
   }
 
   render() {
@@ -71,7 +56,6 @@ class Input extends React.Component {
 
 Input.propTypes = {
   handleQuery: PropTypes.func.isRequired,
-  category: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Input;
