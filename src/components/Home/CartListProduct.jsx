@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { addLocalStorage } from '../../services/dataLocalStorage';
+import { shoppingCardProductAdd } from '../../services/dataLocalStorage';
 
 export default class CartListProduct extends Component {
   addToCart = () => {
@@ -19,7 +19,7 @@ export default class CartListProduct extends Component {
       id,
       quantity: 1,
     };
-    addLocalStorage('dataShoppingCart', cartItem);
+    shoppingCardProductAdd(cartItem);
   };
 
   render() {
