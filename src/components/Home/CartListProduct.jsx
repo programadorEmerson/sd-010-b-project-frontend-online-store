@@ -19,7 +19,7 @@ export default class CartListProduct extends Component {
       id,
       quantity: 1,
     };
-    addLocalStorage('dataShoppingCart', newProduct);
+    addLocalStorage('dataShoppingCart', cartItem);
   };
 
   render() {
