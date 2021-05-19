@@ -33,8 +33,9 @@ class DetailsCard extends React.Component {
     this.setState({ [field]: newValue });
   }
 
-  handleSubmit(){
-    const literalmente = `Texto:${this.state.textArea}, Nota:${this.state.select}`;
+  handleSubmit() {
+    const { textArea, select } = this.state;
+    const literalmente = `Texto:${textArea}, Nota:${select}`;
     const value = JSON.parse(localStorage.getItem('productSubmit'));
     const result = !value ? [] : value;
     localStorage.setItem('productSubmit', JSON.stringify([...result, literalmente]));
@@ -69,12 +70,15 @@ class DetailsCard extends React.Component {
           Adicionar ao Carrinho
         </button>
         <form>
-          <select onChange={ (event) => this.handleChange('select', event.target.value) }>
+          <select
+            defaultValue={ 5 }
+            onChange={ (event) => this.handleChange('select', event.target.value) }
+          >
             <option value={ 1 }>1</option>
             <option value={ 2 }>2</option>
             <option value={ 3 }>3</option>
             <option value={ 4 }>4</option>
-            <option selected value={ 5 }>5</option>
+            <option value={ 5 }>5</option>
           </select>
           <label htmlFor="evaluation">
             Comentário:
