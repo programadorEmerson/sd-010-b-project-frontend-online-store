@@ -21,7 +21,8 @@ class Detail extends React.Component {
   }
 
   handleAddToCart(cardProps) {
-    localStorage.setItem('cartState', JSON.stringify(cardProps));
+    const getStorage = JSON.parse(localStorage.getItem('carState'));
+    localStorage.setItem('cartState', JSON.stringify([...getStorage, cardProps]));
   }
 
   async getProductsFromId(productId) {
