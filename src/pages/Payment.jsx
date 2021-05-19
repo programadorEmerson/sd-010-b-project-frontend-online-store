@@ -27,10 +27,8 @@ class Payment extends React.Component {
 
   render() {
     const { cartItems } = this.props;
-    const total = cartItems.reduce(
-      (acc, value) => (acc + value.price) * value.countItems,
-    );
-    console.log(cartItems);
+    const total = cartItems
+      .reduce((acc, value) => (acc + value.price) * value.countItems) || 0;
     return (
       <div>
         <h3>Payment</h3>
