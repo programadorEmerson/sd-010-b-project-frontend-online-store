@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api2 from '../services/api2';
+import CartAmount from '../components/CartAmount';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -33,6 +34,11 @@ class Cart extends React.Component {
     }
   }
 
+  handleQuantityChange = () => {
+    // Escrever aqui a funcao para ajustar o cart de acordo com a quantidade de produtos que retornar do estado de cada componente
+    // do CartAmount e setar novamente o localStorage
+  }
+
   render() {
     const { cart } = this.state;
     return (
@@ -40,11 +46,12 @@ class Cart extends React.Component {
         <Link to="/"> home </Link>
         <h1 data-testid="shopping-cart-empty-message"> Seu carrinho está vazio </h1>
         {cart && cart.map((item) => (
-          <div key={ item[0].id }>
-            <h3 data-testid="shopping-cart-product-name">{item[0].title}</h3>
-            <p data-testid="shopping-cart-product-quantity">{(item.length).toString()}</p>
-          </div>
-        ))}
+          <CartAmount
+            key={ item[0].id }
+            id={ item[0].id }
+            quantity={ item.length }
+            product={ item[0].title }
+          />))}
       </div>
     );
   }
