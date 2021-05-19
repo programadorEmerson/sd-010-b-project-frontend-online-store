@@ -11,6 +11,8 @@ class Details extends Component {
     super();
     this.state = {
       product: { attributes: [] },
+      // shipping: { free_shipping: false },
+      isShipping: false,
     };
   }
 
@@ -26,13 +28,20 @@ class Details extends Component {
         );
       });
   }
-
+ shippingMessage() => {
+const { product:{ shipping: {free_shipping} } } = this.state;
+if()
+} 
   render() {
-    const { product: { title, price, thumbnail, attributes }, product } = this.state;
+    const { product:
+      { title, price, thumbnail, attributes }, product, isShipping } = this.state;
+    console.log(product.shipping);
+    // const freteGratis = (<span data-testid="free-shipping">&#128722; Frete grátis</span>);
     return (
       <section>
         <img src={ thumbnail } alt={ title } />
         <h2 data-testid="product-detail-name">{ `${title} - R$ ${price}` }</h2>
+        { isShipping ? freteGratis : null }
         <h3>Especificações Técnicas</h3>
         <ul>
           {attributes.map((atribut) => (

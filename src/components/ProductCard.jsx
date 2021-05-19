@@ -9,10 +9,12 @@ class ProductCard extends React.Component {
   numberWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 
   render() {
-    const { product, product: { id, title, thumbnail, price } } = this.props;
+    const { product, product: { id, title, thumbnail,
+      price, shipping: { free_shipping: frete } } } = this.props;
     /* troca o ponto para virgula nos centavos */
     /* https://stackoverflow.com/questions/13672106/jquery-replace-dot-to-comma-and-round-it/13672180 */
     const priceWithStyle = price.toFixed(2).toString().replace('.', ',');
+    const freteGratis = (<span data-testid="free-shipping">&#128722; Frete grátis</span>);
     return (
       <section className="products-section">
         <section data-testid="product" className="product-box">
@@ -21,6 +23,7 @@ class ProductCard extends React.Component {
           </div>
           <div className="product-image">
             <img src={ thumbnail } alt={ title } />
+            { frete ? freteGratis : null }
           </div>
           <div className="product-price">
             <p>{ `R$${this.numberWithCommas(priceWithStyle)}` }</p>
@@ -45,6 +48,9 @@ ProductCard.propTypes = {
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 
