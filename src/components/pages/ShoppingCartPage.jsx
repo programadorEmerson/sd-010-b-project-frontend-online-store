@@ -7,36 +7,46 @@ export default class ShoppingCartPage extends Component {
 
     this.state = {
       products: props.itemShoppingCart,
-      quantity: [],
     };
     this.upQuantityItem = this.upQuantityItem.bind(this);
     this.downQuantityItem = this.downQuantityItem.bind(this);
   }
 
-  componentDidUpdate() {
-    const { products } = this.state;
-    this.setState({
-      quantity: products.map((item, index) => ({ [`item${index}`]: item })),
-    });
-  }
+  // shouldComponentUpdate() {
+  //   this.getAllProducts();
+  // }
+
+  // getAllProducts() {
+  //   const { itemShoppingCart } = this.props;
+  //   this.setState(({ item }) => ({
+  //     products: [...item, itemShoppingCart],
+  //   }));
+  // }
 
   upQuantityItem(item, index) {
-    const { quantity } = this.state;
-    console.log(index);
-    this.setState(({ state }) => {
-      quantity[index] = { item: [state + 1] };
-    });
+    console.log(`antes ${item.quantity}`);
+    const { products } = this.state;
+    const a = products[index].quantity += 1;
+    this.setState(({ products }) => ({
+      products: [...products, a],
+    }));
+    console.log(products[index].quantity);
+    console.log(`depois ${item.quantity}`);
   }
 
-  downQuantityItem(item, index) {
-    const { quantity } = this.state;
-    this.setState({
-      quantity: quantity[index] -= 1,
-    });
+  // getProduct(product) {
+  //   this.setState(({ shoppingCart }) => ({
+  //     shoppingCart: [...shoppingCart, product],
+  //   }));
+  // }
+
+  downQuantityItem(item) {
+    item.quantity -= 1;
+    console.log(item.quantity);
   }
 
   render() {
-    const { products, quantity } = this.state;
+    const { products } = this.state;
     if (products.length) {
       products.forEach((item) => {
         item.quantity = 1;
@@ -44,6 +54,7 @@ export default class ShoppingCartPage extends Component {
     }
 
     // map((item) => { item.quantidade = 1; });
+    // console.log(products);
 
     return (
       <>
@@ -64,12 +75,13 @@ export default class ShoppingCartPage extends Component {
                 >
                   +
                 </button>
-                <p>{quantity[index] || item.quantity}</p>
+                <p>{item.quantity}</p>
                 <button
                   type="button"
-                  onClick={ () => this.downQuantityItem(item, index) }
+                  onClick={ () => this.downQuantityItem(item) }
                 >
                   -
+
                 </button>
               </div>
             ))}
