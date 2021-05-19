@@ -53,6 +53,7 @@ class Cart extends React.Component {
             quantity={ item.length }
             title={ item[0].title }
           />))}
+        <Link data-testid="checkout-products" to="/checkout"> Comprar </Link>
       </div>
     );
   }
