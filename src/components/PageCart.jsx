@@ -39,18 +39,20 @@ class PageCart extends React.Component {
           </div>
         </div>
         <div className="pc-cart">
-          {cart.map(({ qty, product: { title, price, thumbnail, available_quantity: Aqty }, id }) => (
-            <CartItem
-              key={ id }
-              id={ id }
-              name={ title }
-              qty={ qty }
-              Aqty={ Aqty }
-              price={ price }
-              thumbnail={ thumbnail }
-              handleCartBtnEvent={ handleCartBtnEvent }
-            />
-          ))}
+          {cart
+            .map(({ qty, product, id }) => {
+              const { title, price, thumbnail, available_quantity: Aqty } = product;
+              return (<CartItem
+                key={ id }
+                id={ id }
+                name={ title }
+                qty={ qty }
+                Aqty={ Aqty }
+                price={ price }
+                thumbnail={ thumbnail }
+                handleCartBtnEvent={ handleCartBtnEvent }
+              />);
+            })}
           <div className="price-buy">
             <h2>
               Total: R$
