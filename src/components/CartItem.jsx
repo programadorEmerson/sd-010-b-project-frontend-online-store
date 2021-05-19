@@ -6,7 +6,7 @@ import trashIcon from '../img/pagecart/delete.svg';
 
 class CartItem extends React.Component {
   render() {
-    const { name, handleCartBtnEvent, qty, id, price, thumbnail } = this.props;
+    const { name, handleCartBtnEvent, qty, id, price, thumbnail, Aqty } = this.props;
     console.log((Math.round((price + Number.EPSILON) * 100) / 100).toFixed(2));
     return (
       <div className="pc-cartItem">
@@ -27,6 +27,7 @@ class CartItem extends React.Component {
               name="plus"
               type="button"
               onClick={ (e) => handleCartBtnEvent(e, id) }
+              disabled={ Aqty === qty }
             >
               +
             </button>
@@ -73,6 +74,7 @@ CartItem.propTypes = {
   handleCartBtnEvent: PropTypes.func.isRequired,
   price: PropTypes.number.isRequired,
   thumbnail: PropTypes.string.isRequired,
+  Aqty: PropTypes.number.isRequired,
 };
 
 export default CartItem;

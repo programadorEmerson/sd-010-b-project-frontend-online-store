@@ -43,12 +43,14 @@ class Homepage extends React.Component {
         ) : (
           categories.map((categ) => {
             const { id, name } = categ;
-            return (<CategoryList
-              key={ id }
-              id={ id }
-              name={ name }
-              onClick={ setCategory }
-            />);
+            return (
+              <CategoryList
+                key={ id }
+                id={ id }
+                name={ name }
+                onClick={ setCategory }
+              />
+            );
           })
         )}
       </section>

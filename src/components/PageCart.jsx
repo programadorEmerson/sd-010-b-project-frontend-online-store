@@ -24,6 +24,7 @@ class PageCart extends React.Component {
     }
     return (
       <div>
+
         <div className="pc-header">
           <Link to="/">
             <img
@@ -38,12 +39,13 @@ class PageCart extends React.Component {
           </div>
         </div>
         <div className="pc-cart">
-          {cart.map(({ qty, product: { title, price, thumbnail }, id }) => (
+          {cart.map(({ qty, product: { title, price, thumbnail, available_quantity: Aqty }, id }) => (
             <CartItem
               key={ id }
               id={ id }
               name={ title }
               qty={ qty }
+              Aqty={ Aqty }
               price={ price }
               thumbnail={ thumbnail }
               handleCartBtnEvent={ handleCartBtnEvent }
@@ -64,6 +66,7 @@ class PageCart extends React.Component {
             </Link>
           </div>
         </div>
+
       </div>
     );
   }
