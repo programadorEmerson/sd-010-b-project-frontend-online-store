@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Review from '../components/Home/Review';
 import { shoppingCardProductAdd } from '../services/dataLocalStorage';
 
 class ProductDetails extends Component {
@@ -17,8 +18,8 @@ class ProductDetails extends Component {
     return (
       <>
         <section>
-          <h1 data-testid="product-detail-name">{ title }</h1>
-          <img src={ thumbnail } alt="..." />
+          <h2 data-testid="product-detail-name">{ title }</h2>
+          <img src={ thumbnail } className="img-fluid" alt="..." />
         </section>
         <section>
           <h3>Detalhes:</h3>
@@ -34,6 +35,7 @@ class ProductDetails extends Component {
           >
             Ir ao carrinho
           </Link>
+          <Review product={ product } />
         </section>
         <section>
           <button

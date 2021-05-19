@@ -12,8 +12,8 @@ export default class CartListProduct extends Component {
           data-testid="product-detail-link"
           to={ { pathname: `/details/${id}`, state: { product } } }// Fonte: https://stackoverflow.com/questions/41466055/how-do-i-pass-state-through-react-router
         >
-          <h3>{ title }</h3>
-          <img src={ `${thumbnail}` } alt="..." />
+          <h4 className="text-dark">{ title }</h4>
+          <img src={ `${thumbnail}` } className="img-thumbnail" alt="..." />
         </Link>
         <p>{ price }</p>
       </div>
