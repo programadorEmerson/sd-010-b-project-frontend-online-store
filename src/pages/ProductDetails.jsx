@@ -78,6 +78,7 @@ class ProductDetails extends Component {
         </p>
         <img src={ imgUrl } alt={ title } />
         <button
+          data-testid="product-detail-add-to-cart"
           type="button"
           onClick={ () => {
             this.saveAtLocalstorage(

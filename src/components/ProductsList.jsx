@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 class ListProducts extends React.Component {
   render() {
-    const { products } = this.props;
+    const { products, onAddClick } = this.props;
     if (products) {
       return (
         <section>
@@ -22,8 +22,14 @@ class ListProducts extends React.Component {
                     { product.price }
                   </h3>
                 </Link>
-              </div>
-            )) }
+                <button
+                  type="button"
+                  data-testid="product-add-to-cart"
+                  onClick={ () => onAddClick(product) }
+                >
+                  Adicionar
+                </button>
+              </div>))}
           </div>
         </section>
       );
@@ -37,6 +43,7 @@ ListProducts.defaultProps = {
 
 ListProducts.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape),
+  onAddClick: PropTypes.func.isRequired,
 };
 
 export default ListProducts;

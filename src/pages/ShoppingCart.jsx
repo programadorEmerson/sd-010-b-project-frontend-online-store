@@ -22,14 +22,27 @@ class ShoppingCart extends Component {
 
   render() {
     const { products } = this.state;
-    console.log(products);
     return (
       <section>
         <h1>Carrinho de Compras</h1>
-        {/* TODO: Create a component to replace the 'p' element */}
         { products.length
-          ? products.map((product) => <p key={ product.title }>{product.title}</p>)
-          : <p>Seu Carrinho está vazio!</p>}
+          ? products.map(({ title, imgUrl, price }) => (
+            <section key={ title }>
+              <p data-testid="shopping-cart-product-name">{title}</p>
+              <img src={ imgUrl } alt={ title } width="150px" />
+              <p>{price}</p>
+              <span data-testid="shopping-cart-product-quantity">
+                <button type="button">
+                  +
+                </button>
+                1
+                <button type="button">
+                  -
+                </button>
+              </span>
+            </section>
+          ))
+          : <p data-testid="shopping-cart-empty-message">Seu Carrinho está vazio!</p>}
       </section>
     );
   }
