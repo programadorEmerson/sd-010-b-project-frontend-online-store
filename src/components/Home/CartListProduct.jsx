@@ -4,6 +4,24 @@ import { Link } from 'react-router-dom';
 import { addLocalStorage } from '../../services/dataLocalStorage';
 
 export default class CartListProduct extends Component {
+  addToCart = () => {
+    const { product } = this.props;
+    const {
+      title,
+      thumbnail,
+      price,
+      id,
+    } = product;
+    const newProduct = {
+      title,
+      thumbnail,
+      price,
+      id,
+      quantity: 1,
+    };
+    addLocalStorage('dataShoppingCart', newProduct);
+  };
+
   render() {
     const { product } = this.props;
     const { title, thumbnail, price, id } = product;
