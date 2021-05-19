@@ -9,7 +9,13 @@ class Category extends Component {
     return (
       <label htmlFor={ name }>
         {name}
-        <input data-testid="category" type="radio" value={ id } name="category" />
+        <input
+          data-testid="category"
+          type="radio"
+          value={ id }
+          id={ name }
+          name="category"
+        />
       </label>
     );
   }

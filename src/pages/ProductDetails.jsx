@@ -32,20 +32,26 @@ class ProductDetails extends Component {
     const { title, thumbnail, price, id, available_quantity: available } = product;
 
     return (
-      <div className="product-detail-container">
-        <p data-testid="product-detail-name">{title}</p>
-        <img src={ thumbnail } alt={ title } />
-        <p>{price}</p>
-        <p>{ available}</p>
-        <Rating />
-        <button
-          onClick={ () => setCart({ id, title, price, thumbnail, quant: 1, available }) }
-          type="button"
-          data-testid="product-detail-add-to-cart"
-        >
-          Adicionar ao Carrinho
-        </button>
-      </div>
+      <>
+        <div className="detail-container">
+          <p data-testid="product-detail-name">{title}</p>
+          <img src={ thumbnail } alt={ title } />
+          <p>{`R$ ${price}`}</p>
+          <p>{`Disponível: ${available}`}</p>
+          <button
+            onClick={ () => setCart({
+              id, title, price, thumbnail, quant: 1, available,
+            }) }
+            type="button"
+            data-testid="product-detail-add-to-cart"
+          >
+            Adicionar ao Carrinho
+          </button>
+        </div>
+        <div className="rating-container">
+          <Rating />
+        </div>
+      </>
     );
   }
 }

@@ -24,7 +24,7 @@ class ShoppingCart extends Component {
 
   renderContent() {
     return (
-      <div>
+      <div className="checkout">
         <h2>Checkout</h2>
         <div>
           {this.renderList()}
@@ -32,6 +32,7 @@ class ShoppingCart extends Component {
         <Link
           to="/checkout"
           data-testid="checkout-products"
+          className="btn"
         >
           Fechar Carrinho
         </Link>
