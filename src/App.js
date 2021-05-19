@@ -4,6 +4,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 
 import MainPage from './Pages/MainPage';
+import Details from './Pages/Details';
 import ShoppingCart from './Pages/ShoppingCart';
 import Header from './Components/Header';
 
@@ -15,6 +16,10 @@ function App() {
         <Switch>
           <Route path="/shopping-cart" component={ ShoppingCart } />
           <Route exact path="/" component={ MainPage } />
+          <Route
+            path="/:moreDetails"
+            render={ (props) => <Details { ...props } /> }
+          />
         </Switch>
       </BrowserRouter>
     </div>

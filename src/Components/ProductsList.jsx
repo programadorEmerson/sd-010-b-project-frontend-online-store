@@ -28,11 +28,12 @@ class ProductsList extends Component {
 
   render() {
     const { products } = this.state;
-
+    // console.log(products);
     return (
       <div className="products-list">
         { products.map((product) => (<Product
           key={ product.id }
+          id={ product.id }
           title={ product.title }
           img={ product.thumbnail }
           price={ product.price }
