@@ -41,6 +41,7 @@ export default class ItemCard extends Component {
     const { product, commaFunction } = this.props;
     const { quantity } = this.state;
     const totalPrice = product.product.price * quantity;
+    console.log(quantity);
     // localStorage.setItem('total-price', commaFunction(totalPrice.toFixed(2).toString().replace('.', ',')));
     return (
       <div className="item-container">
@@ -68,6 +69,7 @@ export default class ItemCard extends Component {
             data-testid="product-increase-quantity"
             type="button"
             onClick={ () => this.changeQuantity('+') }
+            disabled={ quantity === product.product.available_quantity }
           >
             &#43;
           </button>
@@ -88,6 +90,7 @@ ItemCard.propTypes = {
   product: PropTypes.shape({
     product: PropTypes.shape(),
     quantity: PropTypes.number,
+    available_quantity: PropTypes.number,
   }).isRequired,
   commaFunction: PropTypes.func.isRequired,
 };
