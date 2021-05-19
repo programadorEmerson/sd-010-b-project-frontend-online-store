@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class ProductCard extends Component {
   render() {
     const { product, addCart, removeItemCart, removeCart } = this.props;
-    const { title, price, thumbnail, countItens } = product;
+    const { title, price, thumbnail, countItems } = product;
 
     return (
       <div>
@@ -22,7 +22,7 @@ class ProductCard extends Component {
         >
           +
         </button>
-        <p>{ countItens }</p>
+        <p>{ countItems }</p>
         <button
           type="button"
           data-testid="product-decrease-quantity"
@@ -33,7 +33,7 @@ class ProductCard extends Component {
         <button type="button" onClick={ () => removeCart(product) }>X</button>
         <p data-testid="shopping-cart-product-quantity">
           Quantidade de itens no carrinho
-          {countItens}
+          {countItems}
           {' '}
           itens
         </p>
@@ -44,7 +44,7 @@ class ProductCard extends Component {
 }
 
 ProductCard.propTypes = {
-  countItens: PropTypes.number.isRequired,
+  countItems: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   thumbnail: PropTypes.string.isRequired,
