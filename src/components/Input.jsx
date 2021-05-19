@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CartButton from './CartButton';
 import * as api from '../services/api';
+import CheckoutButton from './CheckoutButton';
 
 class Input extends React.Component {
   constructor(props) {
@@ -44,6 +45,8 @@ class Input extends React.Component {
           Pesquisar
         </button>
         <CartButton />
+        <br />
+        <CheckoutButton />
         <br />
         <p
           data-testid="home-initial-message"
