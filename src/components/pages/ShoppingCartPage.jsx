@@ -25,11 +25,13 @@ export default class ShoppingCartPage extends Component {
 
   upQuantityItem(item, index) {
     console.log(`antes ${item.quantity}`);
+
     const { products } = this.state;
     const a = products[index].quantity += 1;
     this.setState(({ products }) => ({
       products: [...products, a],
     }));
+
     console.log(products[index].quantity);
     console.log(`depois ${item.quantity}`);
   }
