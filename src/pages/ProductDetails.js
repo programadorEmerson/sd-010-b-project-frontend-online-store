@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Rate from '../components/Rate';
 // import ButtonToCart from '../components/ButtonToCart';
 import * as api from '../services/api';
 
@@ -42,6 +43,7 @@ class ProductDetails extends Component {
           ADICIONAR AO CARRINHO
         </button>
         <Link data-testid="shopping-cart-button" to="/cart">VER CARRINHO</Link>
+        <Rate id={ id } />
       </div>
     );
   }
