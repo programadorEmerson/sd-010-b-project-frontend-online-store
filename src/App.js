@@ -8,18 +8,20 @@ import ProductDetails from './pages/ProductDetails';
 
 import './App.css';
 
-function App() {
-  return (
-    <main>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={ ShoppingHome } />
-          <Route exact path="/cart" component={ ShoppingCart } />
-          <Route exact path="/product/:id" component={ ProductDetails } />
-        </Switch>
-      </BrowserRouter>
-    </main>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <main>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ ShoppingHome } />
+            <Route exact path="/cart" component={ ShoppingCart } />
+            <Route exact path="/product/:id" component={ ProductDetails } />
+          </Switch>
+        </BrowserRouter>
+      </main>
+    );
+  }
 }
 
 export default App;

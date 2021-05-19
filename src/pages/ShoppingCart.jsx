@@ -25,7 +25,7 @@ class ShoppingCart extends Component {
     return (
       <section>
         <h1>Carrinho de Compras</h1>
-        { products.length
+        { products
           ? products.map(({ title, imgUrl, price }) => (
             <section key={ title }>
               <p data-testid="shopping-cart-product-name">{title}</p>
@@ -42,7 +42,7 @@ class ShoppingCart extends Component {
               </span>
             </section>
           ))
-          : <p data-testid="shopping-cart-empty-message">Seu Carrinho está vazio!</p>}
+          : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
       </section>
     );
   }

@@ -40,11 +40,13 @@ class ShoppingHome extends Component {
     () => this.updateState());
   }
 
-  handleAddClick({ title, price, thumbnail: imgUrl }) {
+  handleAddClick({ id, title, price, thumbnail: imgUrl }) {
     const product = {
+      id,
       title,
       price,
       imgUrl,
+      quantity: 1,
     };
     this.setState((prevState) => ({
       cartProducts: [...prevState.cartProducts, product],
