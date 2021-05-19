@@ -30,7 +30,7 @@ class CartItem extends Component {
   renderProductName(name) {
     return (
       <div
-        className="product-title"
+        className="product-name"
         data-testid="shopping-cart-product-name"
       >
         { name }
