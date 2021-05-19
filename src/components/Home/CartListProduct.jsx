@@ -12,7 +12,7 @@ export default class CartListProduct extends Component {
       price,
       id,
     } = product;
-    const newProduct = {
+    const cartItem = {
       title,
       thumbnail,
       price,
