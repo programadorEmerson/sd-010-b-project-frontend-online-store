@@ -12,3 +12,26 @@ export const saveCartLocalStorage = (cart) => {
 };
 
 export const readCartLocalStorage = () => JSON.parse(localStorage.getItem('cart'));
+
+export const deleteEveryFromLocalStorage = (id) => {
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  const newCart = cart.filter((item) => item.id !== id);
+
+  saveCartLocalStorage(newCart);
+};
+
+export const addToLocalStorage = (id) => {
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  const product = cart.find((item) => item.id === id);
+
+  cart.push(product);
+  saveCartLocalStorage(cart);
+};
+
+export const removeFromLocalStorage = (id) => {
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  const deleteIndex = cart.map((item) => item.id).indexOf(id);
+
+  cart.splice(deleteIndex, 1);
+  saveCartLocalStorage(cart);
+};
