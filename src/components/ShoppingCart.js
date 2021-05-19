@@ -26,9 +26,11 @@ class ShoppingCart extends React.Component {
               R$
               { price }
             </p>
-            <p data-testid="shopping-cart-product-quantity">
+            <span>Quantidade:</span>
+            {' '}
+            <span data-testid="shopping-cart-product-quantity">
               { quantity }
-            </p>
+            </span>
           </div>
         )) }
       </div>

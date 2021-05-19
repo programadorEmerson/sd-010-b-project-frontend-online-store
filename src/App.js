@@ -49,16 +49,17 @@ class App extends React.Component {
      productsCart.forEach((product, index) => {
        if (product.id === id) {
          productIsInList = true;
-         this.setState((prevState) => ({ productsCart:
-          [...prevState.productsCart, prevState.productsCart[index].quantity + 1] }));
+         console.log(productsCart[index].quantity);
+         this.setState((prevState) => ({ [productsCart[index].quantity]:
+          (prevState.productsCart[index].quantity + 1) }));
+         console.log(productsCart[index].quantity);
        }
      });
-     if (!productIsInList) {
-       his.setState((oldState) => (
+     if (productIsInList === false) {
+       this.setState((oldState) => (
          { productsCart:
           [...oldState.productsCart, { id, title, img, price, quantity: 1 }] }));
      }
-     t;
    }
 
    render() {
