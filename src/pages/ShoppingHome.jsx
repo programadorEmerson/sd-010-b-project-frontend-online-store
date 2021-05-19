@@ -16,11 +16,13 @@ class ShoppingHome extends Component {
       categoryID: '',
       products: undefined,
       query: '',
+      cartProducts: [],
     };
 
     this.handleQueryChange = this.handleQueryChange.bind(this);
     this.updateState = this.updateState.bind(this);
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    this.handleAddClick = this.handleAddClick.bind(this);
   }
 
   handleQueryChange(inputedQuery) {
@@ -36,6 +38,21 @@ class ShoppingHome extends Component {
       query: '',
     },
     () => this.updateState());
+  }
+
+  handleAddClick({ title, price, thumbnail: imgUrl }) {
+    const product = {
+      title,
+      price,
+      imgUrl,
+    };
+    this.setState((prevState) => ({
+      cartProducts: [...prevState.cartProducts, product],
+    }),
+    () => {
+      const { cartProducts } = this.state;
+      localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+    });
   }
 
   async updateState() {
@@ -58,7 +75,7 @@ class ShoppingHome extends Component {
           <Link to="/cart" data-testid="shopping-cart-button">
             Cart
           </Link>
-          <ProductsList products={ products } />
+          <ProductsList products={ products } onAddClick={ this.handleAddClick } />
         </main>
       </section>
     );
