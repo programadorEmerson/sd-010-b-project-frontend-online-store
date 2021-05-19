@@ -28,7 +28,11 @@ class Header extends Component {
         >
           Search
         </button>
-        <Link to="/shopping-cart" data-testid="shopping-cart-button">
+        <Link
+          to="/shopping-cart"
+          data-testid="shopping-cart-button"
+          className="shopping-cart-button"
+        >
           <GrCart />
         </Link>
         <p className="home-initial-message" data-testid="home-initial-message">
