@@ -9,9 +9,11 @@ class SearchList extends React.Component {
     const { title, thumbnail, price, id } = item;
     return (
       <li data-testid="product" className="product-card">
-        {
-          title
-        }
+        <p className="card-title">
+          {
+            title
+          }
+        </p>
         {' '}
         <img alt="foto" width="100px" src={ thumbnail } />
         {' '}
