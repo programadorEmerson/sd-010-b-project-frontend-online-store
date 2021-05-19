@@ -47,8 +47,8 @@ ProductDetails.propTypes = {
         price: PropTypes.number,
         id: PropTypes.string,
         address: PropTypes.shape({
-          cityName: PropTypes.string,
-          stateName: PropTypes.string,
+          city_name: PropTypes.string,
+          state_name: PropTypes.string,
         }).isRequired,
       }).isRequired,
     }).isRequired,
