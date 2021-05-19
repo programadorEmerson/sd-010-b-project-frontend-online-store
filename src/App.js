@@ -20,25 +20,28 @@ class App extends React.Component {
     const { results } = await api.getProductsFromCategoryAndQuery(categoryId, title);
     const findProduct = results.find((result) => result.id === id);
     const exist = addCart.find((product) => product.product.id === id);
-    let newCartList = [];
-    if (exist) {
-      newCartList = addCart.map((product) => {
-        if (product.product.id === findProduct.id) {
-          product.quantity += 1;
-        }
-        return product;
-      });
-    } else {
-      newCartList = [...addCart, { product: findProduct, quantity: 1 }];
-    }
+    console.log(id);
 
-    this.setState({ addCart: newCartList });
+    this.setState((oldState) => {
+      let newCartList = [];
+      if (exist) {
+        newCartList = oldState.addCart.map((product) => {
+          if (product.product.id === findProduct.id) {
+            product.quantity += 1;
+          }
+          return product;
+        });
+      } else {
+        newCartList = [...oldState.addCart, { product: findProduct, quantity: 1 }];
+      }
+      return { addCart: newCartList };
+    });
   };
 
   handleQuantity = (type, id) => {
     const { addCart } = this.state;
-    let newCartList = [];
 
+    let newCartList = [];
     if (type === 'decrease') {
       const findProduct = addCart.find((product) => product.product.id === id);
       if (findProduct) {
@@ -68,10 +71,7 @@ class App extends React.Component {
         });
       }
     }
-
-    console.log('newCartList', newCartList);
-
-    this.setState({ addCart: newCartList });
+    this.setState(() => ({ addCart: newCartList }));
   }
 
   render() {

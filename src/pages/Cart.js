@@ -45,7 +45,7 @@ class Cart extends React.Component {
               >
                 -
               </button>
-              <p>{quantity}</p>
+              <p data-testid="shopping-cart-product-quantity">{quantity}</p>
               <button
                 type="button"
                 data-testid="product-increase-quantity"
@@ -56,13 +56,12 @@ class Cart extends React.Component {
               <button type="button">X</button>
             </div>
           ))}
-          <p
-            data-testid="shopping-cart-product-quantity"
-          >
-            Quantidade de produtos:
+          <p>
             {
               this.renderQuantity()
             }
+          </p>
+          <p>
             Valor total:
             {
               this.renderPrice()
