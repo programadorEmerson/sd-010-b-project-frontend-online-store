@@ -20,7 +20,7 @@ class ProductsList extends Component {
   getList = async () => {
     const { query, categoryID } = this.props;
     const { results } = await getProductsFromCategoryAndQuery(categoryID, query);
-
+    // results is a key of the response's API
     this.setState({
       products: results,
     });

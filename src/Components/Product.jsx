@@ -6,7 +6,7 @@ class Product extends Component {
   render() {
     const { title, img, price, id } = this.props;
     return (
-      <div data-testid="product" key={ id } className="product-card">
+      <section data-testid="product" id={ id } className="product-card">
         <div className="product-title">{ title }</div>
         <div className="product-img-ctn">
           <div>
@@ -14,8 +14,10 @@ class Product extends Component {
           </div>
         </div>
         <div className="price-tag">{ `R$ ${price}` }</div>
-        <Link to={ `/${id}` }> VER DETALHES </Link>
-      </div>
+        <Link to={ `/${id}` }>
+          <button data-testid="product-detail-link" type="button">Ver Detalhes</button>
+        </Link>
+      </section>
     );
   }
 }
