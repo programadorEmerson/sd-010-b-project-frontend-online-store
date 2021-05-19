@@ -20,3 +20,7 @@
   text-align: center;
   width: 210px;
 }
+
+.card-title {
+  padding: 0 3px;
+}

@@ -17,7 +17,7 @@ class SearchList extends React.Component {
         {' '}
         <img alt="foto" width="100px" src={ thumbnail } />
         {' '}
-        {price}
+        { price }
         <button type="button">
           <Link
             to={ `/details/${item.category_id}/${id}` }
