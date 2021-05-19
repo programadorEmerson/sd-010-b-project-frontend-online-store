@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getItemById } from '../services/newRequest';
 
 class ProductCard extends Component {
   constructor(props) {
@@ -9,18 +8,19 @@ class ProductCard extends Component {
     const { results } = this.props;
     this.state = {
       results,
-      itemToCart: '',
+      cart: [],
+      shouldRedirect: false,
     };
-
+    this.clickCart = this.clickCart.bind(this);
     this.showResults = this.showResults.bind(this);
   }
 
   showResults() {
-    const { results } = this.state;
+    const { results, shouldRedirect } = this.state;
     const card = results.map((result) => {
       const { title, thumbnail, price, id } = result;
       return (
-        <div key={ title } data-testid="product">
+        <div key={ id } data-testid="product">
           <h4>{ title }</h4>
           <Link to={ `/product/${id}` } data-testid="product-detail-link">
             <img
@@ -33,38 +33,26 @@ class ProductCard extends Component {
           <span>{ id }</span>
           <button
             type="button"
+            onClick={ this.clickCart }
             data-testid="product-add-to-cart"
-            onClick={ this.makeDivCart }
-          >Adicionar ao carrinho</button>
+          >
+            Add
+          </button>
         </div>
       );
     });
     return card;
   }
 
-  makeDivCart({ target }) {
-    const id = target.previousSibling;
-
-    getItemById(id).then(({ title, }) => (<div key={ title } data-testid="product">
-      <h4>{ title }</h4>
-      <Link to={ `/product/${id}` } data-testid="product-detail-link">
-        <img
-          src={ thumbnail }
-          width="150"
-          alt={ title }
-        />
-      </Link>
-      <span>{ price }</span>
-      <span>{ id }</span>
-      <button
-        type="button"
-        data-testid="product-add-to-cart"
-        onClick={ this.makeDivCart }
-      >
-        Adicionar ao carrinho
-      </button>
-    </div>);
-    );
+  async clickCart({ target }) {
+    const element = target.previousSibling.innerText;
+    localStorage.id = element;
+    /* const dad = target.previousSibling.innerText;
+    const { cart } = this.state;
+    this.setState({
+      cart: [...cart, dad],
+      shouldRedirect: true,
+    }); */
   }
 
   noResult() {
@@ -77,6 +65,7 @@ class ProductCard extends Component {
     const { results } = this.state;
     return (
       results.length === 0 ? this.noResult() : this.showResults()
+      // shouldRedirect && this.shouldRedirect()
     );
   }
 }
