@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class ProductDetails extends React.Component {
   searchAndRenderItemDetais = () => {
-    const { itemUserWantDetail } = this.props;
+    const { itemUserWantDetail, getProductList } = this.props;
     return (
       <div>
         <p data-testid="product-detail-name">
@@ -22,7 +22,18 @@ class ProductDetails extends React.Component {
           {' '}
           {itemUserWantDetail.available_quantity}
         </p>
-        <Link to="/shopping-cart">Adicionar ao Carrinho</Link>
+        <button
+          type="button"
+          onClick={ () => getProductList(
+            itemUserWantDetail.id,
+            itemUserWantDetail.title,
+            itemUserWantDetail.thumbnail,
+            itemUserWantDetail.price,
+          ) }
+          data-testid="product-detail-add-to-cart"
+        >
+          AddCart
+        </button>
         {' '}
         <Link to="/">VOLTAR</Link>
       </div>);

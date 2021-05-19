@@ -43,9 +43,27 @@ class App extends React.Component {
      });
    }
 
-   getProductList = (title, img, price) => {
-     this.setState((oldState) => (
-       { productsCart: [...oldState.productsCart, { title, img, price, quantity: 1 }] }));
+   getProductList = (id, title, img, price) => {
+     const { productsCart } = this.state;
+     let productIsInList = false;
+     productsCart.forEach((product, index) => {
+       console.log(product.id, id);
+       if (product.id === id) {
+         //  productsCart[index].quantity += 1;
+         //  this.setState({ productsCart: [...productsCart] });
+         // forma alternativa para arrays e objetos, não usar com outros tipos de constantes !!
+         productIsInList = true;
+         const novoCarrinho = productsCart;
+         novoCarrinho[index].quantity += 1;
+         this.setState({ productsCart: novoCarrinho });
+       }
+     });
+     if (productIsInList === false) {
+       console.log('criei o primeiro produto no estado');
+       this.setState((oldState) => (
+         { productsCart:
+          [...oldState.productsCart, { id, title, img, price, quantity: 1 }] }));
+     }
    }
 
    render() {
@@ -108,6 +126,7 @@ class App extends React.Component {
                render={ (props) => (<ProductDetails
                  { ...props }
                  itemUserWantDetail={ itemUserWantDetail }
+                 getProductList={ this.getProductList }
                />) }
              />
 
