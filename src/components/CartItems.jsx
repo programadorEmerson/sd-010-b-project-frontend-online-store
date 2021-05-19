@@ -40,14 +40,6 @@ export default class CartItems extends Component {
             { products.length }
           </p>
         </div>
-        <div className="top-cart">
-          <span>Produto</span>
-          <span />
-          <span />
-          <span>Quantidade</span>
-          <span>Preço</span>
-        </div>
-
         {products.map((product) => (
           <ItemCard
             key={ product.product.id }

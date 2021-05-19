@@ -140,7 +140,7 @@ footer p {
 }
 
 .item-container {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   justify-content: space-between;
 }
@@ -148,11 +148,25 @@ footer p {
 .info-wrap {
   align-items: center;
   display: flex;
+  flex-direction: column;
   width: 750px;
+}
+
+.description {
+  display: flex;
+  width: 400px
 }
 
 .info-wrap img {
   margin-right: 10px;
+}
+
+.quantity {
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .item-container span {
@@ -161,4 +175,8 @@ footer p {
 
 .prices {
   width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }

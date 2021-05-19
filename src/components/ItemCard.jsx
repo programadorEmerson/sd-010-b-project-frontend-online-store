@@ -7,13 +7,18 @@ export default class ItemCard extends Component {
     return (
       <div className="item-container">
         <div className="info-wrap">
+          <h4>Produto</h4>
+          <div className="description">
           <img src={ product.product.thumbnail } alt="" width="120px" />
           <p data-testid="shopping-cart-product-name">{ product.product.title }</p>
+          </div>
         </div>
         <div className="quantity">
-          <span data-testid="shopping-cart-product-quantity">{ product.quantity }</span>
+          <h4>Quantidade</h4>
+          <p data-testid="shopping-cart-product-quantity">{ product.quantity }</p>
         </div>
         <div className="prices">
+          <h4>Preço</h4>
           <p>{ `R$ ${product.product.price}` }</p>
         </div>
       </div>
