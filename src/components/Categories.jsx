@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import * as api from '../services/api';
 import Category from './Category';
-import '../Style/Categories.css'
+import '../Style/Categories.css';
 
 class Categories extends Component {
   constructor() {
@@ -15,21 +17,22 @@ class Categories extends Component {
     this.apiCategories();
   }
 
+  valorDaId = () => {
+    const { id } = this.state;
+    const { categoryId } = this.props;
+    categoryId(id);
+  }
+
   apiCategories() {
     api.getCategories().then((category) => this.setState({
       categories: category,
     }));
   }
 
-  valorDaId = () => {
-    const { id } = this.state
-    this.props.categoryId(id);
-  }
-
   render() {
     const { categories } = this.state;
     return (
-      <div className='categories'>
+      <div className="categories">
         {categories.map((category) => (<Category
           key={ category.id }
           category={ category }
@@ -38,5 +41,9 @@ class Categories extends Component {
     );
   }
 }
+
+Categories.propTypes = {
+  categoryId: PropTypes.string,
+}.isRequired;
 
 export default Categories;

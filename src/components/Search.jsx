@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../Style/Search.css';
 
 class Search extends Component {
@@ -11,31 +12,41 @@ class Search extends Component {
   }
 
   stateValue = () => {
-    const { id, product } = this.state
-    this.props.buscafunc(id, product);
+    const { id, product } = this.state;
+    const { buscafunc } = this.props;
+    buscafunc(id, product);
   }
 
   changeState(event) {
-    const { value } = event.target
+    const { value } = event.target;
     this.setState({
       product: value,
     });
   }
-  
+
   render() {
     return (
       <div>
-        <h4 className='searchTitle' data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
+        <h4 className="searchTitle" data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
         </h4>
         <form>
           <input onChange={ this.changeState } type="text" />
-          <button className='searchButton'
-          onClick={ this.stateValue } type="button">Buscar</button>
+          <button
+            className="searchButton"
+            onClick={ this.stateValue }
+            type="button"
+          >
+            Buscar
+          </button>
         </form>
       </div>
-    )
+    );
   }
 }
+
+Search.propTypes = {
+  buscafunc: PropTypes.func,
+}.isRequired;
 
 export default Search;

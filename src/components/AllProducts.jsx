@@ -4,12 +4,11 @@ import Loading from './Loading';
 import Product from './Product';
 
 class AllProducts extends Component {
-  
   render() {
     const { loading, products } = this.props;
     if (loading) return <Loading />;
     return (
-      <div className='allProducts'>
+      <div className="allProducts">
         {products.map((product) => (
           <Product
             key={ product.id }

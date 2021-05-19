@@ -8,19 +8,19 @@ import AllProducts from './AllProducts';
 
 class Home extends Component {
   constructor() {
-    super()
-    this.categoryId = this.categoryId.bind(this)
-    this.buscafunc=this.buscafunc.bind(this)
+    super();
+    this.categoryId = this.categoryId.bind(this);
+    this.buscafunc = this.buscafunc.bind(this);
     this.state = {
       products: [],
       loading: true,
-    }
+    };
   }
 
   componentDidMount() {
     const { id, filterText } = this.state;
     console.log(filterText);
-    this.buscafunc(id, filterText)
+    this.buscafunc(id, filterText);
   }
 
   buscafunc(id, product) {
@@ -39,19 +39,18 @@ class Home extends Component {
   }
 
   render() {
-
     const { loading, products } = this.state;
-    
+
     return (
-      <div className='home'>
-        <div className='searchBox'>
-          <Search buscafunc={this.buscafunc}/>
-          <Categories buscafunc={this.buscafunc}/>
+      <div className="home">
+        <div className="searchBox">
+          <Search buscafunc={ this.buscafunc } />
+          <Categories buscafunc={ this.buscafunc } />
         </div>
         <div>
           <AllProducts
-            loading={ loading } 
-            products={products}
+            loading={ loading }
+            products={ products }
           />
         </div>
         <div>
