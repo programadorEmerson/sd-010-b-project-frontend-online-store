@@ -5,7 +5,6 @@ import ProductCard from '../components/ProductCard';
 class ShoppingCart extends Component {
   constructor(props) {
     super(props);
-    this.amount = this.amount.bind(this);
     this.state = {
       total: 0,
     };
@@ -21,7 +20,7 @@ class ShoppingCart extends Component {
     }
   }
 
-  amount() {
+  amount = () => {
     const { cartItems } = this.props;
     const number = 0;
     if (cartItems.length >= 1) {
