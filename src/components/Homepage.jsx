@@ -69,7 +69,7 @@ class Homepage extends React.Component {
       <div>
         <div className="header__container">
           <input
-            data-testid="querinput"
+            data-testid="query-input"
             type="text"
             name="searchQuery"
             value={ searchQuery }
