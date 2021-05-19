@@ -47,7 +47,6 @@ class App extends React.Component {
      const { productsCart } = this.state;
      let productIsInList = false;
      productsCart.forEach((product, index) => {
-       console.log(product.id, id);
        if (product.id === id) {
          //  productsCart[index].quantity += 1;
          //  this.setState({ productsCart: [...productsCart] });
@@ -64,6 +63,40 @@ class App extends React.Component {
          { productsCart:
           [...oldState.productsCart, { id, title, img, price, quantity: 1 }] }));
      }
+   }
+
+   increaseQuantity = (id) => {
+     const { productsCart } = this.state;
+     productsCart.forEach((product, index) => {
+       if (product.id === id) {
+         const novoCarrinho = productsCart;
+         novoCarrinho[index].quantity += 1;
+         this.setState({ productsCart: novoCarrinho });
+       }
+     });
+   }
+
+   decreaseQuantity = (id) => {
+     const { productsCart } = this.state;
+     productsCart.forEach((product, index) => {
+       if (product.id === id) {
+         const novoCarrinho = productsCart;
+         novoCarrinho[index].quantity -= 1;
+         if (novoCarrinho[index].quantity < 0) novoCarrinho[index].quantity = 0;
+         this.setState({ productsCart: novoCarrinho });
+       }
+     });
+   }
+
+   removeProductFromCart = (id) => {
+     const { productsCart } = this.state;
+     productsCart.forEach((product, index) => {
+       if (product.id === id) {
+         const novoCarrinho = productsCart;
+         novoCarrinho.splice(index, 1);
+         this.setState({ productsCart: novoCarrinho });
+       }
+     });
    }
 
    render() {
@@ -132,7 +165,12 @@ class App extends React.Component {
 
              <Route
                path="/shopping-cart"
-               render={ () => <ShoppingCart productsCart={ productsCart } /> }
+               render={ () => (<ShoppingCart
+                 productsCart={ productsCart }
+                 increaseQuantity={ this.increaseQuantity }
+                 decreaseQuantity={ this.decreaseQuantity }
+                 removeProductFromCart={ this.removeProductFromCart }
+               />) }
              />
 
            </Switch>

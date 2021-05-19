@@ -6,7 +6,11 @@ class ShoppingCart extends React.Component {
   //   super(props);
   // }
   render() {
-    const { productsCart } = this.props;
+    const { productsCart,
+      increaseQuantity,
+      decreaseQuantity,
+      removeProductFromCart,
+    } = this.props;
     if (productsCart.length === 0) {
       return (
         <h1 data-testid="shopping-cart-empty-message">
@@ -16,7 +20,7 @@ class ShoppingCart extends React.Component {
     }
     return (
       <div>
-        { productsCart.map(({ title, img, price, quantity }) => (
+        { productsCart.map(({ id, title, img, price, quantity }) => (
           <div key={ title }>
             <h3 data-testid="shopping-cart-product-name">
               { title }
@@ -26,11 +30,41 @@ class ShoppingCart extends React.Component {
               R$
               { price }
             </p>
+            <button
+              type="button"
+              onClick={ () => decreaseQuantity(id) }
+              data-testid="product-decrease-quantity"
+            >
+              {' '}
+              -
+              {' '}
+
+            </button>
             <span>Quantidade:</span>
             {' '}
             <span data-testid="shopping-cart-product-quantity">
               { quantity }
             </span>
+            <button
+              type="button"
+              onClick={ () => increaseQuantity(id) }
+              data-testid="product-increase-quantity"
+            >
+              {' '}
+              +
+              {' '}
+
+            </button>
+            <button
+              type="button"
+              onClick={ () => removeProductFromCart(id) }
+              color="red"
+            >
+              {' '}
+              X
+              {' '}
+
+            </button>
           </div>
         )) }
       </div>
@@ -40,6 +74,9 @@ class ShoppingCart extends React.Component {
 
 ShoppingCart.propTypes = {
   productsCart: PropTypes.arrayOf(PropTypes.object),
+  increaseQuantity: PropTypes.func.isRequired,
+  decreaseQuantity: PropTypes.func.isRequired,
+  removeProductFromCart: PropTypes.func.isRequired,
 };
 
 ShoppingCart.defaultProps = {
