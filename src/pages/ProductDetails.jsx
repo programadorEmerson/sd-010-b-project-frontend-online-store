@@ -1,6 +1,6 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
+import EvaluationForm from '../components/EvaluationForm';
 import * as api from '../services/api';
 
 class ProductDetails extends React.Component {
@@ -10,18 +10,21 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    const { match } = this.props;
-    console.log(match);
-    api.getProductsFromCategoryAndQuery(match.params.id, match.params.id2)
-      .then((data) => {
-        this.setState({ data: data.results[0] });
+    const { match: { params: { id } } } = this.props;
+    console.log(id);
+    api.getProduct(id)
+      .then((response) => {
+        this.setState({
+          data: response,
+        });
       });
   }
 
   render() {
     const { data } = this.state;
+    console.log(data);
     return (
-      <>
+      <main>
         <h1 data-testid="product-detail-name">
           {data.title}
         </h1>
@@ -30,15 +33,16 @@ class ProductDetails extends React.Component {
           {data.price}
         </h1>
         <img src={ data.thumbnail } alt="" />
-      </>
+        <EvaluationForm />
+      </main>
     );
   }
 }
 
 ProductDetails.propTypes = {
-  match: Proptypes.shape({
-    params: Proptypes.objectOf,
-    id: Proptypes.string,
+  match: PropTypes.shape({
+    params: PropTypes.objectOf,
+    id: PropTypes.string,
   }).isRequired,
 };
 export default ProductDetails;

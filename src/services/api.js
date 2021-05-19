@@ -7,3 +7,8 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
   const endPoint = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&q=${query}`;
   return fetch(endPoint).then((data) => data.json());
 }
+
+export async function getProduct(product) {
+  const endPoint = `https://api.mercadolibre.com/items/${product}`;
+  return fetch(endPoint).then((data) => data.json());
+}
