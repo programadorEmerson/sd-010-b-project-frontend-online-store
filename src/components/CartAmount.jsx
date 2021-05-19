@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as api2 from '../services/api2';
 
 class CartAmount extends React.Component {
   constructor() {
@@ -10,17 +11,21 @@ class CartAmount extends React.Component {
   }
 
   componentDidMount() {
-    this.fechComponentState();
+    this.fetchComponentState();
   }
 
   handleIncreaseClick = () => {
+    const { id } = this.props;
+    api2.addToLocalStorage(id);
     this.setState((estadoAnterior) => ({
       count: estadoAnterior.count + 1,
     }));
   }
 
   handleDecreaseClick = () => {
+    const { id } = this.props;
     const { count } = this.state;
+    api2.removeFromLocalStorage(id);
     if (count > 0) {
       this.setState((estadoAnterior) => ({
         count: estadoAnterior.count - 1,
@@ -28,26 +33,25 @@ class CartAmount extends React.Component {
     }
   }
 
-  fechComponentState = () => {
+  fetchComponentState = () => {
     const { quantity } = this.props;
     this.setState({ count: quantity });
   }
 
   handleExclusion = ({ target }) => {
-    const { className } = target;
-    console.log(className);
-    const getDiv = document.getElementsByClassName(className)[0];
-    console.log(getDiv);
+    const { id } = target;
+    console.log(id);
+    const getDiv = document.querySelector(`#${id}`);
     getDiv.remove();
-    // incrementar aqui uma funcao que atualize o local storage de acordo com a remocao
+    api2.deleteEveryFromLocalStorage(id);
   }
 
   render() {
-    const { id, product, handleQuantityChange } = this.props;
+    const { id, title, handleQuantityChange } = this.props;
     const { count } = this.state;
     return (
-      <div className={ id }>
-        <h3 data-testid="shopping-cart-product-name">{product}</h3>
+      <div id={ id }>
+        <h3 data-testid="shopping-cart-product-name">{title}</h3>
         <p
           data-testid="shopping-cart-product-quantity"
           onChange={ handleQuantityChange }
@@ -70,7 +74,7 @@ class CartAmount extends React.Component {
           -
 
         </button>
-        <button type="button" className={ id } onClick={ this.handleExclusion }>x</button>
+        <button type="button" id={ id } onClick={ this.handleExclusion }>x</button>
       </div>
     );
   }
@@ -79,7 +83,7 @@ class CartAmount extends React.Component {
 CartAmount.propTypes = {
   id: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
-  product: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   handleQuantityChange: PropTypes.func.isRequired,
 };
 

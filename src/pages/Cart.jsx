@@ -50,7 +50,7 @@ class Cart extends React.Component {
             key={ item[0].id }
             id={ item[0].id }
             quantity={ item.length }
-            product={ item[0].title }
+            title={ item[0].title }
           />))}
       </div>
     );
