@@ -14,7 +14,6 @@ class DetailsCard extends React.Component {
       nameItems: [],
       textArea: '',
       select: 5,
-      id:'',
     };
   }
 
@@ -32,19 +31,19 @@ class DetailsCard extends React.Component {
   }
 
   handleChange(field, newValue) {
-    this.setState({ [field]: newValue,  });
+    this.setState({ [field]: newValue });
   }
 
   handleSubmit = (id) => () => {
     const { textArea, select } = this.state;
-    const conteudo = `Texto:${textArea}, Nota:${select}`;
+    const conteudo = `${textArea} Nota:${select}`;
     const value = JSON.parse(localStorage.getItem(id));
     const result = !value ? [] : value;
     localStorage.setItem(id, JSON.stringify([...result, conteudo]));
   }
 
   getName = (title) => () => {
-    this.setState({ nameItems: title});
+    this.setState({ nameItems: title });
   }
 
   getAPI = async () => {
