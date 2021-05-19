@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import ButtonSendCart from '../components/ButtonSendCart';
 import Button from '../components/Button';
+import Rating from '../components/Rating';
+import Coments from '../components/Coments';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -42,6 +44,8 @@ class ProductDetails extends React.Component {
           id="product-detail-add-to-cart"
         />
         <Button />
+        <Rating />
+        <Coments />
       </div>
     );
   }
