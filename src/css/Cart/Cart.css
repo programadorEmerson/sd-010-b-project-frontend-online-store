@@ -2,26 +2,3 @@
   display: flex;
   flex-direction: column;
 }
-
-.cart-item {
-  align-items: center;
-  border: 5px solid black;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 30px;
-  width: 80%;
-}
-
-.config-product-quantity {
-  display: flex;
-  flex-direction: row;
-}
-
-.product-quantity {
-  align-items: center;
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  width: 50px;
-}
