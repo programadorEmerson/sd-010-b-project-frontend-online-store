@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
+import * as api from '../services/api';
+import CardButton from './CardButton';
+import Search from './Search';
 import Categories from './Categories';
 import AllProducts from './AllProducts';
-import Search from './Search';
-import * as api from '../services/api';
+
 
 class Home extends Component {
   constructor() {
@@ -68,6 +70,9 @@ class Home extends Component {
           <AllProducts
             loading={ loading } products={products}
         />
+        </div>
+        <div>
+          <CardButton />
         </div>
       </div>
     );
