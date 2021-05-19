@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CartCard from '../components/CartCard';
 
 class ShoppingCart extends Component {
   constructor() {
@@ -8,10 +9,36 @@ class ShoppingCart extends Component {
     this.state = {
       products: [],
     };
+    this.handleIncrease = this.handleIncrease.bind(this);
+    this.handleDecrease = this.handleDecrease.bind(this);
   }
 
   componentDidMount = () => {
     this.getLocalstorage();
+  }
+
+  handleIncrease(id) {
+    const { products } = this.state;
+    const newProducts = [...products];
+    const requestedId = newProducts.find((element) => element.id === id);
+    const requestedProductIndex = newProducts.indexOf(requestedId);
+    newProducts[requestedProductIndex].quantity += 1;
+    this.setState(() => ({
+      products: newProducts,
+    }));
+  }
+
+  handleDecrease(id) {
+    const { products } = this.state;
+    const newProducts = [...products];
+    const requestedId = newProducts.find((element) => element.id === id);
+    const requestedProductIndex = newProducts.indexOf(requestedId);
+    if (newProducts[requestedProductIndex].quantity > 0) {
+      newProducts[requestedProductIndex].quantity -= 1;
+      this.setState(() => ({
+        products: newProducts,
+      }));
+    }
   }
 
   getLocalstorage = () => {
@@ -26,21 +53,17 @@ class ShoppingCart extends Component {
       <section>
         <h1>Carrinho de Compras</h1>
         { products
-          ? products.map(({ title, imgUrl, price }) => (
-            <section key={ title }>
-              <p data-testid="shopping-cart-product-name">{title}</p>
-              <img src={ imgUrl } alt={ title } width="150px" />
-              <p>{price}</p>
-              <span data-testid="shopping-cart-product-quantity">
-                <button type="button">
-                  +
-                </button>
-                1
-                <button type="button">
-                  -
-                </button>
-              </span>
-            </section>
+          ? products.map(({ id, title, imgUrl, price, quantity }) => (
+            <CartCard
+              id={ id }
+              key={ id }
+              title={ title }
+              imgUrl={ imgUrl }
+              price={ price }
+              quantity={ quantity }
+              handleIncrease={ this.handleIncrease }
+              handleDecrease={ this.handleDecrease }
+            />
           ))
           : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
       </section>
