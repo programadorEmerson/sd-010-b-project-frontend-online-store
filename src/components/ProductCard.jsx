@@ -22,7 +22,9 @@ class ProductCard extends Component {
         >
           +
         </button>
-        <p>{ countItems }</p>
+        <p data-testid="shopping-cart-product-quantity">
+          { `Quantidade de itens: ${countItems}` }
+        </p>
         <button
           type="button"
           data-testid="product-decrease-quantity"

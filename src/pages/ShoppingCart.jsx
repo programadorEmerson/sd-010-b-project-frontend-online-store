@@ -3,21 +3,40 @@ import PropTypes from 'prop-types';
 import ProductCard from '../components/ProductCard';
 
 class ShoppingCart extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.amount = this.amount.bind(this);
     this.state = {
-      countProduct: 0,
+      total: 0,
     };
   }
 
-  btnAdd = () => {
-    this.setState((prevState) => ({
-      countProduct: prevState.countProduct + 1,
-    }));
-  };
+  componentDidMount() {
+    this.amount();
+  }
+
+  componentDidUpdate(previusValueProps) {
+    if (previusValueProps !== this.props) {
+      this.amount();
+    }
+  }
+
+  amount() {
+    const { cartItems } = this.props;
+    const number = 0;
+    if (cartItems.length >= 1) {
+      this.setState({
+        total: cartItems.reduce(
+          (acc, value) => (acc + value.price) * value.countItems,
+          number,
+        ),
+      });
+    }
+  }
 
   render() {
     const { cartItems, addCart, removeItemCart, removeCart } = this.props;
+    const { total } = this.state;
 
     if (cartItems.length === 0) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
@@ -39,13 +58,10 @@ class ShoppingCart extends Component {
           ))}
         </ul>
 
-        <p data-testid="shopping-cart-product-quantity">
-          Quantidade de itens no carrinho
-          {cartItems.length}
-          {' '}
-          itens
+        <p>
+          Valor total:
+          { total }
         </p>
-
         <button type="button">Finalizar compras</button>
       </div>
     );
