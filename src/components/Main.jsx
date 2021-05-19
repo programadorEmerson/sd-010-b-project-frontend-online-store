@@ -21,19 +21,18 @@ class Main extends React.Component {
   }
 
   componentDidMount = () => {
-    
-    const localStorageQuantity = localStorage.getItem('totalQuantity');
-    if (localStorageQuantity === null) {
-      this.setState({ totalQuantityItems: 0 }, () => {
-        this.saveState();
-        this.updateProductsQuantity();
-      })
-    } else {
-      this.setState({ totalQuantityItems: localStorageQuantity }, () => {
-        this.saveState();
-        this.updateProductsQuantity();
-      })
-    }
+    // const localStorageQuantity = localStorage.getItem('totalQuantity');
+    // if (localStorageQuantity === null) {
+    //   this.setState({ totalQuantityItems: 0 }, () => {
+    //     this.saveState();
+    //     this.updateProductsQuantity();
+    //   });
+    // } else {
+    //   this.setState({ totalQuantityItems: localStorageQuantity }, () => {
+    this.saveState();
+    this.updateProductsQuantity();
+    //   });
+    // }
   }
 
   // Atualiza a quantidade total de produtos no carrinho
@@ -44,7 +43,7 @@ class Main extends React.Component {
     );
 
     this.setState({ totalQuantityItems: totalQuantity }, () => {
-      localStorage.setItem('localStorageQuantity', totalQuantity)
+      localStorage.setItem('localStorageQuantity', totalQuantity);
     });
   }
 
@@ -99,7 +98,6 @@ class Main extends React.Component {
   //  Adiciona o produto ao carrinho de compras (passado como prop para o card)
   addProductToShoppingCart = (product) => {
     const { shoppingCart } = this.state;
-
     const testIfProductExist = shoppingCart.find(
       (oldProduct) => oldProduct.id === product.id,
     );
@@ -107,7 +105,7 @@ class Main extends React.Component {
     if (testIfProductExist === undefined) {
       product.quantity = 1;
       this.setState({ shoppingCart: [...shoppingCart, product] }, () => {
-        this.updateProductsQuantity()
+        this.updateProductsQuantity();
         // localStorage.setItem('localStorageQuantity', product.quantity)
       });
     } else if (product.quantity < product.available_quantity) {
@@ -115,6 +113,7 @@ class Main extends React.Component {
       // localStorage.setItem('localStorageQuantity', product.quantity)
       this.updateProductsQuantity();
     }
+    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
   }
 
   render() {
