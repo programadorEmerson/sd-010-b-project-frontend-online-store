@@ -23,17 +23,13 @@ export default class ShoppingCartPage extends Component {
   //   }));
   // }
 
-  upQuantityItem(item, index) {
-    console.log(`antes ${item.quantity}`);
-
+  upQuantityItem(index) {
     const { products } = this.state;
-    const a = products[index].quantity += 1;
-    this.setState(({ products }) => ({
-      products: [...products, a],
+    const newProducts = [...products];
+    newProducts[index].quantity += 1;
+    this.setState(() => ({
+      products: newProducts,
     }));
-
-    console.log(products[index].quantity);
-    console.log(`depois ${item.quantity}`);
   }
 
   // getProduct(product) {
@@ -42,16 +38,22 @@ export default class ShoppingCartPage extends Component {
   //   }));
   // }
 
-  downQuantityItem(item) {
-    item.quantity -= 1;
-    console.log(item.quantity);
+  downQuantityItem(index) {
+    const { products } = this.state;
+    const newProducts = [...products];
+    newProducts[index].quantity -= 1;
+    this.setState(() => ({
+      products: newProducts,
+    }));
   }
 
   render() {
     const { products } = this.state;
     if (products.length) {
       products.forEach((item) => {
-        item.quantity = 1;
+        if (!item.quantity) {
+          item.quantity = 1;
+        }
       });
     }
 
@@ -72,15 +74,17 @@ export default class ShoppingCartPage extends Component {
                 <img src={ item.thumbnail } alt={ item.site_id } width="30px" />
                 <p>{`R$ ${item.price}`}</p>
                 <button
+                  data-testid="product-increase-quantity"
                   type="button"
-                  onClick={ () => this.upQuantityItem(item, index) }
+                  onClick={ () => this.upQuantityItem(index) }
                 >
                   +
                 </button>
-                <p>{item.quantity}</p>
+                <p data-testid="shopping-cart-product-quantity">{item.quantity}</p>
                 <button
+                  data-testid="product-decrease-quantity"
                   type="button"
-                  onClick={ () => this.downQuantityItem(item) }
+                  onClick={ () => this.downQuantityItem(index) }
                 >
                   -
 
@@ -89,9 +93,9 @@ export default class ShoppingCartPage extends Component {
             ))}
         </section>
         <section>
-          <p data-testid="shopping-cart-product-quantity">
+          <p>
             Quantidade de items no carrinho:
-            {products.length}
+            {products.quantity}
           </p>
         </section>
       </>
