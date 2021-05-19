@@ -2,6 +2,48 @@
   text-align: center;
 }
 
+#input-search{
+  margin: 5px auto;
+  width: 80%;
+}
+
+.header{
+  background-color: #fff159;
+}
+
+.home-initial-message{
+  text-align: center;
+  margin: 1px 35px;
+}
+
+.categories{
+  border: 2px solid #fff159;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 35px;
+  text-align: left;
+}
+
+.product-list{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 70%;
+  flex-direction: row;
+}
+
+.product-item{
+  flex: 1;
+  margin: 5px;
+	padding: 0 10px;
+  width: 250px;
+  height: 420px;
+}
+
+.home{
+  display: flex;
+  width: 100%;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
