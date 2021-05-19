@@ -31,7 +31,7 @@ export default class Info extends React.Component {
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
-          onClick={ () => funt(title) }
+          onClick={ () => funt(id, title) }
         >
           Colocar no carrinho
         </button>
