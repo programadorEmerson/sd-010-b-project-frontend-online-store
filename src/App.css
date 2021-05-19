@@ -139,6 +139,14 @@ footer p {
   justify-content: space-around;
 }
 
+.prod-names {
+  width: 200px;
+}
+
+.quantprice-names {
+  width: 10px;
+}
+
 .item-container {
   align-items: center;
   display: flex;
@@ -155,12 +163,30 @@ footer p {
   margin-right: 10px;
 }
 
+.remove-div {
+  display: flex;
+}
+
 .item-container span {
   display: flex;
 }
 
 .prices {
-  width: 200px;
+  width: 300px;
+}
+
+.quant-field {
+  margin: 5px;
+}
+
+.quantity {
+  display: flex;
+  width: 400px;
+}
+
+.finish {
+  display: flex;
+  justify-content: space-around;
 }
 
 .estrela {

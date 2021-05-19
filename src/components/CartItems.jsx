@@ -7,6 +7,7 @@ export default class CartItems extends Component {
 
     this.state = {
       products: [],
+      totalPrice: 0,
     };
   }
 
@@ -29,8 +30,12 @@ export default class CartItems extends Component {
     });
   }
 
+  // adicionar ponto na casa dos milhares e milhões
+  // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript?page=1&tab=votes#tab-top
+  numberWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
   render() {
-    const { products } = this.state;
+    const { products, totalPrice } = this.state;
     return (
       <div>
         <div>
@@ -41,19 +46,33 @@ export default class CartItems extends Component {
           </p>
         </div>
         <div className="top-cart">
-          <span>Produto</span>
-          <span />
-          <span />
-          <span>Quantidade</span>
-          <span>Preço</span>
+          <span className="prod-names">Produtos</span>
+          <span className="quantprice-names">Quantidade</span>
+          <span className="quantprice-names">Preço</span>
         </div>
 
         {products.map((product) => (
           <ItemCard
             key={ product.product.id }
             product={ product }
+            commaFunction={ this.numberWithCommas }
           />
         ))}
+        <hr />
+        <div className="finish">
+          {/* Requisito 12 botão de finalizar compra */}
+          <button type="button">Finalizar compra</button>
+          <span />
+          <span />
+          <div>
+            <span>Total da compra: </span>
+            <span>
+              R$
+              {' '}
+              { this.numberWithCommas(totalPrice) }
+            </span>
+          </div>
+        </div>
       </div>
     );
   }

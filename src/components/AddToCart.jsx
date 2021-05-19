@@ -24,6 +24,7 @@ export default class AddToCart extends Component {
   }
 
   render() {
+    localStorage.setItem('total-price', '0');
     return (
       <div>
         <button
