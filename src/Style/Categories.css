@@ -1,11 +1,13 @@
-.categories{
-  margin: 10px;
+.categories {
+  background-color: rgb(255, 255, 255);
   font-style: italic;
   font-weight: bold;
   display: flex;
+  margin: 10px;
   flex-direction: column;
 }
 
-.category{
-    margin-top: 20px;
+.category {
+  background-color: rgb(255, 255, 255);
+  margin-top: 20px;
 }

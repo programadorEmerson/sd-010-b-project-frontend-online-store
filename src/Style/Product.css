@@ -1,25 +1,27 @@
-.home{
+.home {
   display: flex;
 }
 
 .allProducts {
   display: flex;
   flex-wrap: wrap;
-  margin: 10px 10px;
+  margin: 10px;
 }
 
 .productContainer {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: 2px;
+  background-color: rgb(255, 255, 255);
   border: 3px gray solid;
   border-radius: 10px;
-  width: 250px;
+  display: flex;
+  flex-direction: column;
   height: 300px;
+  margin: 2px;
+  width: 250px;
 }
 
 .title {
+  background-color: rgb(255, 255, 255);
   word-wrap: break-word;
   text-align: center;
   height: 200px;
@@ -31,6 +33,7 @@
 }
 
 .price {
+  background-color: rgb(255, 255, 255);
   display: flex;
   font-style: oblique;
 

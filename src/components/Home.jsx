@@ -27,6 +27,9 @@ class Home extends Component {
     console.log(filterText);
     this.buscafunctest(id, filterText)
   }
+  shouldComponentUpdate() {
+    return true
+  }
 
   buscafunctest(id, product){
     if ( id === product) {
