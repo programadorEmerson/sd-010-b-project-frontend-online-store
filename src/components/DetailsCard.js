@@ -61,6 +61,7 @@ class DetailsCard extends React.Component {
         <h2 data-testid=" product-detail-name">{ title }</h2>
         <img src={ thumbnail } alt={ title } />
         <p>{ price }</p>
+        <Link to="/">Home</Link>
         <Link data-testid="shopping-cart-button" id="cart" to="/cart">Carrinho</Link>
         <button
           data-testid="product-detail-add-to-cart"
