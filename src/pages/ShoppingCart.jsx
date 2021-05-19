@@ -1,40 +1,36 @@
 import React from 'react';
 
-import ProductCard from '../components/ProductCard';
+import CartItem from '../components/CartItem';
 
 class ShoppingCart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      quantity: props.quantity,
-    };
-  }
-
-  handleClick = (operator) => {
-    const { quantity } = this.state;
-    if (operator === '+') {
-      this.setState({
-        quantity: quantity + 1,
-      });
-    }
-    this.setState({
-      quantity: quantity - 1,
-    });
-  }
+  // handleClick = (operator) => {
+  //   const { quantity } = this.state;
+  //   if (operator === '+') {
+  //     this.setState({
+  //       quantity: quantity + 1,
+  //     });
+  //   }
+  //   this.setState({
+  //     quantity: quantity - 1,
+  //   });
+  // }
 
   render() {
-    const cartList = localStorage.getItem('shoppintCart');
-    if (!cartList) {
+    const items = JSON.parse(localStorage.getItem('shoppingCart'));
+    if (!localStorage.getItem('shoppingCart')) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio </p>;
     }
     return (
       <div>
-        {cartList.map((item) => (
-          <div key={ item.id }>
-            <ProductCard key={ item.id } product={ item } />
-            <button
+        {/* <div>
+          {items.map((itemObj) => <CartItem key={ itemObj.id } itemObj={ itemObj } />)}
+        </div> */}
+        {items.map((itemObj) => (
+          <div key={ itemObj.id }>
+            <CartItem key={ itemObj.id } itemObj={ itemObj } />
+            {/* <button
               type="button"
-              key={ item.id }
+              key={ itemObj.id }
               onClick={ this.handleClick('+') }
               data-testid="product-increase-quantity"
             >
@@ -42,12 +38,12 @@ class ShoppingCart extends React.Component {
             </button>
             <button
               type="button"
-              key={ item.id }
+              key={ itemObj.id }
               onClick={ this.handleClick('-') }
               data-testid="product-decrease-quantity"
             >
               +
-            </button>
+            </button> */}
           </div>
 
         ))}
