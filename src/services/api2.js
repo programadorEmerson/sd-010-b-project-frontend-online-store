@@ -20,9 +20,10 @@ export const deleteEveryFromLocalStorage = (id) => {
   saveCartLocalStorage(newCart);
 };
 
-export const addToLocalStorage = (id) => {
+export const addToLocalStorage = async (id) => {
   const cart = JSON.parse(localStorage.getItem('cart'));
-  const product = cart.find((item) => item.id === id);
+  let product = cart.find((item) => item.id === id);
+  if (!product) { product = await getProductsFromId(id); }
 
   cart.push(product);
   saveCartLocalStorage(cart);

@@ -23,6 +23,7 @@ class Cart extends React.Component {
 
     if (products) {
       const quantidadeProdutos = products.reduce((acc, obj) => {
+        if (!obj) return;
         const key = obj.id;
         if (!acc[key]) {
           acc[key] = [];
