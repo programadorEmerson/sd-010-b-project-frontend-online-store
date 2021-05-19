@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import States from '../Assets/data';
 
 class Checkout extends Component {
   render() {
@@ -70,7 +71,14 @@ class Checkout extends Component {
           <input type="text" placeholder="Número" />
           <input type="text" placeholder="Cidade" />
           <select>
-            <option>Estado</option>
+            <option selected>Estado</option>
+            { States.map((state) => (
+              <option
+                key={ state.id }
+                value={ state.id }
+              >
+                {`${state.id}-${state.name}` }
+              </option>))}
           </select>
         </section>
         <section>
