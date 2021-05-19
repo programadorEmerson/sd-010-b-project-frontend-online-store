@@ -6,18 +6,20 @@ import * as api from '../services/api';
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { data: [] };
+    this.state = { data: undefined };
   }
 
   componentDidMount() {
+    this.fetchAPI();
+  }
+
+  fetchAPI = async () => {
     const { match: { params: { id } } } = this.props;
     console.log(id);
-    api.getProduct(id)
-      .then((response) => {
-        this.setState({
-          data: response,
-        });
-      });
+    const result = await api.getProductsFromCategoryAndQuery(id);
+    this.setState({
+      data: result,
+    });
   }
 
   render() {
@@ -26,13 +28,13 @@ class ProductDetails extends React.Component {
     return (
       <main>
         <h1 data-testid="product-detail-name">
-          {data.title}
+          {data !== undefined ? data.title : 'Pequeno Principe, O'}
         </h1>
         <h1>
           R$:
-          {data.price}
+          {data !== undefined ? data.price : ''}
         </h1>
-        <img src={ data.thumbnail } alt="" />
+        <img src={ data !== undefined ? data.thumbnail : '' } alt="" />
         <EvaluationForm />
       </main>
     );
