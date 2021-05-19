@@ -40,7 +40,7 @@ class ProductDetails extends React.Component {
               { `${attribute.name}: ${attribute.value_name}` }
             </li>))}
         </ul>
-        <p>
+        <p data-testid={ shipping.free_shipping ? 'free-shipping' : '' }>
           {shipping.free_shipping ? 'Frete Grátis' : null}
         </p>
         <Rating />

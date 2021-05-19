@@ -11,7 +11,7 @@ class ProductCard extends React.Component {
         <h3>{title}</h3>
         <img src={ thumbnail } alt={ title } />
         <p>{ price }</p>
-        <p data-testid="free-shipping">
+        <p data-testid={ shipping.free_shipping ? 'free-shipping' : '' }>
           {shipping.free_shipping ? 'Frete Grátis' : null}
         </p>
         <Link
