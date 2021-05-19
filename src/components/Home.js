@@ -16,6 +16,7 @@ class Home extends React.Component {
     this.checked = this.checked.bind(this);
     this.recuperarCategorias = this.recuperarCategorias.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.retrieveStorageMaybe = this.retrieveStorageMaybe.bind(this);
 
     this.state = {
       categories: [],
@@ -28,6 +29,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.recuperarCategorias();
+    this.retrieveStorageMaybe();
   }
 
   handleAddToCart(cardProps) {
@@ -57,6 +59,15 @@ class Home extends React.Component {
     this.setState({
       inputfilter: target.value,
     });
+  }
+
+  retrieveStorageMaybe() {
+    const storageProducts = JSON.parse(localStorage.getItem('cartState'));
+    if (storageProducts) {
+      this.setState({
+        cartState: storageProducts,
+      });
+    }
   }
 
   recuperarCategorias() {
