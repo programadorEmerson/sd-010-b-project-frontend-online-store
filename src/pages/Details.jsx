@@ -48,6 +48,26 @@ class Details extends Component {
               <h2>- (0) +</h2>
             </section>
             <AddToCart data-testid="product-detail-add-to-cart" product={ product } />
+            <fieldset>
+              <legend>Avalições</legend>
+              <input type="email" name="" id="" />
+              <textarea
+                name=""
+                data-testid="product-detail-evaluation"
+                cols="30"
+                rows="10"
+                placeholder="Mensagem(opcional)"
+              />
+              <button type="submit">Avaliar</button>
+            </fieldset>
+            <Link to="/" style={ { textDecoration: 'none' } }>
+              <button
+                className="btn-search"
+                type="button"
+              >
+                Voltar &#10550;
+              </button>
+            </Link>
           </section>
           <Link to="/">Voltar</Link>
         </section>
