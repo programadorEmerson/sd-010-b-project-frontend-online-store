@@ -10,21 +10,6 @@ export default class ItemCard extends Component {
     };
   }
 
-  // addToQuantity = () => {
-  //   const { product } = this.props;
-  //   const productsOnCart = JSON.parse(localStorage.getItem('products-on-cart'));
-  //   const findProduct = productsOnCart.find(
-  //     ({ product: { id } }) => id === product.product.id,
-  //   );
-  //   findProduct.quantity += 1;
-  //   const oldState = productsOnCart.filter(
-  //     ({ product: { id } }) => id !== product.product.id,
-  //   );
-  //   localStorage.setItem('products-on-cart', JSON.stringify(
-  //     [...oldState, findProduct],
-  //   ));
-  // }
-
   changeQuantity = (operator) => {
     const { product } = this.props;
     const productsOnCart = JSON.parse(localStorage.getItem('products-on-cart'));
@@ -53,12 +38,14 @@ export default class ItemCard extends Component {
   }
 
   render() {
-    const { product } = this.props;
+    const { product, commaFunction } = this.props;
     const { quantity } = this.state;
     const totalPrice = product.product.price * quantity;
+    // localStorage.setItem('total-price', commaFunction(totalPrice.toFixed(2).toString().replace('.', ',')));
     return (
       <div className="item-container">
         <div className="remove-div">
+          {/* Deixar para depois */}
           <button type="button">Remover</button>
         </div>
         <div className="info-wrap">
@@ -86,7 +73,11 @@ export default class ItemCard extends Component {
           </button>
         </div>
         <div className="prices">
-          <p>{ `R$ ${totalPrice.toFixed(2)}` }</p>
+          {/* troca o ponto para virgula nos centavos */}
+          {/* https://stackoverflow.com/questions/13672106/jquery-replace-dot-to-comma-and-round-it/13672180 */}
+          <p>
+            { `R$ ${commaFunction(totalPrice.toFixed(2).toString().replace('.', ','))}` }
+          </p>
         </div>
       </div>
     );
@@ -98,4 +89,5 @@ ItemCard.propTypes = {
     product: PropTypes.shape(),
     quantity: PropTypes.number,
   }).isRequired,
+  commaFunction: PropTypes.func.isRequired,
 };

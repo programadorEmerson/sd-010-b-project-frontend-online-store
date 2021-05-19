@@ -181,5 +181,10 @@ margin: 5px;
 
 .quantity {
   display: flex;
-  width: 400px
+  width: 400px;
+}
+
+.finish {
+  display: flex;
+  justify-content: space-around;
 }

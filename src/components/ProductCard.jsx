@@ -4,8 +4,15 @@ import PropTypes from 'prop-types';
 import AddToCart from './AddToCart';
 
 class ProductCard extends React.Component {
+  // adicionar ponto na casa dos milhares e milhões
+  // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript?page=1&tab=votes#tab-top
+  numberWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
   render() {
     const { product, product: { id, title, thumbnail, price } } = this.props;
+    /* troca o ponto para virgula nos centavos */
+    /* https://stackoverflow.com/questions/13672106/jquery-replace-dot-to-comma-and-round-it/13672180 */
+    const priceWithStyle = price.toFixed(2).toString().replace('.', ',');
     return (
       <section className="products-section">
         <section data-testid="product" className="product-box">
@@ -16,7 +23,7 @@ class ProductCard extends React.Component {
             <img src={ thumbnail } alt={ title } />
           </div>
           <div className="product-price">
-            <p>{ `R$${price}` }</p>
+            <p>{ `R$${this.numberWithCommas(priceWithStyle)}` }</p>
           </div>
           <div>
             <AddToCart data-testid="product-add-to-cart" product={ product } />
