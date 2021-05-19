@@ -23,7 +23,7 @@ class CartItem extends Component {
     );
   }
 
-  renderImageProduct(source) {
+  renderProductImage(source) {
     return <Image source={ source } alt="imagem do produto" width="100" />;
   }
 
