@@ -1,46 +1,25 @@
 import React, { Component } from 'react';
-import getItemById from '../services/newRequest';
 
 export default class ShoppingCart extends Component {
   constructor() {
     super();
 
-    this.getItemDetails = this.getItemDetails.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
     this.excludeItem = this.excludeItem.bind(this);
 
-    if (!localStorage.getItem('id')) {
-      localStorage.setItem('id', ',');
-    }
-
     const itens = JSON.parse(localStorage.getItem('id'));
-    console.log(itens);
+
+    let willRender = false;
+    
+    if (itens.length > 0) {
+      willRender = true;
+    } 
+
     this.state = {
       id: itens,
-      element: [],
-      renderCart: false,
+      renderCart: willRender,
     };
-  }
-
-  componentDidMount() {
-    const { id } = this.state;
-    if (id[0] !== '') {
-      const newPromise = id.map((itemId) => (this.getItemDetails(itemId)));
-      console.log(newPromise);
-      Promise.all(newPromise).then((value) => this.setState((previousState) => ({
-        element: [...previousState.element, value],
-        renderCart: true,
-      })));
-    }
-  }
-
-  async getItemDetails(itemId) {
-    const { id } = this.state;
-    if (id) {
-      const response = await getItemById(itemId);
-      return (response);
-    }
   }
 
   emptyCart() {
@@ -71,8 +50,8 @@ export default class ShoppingCart extends Component {
   }
 
   renderCart() {
-    const { element } = this.state;
-    return element[0].map((item) => (
+    const { id } = this.state;
+    return id.map((item) => (
       <div key={ item.id }>
         <span
           data-testid="shopping-cart-product-name"
