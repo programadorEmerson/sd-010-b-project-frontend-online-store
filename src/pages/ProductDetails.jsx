@@ -35,7 +35,6 @@ class ProductDetaills extends Component {
     const { product } = this.state;
     const { title, thumbnail, price, warranty } = product;
     const { onClick } = this.props;
-
     return (
       <div>
         <Link to="/shopping-cart" data-testid="shopping-cart-button">
@@ -77,9 +76,8 @@ ProductDetaills.propTypes = {
     price: PropTypes.number,
     warranty: PropTypes.string,
     thumbnail: PropTypes.string,
-  }).isRequired,
-
+  }),
   onClick: PropTypes.func.isRequired,
-};
+}.isRequired;
 
 export default ProductDetaills;
