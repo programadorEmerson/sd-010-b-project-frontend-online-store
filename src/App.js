@@ -56,6 +56,7 @@ class App extends React.Component {
        }
      });
      if (productIsInList === false) {
+       console.log('criei o primeiro produto no estado');
        this.setState((oldState) => (
          { productsCart:
           [...oldState.productsCart, { id, title, img, price, quantity: 1 }] }));
