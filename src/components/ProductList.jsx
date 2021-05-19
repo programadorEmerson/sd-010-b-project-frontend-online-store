@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import ProductCard from './ProductCard';
 import Loading from './Loading';
 
