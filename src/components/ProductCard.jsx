@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 export default class ProductCard extends React.Component {
   render() {
     const { product: { title, thumbnail, price, id } } = this.props;
-    console.log(id);
     return (
       <section data-testid="product">
         <h3>{ title }</h3>
@@ -15,7 +14,7 @@ export default class ProductCard extends React.Component {
           data-testid="product-detail-link"
           to={ { pathname: `/details/${id}` } }
         >
-          <p>Detalhes</p>
+          Detalhes
         </Link>
       </section>
     );
