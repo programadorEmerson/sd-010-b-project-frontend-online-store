@@ -43,13 +43,11 @@ class App extends Component {
         (p) => p.id === product.id,
       )
         ? previousValue.cartItems.map((p) => {
-          if (p.id === product.id) {
-            if (p.countItems) {
-              return {
-                ...p,
-                countItems: p.countItems - 1,
-              };
-            }
+          if (p.id === product.id && p.countItems) {
+            return {
+              ...p,
+              countItems: p.countItems - 1,
+            };
           }
           return p;
         }) : [...previousValue.cartItems, { ...product, countItems: 1 }],

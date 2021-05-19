@@ -69,6 +69,9 @@ ShoppingCart.propTypes = {
     id: PropTypes.string,
     thumbnail: PropTypes.string,
   }).isRequired,
+  addCart: PropTypes.func.isRequired,
+  removeItemCart: PropTypes.func.isRequired,
+  removeCart: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;
