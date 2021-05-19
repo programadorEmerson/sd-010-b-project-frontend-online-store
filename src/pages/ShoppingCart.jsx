@@ -10,8 +10,12 @@ export default class ShoppingCart extends Component {
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
     this.excludeItem = this.excludeItem.bind(this);
 
+    if (!localStorage.getItem('id')) {
+      localStorage.setItem('id', ',');
+    }
+
     this.state = {
-      id: localStorage.id.split(',').splice(1),
+      id: localStorage.getItem('id').split(',').splice(1),
       element: [],
       renderCart: false,
     };
@@ -19,7 +23,9 @@ export default class ShoppingCart extends Component {
 
   componentDidMount() {
     const { id } = this.state;
-    id.map((itemId) => (this.getItemDetails(itemId)));
+    if (id[0] !== '') {
+      id.map((itemId) => (this.getItemDetails(itemId)));
+    }
   }
 
   async getItemDetails(itemId) {
