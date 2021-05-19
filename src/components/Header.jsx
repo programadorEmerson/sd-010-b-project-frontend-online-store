@@ -15,6 +15,7 @@ class Header extends Component {
       <div className="header">
         <input
           id="input-search"
+          className="input-search"
           type="text"
           placeholder="busca"
           data-testid="query-input"
