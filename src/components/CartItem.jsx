@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//
+
 class CartItem extends React.Component {
   render() {
     const { name, handleCartBtnEvent, qty, id, price, Aqty } = this.props;
