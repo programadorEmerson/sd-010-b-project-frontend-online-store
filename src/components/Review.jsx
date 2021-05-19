@@ -3,18 +3,18 @@ import React from 'react';
 
 class Review extends React.Component {
   render() {
-    const { product } = this.props;
+    /* const { product } = this.props;
     const {
       seller: {
         seller_reputation: {
           transactions: {
             ratings: { negative, positive } } } } } = product;
     console.log(negative);
-    console.log(positive);
+    console.log(positive); */
     return (
       <>
-        <li>{ negative }</li>
-        <li>{ positive }</li>
+        {/* <li>{ negative }</li>
+        <li>{ positive }</li> */}
         <form>
           <label htmlFor="reviewInput">
             <textarea

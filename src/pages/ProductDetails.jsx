@@ -6,6 +6,7 @@ import Review from '../components/Review';
 class ProductDetails extends Component {
   render() {
     const { location: { state: { product } } } = this.props;
+    /* console.log(product); */
     const {
       title,
       thumbnail,
