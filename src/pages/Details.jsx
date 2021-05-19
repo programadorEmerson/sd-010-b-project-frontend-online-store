@@ -32,9 +32,8 @@ class Details extends Component {
       <section>
         <section>
           <img src={ thumbnail } alt={ title } />
-          <h2 data-testid="product-detail-name">{title}</h2>
-          <p>{`R$ ${price}`}</p>
-          <p>Descrição:</p>
+          <h2 data-testid="product-detail-name">{`${title} - R$ ${price},00`}</h2>
+          <h3>Especificações Técnicas</h3>
           <ul>
             {attributes.map((atribut) => (
               <li
