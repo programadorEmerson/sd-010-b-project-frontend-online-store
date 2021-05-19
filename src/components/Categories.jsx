@@ -20,10 +20,6 @@ class Categories extends React.Component {
   fetchAPI = async (category, query) => {
     const { handleQuery } = this.props;
     const results = await api.getProductsFromCategoryAndQuery(category, query);
-    console.log('Categories Fetch:');
-    console.log(query);
-    console.log(category);
-    console.log(results);
     handleQuery(results, query);
   }
 
@@ -41,8 +37,6 @@ class Categories extends React.Component {
       selectedCategories: category,
     }, () => {
       const { selectedCategories: newCategories } = this.state;
-      console.log(`Selected Categories: ${newCategories}`);
-      console.log(query);
       this.fetchAPI(newCategories, query);
     });
   }
