@@ -19,6 +19,26 @@ class App extends Component {
     };
   }
 
+  removeItem = (id) => {
+    const { shoppingCartItens } = this.state;
+    const index = shoppingCartItens.findIndex((product) => product.id === id);
+    shoppingCartItens.splice(index, 1);
+    this.setState({ shoppingCartItens });
+  }
+
+  changeItemQuantity = (id, bool) => {
+    const { shoppingCartItens } = this.state;
+    const index = shoppingCartItens.findIndex((product) => product.id === id);
+    if (bool) {
+      shoppingCartItens[index].quantity += 1;
+    } else if (shoppingCartItens[index].quantity > 1) {
+      shoppingCartItens[index].quantity -= 1;
+    } else {
+      shoppingCartItens.splice(index, 1);
+    }
+    this.setState({ shoppingCartItens });
+  }
+
   addToCartHandler = (id, title, price) => {
     const { shoppingCartItens } = this.state;
 
@@ -48,7 +68,11 @@ class App extends Component {
             <Route
               path="/shopping-cart"
               render={ () => (
-                <ShoppingCart shoppingCartItens={ shoppingCartItens } />
+                <ShoppingCart
+                  shoppingCartItens={ shoppingCartItens }
+                  changeItemQuantity={ this.changeItemQuantity }
+                  removeItem={ this.removeItem }
+                />
               ) }
             />
             <Route
