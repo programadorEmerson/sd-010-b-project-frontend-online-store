@@ -53,7 +53,10 @@ class App extends Component {
             />
             <Route
               path="/:id"
-              render={ (props) => <ProductDetails { ...props } /> }
+              render={ (props) => (<ProductDetails
+                addToCartHandler={ this.addToCartHandler }
+                { ...props }
+              />) }
             />
             <Route
               exact
