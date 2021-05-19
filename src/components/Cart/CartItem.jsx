@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Image from './Image';
 import CustomButton from './CustomButton';
+import '../../css/Cart/CartItem.css';
 
 class CartItem extends Component {
   getCartItemId = () => {
