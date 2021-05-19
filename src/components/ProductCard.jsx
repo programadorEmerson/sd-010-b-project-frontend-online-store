@@ -10,7 +10,6 @@ class ProductCard extends Component {
 
     this.state = {
       results,
-      cart: [],
     };
 
     this.clickCart = this.clickCart.bind(this);
@@ -48,7 +47,7 @@ class ProductCard extends Component {
 
   clickCart({ target }) {
     const element = target.previousSibling.innerHTML;
-    localStorage.setItem("id", element);
+    localStorage.setItem('id', element);
   }
 
   noResult() {
