@@ -35,6 +35,13 @@ export default class CartListProduct extends Component {
           <img src={ `${thumbnail}` } alt="..." />
         </Link>
         <p>{ price }</p>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ () => this.addToCart() }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }
