@@ -6,9 +6,16 @@ export default class ShoppingCart extends Component {
     super();
 
     this.getItemDetails = this.getItemDetails.bind(this);
+    this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    this.excludeItem = this.excludeItem.bind(this);
+
+    if (!localStorage.getItem('id')) {
+      localStorage.setItem('id', ',');
+    }
 
     this.state = {
-      id: localStorage.id,
+      id: localStorage.getItem('id').split(',').splice(1),
       element: [],
       renderCart: false,
     };
@@ -16,17 +23,19 @@ export default class ShoppingCart extends Component {
 
   componentDidMount() {
     const { id } = this.state;
-    this.getItemDetails(id);
+    if (id[0] !== '') {
+      id.map((itemId) => (this.getItemDetails(itemId)));
+    }
   }
 
   async getItemDetails(itemId) {
-    const { id, element } = this.state;
+    const { id } = this.state;
     if (id) {
       const response = await getItemById(itemId);
-      this.setState({
-        element: [...element, response],
+      this.setState((previousState) => ({
+        element: [...previousState.element, response],
         renderCart: true,
-      });
+      }));
     }
   }
 
@@ -38,30 +47,71 @@ export default class ShoppingCart extends Component {
     );
   }
 
+  increaseQuantity({ target }) {
+    const atualQuantity = Number(target.previousSibling.innerHTML);
+    target.previousSibling.innerHTML = atualQuantity + 1;
+  }
+
+  decreaseQuantity({ target }) {
+    if (Number(target.nextSibling.innerHTML) === 1) {
+      return false;
+    }
+
+    const atualQuantity = Number(target.nextSibling.innerHTML);
+    target.nextSibling.innerHTML = atualQuantity - 1;
+  }
+
+  excludeItem({ target }) {
+    target.parentNode.innerHTML = '';
+    localStorage.id = '';
+  }
+
   renderCart() {
     const { element } = this.state;
-    return (
-      <div>
+    return element.map((item) => (
+      <div key={ item.id }>
         <span
           data-testid="shopping-cart-product-name"
         >
-          { element[0].title }
+          { item.title }
         </span>
-        <p
+        <button
+          type="button"
+          onClick={ this.decreaseQuantity }
+          data-testid="product-decrease-quantity"
+        >
+          -
+        </button>
+        <span
           data-testid="shopping-cart-product-quantity"
         >
-          { element.length }
-        </p>
+          1
+        </span>
+        <button
+          type="button"
+          onClick={ this.increaseQuantity }
+          data-testid="product-increase-quantity"
+        >
+          +
+        </button>
+        <button
+          type="button"
+          onClick={ this.excludeItem }
+        >
+          X
+        </button>
       </div>
-    );
+    ));
   }
 
   render() {
     const { renderCart } = this.state;
     return (
       <div>
-        { renderCart === false ? this.emptyCart() : this.renderCart() }
+        { !renderCart ? this.emptyCart() : this.renderCart() }
       </div>
     );
   }
 }
+
+// Teste de push
