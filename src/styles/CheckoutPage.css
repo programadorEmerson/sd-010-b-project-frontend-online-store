@@ -1,0 +1,39 @@
+.cp-checkout {
+  align-items: center;
+  background-color: #ce9f95;
+  border-radius: 15px;
+  box-shadow: 17px 13px 30px -21px rgba(0, 0, 0, 0.75);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto 0;
+  width: 55vw;
+}
+
+.cp-checkout_row {
+  display: flex;
+  height: 4rem;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 1rem;
+  width: 80%;
+}
+
+.cp-checkout_first {
+  text-align: start;
+}
+
+.cp-checkout_title {
+  width: 70%;
+}
+
+.cp-checkout_qty {
+  text-align: center;
+  width: 10%;
+}
+
+
+.cp-checkout_price {
+  text-align: center;
+  width: 20%;
+}

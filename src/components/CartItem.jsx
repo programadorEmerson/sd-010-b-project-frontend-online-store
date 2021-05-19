@@ -7,6 +7,7 @@ import trashIcon from '../img/pagecart/delete.svg';
 class CartItem extends React.Component {
   render() {
     const { name, handleCartBtnEvent, qty, id, price, thumbnail } = this.props;
+    console.log((Math.round((price + Number.EPSILON) * 100) / 100).toFixed(2));
     return (
       <div className="pc-cartItem">
         <div className="pc-cartItem__img-name">
@@ -18,47 +19,48 @@ class CartItem extends React.Component {
             {name}
           </p>
         </div>
+        <div className="pc-cartItem__btn-trash-price">
+          <div className="qtybutton__container">
+            <button
+              className="qtybutton__button"
+              data-testid="product-increase-quantity"
+              name="plus"
+              type="button"
+              onClick={ (e) => handleCartBtnEvent(e, id) }
+            >
+              +
+            </button>
+            <p
+              data-testid="shopping-cart-product-quantity"
+              className="qtybutton_text"
+            >
+              {qty}
 
-        <div className="qtybutton__container">
-          <button
-            className="qtybutton__button"
-            data-testid="product-increase-quantity"
-            name="plus"
-            type="button"
+            </p>
+            <button
+              className="qtybutton__button"
+              data-testid="product-decrease-quantity"
+              name="subtract"
+              type="button"
+              onClick={ (e) => handleCartBtnEvent(e, id) }
+            >
+              -
+            </button>
+          </div>
+          <img
+            className="pc-cartItem__removeIcon"
+            src={ trashIcon }
+            alt="remove icon"
+            name="remove"
+            aria-hidden="true"
             onClick={ (e) => handleCartBtnEvent(e, id) }
-          >
-            +
-          </button>
-          <p
-            data-testid="shopping-cart-product-quantity"
-            className="qtybutton_text"
-          >
-            {qty}
-
+          />
+          <p className="pc-cartItem__price">
+            Total: R$
+            {' '}
+            {(Math.round(((price + Number.EPSILON) * qty) * 100) / 100).toFixed(2)}
           </p>
-          <button
-            className="qtybutton__button"
-            data-testid="product-decrease-quantity"
-            name="subtract"
-            type="button"
-            onClick={ (e) => handleCartBtnEvent(e, id) }
-          >
-            -
-          </button>
         </div>
-        <img
-          className="pc-cartItem__removeIcon"
-          src={ trashIcon }
-          alt="remove icon"
-          name="remove"
-          aria-hidden="true"
-          onClick={ (e) => handleCartBtnEvent(e, id) }
-        />
-        <p>
-          Total: R$
-          {' '}
-          {price * qty }
-        </p>
       </div>
     );
   }

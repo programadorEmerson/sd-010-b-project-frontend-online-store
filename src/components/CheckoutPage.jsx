@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import '../styles/CheckoutPage.css';
 
 class CheckoutPage extends React.Component {
   getTotalPrice = () => {
@@ -20,17 +21,24 @@ class CheckoutPage extends React.Component {
     }
     return (
       <div>
-        {cart.map(({ qty, product: { title, price }, id }) => (
-          <div key={ id }>
-            <p>{qty}</p>
-            <p>{title}</p>
-            <p>{price}</p>
-          </div>
-        ))}
-        <h3>
-          Total: R$
-          {this.getTotalPrice()}
-        </h3>
+        <table className="cp-checkout">
+          <tr className="cp-checkout_row">
+            <th className="cp-checkout_title cp-checkout_first">Produtos</th>
+            <th className="cp-checkout_qty">Quantidade</th>
+            <th className="cp-checkout_price">Preço</th>
+          </tr>
+          {cart.map(({ qty, product: { title, price }, id }) => (
+            <tr className="cp-checkout_row" key={ id }>
+              <td className="cp-checkout_title">{title}</td>
+              <td className="cp-checkout_qty">{qty}</td>
+              <td className="cp-checkout_price">{price}</td>
+            </tr>
+          ))}
+          <h3>
+            Total: R$
+            {this.getTotalPrice()}
+          </h3>
+        </table>
         <form>
           <h3>Informações do Comprador</h3>
           <input

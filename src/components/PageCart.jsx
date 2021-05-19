@@ -49,13 +49,19 @@ class PageCart extends React.Component {
               handleCartBtnEvent={ handleCartBtnEvent }
             />
           ))}
-          <div>
+          <div className="price-buy">
             <h2>
               Total: R$
               {this.getTotalPrice()}
             </h2>
-            <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
+            <Link
+              className="price-buy__buy"
+              to="/checkout"
+              data-testid="checkout-products"
+            >
+              Finalizar Compra
 
+            </Link>
           </div>
         </div>
       </div>

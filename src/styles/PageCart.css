@@ -32,3 +32,25 @@
   margin: auto;
   width: 55vw;
 }
+
+.price-buy {
+  align-items: center;
+  background-color: #d8d8d8;
+  bottom: 0;
+  color: black;
+  display: flex;
+  height: 4vh;
+  justify-content: center;
+  position: fixed;
+  width: 100vw;
+}
+
+.price-buy__buy {
+  background-color: red;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 3rem;
+  padding: 0.2rem 1rem;
+  text-decoration: none;
+}
