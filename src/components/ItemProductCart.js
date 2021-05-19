@@ -11,10 +11,13 @@ class ItemProductCart extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(numero) {
+  handleChange(numero, id) {
     this.setState({
       quantidade: numero,
     });
+    const cartItems1 = JSON.parse(localStorage.getItem('cartState'));
+    const newArray = cartItems1.forEach((item) => item.id === id ? item.quantity = 10 : item);
+    console.log(newArray);
   }
 
   render() {
@@ -36,7 +39,7 @@ class ItemProductCart extends React.Component {
           <label htmlFor="quantidade">
             Quantidade
             <button
-              onClick={ () => this.handleChange(quantidade === 1 ? 1 : quantidade - 1) }
+              onClick={ () => this.handleChange((quantidade === 1 ? 1 : quantidade - 1), id) }
               data-testid="product-decrease-quantity"
               type="button"
             >
@@ -49,7 +52,7 @@ class ItemProductCart extends React.Component {
               disabled
             />
             <button
-              onClick={ () => this.handleChange(quantidade + 1) }
+              onClick={ () => this.handleChange((quantidade + 1), id) }
               data-testid="product-increase-quantity"
               type="button"
             >
