@@ -55,6 +55,7 @@ class Home extends React.Component {
           ) : <ProductList products={ products } onClick={ onClick } />}
         </div>
         <Link data-testid="shopping-cart-button" to="/cart">VER CARRINHO</Link>
+        <Link data-testid="checkout-products" to="/checkout">Checkout Page</Link>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import * as api from './services/api';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
 import './App.css';
 
 class App extends React.Component {
@@ -43,6 +44,7 @@ class App extends React.Component {
               addCart={ this.handleAddCartItem }
             />) }
           />
+          <Route exact path="/checkout" component={ Checkout } />
         </Switch>
       </BrowserRouter>
     );
