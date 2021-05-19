@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import * as api from '../services/api';
-import * as modules from '../services/modules';
 
 import InputSearch from '../components/InputSearch';
+import CartComponent from '../components/CartComponent';
 import Categories from '../components/Categories';
-import ButtonToCart from '../components/ButtonToCart';
 import ProductCard from '../components/ProductCard';
 import './Home.css';
 
@@ -82,7 +80,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { categories, foundProducts, cart } = this.state;
+    const { categories, foundProducts } = this.state;
 
     return (
       <section className="container">
@@ -98,19 +96,7 @@ export default class Home extends Component {
               handleInputSearch={ this.handleInputSearch }
               handleSubmitFetch={ this.handleSubmitFetch }
             />
-            <section className="cart-container">
-              <div className="cart-icon">
-                <Link
-                  to={ { pathname: '/cart', state: { cart } } }
-                  data-testid="shopping-cart-button"
-                >
-                  <ButtonToCart />
-                </Link>
-              </div>
-              <div className="cart-number">
-                <p data-testid="shopping-cart-size">{modules.getLength()}</p>
-              </div>
-            </section>
+            <CartComponent />
           </section>
           <section className="content-card">
 
