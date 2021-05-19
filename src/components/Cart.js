@@ -14,6 +14,18 @@ class Cart extends React.Component {
     this.renderCart();
   }
 
+  renderCart() {
+    const { cartItems } = this.state;
+    if (!cartItems) {
+      return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
+    }
+    return (
+      cartItems.map((cartItem, index) => (
+        <ItemProductCart cartItem={ cartItem } key={ index + 1 } />
+      ))
+    );
+  }
+
   render() {
     const { cartItems } = this.state;
     const total = cartItems.length;
