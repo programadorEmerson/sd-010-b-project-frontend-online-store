@@ -33,9 +33,8 @@ class ProductDetaills extends Component {
 
   render() {
     const { product } = this.state;
-    const { title, thumbnail, price, warranty, shipping } = product;
+    const { title, thumbnail, price, warranty } = product;
     const { onClick } = this.props;
-    console.log(shipping);
 
     return (
       <div>
@@ -53,7 +52,6 @@ class ProductDetaills extends Component {
           R$
           {price}
         </p>
-        {/* { freeShipping ? <p>Frete Grátis</p> : null} */}
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
@@ -63,25 +61,6 @@ class ProductDetaills extends Component {
         </button>
         {/* <p>Especificações:</p> */}
         <p>{warranty}</p>
-        <form action="GET">
-          <label htmlFor="product_rating">
-            <input
-              id="product_rating"
-              type="number"
-              step={ 1 }
-              min={ 0 }
-              required
-            />
-          </label>
-          <label htmlFor="product_comments">
-            <textarea
-              id="product_comments"
-              data-testid="product-detail-evaluation"
-              cols="20"
-            />
-          </label>
-
-        </form>
         <Link to="/">Voltar para a tela inicial</Link>
       </div>
     );

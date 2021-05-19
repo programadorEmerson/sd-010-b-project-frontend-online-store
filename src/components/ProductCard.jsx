@@ -15,7 +15,6 @@ class ProductCard extends Component {
           R$
           { price }
         </p>
-        {/* { shipping.free_shipping ? <p>Frete Grátis</p> : <p>Falso</p>} */}
       </div>
     );
   }
