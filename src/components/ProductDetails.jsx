@@ -22,41 +22,37 @@ class ProductDetails extends React.Component {
 
   // Recarrega o carrinho de compras
   populateShoppingCart = () => {
-    const { location: { state: { shoppingCart: items } } } = this.props;
+    // const { location: { state: { shoppingCart: items } } } = this.props;
+    const items = JSON.parse(localStorage.getItem('localStorageCart'));
+
 
     this.setState(
       { shoppingCart: items }, () => this.updateProductsQuantity(),
     );
-  }
 
-  updateLocalStorage =(product) => {
-    // localStorage.setItem('shoppingCart', JSON.stringify(totalQuantity))
-
-    // // receber os itens e verificar a quantidade 
-    // localStorage.setItem('totalQuantityItems', JSON.stringify(totalQuantity))
-
-
+    this.updateLocalStorageQuantity();
   }
 
   // Atualiza a quantidade total de produtos no carrinho
   updateProductsQuantity = () => {
     const { shoppingCart } = this.state;
-    console.log(shoppingCart)
-    const totalQuantity = shoppingCart.reduce(
-      (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
-    );
 
-    this.setState({ totalQuantityItems: totalQuantity }, () => localStorage.setItem('totalQuantityItems', JSON.stringify(totalQuantity)));
-  }
+    if (!shoppingCart) {
+        
+      } else { 
+        const totalQuantity = shoppingCart.reduce(
+          (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
+        );
+    
+        this.setState({ totalQuantityItems: totalQuantity }, () => localStorage.setItem('totalQuantityItems', JSON.stringify(totalQuantity)));
+      
+      }
+}
 
   updateComments = (newComment) => {
     this.setState((oldState) => (
       { listComments: [newComment, ...oldState.listComments] }
     ), () => {
-      // const { shoppingCart } = this.state;
-      // storage.clear();
-      // storage.setItem(listComments, listComments);
-      // console.log(shoppingCart);
     });
   }
 
@@ -67,29 +63,107 @@ class ProductDetails extends React.Component {
 
   //  Adiciona o produto ao carrinho de compras
   addProductToShoppingCart = (product) => {
-    const { shoppingCart } = this.state;
-
-    const testIfProductExist = shoppingCart.find(
-      (oldProduct) => oldProduct.id === product.id,
-    );
-
-    if (testIfProductExist === undefined) {
+    const shoppingCartlocal = JSON.parse(localStorage.getItem('localStorageCart'));
+    if (!shoppingCartlocal) {
       product.quantity = 1;
-      this.setState({ shoppingCart: [...shoppingCart, product] },
-         () => {
-          this.updateProductsQuantity();
-          // localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
-         });
+      localStorage.setItem('localStorageCart', JSON.stringify([product]))
+      this.updateLocalStorageQuantity();
+      this.setState({ totalQuantityItems: 1})
+    console.log('dentro do 1')
+
+    } else { 
+      console.log('dentro do 2')
+
+
+      const shoppingCartlocal = JSON.parse(localStorage.getItem('localStorageCart'));
+      const testIfProductExistlocal = shoppingCartlocal.find(
+        (oldProduct) => oldProduct.id === product.id,
+      );
+
+      if (testIfProductExistlocal === undefined) {
+      console.log('dentro do 3')
+
+        product.quantity = 1;
+      localStorage.setItem('localStorageCart', JSON.stringify([...shoppingCartlocal, product]))
+      this.updateLocalStorageQuantity();
+      this.setState({ totalQuantityItems: 1})
+
+        } else {
+      console.log('dentro do 4')
+
+        console.log((product.quantity))
+
+
+          if (shoppingCartlocal.length > 0) {
+            // Ajustar lógica local storage
+            // // let count = 0;
+            
+            // const findedProduct = shoppingCartlocal.find(
+            //   (productFind, index) => {
+            //     product.id === productFind.id;
+            //     count += 1;
+            //   },
+            // );
+
+            // shoppingCartlocal[?].quantity = product.quantity += 1;
+          } else {
+          product.quantity += 1;
+            localStorage.setItem('localStorageCart', JSON.stringify([product]));
+            this.updateLocalStorageQuantity();
+          }
+          this.setState({ totalQuantityItems: 1})
+
+        }
+    }
+
+  }
+
+  updateLocalStorageQuantity = () => {
+    const shoppingCart = JSON.parse(localStorage.getItem('localStorageCart'));
+
+    if (!shoppingCart) {
+      localStorage.setItem('cartQuantity', JSON.stringify(0))
     } else {
-      product.quantity += 1;
-      this.updateProductsQuantity();
-      // localStorage.setItem('shoppingCart', JSON.stringify(product))
+      const totalQuantity = shoppingCart.reduce(
+        (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
+      );
+  
+      localStorage.setItem('cartQuantity', JSON.stringify(totalQuantity))
     }
   }
 
-  render() {
-    const { render, shoppingCart,totalQuantityItems } = this.state;
+  getLocalStorageQuantity = () => {
+    const totalQuantity = JSON.parse(localStorage.getItem('cartQuantity'));
+
+    if(totalQuantity) {
+      return totalQuantity;
+    }
+    return 0;
+  }
+
+  getProductFromLocalStorage = () => {
+    const shoppingCartlocal = JSON.parse(localStorage.getItem('localStorageCart'));
     const { location: { state: { result } } } = this.props;
+
+    if (!shoppingCartlocal) {
+      return result;
+    } 
+
+    const findedProduct = shoppingCartlocal.find(
+      (product) => product.id === result.id,
+    );
+
+    if (!findedProduct) {
+      return result;
+    } 
+
+    return findedProduct;
+  }
+
+  render() {
+    const { render, shoppingCart } = this.state;
+    const { location: { state: { result } } } = this.props;
+
     const {
       title, thumbnail, price, address: { city_name: city, state_name: state },
     } = result;
@@ -116,7 +190,7 @@ class ProductDetails extends React.Component {
               <button
                 type="submit"
                 data-testid="product-detail-add-to-cart"
-                onClick={ () => this.addProductToShoppingCart(result) }
+                onClick={ () => this.addProductToShoppingCart(this.getProductFromLocalStorage()) }
               >
                 Adicionar ao Carrinho
               </button>
@@ -128,7 +202,7 @@ class ProductDetails extends React.Component {
               </Link>
               <span data-testid="shopping-cart-size">
                 Produtos no carrinho:
-                { totalQuantityItems }
+                { this.getLocalStorageQuantity() }
               </span>
             </section>
 

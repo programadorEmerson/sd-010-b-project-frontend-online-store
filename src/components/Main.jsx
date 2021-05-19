@@ -106,14 +106,24 @@ class Main extends React.Component {
       product.quantity = 1;
       this.setState({ shoppingCart: [...shoppingCart, product] }, () => {
         this.updateProductsQuantity();
-        // localStorage.setItem('localStorageQuantity', product.quantity)
+        localStorage.setItem('localStorageCart', JSON.stringify(this.state.shoppingCart))
+        this.updateLocalStorageQuantity();
       });
     } else if (product.quantity < product.available_quantity) {
       product.quantity += 1;
-      // localStorage.setItem('localStorageQuantity', product.quantity)
-      this.updateProductsQuantity();
+      localStorage.setItem('localStorageCart', JSON.stringify(this.state.shoppingCart))
+      this.updateLocalStorageQuantity();
     }
-    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+  }
+
+  updateLocalStorageQuantity = () => {
+    const shoppingCart = JSON.parse(localStorage.getItem('localStorageCart'));
+
+    const totalQuantity = shoppingCart.reduce(
+      (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
+    );
+
+    localStorage.setItem('cartQuantity', JSON.stringify(totalQuantity))
   }
 
   render() {
