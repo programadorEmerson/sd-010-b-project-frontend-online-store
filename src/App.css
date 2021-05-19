@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+a {
+  color: #333;
+}
+
 .input-search {
   margin: 5px;
   width: 80%;
