@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { addLocalStorage } from '../../services/dataLocalStorage';
 
 export default class CartListProduct extends Component {
   render() {
