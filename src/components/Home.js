@@ -62,6 +62,8 @@ class Home extends React.Component {
           getApiFromQuery={ this.getApiFromQuery }
         />
         <Link data-testid="shopping-cart-button" id="cart" to="/cart">Carrinho</Link>
+        <br />
+        <Link data-testid="checkout-products" to="/checkout">Finalizar Compra</Link>
         <CategoryList onClick={ this.getApiFromCategory } />
 
         {filtered.length !== 0 && (
