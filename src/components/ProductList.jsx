@@ -1,6 +1,6 @@
 import React from 'react';
 import * as api from '../services/api';
-import ProductCard from './ProductCart';
+import ProductCard from './ProductCard';
 
 class ProductList extends React.Component {
   constructor() {

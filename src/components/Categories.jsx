@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import * as api from '../services/api';
-import ProductCart from './ProductCart';
+
+import ProductCard from './ProductCard';
 
 class Categories extends React.Component {
   constructor(props) {
@@ -49,7 +51,7 @@ class Categories extends React.Component {
               {category.name}
             </Link>))}
           {categorieSelect.map((item) => (
-            <ProductCart key={ item.id } product={ item } />
+            <ProductCard key={ item.id } product={ item } />
           ))}
         </div>
       </div>
