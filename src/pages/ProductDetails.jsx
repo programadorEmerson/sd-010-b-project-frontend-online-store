@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import { FormAvaliation } from '../components/ProductAvaliation';
 
 export class ProductDetails extends Component {
   constructor() {
@@ -29,19 +30,21 @@ export class ProductDetails extends Component {
   render() {
     const { product } = this.state;
     const { title, thumbnail, price } = product;
+    console.log(product);
     return (
       <div key={ title }>
         <h1 data-testid=" product-detail-name">{title}</h1>
         <p>{`R$${price}`}</p>
         <img src={ thumbnail } alt={ title } />
-        <p>Especificações:</p>
+        {/* <p>Especificações:</p>
         <ul>
-          {/* {product.attributes.map((attributes) => (
+          {attributes.map((attributes) => (
             <li key={ attributes.id }>
               {`${attributes.name}: ${attributes.value_name}`}
-            </li>))} */}
-        </ul>
+            </li>))}
+        </ul> */}
         <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link>
+        <FormAvaliation />
       </div>
     );
   }
