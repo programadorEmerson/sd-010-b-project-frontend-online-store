@@ -10,7 +10,7 @@ class ProductDetails extends Component {
       thumbnail,
       price,
       id,
-      address: { cityName: city, stateName: state } } = product;
+      address: { city_name: city, state_name: state } } = product;
 
     return (
       <>
