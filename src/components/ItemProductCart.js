@@ -11,10 +11,9 @@ class ItemProductCart extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange({ target }) {
-    const { name, value } = target;
+  handleChange(numero) {
     this.setState({
-      [name]: value,
+      quantidade: numero,
     });
   }
 
@@ -36,17 +35,24 @@ class ItemProductCart extends React.Component {
           <p>{`R$${price}`}</p>
           <label htmlFor="quantidade">
             Quantidade
-            <button type="button">
+            <button
+              onClick={ () => this.handleChange(quantidade === 1 ? 1 : quantidade - 1) }
+              data-testid="product-decrease-quantity"
+              type="button"
+            >
               -
             </button>
             <input
               type="text"
-              onChange={ this.handleChange }
               value={ quantidade }
               id="quantidade"
               disabled
             />
-            <button type="button">
+            <button
+              onClick={ () => this.handleChange(quantidade + 1) }
+              data-testid="product-increase-quantity"
+              type="button"
+            >
               +
             </button>
           </label>
