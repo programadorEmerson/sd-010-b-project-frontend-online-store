@@ -24,7 +24,7 @@ class CategoryList extends React.Component {
     const { categories, addToCart } = this.props;
     const { searchText } = this.state;
     return (
-      <section>
+      <section className="category-and-results">
         <aside>
           <ol>
             { categories.map(({ id, name }) => (
