@@ -6,11 +6,13 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 class DetailsCard extends React.Component {
   constructor(props) {
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
       details: {},
       nameItems: [],
-      // value: '',
+      textArea: '',
+      select: 5,
     };
   }
 
@@ -20,7 +22,6 @@ class DetailsCard extends React.Component {
 
   componentDidUpdate() {
     const { nameItems } = this.state;
-    console.log(nameItems);
     if (nameItems.length !== 0) {
       const value = JSON.parse(localStorage.getItem('cartItems'));
       const result = !value ? [] : value;
@@ -28,8 +29,15 @@ class DetailsCard extends React.Component {
     }
   }
 
-  handleChange() {
+  handleChange(field, newValue) {
+    this.setState({ [field]: newValue });
+  }
 
+  handleSubmit(){
+    const literalmente = `Texto:${this.state.textArea}, Nota:${this.state.select}`;
+    const value = JSON.parse(localStorage.getItem('productSubmit'));
+    const result = !value ? [] : value;
+    localStorage.setItem('productSubmit', JSON.stringify([...result, literalmente]));
   }
 
   getName = (title) => () => {
@@ -61,7 +69,7 @@ class DetailsCard extends React.Component {
           Adicionar ao Carrinho
         </button>
         <form>
-          <select>
+          <select onChange={ (event) => this.handleChange('select', event.target.value) }>
             <option value={ 1 }>1</option>
             <option value={ 2 }>2</option>
             <option value={ 3 }>3</option>
@@ -71,12 +79,13 @@ class DetailsCard extends React.Component {
           <label htmlFor="evaluation">
             Comentário:
             <textarea
+              name="textArea"
               data-testid="product-detail-evaluation"
               value={ value }
-              onChange={ this.handleChange }
+              onChange={ (event) => this.handleChange('textArea', event.target.value) }
             />
           </label>
-          <input onClick={ null } type="submit" value="Enviar" />
+          <input onClick={ () => this.handleSubmit() } type="submit" value="Enviar" />
         </form>
       </div>
     );
