@@ -11,26 +11,25 @@ export default class ShoppingCart extends Component {
     this.excludeItem = this.excludeItem.bind(this);
 
     this.state = {
-      id: localStorage.id,
+      id: localStorage.id.split(',').splice(1),
       element: [],
       renderCart: false,
-      quantity: 1,
     };
   }
 
   componentDidMount() {
     const { id } = this.state;
-    this.getItemDetails(id);
+    id.map((itemId) => (this.getItemDetails(itemId)));
   }
 
   async getItemDetails(itemId) {
-    const { id, element } = this.state;
+    const { id } = this.state;
     if (id) {
       const response = await getItemById(itemId);
-      this.setState({
-        element: [...element, response],
+      this.setState((previousState) => ({
+        element: [...previousState.element, response],
         renderCart: true,
-      });
+      }));
     }
   }
 
@@ -42,37 +41,33 @@ export default class ShoppingCart extends Component {
     );
   }
 
-  increaseQuantity() {
-    this.setState((previousState) => ({
-      quantity: (previousState.quantity + 1),
-    }));
+  increaseQuantity({ target }) {
+    const atualQuantity = Number(target.previousSibling.innerHTML);
+    target.previousSibling.innerHTML = atualQuantity + 1;
   }
 
-  decreaseQuantity() {
-    const { quantity } = this.state;
-    if (quantity === 1) {
+  decreaseQuantity({ target }) {
+    if (Number(target.nextSibling.innerHTML) === 1) {
       return false;
     }
 
-    this.setState((previousState) => ({
-      quantity: (previousState.quantity - 1),
-    }));
+    const atualQuantity = Number(target.nextSibling.innerHTML);
+    target.nextSibling.innerHTML = atualQuantity - 1;
   }
 
   excludeItem({ target }) {
     target.parentNode.innerHTML = '';
-    this.state.quantity = 0;
     localStorage.id = '';
   }
 
   renderCart() {
-    const { element, quantity } = this.state;
-    return (
-      <div>
+    const { element } = this.state;
+    return element.map((item) => (
+      <div key={ item.id }>
         <span
           data-testid="shopping-cart-product-name"
         >
-          { element[0].title }
+          { item.title }
         </span>
         <button
           type="button"
@@ -84,7 +79,7 @@ export default class ShoppingCart extends Component {
         <span
           data-testid="shopping-cart-product-quantity"
         >
-          { quantity }
+          1
         </span>
         <button
           type="button"
@@ -100,7 +95,7 @@ export default class ShoppingCart extends Component {
           X
         </button>
       </div>
-    );
+    ));
   }
 
   render() {

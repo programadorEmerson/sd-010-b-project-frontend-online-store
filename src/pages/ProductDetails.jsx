@@ -7,6 +7,9 @@ import getItemById from '../services/newRequest';
 export default class ProductDetails extends Component {
   constructor() {
     super();
+    if (localStorage.getItem('id') === undefined) {
+      localStorage.setItem('id', []);
+    }
     this.renderDetails = this.renderDetails.bind(this);
     this.getProduct = this.getProduct.bind(this);
     this.state = {
@@ -30,7 +33,8 @@ export default class ProductDetails extends Component {
 
   clickCart({ target }) {
     const element = target.previousSibling.innerHTML;
-    localStorage.setItem('id', element);
+    const storedId = localStorage.getItem('id');
+    localStorage.setItem('id', [storedId, element]);
   }
 
   renderDetails() {

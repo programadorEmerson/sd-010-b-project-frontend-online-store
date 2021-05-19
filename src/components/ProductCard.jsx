@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 class ProductCard extends Component {
   constructor(props) {
     super(props);
+    if (localStorage.getItem('id') === undefined) {
+      localStorage.setItem('id', []);
+    }
 
     const { results } = this.props;
 
@@ -47,7 +50,8 @@ class ProductCard extends Component {
 
   clickCart({ target }) {
     const element = target.previousSibling.innerHTML;
-    localStorage.setItem('id', element);
+    const storedId = localStorage.getItem('id');
+    localStorage.setItem('id', [storedId, element]);
   }
 
   noResult() {
