@@ -35,7 +35,7 @@ class SearchBar extends React.Component {
   };
 
   handleClick = async () => {
-    console.log('opa');
+    // console.log('opa');
     this.setState({
       products: '',
     });

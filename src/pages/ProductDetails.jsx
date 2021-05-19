@@ -30,7 +30,7 @@ export class ProductDetails extends Component {
   render() {
     const { product } = this.state;
     const { title, thumbnail, price } = product;
-    console.log(product);
+    // console.log(product);
     return (
       <div key={ title }>
         <h1 data-testid=" product-detail-name">{title}</h1>
