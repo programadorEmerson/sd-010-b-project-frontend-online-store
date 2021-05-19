@@ -5,11 +5,14 @@ import { Link } from 'react-router-dom';
 class ProductCard extends Component {
   constructor(props) {
     super(props);
+
     const { results } = this.props;
+
     this.state = {
       results,
     };
 
+    this.clickCart = this.clickCart.bind(this);
     this.showResults = this.showResults.bind(this);
   }
 
@@ -18,7 +21,7 @@ class ProductCard extends Component {
     const card = results.map((result) => {
       const { title, thumbnail, price, id } = result;
       return (
-        <div key={ title } data-testid="product">
+        <div key={ id } data-testid="product">
           <h4>{ title }</h4>
           <Link to={ `/product/${id}` } data-testid="product-detail-link">
             <img
@@ -28,10 +31,23 @@ class ProductCard extends Component {
             />
           </Link>
           <span>{ price }</span>
+          <span>{ id }</span>
+          <button
+            type="button"
+            onClick={ this.clickCart }
+            data-testid="product-add-to-cart"
+          >
+            Add
+          </button>
         </div>
       );
     });
     return card;
+  }
+
+  clickCart({ target }) {
+    const element = target.previousSibling.innerHTML;
+    localStorage.setItem('id', element);
   }
 
   noResult() {

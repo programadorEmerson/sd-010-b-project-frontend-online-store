@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import getItemById from '../services/newRequest';
+// import AddButton from '../components/AddButton';
 
 export default class ProductDetails extends Component {
   constructor() {

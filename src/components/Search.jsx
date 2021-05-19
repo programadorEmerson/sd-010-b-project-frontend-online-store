@@ -27,7 +27,7 @@ class Search extends Component {
           type="button"
         >
           <Link
-            to="/checkout"
+            to="/shoppingcart"
             data-testid="shopping-cart-button"
           >
             Carrinho
