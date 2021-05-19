@@ -14,6 +14,25 @@ class ProductCard extends Component {
           R$
           { price }
         </p>
+
+        <button
+          type="button"
+          data-testid="product-increase-quantity"
+          onClick={ () => addCart(product) }
+        >
+          +
+        </button>
+        <p data-testid="shopping-cart-product-quantity">
+          { `Quantidade de itens: ${countItems}` }
+        </p>
+        <button
+          type="button"
+          data-testid="product-decrease-quantity"
+          onClick={ () => removeItemCart(product) }
+        >
+          -
+        </button>
+        <button type="button" onClick={ () => removeCart(product) }>X</button>
       </div>
     );
   }
