@@ -22,7 +22,6 @@ class Detail extends React.Component {
   }
 
   handleAddToCart(cardProps) {
-
     this.setState((oldState) => ({
       cartState: [
         ...oldState.cartState, { cardProps },
