@@ -14,7 +14,7 @@ class ProductList extends React.Component {
           <div key={ product.id } data-testid="product">
             <Link
               data-testid="product-detail-link"
-              to={ `/details/${product.id}/${product.category_id}/${product.title}` }
+              to={ `/details/${product.id}/` }
             >
               <h3>{ product.title }</h3>
               <img src={ product.thumbnail } alt={ product.title } />

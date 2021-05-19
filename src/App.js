@@ -38,7 +38,7 @@ class App extends React.Component {
           />
           <Route exact path="/cart" render={ () => <Cart addCart={ addCart } /> } />
           <Route
-            path="/details/:id/:categoryId/:title"
+            path="/details/:id"
             render={ (props) => (<ProductDetails
               { ...props }
               addCart={ this.handleAddCartItem }
