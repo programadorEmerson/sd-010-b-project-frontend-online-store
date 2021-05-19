@@ -27,33 +27,30 @@ class ShoppingCart extends Component {
               data-testid="product-increase-quantity"
               onClick={ () => changeItemQuantity(product.id, true) }
             >
-            +
+              +
             </button>
             <button
               type="button"
               data-testid="product-decrease-quantity"
               onClick={ () => changeItemQuantity(product.id, false) }
             >
-            -
+              -
             </button>
-            <button
-              type="button"
-              onClick={ () => removeItem(product.id) }
-            >
+            <button type="button" onClick={ () => removeItem(product.id) }>
               X
             </button>
           </div>
         ))}
       </div>
     );
-  }
+  };
 
   render() {
     return (
       <section>
         {this.shoppingCartItens.length === 0
           ? this.renderEmptyMsg()
-          : this.renderCartList() }
+          : this.renderCartList()}
       </section>
     );
   }
