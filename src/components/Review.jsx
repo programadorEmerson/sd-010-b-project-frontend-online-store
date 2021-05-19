@@ -18,6 +18,8 @@ class Review extends React.Component {
         <form>
           <label htmlFor="reviewInput">
             <textarea
+              className="form-control"
+              placeholder="Seu comentario..."
               name="reviewInput"
               data-testid="product-detail-evaluation"
               type="text"

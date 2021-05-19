@@ -44,17 +44,19 @@ class Home extends React.Component {
     const { products, categories, query } = this.state;
     return (
       <>
-        <Search
-          handlerChange={ this.handlerChange }
-          handlerClick={ this.handlerClick }
-          query={ query }
-        />
+        <div className="p-3 mb-2 bg-dark text-white">
+          <Search
+            handlerChange={ this.handlerChange }
+            handlerClick={ this.handlerClick }
+            query={ query }
+          />
 
-        <ListCategories
-          handlerChange={ this.handlerChange }
-          handlerClick={ this.handlerClick }
-          categories={ categories }
-        />
+          <ListCategories
+            handlerChange={ this.handlerChange }
+            handlerClick={ this.handlerClick }
+            categories={ categories }
+          />
+        </div>
 
         <section className="list-component">
           {products.map((product) => (
