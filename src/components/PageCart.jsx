@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
+import '../styles/PageCart.css';
+import homeIcon from '../img/pagecart/home-page.svg';
 
 class PageCart extends React.Component {
   // Faz a soma total do preço dos items que chegaram da props
@@ -22,10 +24,20 @@ class PageCart extends React.Component {
     }
     return (
       <div>
-        <h3>
+        <div className="header">
+          <Link to="/">
+            <img src={ homeIcon } alt="Voltar para página principal" />
+          </Link>
+          <div>
+            <h1>Logo</h1>
+            <h1>|</h1>
+            <h1>Carrinho de Compras</h1>
+          </div>
+        </div>
+        <h2>
           Total: R$
           {this.getTotalPrice()}
-        </h3>
+        </h2>
         {cart.map(({ qty, product: { title, price }, id }) => (
           <CartItem
             key={ id }

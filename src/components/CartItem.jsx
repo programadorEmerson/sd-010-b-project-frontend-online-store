@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/CartItem.css';
 
 class CartItem extends React.Component {
   render() {
     const { name, handleCartBtnEvent, qty, id, price } = this.props;
     return (
-      <div>
+      <div className="pc-cartItem">
         <p data-testid="shopping-cart-product-quantity">{qty}</p>
         <p data-testid="shopping-cart-product-name">{name}</p>
         <button
