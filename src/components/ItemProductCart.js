@@ -12,11 +12,11 @@ class ItemProductCart extends React.Component {
   }
 
   handleChange(numero, id) {
+    const cartItems1 = JSON.parse(localStorage.getItem('cartState'));
+    const newArray = cartItems1.map((item) => item.cardProps.id === id ? item.cardProps.quantity = numero : item);
     this.setState({
       quantidade: numero,
     });
-    const cartItems1 = JSON.parse(localStorage.getItem('cartState'));
-    const newArray = cartItems1.forEach((item) => item.id === id ? item.quantity = 10 : item);
     console.log(newArray);
   }
 
