@@ -143,8 +143,8 @@ footer p {
   width: 200px;
 }
 
-.quantprice-names{
-width: 10px;
+.quantprice-names {
+  width: 10px;
 }
 
 .item-container {
@@ -176,7 +176,7 @@ width: 10px;
 }
 
 .quant-field {
-margin: 5px;
+  margin: 5px;
 }
 
 .quantity {
