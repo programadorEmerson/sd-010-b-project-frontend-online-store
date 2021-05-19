@@ -22,7 +22,18 @@ class ProductDetails extends React.Component {
           {' '}
           {itemUserWantDetail.available_quantity}
         </p>
-        <Link to="/shopping-cart">Adicionar ao Carrinho</Link>
+        <button
+          type="button"
+          onClick={ () => getProductList(
+            itemUserWantDetail.id,
+            itemUserWantDetail.title,
+            itemUserWantDetail.thumbnail,
+            itemUserWantDetail.price,
+          ) }
+          data-testid="XXXXXXXXXXXX"
+        >
+          AddCart
+        </button>
         {' '}
         <Link to="/">VOLTAR</Link>
       </div>);

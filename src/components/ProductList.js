@@ -86,7 +86,12 @@ class ProductList extends React.Component {
               </Link>
               <button
                 type="button"
-                onClick={ () => getProductList(item.title, item.thumbnail, item.price) }
+                onClick={ () => getProductList(
+                  item.id,
+                  item.title,
+                  item.thumbnail,
+                  item.price,
+                ) }
                 data-testid="product-add-to-cart"
               >
                 AddCart

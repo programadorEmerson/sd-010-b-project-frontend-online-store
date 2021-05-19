@@ -43,9 +43,21 @@ class App extends React.Component {
      });
    }
 
-   getProductList = (title, img, price) => {
-     this.setState((oldState) => (
-       { productsCart: [...oldState.productsCart, { title, img, price, quantity: 1 }] }));
+   getProductList = (id, title, img, price) => {
+     const { productsCart } = this.state;
+     let productIsInList = false;
+     productsCart.forEach((product, index) => {
+       if (product.id === id) {
+         productIsInList = true;
+         this.setState((prevState) => {this.state.index.quantity: prevState.index.quantity + 1 }  ); //essa linha precisa ser corrigida, não funciona
+       }
+     });
+     if (!productIsInList) {
+       his.setState((oldState) => (
+         { productsCart:
+          [...oldState.productsCart, { id, title, img, price, quantity: 1 }] }));
+     }
+     t;
    }
 
    render() {
@@ -108,6 +120,7 @@ class App extends React.Component {
                render={ (props) => (<ProductDetails
                  { ...props }
                  itemUserWantDetail={ itemUserWantDetail }
+                 getProductList={ this.getProductList }
                />) }
              />
 
