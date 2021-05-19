@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Img from '../images/cart.png';
 
 class Detail extends React.Component {
   constructor() {
@@ -94,6 +96,16 @@ class Detail extends React.Component {
               >
                 Adicionar
               </button>
+              <Link to="/cart">
+                <button type="button" className="button_cart">
+                  <img
+                    data-testid="shopping-cart-button"
+                    src={ Img }
+                    width="50px"
+                    alt="cart shop"
+                  />
+                </button>
+              </Link>
             </div>
           )}
       </div>
