@@ -48,6 +48,7 @@ class ListCategories extends Component {
     );
   }
 }
+
 ListCategories.propTypes = {
   handleCategoryClick: PropTypes.func.isRequired,
 };

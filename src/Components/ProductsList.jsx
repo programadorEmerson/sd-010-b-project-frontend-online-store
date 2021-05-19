@@ -20,7 +20,7 @@ class ProductsList extends Component {
   getList = async () => {
     const { query, categoryID } = this.props;
     const { results } = await getProductsFromCategoryAndQuery(categoryID, query);
-
+    // results is a key of the response's API
     this.setState({
       products: results,
     });
@@ -28,14 +28,16 @@ class ProductsList extends Component {
 
   render() {
     const { products } = this.state;
-
+    const { addToCartHandler } = this.props;
     return (
       <div className="products-list">
         { products.map((product) => (<Product
           key={ product.id }
+          id={ product.id }
           title={ product.title }
           img={ product.thumbnail }
           price={ product.price }
+          addToCartHandler={ addToCartHandler }
         />)) }
       </div>
     );
@@ -45,7 +47,7 @@ class ProductsList extends Component {
 ProductsList.propTypes = {
   query: PropTypes.string.isRequired,
   categoryID: PropTypes.string.isRequired,
-
+  addToCartHandler: PropTypes.func.isRequired,
 };
 
 export default ProductsList;

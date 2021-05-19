@@ -100,3 +100,7 @@ main {
   flex-flow: row wrap;
   width: 100%;
 }
+
+.add-to-cart {
+  cursor: pointer;
+}
