@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import ButtonToCart from '../components/ButtonToCart';
-import * as api from '../services/api';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -19,16 +18,18 @@ class ProductDetails extends Component {
   }
 
   async searchProduct() {
-    const { match: { params: { categoryId, id, title } } } = this.props;
-    const { results } = await api.getProductsFromCategoryAndQuery(categoryId, title);
-    const findProduct = results.find((result) => result.id === id);
-    this.setState({ productDetail: findProduct });
+    const { match: { params: { id } } } = this.props;
+    fetch(`https://api.mercadolibre.com/items/${id}`)
+      .then((response) => {
+        response.json().then((result) => {
+          this.setState({ productDetail: result });
+        });
+      });
   }
 
   render() {
-    const { match: { params: { categoryId, id, title } }, addCart } = this.props;
-    const { productDetail } = this.state;
-    const { price, thumbnail } = productDetail;
+    const { addCart } = this.props;
+    const { productDetail: { title, price, thumbnail, id, categoryId } } = this.state;
     return (
       <div>
         <h1 data-testid="product-detail-name">{title}</h1>
