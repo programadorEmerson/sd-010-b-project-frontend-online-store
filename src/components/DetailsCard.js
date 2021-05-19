@@ -10,7 +10,12 @@ class DetailsCard extends React.Component {
     this.state = {
       details: {},
       nameItems: [],
+      // value: '',
     };
+  }
+
+  handleChange() {
+
   }
 
   componentDidMount() {
@@ -55,6 +60,24 @@ class DetailsCard extends React.Component {
         >
           Adicionar ao Carrinho
         </button>
+        <form>
+          <select>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option selected value={5}>5</option>
+          </select>
+          <label>
+            Comentário:
+            <textarea
+              data-testid="product-detail-evaluation" 
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          </label>
+          <input onClick={null} type="submit" value="Enviar" />
+        </form>
       </div>
     );
   }
