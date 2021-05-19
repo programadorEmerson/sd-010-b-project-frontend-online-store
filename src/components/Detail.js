@@ -51,6 +51,7 @@ class Detail extends React.Component {
       thumbnail,
       price,
       id,
+      quantity: 1,
     };
     this.handleAddToCart(cartItem);
   }
