@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import * as api2 from '../services/api2';
 import CartAmount from '../components/CartAmount';
+import Evaluation from '../components/Evaluation';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -11,7 +12,6 @@ class ProductDetails extends Component {
     this.state = {
       product: {},
       cart: [],
-      count: 0,
     };
   }
 
@@ -76,6 +76,7 @@ class ProductDetails extends Component {
         >
           add
         </button>
+        <Evaluation />
       </div>
     );
   }
