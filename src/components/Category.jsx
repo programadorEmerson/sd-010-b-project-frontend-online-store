@@ -2,16 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
-import '../Style/Categories.css'
+import '../Style/Categories.css';
 
 class Category extends React.Component {
   render() {
     const { category } = this.props;
     return (
-      <Link 
-      className='category'
-      to="/card" 
-      data-testid="category">{`${category.name}`}</Link>
+      <Link
+        className="category"
+        to="/card"
+        data-testid="category"
+      >
+        {`${category.name}`}
+      </Link>
     );
   }
 }

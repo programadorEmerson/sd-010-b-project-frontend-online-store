@@ -16,7 +16,6 @@ class Product extends Component {
             <p className="price">{`R$-${price}`}</p>
           </div>
         </Link>
-        {/* {console.log('seilah')} */}
       </div>
     );
   }

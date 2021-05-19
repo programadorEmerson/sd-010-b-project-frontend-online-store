@@ -9,3 +9,9 @@ export async function getProductsCategories(categoriesId) {
     .then((fetchReturn) => fetchReturn.json())
     .catch((error) => error);
 }
+
+export async function getProductFromId(ID) {
+  return fetch(`https://api.mercadolibre.com/items/${ID}`)
+    .then((fetchReturn) => fetchReturn.json())
+    .catch((error) => error);
+}
