@@ -55,7 +55,7 @@ class SeachBar extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h1>
         </section>
-        <ol>
+        <ol className="search-result">
           {searchNotFound && <div>Nenhum produto foi encontrado</div>}
           {searchText.map((item) => (<SearchList
             key={ item.id }
