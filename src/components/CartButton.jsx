@@ -5,7 +5,7 @@ class CartButton extends Component {
   render() {
     return (
       <div>
-        <Link to="/cart" data-testid="shopping-cart-button">Cart</Link>
+        <Link to="/Cart" data-testid="shopping-cart-button">Cart</Link>
       </div>
     );
   }

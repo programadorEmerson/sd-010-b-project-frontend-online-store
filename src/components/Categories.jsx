@@ -33,6 +33,7 @@ class Categories extends Component {
     const { categories } = this.state;
     return (
       <div className="categories">
+        Categorias:
         {categories.map((category) => (<Category
           key={ category.id }
           category={ category }
