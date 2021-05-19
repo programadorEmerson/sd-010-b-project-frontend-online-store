@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../Style/Search.css';
 
 class Search extends Component {
   constructor() {
@@ -24,12 +25,13 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <p data-testid="home-initial-message">
+        <h4 class='searchTitle' data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
+        </h4>
         <form>
           <input onChange={ this.changeState } type="text" />
-          <button onClick={ this.valorDoState } type="button">Buscar</button>
+          <button class='searchButton'
+          onClick={ this.valorDoState } type="button">Buscar</button>
         </form>
       </div>
     )

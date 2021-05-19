@@ -22,18 +22,16 @@ class Home extends Component {
   render() {
     const { filterText } = this.state;
     return (
-      <div>
-        <div>
+      <div class='home'>
+        <div class='searchBox'>
           <Search filterTextFunc={this.filterTextFunc}/>
+          <Categories />
         </div>
-        <spam>
+        <div>
           <AllProducts
             filterText={ filterText }
         />
-        </spam>
-        <spam>
-          <Categories />
-        </spam>
+        </div>
       </div>
     );
   }

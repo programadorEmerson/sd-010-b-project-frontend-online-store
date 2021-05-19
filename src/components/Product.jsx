@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../Style/Product.css'
 
 class Product extends Component {
   render() {
     const { product: { id, title, price, thumbnail } } = this.props;
     return (
       <div>
-        <img src={ thumbnail } alt={ title } />
-        <div className="container">
-          <h1>{ title }</h1>
-          <h2>{ price }</h2>
+        <div className="productContainer">
+          <h3 class='title'>{ title }</h3>
+          <img class={'img'} src={ thumbnail } alt={ title } />
+          <p class='price'>{`R$-${ price }`}</p>
         </div>
         {/* {console.log('seilah')} */}
       </div>

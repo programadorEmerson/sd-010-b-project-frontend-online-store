@@ -1,0 +1,37 @@
+.home{
+  display: flex;
+}
+
+.allProducts {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 10px;
+}
+
+.productContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px;
+  border: 3px gray solid;
+  border-radius: 10px;
+  width: 250px;
+  height: 300px;
+}
+
+.title {
+  word-wrap: break-word;
+  text-align: center;
+  height: 200px;
+}
+
+.img {
+  max-height: 150px;
+  max-width: 170px;
+}
+
+.price {
+  display: flex;
+  font-style: oblique;
+
+}

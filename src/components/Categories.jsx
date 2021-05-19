@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../services/api';
 import Category from './Category';
+import '../Style/Categories.css'
 
 class Categories extends Component {
   constructor() {
@@ -23,7 +24,7 @@ class Categories extends Component {
   render() {
     const { categories } = this.state;
     return (
-      <div>
+      <div class='categories'>
         {/* {console.log(categories)} */}
         {categories.map((category) => (<Category
           key={ category.id }

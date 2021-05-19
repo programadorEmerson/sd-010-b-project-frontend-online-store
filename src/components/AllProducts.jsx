@@ -29,14 +29,13 @@ class AllProducts extends Component {
       });
     });
   } 
-
   
   render() {
     const { prod, loading } = this.state;
     if (loading) return <Loading />;
 
     return (
-      <div>
+      <div class='allProducts'>
         {console.log(prod)}
         {prod.map((product) => (
           <Product
