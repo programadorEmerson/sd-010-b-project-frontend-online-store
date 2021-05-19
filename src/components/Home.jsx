@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import * as api from '../services/api';
-import CardButton from './CardButton';
+import CartButton from './CartButton';
 import Search from './Search';
 import Categories from './Categories';
 import AllProducts from './AllProducts';
@@ -75,7 +75,7 @@ class Home extends Component {
         />
         </div>
         <div>
-          <CardButton />
+          <CartButton />
         </div>
       </div>
     );
