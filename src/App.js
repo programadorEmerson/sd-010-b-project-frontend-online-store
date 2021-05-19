@@ -8,6 +8,7 @@ import './App.css';
 import MainPage from './Pages/MainPage';
 import ShoppingCart from './Pages/ShoppingCart';
 import Header from './Components/Header';
+import ProductDetails from './Pages/ProductDetails';
 
 class App extends Component {
   constructor() {
@@ -49,6 +50,10 @@ class App extends Component {
               render={ () => (
                 <ShoppingCart shoppingCartItens={ shoppingCartItens } />
               ) }
+            />
+            <Route
+              path="/:id"
+              render={ (props) => <ProductDetails { ...props } /> }
             />
             <Route
               exact
