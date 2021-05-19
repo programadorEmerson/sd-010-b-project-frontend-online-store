@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import getProductById from '../services/api2';
 import * as api from '../services/api';
 import Loading from '../components/Loading';
+import Rating from '../components/Rating';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class ProductDetails extends React.Component {
               { `${attribute.name}: ${attribute.value_name}` }
             </li>))}
         </ul>
+        <Rating />
       </div>
     );
   }
