@@ -73,7 +73,7 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={ () => <Home onClick={ this.handlecartItemsItem } /> }
+              render={ () => <Home onClick={ this.addCart } /> }
             />
             <Route
               exact
@@ -91,7 +91,7 @@ class App extends Component {
               path="/details/:id"
               render={ (props) => (<ProductDetaills
                 { ...props }
-                onClick={ this.handlecartItemsItem }
+                onClick={ this.addCart }
               />) }
             />
           </Switch>
