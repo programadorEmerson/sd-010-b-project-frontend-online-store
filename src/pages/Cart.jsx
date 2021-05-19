@@ -22,7 +22,7 @@ class Cart extends Component {
     const productsCopy = this.cloneProducts();
     const indexProductFound = productsCopy.findIndex((product) => product.id === id);
     productsCopy.splice(indexProductFound, 1);
-    dataLocalStorage.updateLocalStorage('dataShoppingCart', productsCopy);
+    dataLocalStorage.shoppingCardProductUpdate(productsCopy);
     this.setState({ products: productsCopy });
   };
 
@@ -37,7 +37,7 @@ class Cart extends Component {
       prodQuantity = (prodQuantity > 1) ? prodQuantity - 1 : 0;
     }
     productsCopy[indexProductFound].quantity = prodQuantity;
-    dataLocalStorage.updateLocalStorage('dataShoppingCart', productsCopy);
+    dataLocalStorage.shoppingCardProductUpdate(productsCopy);
     this.setState({ products: productsCopy });
   };
 
