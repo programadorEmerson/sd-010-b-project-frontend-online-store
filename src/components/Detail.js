@@ -7,22 +7,31 @@ class Detail extends React.Component {
     this.state = {
       produto: {},
       loading: true,
+      cartState: [],
     };
 
     this.recuperarProduto = this.recuperarProduto.bind(this);
     this.getProductsFromId = this.getProductsFromId.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.addToCart = this.addToCart.bind(this);
-    this.updateCart = this.updateCart.bind(this);
+    this.retrieveStorageMaybe = this.retrieveStorageMaybe.bind(this);
   }
 
   componentDidMount() {
-    this.updateCart();
+    this.recuperarProduto();
+    this.retrieveStorageMaybe();
   }
 
   handleAddToCart(cardProps) {
-    const getStorage = JSON.parse(localStorage.getItem('carState'));
-    localStorage.setItem('cartState', JSON.stringify([...getStorage, cardProps]));
+    this.setState((oldState) => ({
+      cartState: [
+        ...oldState.cartState, { cardProps },
+      ],
+    }),
+    async () => {
+      const { cartState } = this.state;
+      localStorage.setItem('cartState', JSON.stringify(cartState));
+    });
   }
 
   async getProductsFromId(productId) {
@@ -30,10 +39,6 @@ class Detail extends React.Component {
     return fetch(URL)
       .then((result) => result.json())
       .catch((error) => { console.log(`Erro na requisição: ${error}`); });
-  }
-
-  updateCart() {
-    this.recuperarProduto();
   }
 
   addToCart() {
@@ -45,6 +50,15 @@ class Detail extends React.Component {
       id,
     };
     this.handleAddToCart(cartItem);
+  }
+
+  retrieveStorageMaybe() {
+    const storageProducts = JSON.parse(localStorage.getItem('cartState'));
+    if (storageProducts) {
+      this.setState({
+        cartState: storageProducts,
+      });
+    }
   }
 
   recuperarProduto() {
