@@ -7,7 +7,7 @@ class Detail extends React.Component {
     this.state = {
       produto: {},
       loading: true,
-      cartState: [],
+      cartState: [{}],
     };
 
     this.recuperarProduto = this.recuperarProduto.bind(this);
@@ -22,16 +22,17 @@ class Detail extends React.Component {
   }
 
   handleAddToCart(cardProps) {
-
-    this.setState((oldState) => ({
-      cartState: [
-        ...oldState.cartState, { cardProps },
-      ],
-    }),
-    () => {
-      const { cartState } = this.state;
-      localStorage.setItem('cartState', JSON.stringify(cartState));
-    });
+    const estado = this.state.cartState;
+    estado.push(cardProps);
+    if (estado.lenght > 0) {
+      this.setState(() => ({
+        cartState: estado,
+      }),
+      () => {
+        const { cartState } = this.state;
+        localStorage.setItem('cartState', JSON.stringify(cartState));
+      });
+    }
   }
 
   async getProductsFromId(productId) {
