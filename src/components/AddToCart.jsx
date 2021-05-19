@@ -16,15 +16,34 @@ export default class AddToCart extends Component {
           .filter((product) => product.product.id !== prod.product.id);
         checkEqual.quantity += 1;
         const newArray = [...oldArray, checkEqual];
+        const { product } = this.props;
+        const TOTAL_PRICE_STORAGE = 'total-price';
+        const fetchCart = localStorage.getItem(TOTAL_PRICE_STORAGE);
+        if (fetchCart) {
+          localStorage.setItem(TOTAL_PRICE_STORAGE,
+            JSON.stringify(JSON.parse(fetchCart) + product.price));
+        }
+        if (!fetchCart) {
+          localStorage.setItem(TOTAL_PRICE_STORAGE, JSON.stringify(product.price));
+        }
         return localStorage.setItem(productsOnCart, JSON.stringify(newArray));
       }
     }
     products.push({ ...prod, quantity: 1 });
     localStorage.setItem(productsOnCart, JSON.stringify(products));
+    const { product } = this.props;
+    const TOTAL_PRICE_STORAGE = 'total-price';
+    if (localStorage.getItem(TOTAL_PRICE_STORAGE)) {
+      localStorage.setItem(TOTAL_PRICE_STORAGE, JSON.stringify(
+        JSON.parse(localStorage.getItem(TOTAL_PRICE_STORAGE)) + product.price,
+      ));
+    }
+    if (!localStorage.getItem(TOTAL_PRICE_STORAGE)) {
+      localStorage.setItem(TOTAL_PRICE_STORAGE, JSON.stringify(product.price));
+    }
   }
 
   render() {
-    localStorage.setItem('total-price', '0');
     return (
       <div>
         <button
@@ -42,5 +61,6 @@ export default class AddToCart extends Component {
 AddToCart.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.string,
+    price: PropTypes.number,
   }).isRequired,
 };
