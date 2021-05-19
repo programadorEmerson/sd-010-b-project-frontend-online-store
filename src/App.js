@@ -5,6 +5,7 @@ import Cart from './pages/Cart';
 import Input from './components/Input';
 import Categories from './components/Categories';
 import ProductList from './components/ProductList';
+import ProductDetails from './pages/ProductDetails';
 
 class App extends React.Component {
   constructor() {
@@ -29,19 +30,18 @@ class App extends React.Component {
   render() {
     const { products, queryTerm } = this.state;
     return (
-      <main>
-        <BrowserRouter>
-          <Input handleQuery={ this.handleQuery } />
-          <Categories
-            handleQuery={ this.handleQuery }
-            query={ queryTerm }
-          />
-          <Switch>
-            <Route to="/cart" component={ Cart } />
-          </Switch>
-          <ProductList products={ products } />
-        </BrowserRouter>
-      </main>
+      <BrowserRouter>
+        <Input handleQuery={ this.handleQuery } />
+        <Categories
+          handleQuery={ this.handleQuery }
+          query={ queryTerm }
+        />
+        <Switch>
+          <Route path="/cart" component={ Cart } />
+          <Route path="/details/:pID" component={ ProductDetails } />
+        </Switch>
+        <ProductList products={ products } />
+      </BrowserRouter>
     );
   }
 }
