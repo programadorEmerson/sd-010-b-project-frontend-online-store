@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Rating from './Rating';
 
 class DetailsCard extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class DetailsCard extends React.Component {
       nameItems: [],
       textArea: '',
       select: 5,
+      id:'',
     };
   }
 
@@ -30,19 +32,19 @@ class DetailsCard extends React.Component {
   }
 
   handleChange(field, newValue) {
-    this.setState({ [field]: newValue });
+    this.setState({ [field]: newValue,  });
   }
 
-  handleSubmit() {
+  handleSubmit = (id) => () => {
     const { textArea, select } = this.state;
-    const literalmente = `Texto:${textArea}, Nota:${select}`;
-    const value = JSON.parse(localStorage.getItem('productSubmit'));
+    const conteudo = `Texto:${textArea}, Nota:${select}`;
+    const value = JSON.parse(localStorage.getItem(id));
     const result = !value ? [] : value;
-    localStorage.setItem('productSubmit', JSON.stringify([...result, literalmente]));
+    localStorage.setItem(id, JSON.stringify([...result, conteudo]));
   }
 
   getName = (title) => () => {
-    this.setState({ nameItems: title });
+    this.setState({ nameItems: title});
   }
 
   getAPI = async () => {
@@ -54,7 +56,7 @@ class DetailsCard extends React.Component {
   }
 
   render() {
-    const { details: { title, thumbnail, price } } = this.state;
+    const { details: { title, thumbnail, price, id } } = this.state;
     const { value } = this.state;
     return (
       <div>
@@ -90,8 +92,9 @@ class DetailsCard extends React.Component {
               onChange={ (event) => this.handleChange('textArea', event.target.value) }
             />
           </label>
-          <input onClick={ () => this.handleSubmit() } type="submit" value="Enviar" />
+          <input onClick={ this.handleSubmit(id) } type="submit" value="Enviar" />
         </form>
+        <Rating id={ id } />
       </div>
     );
   }
