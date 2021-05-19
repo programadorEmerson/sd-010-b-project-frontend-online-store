@@ -8,6 +8,7 @@ class ShoppingCart extends Component {
     super(props);
     this.state = {
       total: 0,
+      totalItem: 0,
     };
   }
 
@@ -30,13 +31,17 @@ class ShoppingCart extends Component {
           (acc, value) => (acc + value.price) * value.countItems,
           number,
         ),
+        totalItem: cartItems.reduce(
+          (acc, value) => (acc + value.countItems),
+          number,
+        ),
       });
     }
   }
 
   render() {
     const { cartItems, addCart, removeItemCart, removeCart } = this.props;
-    const { total } = this.state;
+    const { total, totalItem } = this.state;
 
     if (cartItems.length === 0) {
       return (
@@ -52,7 +57,7 @@ class ShoppingCart extends Component {
     return (
       <div>
         <div>
-          { cartItems.length }
+          { totalItem }
         </div>
         <ul>
           {cartItems.map((product) => (

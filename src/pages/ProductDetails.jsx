@@ -14,34 +14,60 @@ class ProductDetaills extends Component {
     this.state = {
       product: [],
       productId: id,
+      totalItem: 0,
     };
   }
 
   componentDidMount() {
     this.requestDetails();
+    this.amount();
+  }
+
+  componentDidUpdate(previusValueProps) {
+    if (previusValueProps !== this.props) {
+      this.amount();
+    }
+  }
+
+  amount = () => {
+    const { cartItems } = this.props;
+    const number = 0;
+    if (cartItems.length >= 1) {
+      this.setState({
+        totalItem: cartItems.reduce(
+          (acc, value) => (acc + value.countItems),
+          number,
+        ),
+      });
+    }
+    console.log(cartItems);
   }
 
   requestDetails = async () => {
     const { productId } = this.state;
-    const returnRequest = await fetch(`https://api.mercadolibre.com/items/${productId}`);
+    const returnRequest = await fetch(
+      `https://api.mercadolibre.com/items/${productId}`,
+    );
     const returnJson = await returnRequest.json();
     this.setState({
       product: returnJson,
     });
-  }
+  };
 
   render() {
-    const { product } = this.state;
+    const { product, totalItem } = this.state;
     const { title, thumbnail, price, warranty } = product;
-    const { onClick } = this.props;
+    const { addCart } = this.props;
     return (
       <div>
+        <div data-testid="shopping-cart-size">{ totalItem }</div>
         <Link
           to="/shopping-cart"
           data-testid="shopping-cart-button"
           className="shopping-cart-button"
         >
           <GrCart />
+
         </Link>
         <h3>Especificações Técnicas</h3>
         <h3 data-testid="product-detail-name">{title}</h3>
@@ -54,7 +80,7 @@ class ProductDetaills extends Component {
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
-          onClick={ () => onClick(product) }
+          onClick={ () => addCart(product) }
         >
           Adicionar ao carrinho
         </button>
@@ -67,17 +93,19 @@ class ProductDetaills extends Component {
               type="number"
               step={ 1 }
               min={ 0 }
+              max={ 5 }
               required
             />
           </label>
-          <label htmlFor="product_comments">
-            <textarea
-              id="product_comments"
-              data-testid="product-detail-evaluation"
-              cols="20"
-            />
-          </label>
-
+          <div>
+            <label htmlFor="product_comments">
+              <textarea
+                id="product_comments"
+                data-testid="product-detail-evaluation"
+                cols="20"
+              />
+            </label>
+          </div>
         </form>
         <Link to="/">Voltar para a tela inicial</Link>
       </div>

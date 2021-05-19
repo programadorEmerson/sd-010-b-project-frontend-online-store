@@ -45,7 +45,7 @@ class Home extends Component {
 
   render() {
     const { products, noProducts, categoryId, search } = this.state;
-    const { onClick } = this.props;
+    const { addCart } = this.props;
     const noProduct = 'Nenhum produto encontrado';
     return (
       <div>
@@ -60,7 +60,7 @@ class Home extends Component {
           <div className="product-list">
             { noProducts ? <p>{ noProduct }</p> : <ProductList
               products={ products }
-              onClick={ onClick }
+              onClick={ addCart }
             />}
           </div>
         </div>
@@ -70,7 +70,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  addCart: PropTypes.func.isRequired,
 };
 
 export default Home;
