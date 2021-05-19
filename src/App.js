@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './prototypes/prototype.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ShoppingCart from './pages/ShoppingCart';
 import Index from './pages/Index';

@@ -1,0 +1,25 @@
+.category-and-results {
+  display: flex;
+}
+
+.results-display, .search-result {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-card {
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.205);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  justify-content: space-around;
+  margin: 4px;
+  text-align: center;
+  width: 210px;
+}
+
+.card-title {
+  padding: 0 3px;
+}

@@ -8,14 +8,16 @@ class SearchList extends React.Component {
     const { item, addToCart } = this.props;
     const { title, thumbnail, price, id } = item;
     return (
-      <li data-testid="product">
-        {
-          title
-        }
+      <li data-testid="product" className="product-card">
+        <p className="card-title">
+          {
+            title
+          }
+        </p>
         {' '}
         <img alt="foto" width="100px" src={ thumbnail } />
         {' '}
-        {price}
+        { price }
         <button type="button">
           <Link
             to={ `/details/${item.category_id}/${id}` }
