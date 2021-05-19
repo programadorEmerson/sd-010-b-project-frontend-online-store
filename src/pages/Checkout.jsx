@@ -1,6 +1,17 @@
 import React from 'react';
 
 class Checkout extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      cart: [],
+    };
+  }
+
+  componentDidMount() {
+    this.fetchCart();
+  }
+
   renderInputName = () => (
     <div>
       <label htmlFor="fullName">
@@ -23,7 +34,7 @@ class Checkout extends React.Component {
     <div>
       <label htmlFor="CPF">
         CPF
-        <input data-testid="checkout-cpf" name="CPF" type="number" />
+        <input data-testid="checkout-cpf" name="CPF" type="text" />
       </label>
     </div>
   )
@@ -32,7 +43,7 @@ class Checkout extends React.Component {
     <div>
       <label htmlFor="phoneNumber">
         Telefone
-        <input data-testid="checkout-phone" name="phoneNumber" type="number" />
+        <input data-testid="checkout-phone" name="phoneNumber" type="text" />
       </label>
     </div>
   )
@@ -41,7 +52,7 @@ class Checkout extends React.Component {
     <div>
       <label htmlFor="CEP">
         CEP
-        <input data-testid="checkout-cep" name="CEP" type="number" />
+        <input data-testid="checkout-cep" name="CEP" type="text" />
       </label>
     </div>
   )
@@ -55,9 +66,32 @@ class Checkout extends React.Component {
     </div>
   )
 
+  renderOrder = () => {
+    const { cart } = this.state;
+    return (
+      <div>
+        { cart.map( (item, index) => (<p key={index}> { item[0].title } { item.length*parseFloat(item[0].price) } </p>)) }
+      </div>
+    );
+  }
+
+  fetchCart = () => {
+    const { location: { state } } = this.props;
+    this.setState({ cart:state });
+  }
+
   render() {
     return (
-      <div />
+      <div>
+        { this.renderOrder()}
+        { this.renderInputName()}
+        { this.renderInputEmail()}
+        { this.renderInputCPF()}
+        { this.renderInputPhone()}
+        { this.renderInputCEP()}
+        { this.renderInputAddress()}
+
+      </div>
     );
   }
 }

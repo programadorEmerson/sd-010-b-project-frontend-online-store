@@ -53,7 +53,15 @@ class Cart extends React.Component {
             quantity={ item.length }
             title={ item[0].title }
           />))}
-        <Link data-testid="checkout-products" to="/checkout"> Comprar </Link>
+        <Link
+          data-testid="checkout-products"
+          to={ {
+            pathname: '/checkout',
+            state: cart,
+          } }
+        >
+          Comprar
+        </Link>
       </div>
     );
   }
