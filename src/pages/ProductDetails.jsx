@@ -15,14 +15,13 @@ class ProductDetaills extends Component {
       product: [],
       productId: id,
     };
-    this.requestDetails = this.requestDetails.bind(this);
   }
 
   componentDidMount() {
     this.requestDetails();
   }
 
-  async requestDetails() {
+  requestDetails = async () => {
     const { productId } = this.state;
     const returnRequest = await fetch(`https://api.mercadolibre.com/items/${productId}`);
     const returnJson = await returnRequest.json();
@@ -92,9 +91,6 @@ ProductDetaills.propTypes = {
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     }),
   }).isRequired,
-};
-
-ProductDetaills.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
     price: PropTypes.number,
