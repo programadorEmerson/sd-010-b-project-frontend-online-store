@@ -12,9 +12,11 @@ class ProductDetails extends Component {
     super(props);
 
     this.state = {
+      id: '',
       title: '',
       price: '',
       imgUrl: '',
+      quantity: 0,
       comments: [],
       loading: true,
     };
@@ -32,11 +34,13 @@ class ProductDetails extends Component {
 
   getProduct = async () => {
     const { match: { params: { id } } } = this.props;
-    const { title, price, thumbnail } = await getProductById(id);
+    const { id: productId, title, price, thumbnail } = await getProductById(id);
     this.setState({
+      id: productId,
       title,
       price,
       imgUrl: thumbnail,
+      quantity: 1,
       loading: false,
     });
   }
@@ -56,7 +60,7 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { title, price, imgUrl, comments, loading } = this.state;
+    const { id, title, price, imgUrl, quantity, comments, loading } = this.state;
 
     if (loading) {
       return (
@@ -75,7 +79,11 @@ class ProductDetails extends Component {
         <img src={ imgUrl } alt={ title } />
         <button
           type="button"
-          onClick={ () => { this.saveAtLocalstorage({ title, price, imgUrl }); } }
+          onClick={ () => {
+            this.saveAtLocalstorage(
+              { id, title, price, imgUrl, quantity },
+            );
+          } }
         >
           Adicionar ao Carrinho
 

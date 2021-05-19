@@ -26,6 +26,7 @@ class ShoppingCart extends Component {
     return (
       <section>
         <h1>Carrinho de Compras</h1>
+        {/* TODO: Create a component to replace the 'p' element */}
         { products.length
           ? products.map((product) => <p key={ product.title }>{product.title}</p>)
           : <p>Seu Carrinho está vazio!</p>}
