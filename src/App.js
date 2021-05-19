@@ -47,12 +47,15 @@ class App extends React.Component {
      const { productsCart } = this.state;
      let productIsInList = false;
      productsCart.forEach((product, index) => {
+       console.log(product.id, id);
        if (product.id === id) {
+         //  productsCart[index].quantity += 1;
+         //  this.setState({ productsCart: [...productsCart] });
+         // forma alternativa para arrays e objetos, não usar com outros tipos de constantes !!
          productIsInList = true;
-         console.log(productsCart[index].quantity);
-         this.setState((prevState) => ({ [productsCart[index].quantity]:
-          (prevState.productsCart[index].quantity + 1) }));
-         console.log(productsCart[index].quantity);
+         const novoCarrinho = productsCart;
+         novoCarrinho[index].quantity += 1;
+         this.setState({ productsCart: novoCarrinho });
        }
      });
      if (productIsInList === false) {
