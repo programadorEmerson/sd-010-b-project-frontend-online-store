@@ -52,11 +52,20 @@ class Cart extends Component {
 
   render() {
     const { products } = this.state;
+    if (products.length === 0) {
+      return (
+        <>
+          <Link to="/">Voltar</Link>
+          <header>Carrinho de compras</header>
+          <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
+        </>
+      );
+    }
+
     return (
       <>
         <Link to="/">Voltar</Link>
         <header>Carrinho de compras</header>
-        <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
         <div className="cart-item-container">
           { products.map((product) => (
             <CartItem
