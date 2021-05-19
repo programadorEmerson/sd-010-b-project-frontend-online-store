@@ -25,12 +25,12 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <h4 class='searchTitle' data-testid="home-initial-message">
+        <h4 className='searchTitle' data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
         </h4>
         <form>
           <input onChange={ this.changeState } type="text" />
-          <button class='searchButton'
+          <button className='searchButton'
           onClick={ this.valorDoState } type="button">Buscar</button>
         </form>
       </div>

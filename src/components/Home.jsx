@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 import Categories from './Categories';
 import AllProducts from './AllProducts';
 import Search from './Search';
+import Category from './Category';
 
 class Home extends Component {
   constructor() {
     super()
     this.filterTextFunc = this.filterTextFunc.bind(this)
     this.state = {
-      filterText: ''
+      filterText: '',
+      categoryId: '',
     }
   }
 
@@ -20,16 +22,16 @@ class Home extends Component {
   }
 
   render() {
-    const { filterText } = this.state;
+    const { filterText, categoryId } = this.state;
     return (
-      <div class='home'>
-        <div class='searchBox'>
+      <div className='home'>
+        <div className='searchBox'>
           <Search filterTextFunc={this.filterTextFunc}/>
           <Categories />
         </div>
         <div>
           <AllProducts
-            filterText={ filterText }
+            filterText={ filterText, categoryId }
         />
         </div>
       </div>

@@ -8,9 +8,9 @@ class Product extends Component {
     return (
       <div>
         <div className="productContainer">
-          <h3 class='title'>{ title }</h3>
-          <img class={'img'} src={ thumbnail } alt={ title } />
-          <p class='price'>{`R$-${ price }`}</p>
+          <h3 className='title'>{ title }</h3>
+          <img className={'img'} src={ thumbnail } alt={ title } />
+          <p className='price'>{`R$-${ price }`}</p>
         </div>
         {/* {console.log('seilah')} */}
       </div>
