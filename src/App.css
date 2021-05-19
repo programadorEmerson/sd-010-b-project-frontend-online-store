@@ -56,8 +56,22 @@ header {
 }
 
 .header-container a {
-  background-color: red;
-  border-radius: 3px;
-  padding: 5px 15px;
+  background-color: rgb(219, 122, 42);
+  border-radius: 5px;
+  color: rgb(39, 38, 38);
+  font-size: 1em;
+  opacity: 80%;
+  padding: 5px 11px;
   text-decoration: none;
+  transition: transform 0.5s;
+}
+
+.header-container a:hover {
+  color: rgb(4, 170, 170);
+  opacity: 100%;
+  transform: scale(1.1);
+}
+
+.cart-btn {
+  display: none;
 }

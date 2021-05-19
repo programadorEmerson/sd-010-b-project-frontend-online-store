@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { HiOutlineShoppingCart } from 'react-icons/hi';
 
 class Header extends Component {
   render() {
@@ -19,6 +20,7 @@ class Header extends Component {
           to="/cart"
           data-testid="shopping-cart-size"
         >
+          <HiOutlineShoppingCart />
           {totalItems}
         </Link>
       </header>
