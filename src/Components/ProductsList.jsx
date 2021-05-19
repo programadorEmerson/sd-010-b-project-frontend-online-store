@@ -29,7 +29,6 @@ class ProductsList extends Component {
   render() {
     const { products } = this.state;
     const { addToCartHandler } = this.props;
-    console.log(products); // testes
     return (
       <div className="products-list">
         { products.map((product) => (<Product

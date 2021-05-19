@@ -23,7 +23,6 @@ class App extends Component {
 
     if (shoppingCartItens.find((product) => product.id === id)) {
       const index = shoppingCartItens.findIndex((product) => product.id === id);
-      console.log(index, id);
       shoppingCartItens[index].quantity += 1;
     } else {
       const newCartItem = {
