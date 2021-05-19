@@ -17,13 +17,62 @@ class App extends React.Component {
   }
 
   handleAddCartItem = async (categoryId, title, id) => {
+    const { addCart } = this.state;
     const { results } = await api.getProductsFromCategoryAndQuery(categoryId, title);
     const findProduct = results.find((result) => result.id === id);
-    this.setState((oldState) => ({ addCart: [...oldState.addCart, findProduct] }));
+    const exist = addCart.find((product) => product.product.id === id);
+    console.log(id);
+
+    this.setState((oldState) => {
+      let newCartList = [];
+      if (exist) {
+        newCartList = oldState.addCart.map((product) => {
+          if (product.product.id === findProduct.id) {
+            product.quantity += 1;
+          }
+          return product;
+        });
+      } else {
+        newCartList = [...oldState.addCart, { product: findProduct, quantity: 1 }];
+      }
+      return { addCart: newCartList };
+    });
   };
 
-  addProdToCart = async (product) => {
-    this.setState((oldState) => ({ cart: [...oldState.cart, product] }));
+  handleQuantity = (type, id) => {
+    const { addCart } = this.state;
+
+    let newCartList = [];
+    if (type === 'decrease') {
+      const findProduct = addCart.find((product) => product.product.id === id);
+      if (findProduct) {
+        console.log('dentro do if -');
+        newCartList = addCart.map((product) => {
+          if (product.product.id === findProduct.product.id) {
+            console.log('dentro do if quantity');
+            product.quantity -= 1;
+          }
+          console.log('product', product);
+          return product;
+        });
+      }
+    }
+
+    if (type === 'increase') {
+      const findProduct = addCart.find((product) => product.product.id === id);
+      if (findProduct) {
+        console.log('dentro do if -');
+        newCartList = addCart.map((product) => {
+          if (product.product.id === findProduct.product.id) {
+            console.log('dentro do if quantity');
+            product.quantity += 1;
+          }
+          console.log('product', product);
+          return product;
+        });
+      }
+    }
+    this.setState(() => ({ addCart: newCartList }));
   }
 
   render() {
@@ -36,15 +85,26 @@ class App extends React.Component {
             path="/"
             render={ () => <Home onClick={ this.handleAddCartItem } /> }
           />
-          <Route exact path="/cart" render={ () => <Cart addCart={ addCart } /> } />
           <Route
-            path="/details/:id/:categoryId/:title"
+            exact
+            path="/cart"
+            render={ () => (<Cart
+              addCart={ addCart }
+              onClick={ this.handleQuantity }
+            />) }
+          />
+          <Route
+            path="/details/:id"
             render={ (props) => (<ProductDetails
               { ...props }
               addCart={ this.handleAddCartItem }
             />) }
           />
-          <Route exact path="/checkout" component={ Checkout } />
+          <Route
+            exact
+            path="/checkout"
+            render={ () => (<Checkout addCart={ addCart } />) }
+          />
         </Switch>
       </BrowserRouter>
     );

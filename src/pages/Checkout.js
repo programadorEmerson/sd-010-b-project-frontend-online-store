@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 
 class Checkout extends React.Component {
@@ -16,6 +17,8 @@ class Checkout extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.renderPrice = this.renderPrice.bind(this);
+    this.renderQuantity = this.renderQuantity.bind(this);
   }
 
   handleChange({ target }) {
@@ -39,9 +42,30 @@ class Checkout extends React.Component {
     });
   }
 
+  renderQuantity() {
+    const { addCart } = this.props;
+    let total = 0;
+    addCart.map(({ quantity }) => {
+      total += quantity;
+      return total;
+    });
+    return total;
+  }
+
+  renderPrice() {
+    const { addCart } = this.props;
+    let totalPrice = 0;
+    addCart.map(({ product, quantity }) => {
+      totalPrice += Number(product.price) * Number(quantity);
+      return totalPrice;
+    });
+    return totalPrice;
+  }
+
   render() {
     const { fullname, email, cpf, phone, cep, address, redirect, payment } = this.state;
-    const { cartList } = this.props;
+    const { addCart } = this.props;
+    console.log(addCart);
 
     if (redirect) {
       return <Redirect to="/" />;
@@ -51,7 +75,7 @@ class Checkout extends React.Component {
       <div data-testid="checkout-products">
         Informações do Carrinho
         <section>
-          ...
+          {/* <h1>Preço Total{ this.renderPrice() }</h1> */}
         </section>
         Informações do Comprador
         <section id="info">
@@ -168,5 +192,11 @@ class Checkout extends React.Component {
     );
   }
 }
+
+Checkout.propTypes = {
+  addCart: PropTypes.arrayOf(
+    PropTypes.object,
+  ).isRequired,
+};
 
 export default Checkout;
