@@ -47,3 +47,17 @@
 img {
   width: 100px;
 }
+
+/* https://codepen.io/gabrielcarvalhogama/pen/edwajP */
+.fa {
+  font-size: 2em;
+}
+
+.fa:before {
+  color: #fc0;
+  content: '\f005';
+}
+
+.estrelas .inputRadio:checked ~ .fa:before {
+  color: #ccc;
+}
