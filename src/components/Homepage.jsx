@@ -42,12 +42,14 @@ class Homepage extends React.Component {
         ) : (
           categories.map((categ) => {
             const { id, name } = categ;
-            return (<CategoryList
-              key={ id }
-              id={ id }
-              name={ name }
-              onClick={ setCategory }
-            />);
+            return (
+              <CategoryList
+                key={ id }
+                id={ id }
+                name={ name }
+                onClick={ setCategory }
+              />
+            );
           })
         )}
       </section>
@@ -83,21 +85,21 @@ class Homepage extends React.Component {
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
-        <Link to="/pagecart" data-testid="shopping-cart-button">Page Cart</Link>
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ handleClick }
-        >
+        <Link to="/pagecart" data-testid="shopping-cart-button">
+          Page Cart
+        </Link>
+        <button type="button" data-testid="query-button" onClick={ handleClick }>
           Pesquisar
         </button>
         {this.renderCategories()}
-        {arrProducts.map((product, index) => (<ProductsByTerms
-          key={ product.id }
-          product={ product }
-          id={ index }
-          addToCart={ addToCart }
-        />))}
+        {arrProducts.map((product, index) => (
+          <ProductsByTerms
+            key={ product.id }
+            product={ product }
+            id={ index }
+            addToCart={ addToCart }
+          />
+        ))}
       </div>
     );
   }
