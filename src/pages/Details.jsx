@@ -29,9 +29,8 @@ class Details extends Component {
       });
   }
  shippingMessage() => {
-const { product:{ shipping: {free_shipping} } } = this.state;
-if()
-} 
+  const { product:{ shipping: {free_shipping} } } = this.state;
+ }
   render() {
     const { product:
       { title, price, thumbnail, attributes }, product, isShipping } = this.state;
