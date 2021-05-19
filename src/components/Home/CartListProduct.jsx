@@ -4,24 +4,6 @@ import { Link } from 'react-router-dom';
 import { shoppingCardProductAdd } from '../../services/dataLocalStorage';
 
 export default class CartListProduct extends Component {
-  addToCart = () => {
-    const { product } = this.props;
-    const {
-      title,
-      thumbnail,
-      price,
-      id,
-    } = product;
-    const cartItem = {
-      title,
-      thumbnail,
-      price,
-      id,
-      quantity: 1,
-    };
-    shoppingCardProductAdd(cartItem);
-  };
-
   render() {
     const { product } = this.props;
     const { title, thumbnail, price, id } = product;
@@ -38,7 +20,7 @@ export default class CartListProduct extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ () => this.addToCart() }
+          onClick={ () => shoppingCardProductAdd(product) }
         >
           Adicionar ao carrinho
         </button>
