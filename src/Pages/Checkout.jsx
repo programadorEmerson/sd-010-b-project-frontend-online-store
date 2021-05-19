@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CheckoutForm from '../Components/Forms/CheckoutForm';
 
 class Checkout extends Component {
@@ -39,4 +40,7 @@ class Checkout extends Component {
   }
 }
 
+Checkout.propTypes = {
+  shoppingCartItens: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 export default Checkout;
