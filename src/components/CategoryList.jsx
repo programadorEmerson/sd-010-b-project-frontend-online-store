@@ -42,7 +42,7 @@ class CategoryList extends React.Component {
             )) }
           </ol>
         </aside>
-        <ol>
+        <ol className="results-display">
           {searchText.map((item) => (<SearchList
             key={ item.id }
             item={ item }
