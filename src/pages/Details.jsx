@@ -43,6 +43,10 @@ class Details extends Component {
               </li>))}
           </ul>
           <section>
+            <section>
+              <h3>Quantidade:</h3>
+              <h2>- (0) +</h2>
+            </section>
             <AddToCart data-testid="product-detail-add-to-cart" product={ product } />
           </section>
           <Link to="/">Voltar</Link>
