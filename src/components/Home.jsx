@@ -6,17 +6,12 @@ import Search from './Search';
 import Categories from './Categories';
 import AllProducts from './AllProducts';
 
-
 class Home extends Component {
   constructor() {
     super()
-    this.filterTextFunc = this.filterTextFunc.bind(this)
     this.categoryId = this.categoryId.bind(this)
     this.buscafunc=this.buscafunc.bind(this)
-    this.buscafunctest=this.buscafunctest.bind(this)
     this.state = {
-      filterText: '',
-      id: '',
       products: [],
       loading: true,
     }
@@ -25,18 +20,7 @@ class Home extends Component {
   componentDidMount() {
     const { id, filterText } = this.state;
     console.log(filterText);
-    this.buscafunctest(id, filterText)
-  }
-  shouldComponentUpdate() {
-    return true
-  }
-
-  buscafunctest(id, product){
-    if ( id === product) {
-      this.buscafunc()
-    } else {
-      this.buscafunc(id, product)
-    }
+    this.buscafunc(id, filterText)
   }
 
   buscafunc(id, product) {
@@ -48,12 +32,6 @@ class Home extends Component {
     });
   }
 
-  filterTextFunc(text) {
-    this.setState({
-      filterText: text,
-    });
-  }
-
   categoryId(text) {
     this.setState({
       id: text,
@@ -61,18 +39,20 @@ class Home extends Component {
   }
 
   render() {
-    const { loading, products, filterText } = this.state;
+
+    const { loading, products } = this.state;
     
     return (
       <div className='home'>
         <div className='searchBox'>
-          <Search filterTextFunc={this.filterTextFunc}/>
+          <Search buscafunc={this.buscafunc}/>
           <Categories categoryId={this.categoryId}/>
         </div>
         <div>
           <AllProducts
-            loading={ loading } products={products}
-        />
+            loading={ loading } 
+            products={products}
+          />
         </div>
         <div>
           <CartButton />

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../Style/Search.css';
 
-
 class Search extends Component {
   constructor() {
     super();
@@ -12,8 +11,8 @@ class Search extends Component {
   }
 
   stateValue = () => {
-    const { filterText } = this.state
-    this.props.filterTextFunc(filterText);
+    const { product } = this.state
+    this.props.buscafunc('', product);
   }
 
   changeState(event) {
