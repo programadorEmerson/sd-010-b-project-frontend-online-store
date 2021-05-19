@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Review from '../components/Review';
 
 class ProductDetails extends Component {
   render() {
@@ -10,8 +11,7 @@ class ProductDetails extends Component {
       thumbnail,
       price,
       id,
-      address: { cityName: city, stateName: state } } = product;
-
+      address: { city_name: city, state_name: state } } = product;
     return (
       <>
         <section>
@@ -32,6 +32,7 @@ class ProductDetails extends Component {
           >
             Ir ao carrinho
           </Link>
+          <Review product={ product } />
         </section>
       </>
     );
@@ -47,8 +48,8 @@ ProductDetails.propTypes = {
         price: PropTypes.number,
         id: PropTypes.string,
         address: PropTypes.shape({
-          cityName: PropTypes.string,
-          stateName: PropTypes.string,
+          city_name: PropTypes.string,
+          state_name: PropTypes.string,
         }).isRequired,
       }).isRequired,
     }).isRequired,
