@@ -16,53 +16,46 @@ class ShoppingCart extends Component {
     }));
   };
 
-  btnLess = () => {
-    const { countProduct } = this.state; // Vai ser algo para armazenar a quantidade de produtos
-    this.setState((prevState) => ({
-      countProduct: prevState.countProduct - 1,
-    }));
-    if (countProduct === 0) {
-      this.setState({
-        countProduct: 0,
-      });
-    }
-  };
-
-  buttons = () => {
-    const { countProduct } = this.state;
-    return (
-      <div>
-        <button type="button" onClick={ this.btnAdd }>+</button>
-        <p>{ countProduct }</p>
-        <button type="button" onClick={ this.btnLess }>-</button>
-        <button type="button">X</button>
-      </div>
-    );
-  }
-
   render() {
-    const { addCart } = this.props;
+    const { cartItems, addCart, removeItemCart, removeCart } = this.props;
 
-    if (addCart.length === 0) {
+    if (cartItems.length === 0) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
 
     return (
       <div>
         <ul>
-          {addCart.map((product) => (
+          {cartItems.map((product) => (
             <li key={ product.id }>
               <ProductCard product={ product } />
-              {this.buttons()}
+              <button
+                type="button"
+                data-testid="product-increase-quantity"
+                onClick={ () => addCart(product) }
+              >
+                +
+              </button>
+              <p>{ product.countItens }</p>
+              <button
+                type="button"
+                data-testid="product-decrease-quantity"
+                onClick={ () => removeItemCart(product) }
+              >
+                -
+              </button>
+              <button type="button" onClick={ () => removeCart(product) }>X</button>
+              <p data-testid="shopping-cart-product-quantity">
+                Quantidade de itens no carrinho
+                {product.countItems}
+                {' '}
+                itens
+              </p>
             </li>
+
           ))}
         </ul>
-        <p data-testid="shopping-cart-product-quantity">
-          Quantidade de itens no carrinho
-          {addCart.length}
-          {' '}
-          itens
-        </p>
+
         <button type="button">Finalizar compras</button>
       </div>
     );
@@ -70,7 +63,7 @@ class ShoppingCart extends Component {
 }
 
 ShoppingCart.propTypes = {
-  addCart: PropTypes.objectOf({
+  cartItems: PropTypes.objectOf({
     title: PropTypes.string,
     price: PropTypes.number,
     id: PropTypes.string,
