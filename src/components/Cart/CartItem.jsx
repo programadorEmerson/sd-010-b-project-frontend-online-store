@@ -85,12 +85,7 @@ class CartItem extends Component {
         {this.renderProductName(title)}
         <div className="config-product-quantity">
           {this.renderDecreaseQuantityIcon()}
-          <div
-            className="product-quantity"
-            dataTestId="shopping-cart-product-quantity"
-          >
-            { quantity }
-          </div>
+          {this.renderProductQuantity(quantity)}
           {this.renderIncreaseQuantityIcon()}
         </div>
         <div className="product-price">{ `R$ ${price * quantity}` }</div>
