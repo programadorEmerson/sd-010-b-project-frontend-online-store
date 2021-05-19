@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import ButtonToCart from '../components/ButtonToCart';
-import * as api from '../services/api';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -21,9 +20,10 @@ class ProductDetails extends Component {
   async searchProduct() {
     const { match: { params: { id } } } = this.props;
     fetch(`https://api.mercadolibre.com/items/${id}`)
-    .then((response) => {
-      response.json() .then((result) =>
-       { this.setState({ productDetail: result }); });
+      .then((response) => {
+        response.json().then((result) => {
+          this.setState({ productDetail: result });
+        });
       });
   }
 

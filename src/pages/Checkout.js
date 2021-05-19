@@ -39,7 +39,7 @@ class Checkout extends React.Component {
 
   render() {
     const { fullname, email, cpf, phone, cep, address, redirect } = this.state;
-    const { cartList } = this.props;
+    // const { cartList } = this.props;
 
     if (redirect) {
       return <Redirect to="/" />;
