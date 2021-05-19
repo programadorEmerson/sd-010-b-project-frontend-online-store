@@ -45,7 +45,7 @@ class ProductDetails extends Component {
           <label htmlFor="rating">
             <input
               id="rating"
-              type="number"              
+              type="number"
               max={ 5 }
               min={ 0 }
               required
