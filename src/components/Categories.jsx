@@ -21,11 +21,15 @@ class Categories extends Component {
     }));
   }
 
+  valorDaId = () => {
+    const { id } = this.state
+    this.props.categoryId(id);
+  }
+
   render() {
     const { categories } = this.state;
     return (
       <div className='categories'>
-        {/* {console.log(categories)} */}
         {categories.map((category) => (<Category
           key={ category.id }
           category={ category }

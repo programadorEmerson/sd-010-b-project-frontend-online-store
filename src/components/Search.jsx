@@ -10,7 +10,7 @@ class Search extends Component {
     };
   }
 
-  valorDoState = () => {
+  stateValue = () => {
     const { filterText } = this.state
     this.props.filterTextFunc(filterText);
   }
@@ -31,7 +31,7 @@ class Search extends Component {
         <form>
           <input onChange={ this.changeState } type="text" />
           <button className='searchButton'
-          onClick={ this.valorDoState } type="button">Buscar</button>
+          onClick={ this.stateValue } type="button">Buscar</button>
         </form>
       </div>
     )

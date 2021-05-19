@@ -1,6 +1,11 @@
 .categories{
   margin: 10px;
-  margin-top: 20px;
   font-style: italic;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}
+
+.category{
+    margin-top: 20px;
 }

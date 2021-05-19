@@ -1,11 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../Style/Categories.css'
 
 class Category extends React.Component {
   render() {
     const { category } = this.props;
     return (
-      <p data-testid="category">{`${category.name}`}</p>
+      <a
+        className='category'
+        type="text"
+        href={ category.id }
+        data-testid="category"
+      >
+        {`${category.name}`}
+      </a>
     );
   }
 }
