@@ -6,22 +6,21 @@ class Search extends Component {
     super();
     this.changeState = this.changeState.bind(this);
     this.state = {
-      filterText: '',
+      product: '',
     };
   }
 
   stateValue = () => {
-    const { product } = this.state
-    this.props.buscafunc('', product);
+    const { id, product } = this.state
+    this.props.buscafunc(id, product);
   }
 
   changeState(event) {
     const { value } = event.target
     this.setState({
-      filterText: value,
+      product: value,
     });
   }
-
   
   render() {
     return (

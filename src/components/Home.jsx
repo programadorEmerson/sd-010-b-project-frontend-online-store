@@ -46,7 +46,7 @@ class Home extends Component {
       <div className='home'>
         <div className='searchBox'>
           <Search buscafunc={this.buscafunc}/>
-          <Categories categoryId={this.categoryId}/>
+          <Categories buscafunc={this.buscafunc}/>
         </div>
         <div>
           <AllProducts
