@@ -27,6 +27,28 @@ class CartItem extends Component {
     return <Image source={ source } alt="imagem do produto" width="100" />;
   }
 
+  renderProductName(name) {
+    return (
+      <div
+        className="product-title"
+        data-testid="shopping-cart-product-name"
+      >
+        { name }
+      </div>
+    );
+  }
+
+  renderProductQuantity(quantity) {
+    return (
+      <div
+        className="product-quantity"
+        dataTestId="shopping-cart-product-quantity"
+      >
+        { quantity }
+      </div>
+    );
+  }
+
   renderDecreaseQuantityIcon() {
     const { updateQuantity } = this.props;
     const id = this.getCartItemId();
