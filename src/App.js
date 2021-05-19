@@ -4,6 +4,7 @@ import './App.css';
 import Home from './pages/Home';
 import ProductDetaills from './pages/ProductDetails';
 import ShoppingCart from './pages/ShoppingCart';
+import Payment from './pages/Payment';
 
 class App extends Component {
   constructor() {
@@ -74,6 +75,10 @@ class App extends Component {
               exact
               path="/"
               render={ () => <Home onClick={ this.addCart } /> }
+            />
+            <Route
+              path="/payment"
+              render={ (props) => <Payment { ...props } cartItems={ cartItems } /> }
             />
             <Route
               exact

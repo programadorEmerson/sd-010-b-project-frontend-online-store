@@ -39,10 +39,13 @@ class ProductCard extends Component {
 }
 
 ProductCard.propTypes = {
-  countItems: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  thumbnail: PropTypes.string.isRequired,
+  product: PropTypes.objectOf({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    id: PropTypes.string,
+    thumbnail: PropTypes.string,
+    countItems: PropTypes.number.isRequired,
+  }).isRequired,
   addCart: PropTypes.func.isRequired,
   removeItemCart: PropTypes.func.isRequired,
   removeCart: PropTypes.func.isRequired,

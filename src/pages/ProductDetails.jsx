@@ -33,7 +33,7 @@ class ProductDetaills extends Component {
 
   render() {
     const { product } = this.state;
-    const { title, thumbnail, price, warranty, shipping } = product;
+    const { title, thumbnail, price, warranty } = product;
     const { onClick } = this.props;
     return (
       <div>
