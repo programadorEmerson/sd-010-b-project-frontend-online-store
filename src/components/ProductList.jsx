@@ -45,9 +45,7 @@ class ProductList extends React.Component {
         { product === []
           ? (<p>Nenhum produto foi encotrado</p>)
           : product.map((item) => (
-
             <ProductCard key={ item.id } product={ item } />
-
           ))}
       </div>
     );

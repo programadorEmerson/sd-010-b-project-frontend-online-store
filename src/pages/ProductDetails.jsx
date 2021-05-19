@@ -29,7 +29,7 @@ class ProductDetails extends React.Component {
   render() {
     const { productDetails, fetched } = this.state;
     if (!fetched) return <Loading />;
-    const { title, thumbnail, attributes } = productDetails;
+    const { title, thumbnail, attributes, shipping } = productDetails;
     return (
       <div>
         <h3 data-testid="product-detail-name">{title}</h3>
@@ -40,6 +40,9 @@ class ProductDetails extends React.Component {
               { `${attribute.name}: ${attribute.value_name}` }
             </li>))}
         </ul>
+        <p data-testid={ shipping.free_shipping ? 'free-shipping' : '' }>
+          {shipping.free_shipping ? 'Frete Grátis' : null}
+        </p>
         <Rating />
       </div>
     );
