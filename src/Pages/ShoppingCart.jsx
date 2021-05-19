@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// Req 12 :
+import { Link } from 'react-router-dom';
 
 class ShoppingCart extends Component {
   constructor(props) {
@@ -31,6 +33,16 @@ class ShoppingCart extends Component {
         {this.shoppingCartItens.length === 0
           ? this.renderEmptyMsg()
           : this.renderCartList() }
+        {/* Req 12 */}
+        <Link to="/shopping-cart/checkout">
+          <button
+            type="button"
+            data-testid="checkout-products"
+            onClick={ () => console.log('oi bobo') }
+          >
+            Checkout
+          </button>
+        </Link>
       </section>
     );
   }

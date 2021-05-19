@@ -9,6 +9,7 @@ import MainPage from './Pages/MainPage';
 import ShoppingCart from './Pages/ShoppingCart';
 import Header from './Components/Header';
 import ProductDetails from './Pages/ProductDetails';
+import Checkout from './Pages/Checkout';
 
 class App extends Component {
   constructor() {
@@ -45,6 +46,10 @@ class App extends Component {
         <BrowserRouter>
           <Header />
           <Switch>
+            <Route
+              path="/shopping-cart/checkout"
+              render={ () => (<Checkout shoppingCartItens={ shoppingCartItens } />) }
+            />
             <Route
               path="/shopping-cart"
               render={ () => (
