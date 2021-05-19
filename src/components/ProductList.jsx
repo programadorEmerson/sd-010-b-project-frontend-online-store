@@ -1,6 +1,6 @@
 import React from 'react';
 import * as api from '../services/api';
-import ProductCard from './ProductCart';
+import ProductCard from './ProductCard';
 
 class ProductList extends React.Component {
   constructor() {
@@ -45,7 +45,9 @@ class ProductList extends React.Component {
         { product === []
           ? (<p>Nenhum produto foi encotrado</p>)
           : product.map((item) => (
+
             <ProductCard key={ item.id } product={ item } />
+
           ))}
       </div>
     );
