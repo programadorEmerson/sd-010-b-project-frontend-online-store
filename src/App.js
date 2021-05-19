@@ -11,16 +11,18 @@ class App extends React.Component {
     super();
 
     this.state = {
+      id: [],
       name: [],
     };
   }
 
-  onClick = (id) => {
-    this.setState((prevState) => ({ name: [...prevState.name, id] }));
+  onClick = (id, title) => {
+    this.setState((prevState) => (
+      { id: [...prevState.id, id], name: [...prevState.name, title] }));
   }
 
   render() {
-    const { name } = this.state;
+    const { name, id } = this.state;
     return (
       <div
         className="App"
@@ -35,7 +37,7 @@ class App extends React.Component {
             <Route
               exact
               path="/checkout"
-              render={ () => <Checkout name={ name } /> }
+              render={ () => <Checkout name={ name } id={ id } /> }
             />
             <Route
               exact
