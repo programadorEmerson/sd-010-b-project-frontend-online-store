@@ -8,7 +8,7 @@ class SearchList extends React.Component {
     const { item, addToCart } = this.props;
     const { title, thumbnail, price, id } = item;
     return (
-      <li data-testid="product">
+      <li data-testid="product" className="product-card">
         {
           title
         }
