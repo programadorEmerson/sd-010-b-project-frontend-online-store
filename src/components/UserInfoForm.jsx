@@ -172,7 +172,6 @@ class UserInfoForm extends React.Component {
         value={ state }
         onChange={ (event) => this.updateInput('state', event.target.value) }
       >
-        {/* <option selected value="Estado">Estado</option> */}
         { estadosBrasileiros.map(
           (estado) => (
             <option

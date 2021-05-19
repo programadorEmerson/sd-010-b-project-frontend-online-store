@@ -1,6 +1,6 @@
+import { Link as NewLink } from 'react-router-dom';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 
 class ShoppingCart extends Component {
@@ -63,12 +63,12 @@ class ShoppingCart extends Component {
           Valor total:
           { total }
         </p>
-        <Link
+        <NewLink
           data-testid="checkout-products"
           to="/payment"
         >
           Finalizar Compra
-        </Link>
+        </NewLink>
       </div>
     );
   }
