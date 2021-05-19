@@ -1,3 +1,37 @@
 .pc-cartItem {
-  display: block;
+  align-items: center;
+  display: flex;
+  height: 12vh;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.pc-cartItem__img-name {
+  width: 70%;
+}
+
+.pc-cartItem__thumbnail {
+  border-radius: 10px;
+  width: 5vw;
+}
+
+.pc-cartItem__name{
+
+}
+
+.qtybutton__container {
+  display: flex;
+}
+
+.qtybutton__button{
+
+}
+
+.qtybutton_text{
+
+}
+
+.pc-cartItem__removeIcon {
+  cursor: pointer;
+  width: 2rem;
 }

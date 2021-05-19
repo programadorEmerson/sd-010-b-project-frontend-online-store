@@ -24,31 +24,40 @@ class PageCart extends React.Component {
     }
     return (
       <div>
-        <div className="header">
+        <div className="pc-header">
           <Link to="/">
-            <img src={ homeIcon } alt="Voltar para página principal" />
+            <img
+              className="pc-header__back-icon"
+              src={ homeIcon }
+              alt="Voltar para página principal"
+            />
           </Link>
-          <div>
-            <h1>Logo</h1>
-            <h1>|</h1>
-            <h1>Carrinho de Compras</h1>
+          <div className="pc-header__logoContainer">
+            <h1 className="pc-header__logo">Logo &nbsp;</h1>
+            <h1 className="pc-header__text">| Carrinho de Compras</h1>
           </div>
         </div>
-        <h2>
-          Total: R$
-          {this.getTotalPrice()}
-        </h2>
-        {cart.map(({ qty, product: { title, price }, id }) => (
-          <CartItem
-            key={ id }
-            id={ id }
-            name={ title }
-            qty={ qty }
-            price={ price }
-            handleCartBtnEvent={ handleCartBtnEvent }
-          />
-        ))}
-        <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
+        <div className="pc-cart">
+          {cart.map(({ qty, product: { title, price, thumbnail }, id }) => (
+            <CartItem
+              key={ id }
+              id={ id }
+              name={ title }
+              qty={ qty }
+              price={ price }
+              thumbnail={ thumbnail }
+              handleCartBtnEvent={ handleCartBtnEvent }
+            />
+          ))}
+          <div>
+            <h2>
+              Total: R$
+              {this.getTotalPrice()}
+            </h2>
+            <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
+
+          </div>
+        </div>
       </div>
     );
   }

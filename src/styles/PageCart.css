@@ -1,3 +1,34 @@
-.header {
-  display: block;
+.pc-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pc-header__back-icon {
+  width: 2.675rem;
+}
+
+.pc-header__logoContainer {
+  display: flex;
+}
+
+.pc-header__logo {
+  color: black;
+}
+
+.pc-header__text {
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+}
+
+.pc-cart {
+  align-items: center;
+  background-color: #ce9f95;
+  border-radius: 15px;
+  box-shadow: 17px 13px 30px -21px rgba(0, 0, 0, 0.75);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 55vw;
 }
