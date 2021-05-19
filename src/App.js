@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Header cartItems={ cart } />
-        <p>
+        <p className="cart-btn">
           <Link data-testid="shopping-cart-button" to="/cart">
             Carrinho
           </Link>

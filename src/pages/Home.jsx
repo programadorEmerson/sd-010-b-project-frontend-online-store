@@ -48,15 +48,17 @@ class Home extends Component {
     const { products, listCategories } = this.state;
     const { setCart } = this.props;
     return (
-      <>
+      <section className="main-content">
         <div className="list-category" onChange={ this.onChangeCategory }>
+          <SearchBar handleSubmit={ this.handleSubmit } />
           {listCategories.map((elem) => (
             <Category key={ elem.name } category={ elem } />
           ))}
         </div>
-        <SearchBar handleSubmit={ this.handleSubmit } />
-        <ListProducts setCart={ setCart } products={ products } />
-      </>
+        <section className="products-container">
+          <ListProducts setCart={ setCart } products={ products } />
+        </section>
+      </section>
     );
   }
 }
