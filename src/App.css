@@ -162,3 +162,9 @@ footer p {
 .prices {
   width: 200px;
 }
+
+.estrela {
+  background-color: rgb(233, 232, 232);
+  border-radius: 10px;
+  width: 19px;
+}
