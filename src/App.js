@@ -34,7 +34,7 @@ class App extends Component {
     } else if (shoppingCartItens[index].quantity > 1) {
       shoppingCartItens[index].quantity -= 1;
     } else {
-      this.removeItem(id);
+      shoppingCartItens.splice(index, 1);
     }
     this.setState({ shoppingCartItens });
   }
