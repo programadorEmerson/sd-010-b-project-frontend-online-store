@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CartBtn from '../buttonsAndLinks/CartBtn';
 import EvaluationArea from '../EvaluationArea';
 
 export default class ItemProduct extends Component {
@@ -11,7 +12,6 @@ export default class ItemProduct extends Component {
       rating: 0,
       menssage: '',
     };
-
     this.fetchItem = this.fetchItem.bind(this);
     this.evaluationData = this.evaluationData.bind(this);
   }
@@ -33,10 +33,14 @@ export default class ItemProduct extends Component {
   }
 
   render() {
+    const { getProduct } = this.props;
     const { item, email, menssage, rating } = this.state;
     return (
       <main>
         <section>
+          <div>
+            <CartBtn />
+          </div>
           <div>
             Produto:
             {' '}
@@ -48,6 +52,15 @@ export default class ItemProduct extends Component {
             <strong>{item.price}</strong>
           </div>
           <img src={ item.thumbnail } alt="imagem do produto" />
+          <div>
+            <button
+              data-testid="product-detail-add-to-cart"
+              type="submit"
+              onClick={ () => getProduct(item) }
+            >
+              Adicionar ao carrinho
+            </button>
+          </div>
         </section>
         <form>
           <label htmlFor="email">
@@ -133,8 +146,8 @@ export default class ItemProduct extends Component {
     );
   }
 }
-
 ItemProduct.propTypes = {
+  getProduct: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({ id: PropTypes.string }),
   }).isRequired,
