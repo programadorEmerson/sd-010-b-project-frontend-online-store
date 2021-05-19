@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import EvaluationArea from '../EvaluationArea';
-import CartBtn from '../buttonsAndLinks/CartBtn';
-
 
 export default class ItemProduct extends Component {
   constructor(props) {
@@ -140,5 +138,4 @@ ItemProduct.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({ id: PropTypes.string }),
   }).isRequired,
-  getProduct: PropTypes.func.isRequired,
 };
