@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import '../styles/productsByTerms.css';
+
 class ProductsByTerms extends React.Component {
   render() {
     const { product, id, addToCart } = this.props;
@@ -9,18 +11,34 @@ class ProductsByTerms extends React.Component {
     const { free_shipping: freeShipping } = shipping;
 
     return (
-      <div>
-        <Link data-testid="product-detail-link" to={ `/details/${id}` }>
-          <div data-testid="product">
-            <p>{title}</p>
-            <p>{price}</p>
-            <img src={ thumbnail } alt={ title } />
+      <div className="card">
+        <Link
+          className="card__link"
+          data-testid="product-detail-link"
+          to={ `/details/${id}` }
+        >
+          <div className="title-thumbnail-price" data-testid="product">
+            <p className="title-thumbnail-price__title">{title}</p>
+            <div className="thumbnail-price__container">
+              <img
+                className="thumbnail-price__thumbnail"
+                src={ thumbnail }
+                alt={ title }
+              />
+              <p className="thumbnail-price__price">
+                R$:
+                {' '}
+                {price}
+              </p>
+            </div>
           </div>
         </Link>
         <div>
-          {freeShipping && <p data-testid="free-shipping">frete grátis</p>}
+          { freeShipping
+          && <p className="card__fShip" data-testid="free-shipping">frete grátis</p> }
         </div>
         <button
+          className="card__button"
           type="button"
           data-testid="product-add-to-cart"
           onClick={ () => addToCart(product) }

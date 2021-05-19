@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import '../styles/CheckoutPage.css';
 
 class CheckoutPage extends React.Component {
   getTotalPrice = () => {
@@ -20,65 +21,82 @@ class CheckoutPage extends React.Component {
     }
     return (
       <div>
-        {cart.map(({ qty, product: { title, price }, id }) => (
-          <div key={ id }>
-            <p>{qty}</p>
-            <p>{title}</p>
-            <p>{price}</p>
-          </div>
-        ))}
-        <h3>
-          Total: R$
-          {this.getTotalPrice()}
-        </h3>
-        <form>
+        <table className="cp-checkout">
+          <tr className="cp-checkout_row">
+            <th className="cp-checkout_title cp-checkout_first">Produtos</th>
+            <th className="cp-checkout_qty">Quantidade</th>
+            <th className="cp-checkout_price">Preço</th>
+          </tr>
+          {cart.map(({ qty, product: { title, price }, id }) => (
+            <tr className="cp-checkout_row" key={ id }>
+              <td className="cp-checkout_title">{title}</td>
+              <td className="cp-checkout_qty">{qty}</td>
+              <td className="cp-checkout_price">{price}</td>
+            </tr>
+          ))}
+          <h3>
+            Total: R$
+            {this.getTotalPrice()}
+          </h3>
+        </table>
+        <form className="cp-form">
           <h3>Informações do Comprador</h3>
-          <input
-            data-testid="checkout-fullname"
-            type="text"
-            placeholder="Nome Completo"
-            required
-          />
-          <input
-            data-testid="checkout-cpf"
-            type="text"
-            placeholder="CPF"
-            required
-          />
-          <input
-            data-testid="checkout-email"
-            type="email"
-            placeholder="Email"
-            required
-          />
-          <input
-            data-testid="checkout-phone"
-            type="tel"
-            placeholder="Telefone"
-            required
-          />
-          <input
-            data-testid="checkout-cep"
-            type="text"
-            placeholder="CEP"
-            required
-          />
-          <input
-            data-testid="checkout-address"
-            type="text"
-            placeholder="Endereço"
-            required
-          />
+          <div className="cp-form__container">
+            <input
+              className="cp-form__first"
+              data-testid="checkout-fullname"
+              type="text"
+              placeholder="Nome Completo"
+              required
+            />
+            <input
+              className="cp-form__second"
+              data-testid="checkout-cpf"
+              type="text"
+              placeholder="CPF"
+              required
+            />
+          </div>
+          <div className="cp-form__container">
+            <input
+              className="cp-form__first"
+              data-testid="checkout-email"
+              type="email"
+              placeholder="Email"
+              required
+            />
+            <input
+              className="cp-form__second"
+              data-testid="checkout-phone"
+              type="tel"
+              placeholder="Telefone"
+              required
+            />
+          </div>
+          <div className="cp-form__container">
+            <input
+              className="cp-form__first"
+              data-testid="checkout-address"
+              type="text"
+              placeholder="Endereço"
+              required
+            />
+            <input
+              className="cp-form__second"
+              data-testid="checkout-cep"
+              type="text"
+              placeholder="CEP"
+              required
+            />
+          </div>
           <h3>Formas de Pagamento</h3>
+          <div>
+            <label htmlFor="boleto">
+              Boleto
+              <input type="checkbox" id="boleto" name="boleto" value="boleto" />
+            </label>
 
-          <label htmlFor="boleto">
-            Boleto
-            <input type="checkbox" id="boleto" name="boleto" value="boleto" />
-          </label>
-          <label htmlFor="boleto">
-            Cartão de Credito
-            <br />
-            <br />
+            <h4>Cartão de Credito</h4>
             <label htmlFor="Visa">
               Visa
               <input type="checkbox" name="Visa" value="Visa" />
@@ -92,8 +110,10 @@ class CheckoutPage extends React.Component {
               Elo
               <input type="checkbox" name="Elo" value="Elo" />
             </label>
-          </label>
+
+          </div>
           <input
+            className="cp-form__send"
             type="submit"
             name="Comprar"
             onClick={ () => { const history = useHistory(); history.push('/'); } }

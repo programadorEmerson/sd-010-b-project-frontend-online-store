@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
+import '../styles/PageCart.css';
+import homeIcon from '../img/pagecart/home-page.svg';
 
 class PageCart extends React.Component {
   // Faz a soma total do preço dos items que chegaram da props
@@ -22,22 +24,51 @@ class PageCart extends React.Component {
     }
     return (
       <div>
-        <h3>
-          Total: R$
-          {this.getTotalPrice()}
-        </h3>
-        {cart.map(({ qty, product: { title, price, available_quantity: Aqty }, id }) => (
-          <CartItem
-            key={ id }
-            id={ id }
-            name={ title }
-            qty={ qty }
-            Aqty={ Aqty }
-            price={ price }
-            handleCartBtnEvent={ handleCartBtnEvent }
-          />
-        ))}
-        <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
+
+        <div className="pc-header">
+          <Link to="/">
+            <img
+              className="pc-header__back-icon"
+              src={ homeIcon }
+              alt="Voltar para página principal"
+            />
+          </Link>
+          <div className="pc-header__logoContainer">
+            <h1 className="pc-header__logo">Logo &nbsp;</h1>
+            <h1 className="pc-header__text">| Carrinho de Compras</h1>
+          </div>
+        </div>
+        <div className="pc-cart">
+          {cart
+            .map(({ qty, product, id }) => {
+              const { title, price, thumbnail, available_quantity: Aqty } = product;
+              return (<CartItem
+                key={ id }
+                id={ id }
+                name={ title }
+                qty={ qty }
+                Aqty={ Aqty }
+                price={ price }
+                thumbnail={ thumbnail }
+                handleCartBtnEvent={ handleCartBtnEvent }
+              />);
+            })}
+          <div className="price-buy">
+            <h2>
+              Total: R$
+              {this.getTotalPrice()}
+            </h2>
+            <Link
+              className="price-buy__buy"
+              to="/checkout"
+              data-testid="checkout-products"
+            >
+              Finalizar Compra
+
+            </Link>
+          </div>
+        </div>
+
       </div>
     );
   }
