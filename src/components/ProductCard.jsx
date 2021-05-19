@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends Component {
   render() {
-    const {
-      product: { title, price, thumbnail },
-    } = this.props;
+    const { product, addCart, removeItemCart, removeCart } = this.props;
+    const { title, price, thumbnail, countItems } = product;
 
     return (
       <div>
@@ -15,18 +14,38 @@ class ProductCard extends Component {
           R$
           { price }
         </p>
-        {/* { shipping.free_shipping ? <p>Frete Grátis</p> : <p>Falso</p>} */}
+
+        <button
+          type="button"
+          data-testid="product-increase-quantity"
+          onClick={ () => addCart(product) }
+        >
+          +
+        </button>
+        <p data-testid="shopping-cart-product-quantity">
+          { `Quantidade de itens: ${countItems}` }
+        </p>
+        <button
+          type="button"
+          data-testid="product-decrease-quantity"
+          onClick={ () => removeItemCart(product) }
+        >
+          -
+        </button>
+        <button type="button" onClick={ () => removeCart(product) }>X</button>
       </div>
     );
   }
 }
 
 ProductCard.propTypes = {
-  product: PropTypes.shape({
-    title: PropTypes.string,
-    price: PropTypes.number,
-    thumbnail: PropTypes.string,
-  }).isRequired,
+  countItems: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+  addCart: PropTypes.func.isRequired,
+  removeItemCart: PropTypes.func.isRequired,
+  removeCart: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

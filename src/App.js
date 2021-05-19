@@ -8,18 +8,63 @@ import ShoppingCart from './pages/ShoppingCart';
 class App extends Component {
   constructor() {
     super();
-
+    this.addCart = this.addCart.bind(this);
+    this.removeItemCart = this.removeItemCart.bind(this);
+    this.removeCart = this.removeCart.bind(this);
     this.state = {
-      addCart: [],
+      cartItems: [],
     };
   }
 
-  handleAddCartItem = (produto) => {
-    this.setState((odState) => ({ addCart: [...odState.addCart, produto] }));
+  handlecartItemsItem = (produto) => {
+    this.setState((odState) => ({ cartItems: [...odState.cartItems, produto] }));
   };
 
+  addCart(product) {
+    this.setState((previousValue) => ({
+      cartItems: previousValue.cartItems.find(
+        (p) => p.id === product.id,
+      )
+        ? previousValue.cartItems.map((p) => {
+          if (p.id === product.id) {
+            return {
+              ...p,
+              countItems: p.countItems + 1,
+            };
+          }
+          return p;
+        }) : [...previousValue.cartItems, { ...product, countItems: 1 }],
+    }));
+  }
+
+  removeItemCart(product) {
+    this.setState((previousValue) => ({
+      cartItems: previousValue.cartItems.some(
+        (p) => p.id === product.id,
+      )
+        ? previousValue.cartItems.map((p) => {
+          if (p.id === product.id && p.countItems) {
+            return {
+              ...p,
+              countItems: p.countItems - 1,
+            };
+          }
+          return p;
+        }) : [...previousValue.cartItems, { ...product, countItems: 1 }],
+    }));
+  }
+
+  removeCart(productRemove) {
+    this.setState((previousValue) => {
+      const listItems = [...previousValue.cartItems];
+      const indiceItem = listItems.findIndex((p) => p.id === productRemove.id);
+      listItems.splice(indiceItem, 1);
+      return { cartItems: listItems };
+    });
+  }
+
   render() {
-    const { addCart } = this.state;
+    const { cartItems } = this.state;
 
     return (
       <div className="App">
@@ -28,19 +73,25 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={ () => <Home onClick={ this.handleAddCartItem } /> }
+              render={ () => <Home onClick={ this.addCart } /> }
             />
             <Route
               exact
               path="/shopping-cart"
-              render={ () => <ShoppingCart addCart={ addCart } /> }
+              render={ (props) => (<ShoppingCart
+                { ...props }
+                addCart={ this.addCart }
+                removeItemCart={ this.removeItemCart }
+                removeCart={ this.removeCart }
+                cartItems={ cartItems }
+              />) }
             />
             <Route
               exact
               path="/details/:id"
               render={ (props) => (<ProductDetaills
                 { ...props }
-                onClick={ this.handleAddCartItem }
+                onClick={ this.addCart }
               />) }
             />
           </Switch>

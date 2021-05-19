@@ -35,8 +35,6 @@ class ProductDetaills extends Component {
     const { product } = this.state;
     const { title, thumbnail, price, warranty, shipping } = product;
     const { onClick } = this.props;
-    console.log(shipping);
-
     return (
       <div>
         <Link
@@ -102,9 +100,8 @@ ProductDetaills.propTypes = {
     price: PropTypes.number,
     warranty: PropTypes.string,
     thumbnail: PropTypes.string,
-  }).isRequired,
-
+  }),
   onClick: PropTypes.func.isRequired,
-};
+}.isRequired;
 
 export default ProductDetaills;
