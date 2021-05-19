@@ -2,23 +2,31 @@ import React, { Component } from 'react';
 import getItemById from '../services/newRequest';
 
 export default class ShoppingCart extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+
+    this.getItemDetails = this.getItemDetails.bind(this);
+
     this.state = {
       id: localStorage.id,
       element: [],
-      renderCart: true,
+      renderCart: false,
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    const { id } = this.state;
+    this.getItemDetails(id);
+  }
+
+  async getItemDetails(itemId) {
     const { id, element } = this.state;
-    if (id !== undefined) {
-      const response = await getItemById(id);
-      /* this.setState({
-        renderCart: true,
+    if (id) {
+      const response = await getItemById(itemId);
+      this.setState({
         element: [...element, response],
-      }); */
+        renderCart: true,
+      });
     }
   }
 
@@ -30,22 +38,19 @@ export default class ShoppingCart extends Component {
     );
   }
 
-  async renderCart() {
-    const { id } = this.state;
-    const response = await getItemById(id);
-    const { title } = response;
-    console.log(title);
+  renderCart() {
+    const { element } = this.state;
     return (
       <div>
         <span
           data-testid="shopping-cart-product-name"
         >
-          { title }
+          { element[0].title }
         </span>
         <p
           data-testid="shopping-cart-product-quantity"
         >
-          { response.length }
+          { element.length }
         </p>
       </div>
     );
@@ -55,7 +60,7 @@ export default class ShoppingCart extends Component {
     const { renderCart } = this.state;
     return (
       <div>
-        { renderCart ? this.renderCart() : this.emptyCart() }
+        { renderCart === false ? this.emptyCart() : this.renderCart() }
       </div>
     );
   }

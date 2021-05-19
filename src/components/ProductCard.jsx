@@ -5,18 +5,20 @@ import { Link } from 'react-router-dom';
 class ProductCard extends Component {
   constructor(props) {
     super(props);
+
     const { results } = this.props;
+
     this.state = {
       results,
       cart: [],
-      shouldRedirect: false,
     };
+
     this.clickCart = this.clickCart.bind(this);
     this.showResults = this.showResults.bind(this);
   }
 
   showResults() {
-    const { results, shouldRedirect } = this.state;
+    const { results } = this.state;
     const card = results.map((result) => {
       const { title, thumbnail, price, id } = result;
       return (
@@ -44,15 +46,9 @@ class ProductCard extends Component {
     return card;
   }
 
-  async clickCart({ target }) {
-    const element = target.previousSibling.innerText;
-    localStorage.id = element;
-    /* const dad = target.previousSibling.innerText;
-    const { cart } = this.state;
-    this.setState({
-      cart: [...cart, dad],
-      shouldRedirect: true,
-    }); */
+  clickCart({ target }) {
+    const element = target.previousSibling.innerHTML;
+    localStorage.setItem("id", element);
   }
 
   noResult() {
@@ -65,7 +61,6 @@ class ProductCard extends Component {
     const { results } = this.state;
     return (
       results.length === 0 ? this.noResult() : this.showResults()
-      // shouldRedirect && this.shouldRedirect()
     );
   }
 }
