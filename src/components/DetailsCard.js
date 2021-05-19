@@ -14,10 +14,6 @@ class DetailsCard extends React.Component {
     };
   }
 
-  handleChange() {
-
-  }
-
   componentDidMount() {
     this.getAPI();
   }
@@ -30,6 +26,10 @@ class DetailsCard extends React.Component {
       const result = !value ? [] : value;
       localStorage.setItem('cartItems', JSON.stringify([...result, nameItems]));
     }
+  }
+
+  handleChange() {
+
   }
 
   getName = (title) => () => {
@@ -46,7 +46,7 @@ class DetailsCard extends React.Component {
 
   render() {
     const { details: { title, thumbnail, price } } = this.state;
-    // const { getApiFromQuery } = this.props;
+    const { value } = this.state;
     return (
       <div>
         <h2 data-testid=" product-detail-name">{ title }</h2>
@@ -62,21 +62,21 @@ class DetailsCard extends React.Component {
         </button>
         <form>
           <select>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option selected value={5}>5</option>
+            <option value={ 1 }>1</option>
+            <option value={ 2 }>2</option>
+            <option value={ 3 }>3</option>
+            <option value={ 4 }>4</option>
+            <option selected value={ 5 }>5</option>
           </select>
-          <label>
+          <label htmlFor="evaluation">
             Comentário:
             <textarea
-              data-testid="product-detail-evaluation" 
-              value={this.state.value}
-              onChange={this.handleChange}
+              data-testid="product-detail-evaluation"
+              value={ value }
+              onChange={ this.handleChange }
             />
           </label>
-          <input onClick={null} type="submit" value="Enviar" />
+          <input onClick={ null } type="submit" value="Enviar" />
         </form>
       </div>
     );
