@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import ItemCard from './ItemCard';
 
 export default class CartItems extends Component {
@@ -27,6 +29,22 @@ export default class CartItems extends Component {
     const productsInStorage = this.storageUpdate();
     this.setState({
       products: productsInStorage,
+      totalPrice: localStorage.getItem('total-price'),
+    });
+  }
+
+  calculateTotalPrice = () => {
+    const { products } = this.state;
+    const storageKey = 'total-price';
+    let totalPrice = products.reduce((accumulator, currentProduct) => {
+      accumulator += currentProduct.product.price * currentProduct.quantity;
+      return accumulator;
+    }, 0);
+    totalPrice = totalPrice.toFixed(2).toString().replace('.', ',');
+    this.numberWithCommas(totalPrice);
+    localStorage.setItem(storageKey, totalPrice);
+    this.setState({
+      totalPrice: localStorage.getItem(storageKey),
     });
   }
 
@@ -36,6 +54,7 @@ export default class CartItems extends Component {
 
   render() {
     const { products, totalPrice } = this.state;
+    // const totalStoragePrice = localStorage.getItem('total-price');
     return (
       <div>
         <div>
@@ -56,12 +75,21 @@ export default class CartItems extends Component {
             key={ product.product.id }
             product={ product }
             commaFunction={ this.numberWithCommas }
+            calculateTotal={ this.calculateTotalPrice }
           />
         ))}
         <hr />
         <div className="finish">
           {/* Requisito 12 botão de finalizar compra */}
-          <button type="button">Finalizar compra</button>
+          <Link to="/checkout">
+            <button
+              data-testid="checkout-products"
+              type="button"
+            >
+              Finalizar compra
+
+            </button>
+          </Link>
           <span />
           <span />
           <div>

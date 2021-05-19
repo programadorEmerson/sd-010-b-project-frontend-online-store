@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Header from './components/Header';
 import Cart from './pages/Cart';
 import Details from './pages/Details';
+import Checkout from './pages/Checkout';
+
 import './App.css';
 
 function App() {
@@ -28,6 +30,11 @@ function App() {
               exact
               path="/details/:id/:title"
               render={ (props) => <Details { ...props } /> }
+            />
+            <Route
+              exact
+              path="/checkout"
+              render={ (props) => <Checkout { ...props } /> }
             />
           </Switch>
         </main>
