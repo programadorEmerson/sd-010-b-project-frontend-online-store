@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Checkout extends React.Component {
   constructor() {
@@ -70,14 +71,19 @@ class Checkout extends React.Component {
     const { cart } = this.state;
     return (
       <div>
-        { cart.map( (item, index) => (<p key={index}> { item[0].title } { item.length*parseFloat(item[0].price) } </p>)) }
+        { cart
+          .map((item, index) => (
+            <p key={ index }>
+              {`${item[0].title} ${item.length * parseFloat(item[0].price)} `}
+            </p>
+          ))}
       </div>
     );
   }
 
   fetchCart = () => {
     const { location: { state } } = this.props;
-    this.setState({ cart:state });
+    this.setState({ cart: state });
   }
 
   render() {
@@ -95,5 +101,11 @@ class Checkout extends React.Component {
     );
   }
 }
+
+Checkout.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.arrayOf(Object),
+  }).isRequired,
+};
 
 export default Checkout;
