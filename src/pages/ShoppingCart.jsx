@@ -6,11 +6,15 @@ export default class ShoppingCart extends Component {
     super();
 
     this.getItemDetails = this.getItemDetails.bind(this);
+    this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    this.excludeItem = this.excludeItem.bind(this);
 
     this.state = {
       id: localStorage.id,
       element: [],
       renderCart: false,
+      quantity: 1,
     };
   }
 
@@ -38,8 +42,31 @@ export default class ShoppingCart extends Component {
     );
   }
 
+  increaseQuantity() {
+    this.setState((previousState) => ({
+      quantity: (previousState.quantity + 1),
+    }));
+  }
+
+  decreaseQuantity() {
+    const { quantity } = this.state;
+    if (quantity === 1) {
+      return false;
+    }
+
+    this.setState((previousState) => ({
+      quantity: (previousState.quantity - 1),
+    }));
+  }
+
+  excludeItem({ target }) {
+    target.parentNode.innerHTML = '';
+    this.state.quantity = 0;
+    localStorage.id = '';
+  }
+
   renderCart() {
-    const { element } = this.state;
+    const { element, quantity } = this.state;
     return (
       <div>
         <span
@@ -47,11 +74,31 @@ export default class ShoppingCart extends Component {
         >
           { element[0].title }
         </span>
-        <p
+        <button
+          type="button"
+          onClick={ this.decreaseQuantity }
+          data-testid="product-decrease-quantity"
+        >
+          -
+        </button>
+        <span
           data-testid="shopping-cart-product-quantity"
         >
-          { element.length }
-        </p>
+          { quantity }
+        </span>
+        <button
+          type="button"
+          onClick={ this.increaseQuantity }
+          data-testid="product-increase-quantity"
+        >
+          +
+        </button>
+        <button
+          type="button"
+          onClick={ this.excludeItem }
+        >
+          X
+        </button>
       </div>
     );
   }
@@ -60,7 +107,7 @@ export default class ShoppingCart extends Component {
     const { renderCart } = this.state;
     return (
       <div>
-        { renderCart === false ? this.emptyCart() : this.renderCart() }
+        { !renderCart ? this.emptyCart() : this.renderCart() }
       </div>
     );
   }
