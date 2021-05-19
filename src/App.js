@@ -8,13 +8,13 @@ import MainPage from './pages/MainPage';
 class App extends React.Component {
   render() {
     return (
-        <BrowserRouter>
-          <Switch>
-            <Route path="/cart" component={ Cart } />
-            <Route path="/checkout" component={ Checkout } />
-            <Route exact path="/" component={ MainPage } />
-          </Switch>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/cart" component={ Cart } />
+          <Route path="/checkout" component={ Checkout } />
+          <Route exact path="/" component={ MainPage } />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
