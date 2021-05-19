@@ -100,7 +100,11 @@ class App extends React.Component {
               addCart={ this.handleAddCartItem }
             />) }
           />
-          <Route exact path="/checkout" component={ Checkout } />
+          <Route
+            exact
+            path="/checkout"
+            render={ () => (<Checkout addCart={ addCart } />) }
+          />
         </Switch>
       </BrowserRouter>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Cart extends React.Component {
   renderQuantity() {
@@ -67,6 +68,7 @@ class Cart extends React.Component {
               this.renderPrice()
             }
           </p>
+          <Link data-testid="checkout-products" to="/checkout">Checkout Page</Link>
         </div>
       </div>
     );
