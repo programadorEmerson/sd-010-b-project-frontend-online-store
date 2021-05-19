@@ -29,8 +29,8 @@ class ShoppingCart extends Component {
     return (
       <section>
         {this.shoppingCartItens.length === 0
-          ? this.renderEmptyMsg
-          : this.renderCartList}
+          ? this.renderEmptyMsg()
+          : this.renderCartList() }
       </section>
     );
   }
