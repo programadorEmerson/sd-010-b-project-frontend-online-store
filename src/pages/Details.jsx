@@ -69,7 +69,6 @@ class Details extends Component {
               </button>
             </Link>
           </section>
-          <Link to="/">Voltar</Link>
         </section>
       </section>
     );
