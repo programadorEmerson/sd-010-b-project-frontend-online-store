@@ -17,6 +17,7 @@ export function shoppingCardProductAdd(productParameter) {
     localStorage.setItem('dataShoppingCart', JSON.stringify(products));
   }
 }
+
 export function shoppingCardProductUpdate(productParameter) {
   localStorage.setItem('dataShoppingCart', JSON.stringify(productParameter));
 }
@@ -27,6 +28,10 @@ export function addLocalStorage(key, value) {
 
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
+}
+
+export function removeLocalStorage(key) {
+  localStorage.removeItem(key);
 }
 
 export function removeLocalStorage(key) {
