@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 class ProductCard extends Component {
   constructor(props) {
     super(props);
-    if (localStorage.getItem('id') === undefined) {
+
+    /* if (localStorage.getItem('id') === undefined) {
       localStorage.setItem('id', []);
-    }
+    } */
 
     const { results } = this.props;
 
@@ -34,10 +35,9 @@ class ProductCard extends Component {
             />
           </Link>
           <span>{ price }</span>
-          <span>{ id }</span>
           <button
             type="button"
-            onClick={ this.clickCart }
+            onClick={ () => this.clickCart(id) }
             data-testid="product-add-to-cart"
           >
             Add
@@ -48,10 +48,11 @@ class ProductCard extends Component {
     return card;
   }
 
-  clickCart({ target }) {
-    const element = target.previousSibling.innerHTML;
+  clickCart(id) {
+    const { results } = this.state;
+    const [choosenProduct] = results.filter((item) => item.id === id);
     const storedId = localStorage.getItem('id');
-    localStorage.setItem('id', [storedId, element]);
+    localStorage.setItem('id', [storedId, JSON.stringify(choosenProduct)]);
   }
 
   noResult() {

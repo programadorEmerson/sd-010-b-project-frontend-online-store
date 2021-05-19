@@ -14,8 +14,10 @@ export default class ShoppingCart extends Component {
       localStorage.setItem('id', ',');
     }
 
+    const itens = JSON.parse(localStorage.getItem('id'));
+    console.log(itens);
     this.state = {
-      id: localStorage.getItem('id').split(',').splice(1),
+      id: itens,
       element: [],
       renderCart: false,
     };
@@ -24,7 +26,12 @@ export default class ShoppingCart extends Component {
   componentDidMount() {
     const { id } = this.state;
     if (id[0] !== '') {
-      id.map((itemId) => (this.getItemDetails(itemId)));
+      const newPromise = id.map((itemId) => (this.getItemDetails(itemId)));
+      console.log(newPromise);
+      Promise.all(newPromise).then((value) => this.setState((previousState) => ({
+        element: [...previousState.element, value],
+        renderCart: true,
+      })));
     }
   }
 
@@ -32,10 +39,7 @@ export default class ShoppingCart extends Component {
     const { id } = this.state;
     if (id) {
       const response = await getItemById(itemId);
-      this.setState((previousState) => ({
-        element: [...previousState.element, response],
-        renderCart: true,
-      }));
+      return (response);
     }
   }
 
@@ -68,7 +72,7 @@ export default class ShoppingCart extends Component {
 
   renderCart() {
     const { element } = this.state;
-    return element.map((item) => (
+    return element[0].map((item) => (
       <div key={ item.id }>
         <span
           data-testid="shopping-cart-product-name"
