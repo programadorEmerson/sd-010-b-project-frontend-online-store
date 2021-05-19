@@ -2,10 +2,10 @@
   display: flex;
 }
 
-.results-display {
+.results-display,
+.search-result {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
 }
 
 .product-card {
@@ -16,7 +16,7 @@
   flex-direction: column;
   height: 350px;
   justify-content: space-around;
-  margin-bottom: 2.5px;
+  margin: 4px;
   text-align: center;
-  width: 220px;
+  width: 210px;
 }
