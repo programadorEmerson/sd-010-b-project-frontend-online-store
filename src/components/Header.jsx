@@ -12,9 +12,10 @@ class Header extends Component {
   render() {
     const { handleInput, handleClick } = this.props;
     return (
-      <div>
+      <div className="header">
         <input
           id="input-search"
+          className="input-search"
           type="text"
           placeholder="busca"
           data-testid="query-input"
@@ -27,10 +28,14 @@ class Header extends Component {
         >
           Search
         </button>
-        <Link to="/shopping-cart" data-testid="shopping-cart-button">
+        <Link
+          to="/shopping-cart"
+          data-testid="shopping-cart-button"
+          className="shopping-cart-button"
+        >
           <GrCart />
         </Link>
-        <p data-testid="home-initial-message">
+        <p className="home-initial-message" data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
 

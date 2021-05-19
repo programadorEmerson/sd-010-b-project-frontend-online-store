@@ -53,11 +53,17 @@ class Home extends Component {
           handleInput={ this.handleInput }
           handleClick={ () => this.handleCheckedSearch(categoryId, search) }
         />
-        { noProducts ? <p>{ noProduct }</p> : <ProductList
-          products={ products }
-          onClick={ onClick }
-        />}
-        <Categories checked={ this.handleChecked } />
+        <div className="home">
+          <div className="categories">
+            <Categories checked={ this.handleChecked } />
+          </div>
+          <div className="product-list">
+            { noProducts ? <p>{ noProduct }</p> : <ProductList
+              products={ products }
+              onClick={ onClick }
+            />}
+          </div>
+        </div>
       </div>
     );
   }

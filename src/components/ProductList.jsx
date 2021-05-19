@@ -7,9 +7,9 @@ class ProductList extends Component {
     const { products, onClick } = this.props;
 
     return (
-      <div>
+      <>
         {products.map((product) => (
-          <div data-testid="product" key={ product.id }>
+          <div data-testid="product" className="product-item" key={ product.id }>
             <Link
               data-testid="product-detail-link"
               to={ `details/${product.id}` }
@@ -33,7 +33,7 @@ class ProductList extends Component {
             </button>
           </div>
         ))}
-      </div>
+      </>
     );
   }
 }
