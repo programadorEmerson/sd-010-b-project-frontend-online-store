@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
 import CommentForms from '../components/CommentForms';
 import CommentCard from '../components/CommentCard';
 import Loading from '../components/Loading';
@@ -55,8 +56,8 @@ class ProductDetails extends Component {
 
     localStorage.setItem('cartProducts', JSON.stringify(localObj));
     // Navegação para o cart
-    const { history: { push } } = this.props;
-    push('/cart');
+    // const { history: { push } } = this.props;
+    // push('/cart');
   }
 
   render() {
@@ -70,6 +71,7 @@ class ProductDetails extends Component {
 
     return (
       <section>
+        <Link to="/cart" data-testid="shopping-cart-button">Cart</Link>
         <h1 data-testid="product-detail-name">{title}</h1>
         <p>
           R$
