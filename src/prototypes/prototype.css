@@ -2,8 +2,7 @@
   display: flex;
 }
 
-.results-display,
-.search-result {
+.results-display, .search-result {
   display: flex;
   flex-wrap: wrap;
 }
