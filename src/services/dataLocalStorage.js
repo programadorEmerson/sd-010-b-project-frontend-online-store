@@ -34,6 +34,6 @@ export function removeLocalStorage(key) {
   localStorage.removeItem(key);
 }
 
-export function removeLocalStorage(key) {
+export function clearLocalStorage(key) {
   localStorage.removeItem(key);
 }
