@@ -28,7 +28,7 @@ class ProductsList extends Component {
 
   render() {
     const { products } = this.state;
-
+    const { addToCartHandler } = this.props;
     return (
       <div className="products-list">
         { products.map((product) => (<Product
@@ -37,6 +37,7 @@ class ProductsList extends Component {
           title={ product.title }
           img={ product.thumbnail }
           price={ product.price }
+          addToCartHandler={ addToCartHandler }
         />)) }
       </div>
     );
@@ -46,7 +47,7 @@ class ProductsList extends Component {
 ProductsList.propTypes = {
   query: PropTypes.string.isRequired,
   categoryID: PropTypes.string.isRequired,
-
+  addToCartHandler: PropTypes.func.isRequired,
 };
 
 export default ProductsList;
