@@ -47,7 +47,7 @@ class Details extends Component {
             <h3>Quantidade:</h3>
             <h2>
               <input type="button" value="-" />
-              0
+              1
               <input type="button" value="+" />
             </h2>
           </section>
