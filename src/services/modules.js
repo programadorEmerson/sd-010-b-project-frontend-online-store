@@ -1,6 +1,5 @@
 let arrayCart = [];
 let arrReviews = [];
-// const estoque = available_quantity;
 
 export const handleAmount = (prod, bool) => {
   if (bool) {
@@ -21,25 +20,15 @@ export const addProductCart = (item) => {
   } else {
     const itemProduct = { ...item, qty: 1 };
     arrayCart = [...arrayCart, itemProduct];
-    console.log(arrayCart);
   }
 };
 
 export const handleDelete = (prod) => {
   arrayCart = arrayCart.filter((item) => item.id !== prod.id);
-  console.log(arrayCart);
 };
-
-// export const handleQuantity = () => {
-//   return arrayCart.reduce((total, item) => {
-//     total += item.price * item.qty;
-//     return total;
-//   }, 0);
-// };
 
 export const setReview = (obj) => {
   arrReviews = [...arrReviews, obj];
-  console.log(arrReviews);
 };
 
 export const getReviews = (id) => {

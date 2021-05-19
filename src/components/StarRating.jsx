@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default class StarRating extends Component { // StarRating based on https://www.youtube.com/watch?v=eDw46GYAIDQ&t=532s
   render() {
-    const { handleRating, rating } = this.props;
+    const { rating, handleEmailMsgRating } = this.props;
     const num = 5;
 
     return (
@@ -17,11 +17,11 @@ export default class StarRating extends Component { // StarRating based on https
                 id={ index }
                 name="rating"
                 value={ ratingValue }
-                onClick={ () => handleRating(ratingValue) }
+                onClick={ (e) => handleEmailMsgRating(e) }
                 type="radio"
               />
               <AiFillStar
-                color={ ratingValue <= rating ? '#21816532' : '#a9a9a9' }
+                color={ ratingValue <= rating ? '#FFD700' : '#a9a9a9' }
               />
             </label>
           );
@@ -32,6 +32,6 @@ export default class StarRating extends Component { // StarRating based on https
 }
 
 StarRating.propTypes = {
-  handleRating: PropTypes.func.isRequired,
+  handleEmailMsgRating: PropTypes.func.isRequired,
   rating: PropTypes.number.isRequired,
 };

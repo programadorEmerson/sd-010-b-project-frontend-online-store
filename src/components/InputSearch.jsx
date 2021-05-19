@@ -21,9 +21,7 @@ class InputSearch extends Component {
           data-testid="query-button"
           type="button"
           onClick={ handleSubmitFetch }
-        >
-          Pesquisar
-        </BiSearch>
+        />
       </div>
     );
   }

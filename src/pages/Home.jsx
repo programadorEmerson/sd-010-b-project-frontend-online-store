@@ -14,7 +14,6 @@ export default class Home extends Component {
     this.state = {
       categories: [],
       products: [],
-      foundProducts: true,
       value: '',
       reload: true,
     };
@@ -41,7 +40,7 @@ export default class Home extends Component {
       .getProductsFromCategoryAndQuery('', value)
       .then((data) => this.setState({ products: data.results }))
       .catch(() => {
-        this.setState({ foundProducts: false });
+        alert('Erro: Tente novamente.');
       });
   }
 
@@ -65,7 +64,6 @@ export default class Home extends Component {
           <ProductCard
             key={ item.id }
             item={ item }
-            addProductIntoCart={ this.addProductIntoCart }
             data-testid="product"
             handleReload={ this.handleReload }
           />
@@ -80,7 +78,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { categories, foundProducts } = this.state;
+    const { products, categories } = this.state;
 
     return (
       <section className="container">
@@ -99,13 +97,11 @@ export default class Home extends Component {
             <CartComponent />
           </section>
           <section className="content-card">
-
-            <p className="home-initial-message" data-testid="home-initial-message">
-              {foundProducts
-                ? 'Digite algum termo de pesquisa ou escolha uma categoria.'
-                : 'Nenhum produto foi encontrado'}
-            </p>
-            {this.handleCard()}
+            <div className="home-initial-message" data-testid="home-initial-message">
+              { products.length
+                ? this.handleCard()
+                : 'Digite algum termo de pesquisa ou escolha uma categoria.'}
+            </div>
           </section>
         </section>
       </section>

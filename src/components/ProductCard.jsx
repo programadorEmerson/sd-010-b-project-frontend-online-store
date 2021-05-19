@@ -9,7 +9,6 @@ export default class ProductCard extends Component {
   constructor(props) {
     super(props);
     this.handleAddToCart = this.handleAddToCart.bind(this);
-    this.state = {};
   }
 
   handleAddToCart() {
@@ -39,7 +38,7 @@ export default class ProductCard extends Component {
         </button>
         <Link
           data-testid="product-detail-link"
-          to={ { pathname: '/datails', state: { item } } }
+          to={ { pathname: '/details', state: { item } } }
         >
           Detalhes
         </Link>
