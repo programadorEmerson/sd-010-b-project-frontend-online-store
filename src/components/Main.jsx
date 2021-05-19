@@ -42,9 +42,7 @@ class Main extends React.Component {
       (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
     );
 
-    this.setState({ totalQuantityItems: totalQuantity }, () => {
-      localStorage.setItem('localStorageQuantity', totalQuantity);
-    });
+    this.setState({ totalQuantityItems: totalQuantity });
   }
 
   saveState = async () => {

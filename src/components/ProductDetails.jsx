@@ -44,7 +44,7 @@ class ProductDetails extends React.Component {
           (quantityAccumulator, product) => quantityAccumulator + product.quantity, 0,
         );
     
-        this.setState({ totalQuantityItems: totalQuantity }, () => localStorage.setItem('totalQuantityItems', JSON.stringify(totalQuantity)));
+        this.setState({ totalQuantityItems: totalQuantity });
       
       }
 }
@@ -81,41 +81,33 @@ class ProductDetails extends React.Component {
       );
 
       if (testIfProductExistlocal === undefined) {
-      console.log('dentro do 3')
-
-        product.quantity = 1;
-      localStorage.setItem('localStorageCart', JSON.stringify([...shoppingCartlocal, product]))
-      this.updateLocalStorageQuantity();
-      this.setState({ totalQuantityItems: 1})
-
-        } else {
-      console.log('dentro do 4')
-
-        console.log((product.quantity))
-
-
-          if (shoppingCartlocal.length > 0) {
-            // Ajustar lógica local storage
-            // // let count = 0;
-            
-            // const findedProduct = shoppingCartlocal.find(
-            //   (productFind, index) => {
-            //     product.id === productFind.id;
-            //     count += 1;
-            //   },
-            // );
-
-            // shoppingCartlocal[?].quantity = product.quantity += 1;
-          } else {
-          product.quantity += 1;
-            localStorage.setItem('localStorageCart', JSON.stringify([product]));
-            this.updateLocalStorageQuantity();
-          }
+          product.quantity = 1;
+          localStorage.setItem('localStorageCart', JSON.stringify([...shoppingCartlocal, product]))
+          this.updateLocalStorageQuantity();
           this.setState({ totalQuantityItems: 1})
-
+        } else {
+          if (shoppingCartlocal.length > 0) {
+            let count = 0;
+            let count2 = 0;
+              
+            shoppingCartlocal.forEach((productFind) => {
+                if((product.id !== productFind.id) && (count2 === 0)) {
+                  count += 1;
+                } else {
+                  count2 += 1;
+                }
+              })
+              
+            shoppingCartlocal[count].quantity = product.quantity += 1;
+            localStorage.setItem('localStorageCart', JSON.stringify(shoppingCartlocal));
+          } else {
+            product.quantity += 1;
+            localStorage.setItem('localStorageCart', JSON.stringify([product]));
+          }
+          this.updateLocalStorageQuantity();
+          this.setState({ totalQuantityItems: 1})
         }
     }
-
   }
 
   updateLocalStorageQuantity = () => {
