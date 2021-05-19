@@ -31,13 +31,6 @@ class ProductCard extends Component {
           -
         </button>
         <button type="button" onClick={ () => removeCart(product) }>X</button>
-        <p data-testid="shopping-cart-product-quantity">
-          Quantidade de itens no carrinho
-          {countItems}
-          {' '}
-          itens
-        </p>
-
       </div>
     );
   }

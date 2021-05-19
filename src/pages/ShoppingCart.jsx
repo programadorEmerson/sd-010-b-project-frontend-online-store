@@ -39,6 +39,13 @@ class ShoppingCart extends Component {
           ))}
         </ul>
 
+        <p data-testid="shopping-cart-product-quantity">
+          Quantidade de itens no carrinho
+          {cartItems.length}
+          {' '}
+          itens
+        </p>
+
         <button type="button">Finalizar compras</button>
       </div>
     );
