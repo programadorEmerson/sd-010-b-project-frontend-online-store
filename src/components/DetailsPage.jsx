@@ -6,6 +6,10 @@ import cartIcon from '../img/cart/cart.svg';
 import '../styles/DetailsPage.css';
 
 class DetailsPage extends React.Component {
+  /*  handleClick() {
+
+  } */
+
   render() {
     const { match: { params: { id } }, arrProducts, addToCart, quantity } = this.props;
     const { thumbnail, title, price, shipping } = arrProducts[id];

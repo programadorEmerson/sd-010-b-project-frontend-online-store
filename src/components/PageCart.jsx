@@ -26,12 +26,13 @@ class PageCart extends React.Component {
           Total: R$
           {this.getTotalPrice()}
         </h3>
-        {cart.map(({ qty, product: { title, price }, id }) => (
+        {cart.map(({ qty, product: { title, price, available_quantity: Aqty }, id }) => (
           <CartItem
             key={ id }
             id={ id }
             name={ title }
             qty={ qty }
+            Aqty={ Aqty }
             price={ price }
             handleCartBtnEvent={ handleCartBtnEvent }
           />

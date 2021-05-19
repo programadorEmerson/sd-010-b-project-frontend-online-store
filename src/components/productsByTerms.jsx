@@ -18,7 +18,7 @@ class ProductsByTerms extends React.Component {
           </div>
         </Link>
         <div>
-          { freeShipping && <p data-testid="free-shipping">frete grátis</p> }
+          {freeShipping && <p data-testid="free-shipping">frete grátis</p>}
         </div>
         <button
           type="button"
