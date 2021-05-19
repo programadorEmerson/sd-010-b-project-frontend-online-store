@@ -41,11 +41,9 @@ export default class CartItems extends Component {
           </p>
         </div>
         <div className="top-cart">
-          <span>Produto</span>
-          <span />
-          <span />
-          <span>Quantidade</span>
-          <span>Preço</span>
+          <span className="prod-names">Produtos</span>
+          <span className="quantprice-names">Quantidade</span>
+          <span className="quantprice-names">Preço</span>
         </div>
 
         {products.map((product) => (
@@ -54,6 +52,9 @@ export default class CartItems extends Component {
             product={ product }
           />
         ))}
+        <div>
+          <button type="button">Finalizar compra</button>
+        </div>
       </div>
     );
   }
