@@ -1,3 +1,22 @@
 .category-and-results {
   display: flex;
 }
+
+.results-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.product-card {
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.205);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  justify-content: space-around;
+  margin-bottom: 2.5px;
+  text-align: center;
+  width: 220px;
+}
