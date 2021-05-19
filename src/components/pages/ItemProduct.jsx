@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import EvaluationArea from '../EvaluationArea';
+import CartBtn from '../buttonsAndLinks/CartBtn';
+
 
 export default class ItemProduct extends Component {
   constructor(props) {
@@ -11,6 +13,7 @@ export default class ItemProduct extends Component {
       rating: 0,
       menssage: '',
     };
+
     this.fetchItem = this.fetchItem.bind(this);
     this.evaluationData = this.evaluationData.bind(this);
   }
@@ -132,8 +135,10 @@ export default class ItemProduct extends Component {
     );
   }
 }
+
 ItemProduct.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({ id: PropTypes.string }),
   }).isRequired,
+  getProduct: PropTypes.func.isRequired,
 };

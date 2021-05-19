@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CartBtn from '../buttonsAndLinks/CartBtn';
 import { getCategories, getProductsFromCategoryAndQuery } from '../../services/api';
 import ListCategories from '../ListCategories';
@@ -11,11 +12,14 @@ export default class Home extends Component {
     this.state = {
       listCategories: [],
       listProducts: [],
+      msgProductNotFound: '',
+      shoppingCart: [],
     };
 
     this.fetchCategories = this.fetchCategories.bind(this);
     this.fetchCategoryAndProducts = this.fetchCategoryAndProducts.bind(this);
     this.fetchProductsByCategories = this.fetchProductsByCategories.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   componentDidMount() {
@@ -29,11 +33,17 @@ export default class Home extends Component {
   }
 
   async fetchCategoryAndProducts({ target: { value } }) {
-    const getProducts = await getProductsFromCategoryAndQuery('', value);
-    const arrayProducts = getProducts.results;
-    this.setState({
-      listProducts: arrayProducts,
-    });
+    if (value) {
+      const getProducts = await getProductsFromCategoryAndQuery('', value);
+      const arrayProducts = getProducts.results;
+      this.setState({
+        listProducts: arrayProducts,
+      });
+    } else {
+      this.setState({
+        msgProductNotFound: 'Nenhum produto foi encontrado',
+      });
+    }
   }
 
   async fetchProductsByCategories(categoryId) {
@@ -43,14 +53,22 @@ export default class Home extends Component {
     });
   }
 
+  addItemToCart(event) {
+    const { shoppingCart } = this.state;
+    this.setState({ shoppingCart: [...shoppingCart, event] });
+  }
+
   render() {
-    const { listCategories, listProducts } = this.state;
+    const { listCategories, listProducts, msgProductNotFound, shoppingCart } = this.state;
+    const { getProduct } = this.props;
     return (
       <>
-        <CartBtn />
+        <CartBtn shoppingCart={ shoppingCart } />
         <SearchBox
           onFetchProducts={ this.fetchCategoryAndProducts }
+          getProduct={ getProduct }
           listProducts={ listProducts }
+          msgProductNotFound={ msgProductNotFound }
         />
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
@@ -65,3 +83,7 @@ export default class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  getProduct: PropTypes.func.isRequired,
+};
