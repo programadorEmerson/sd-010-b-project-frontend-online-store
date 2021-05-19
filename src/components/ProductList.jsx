@@ -38,18 +38,6 @@ class ProductList extends Component {
   }
 }
 
-// ProductList.propTypes = {
-//   map: PropTypes.arrayOf({
-//     products: PropTypes.shape({
-//       title: PropTypes.string,
-//       price: PropTypes.number,
-//       id: PropTypes.string,
-//       thumbnail: PropTypes.string,
-//     }),
-//   }).isRequired,
-//   onClick: PropTypes.func.isRequired,
-// };
-
 ProductList.propTypes = {
   products: PropTypes.shape({
     title: PropTypes.string,

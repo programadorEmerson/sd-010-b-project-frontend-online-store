@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
@@ -6,7 +7,6 @@ import ProductCard from '../components/ProductCard';
 class ShoppingCart extends Component {
   constructor(props) {
     super(props);
-    this.amount = this.amount.bind(this);
     this.state = {
       total: 0,
     };
@@ -22,7 +22,7 @@ class ShoppingCart extends Component {
     }
   }
 
-  amount() {
+  amount = () => {
     const { cartItems } = this.props;
     const number = 0;
     if (cartItems.length >= 1) {
@@ -40,11 +40,21 @@ class ShoppingCart extends Component {
     const { total } = this.state;
 
     if (cartItems.length === 0) {
-      return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
+      return (
+        <div>
+          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+          <div>
+            <Link to="/">Voltar para a tela inicial</Link>
+          </div>
+        </div>
+      );
     }
 
     return (
       <div>
+        <div>
+          { cartItems.length }
+        </div>
         <ul>
           {cartItems.map((product) => (
             <li key={ product.id }>
@@ -63,12 +73,17 @@ class ShoppingCart extends Component {
           Valor total:
           { total }
         </p>
+
         <Link
           data-testid="checkout-products"
           to="/payment"
         >
           Finalizar Compra
         </Link>
+
+          <Link to="/">Voltar para a tela inicial</Link>
+        </div>
+
       </div>
     );
   }
