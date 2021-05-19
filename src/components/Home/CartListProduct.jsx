@@ -7,6 +7,8 @@ export default class CartListProduct extends Component {
   render() {
     const { product } = this.props;
     const { title, thumbnail, price, id } = product;
+    const productToCart = { title, thumbnail, price, id, quantity: 1 };
+
     return (
       <div data-testid="product">
         <Link
@@ -20,7 +22,7 @@ export default class CartListProduct extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ () => shoppingCardProductAdd(product) }
+          onClick={ () => shoppingCardProductAdd(productToCart) }
         >
           Adicionar ao carrinho
         </button>
