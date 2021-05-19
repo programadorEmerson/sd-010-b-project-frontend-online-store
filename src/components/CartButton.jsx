@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 class CartButton extends React.Component {
   render() {
     return (
-      <Link data-testid="shopping-cart-button" to="/cart">CARRINHO</Link>
+      <div>
+        <Link data-testid="shopping-cart-button" to="/cart">
+          <AiOutlineShoppingCart />
+        </Link>
+      </div>
     );
   }
 }

@@ -44,38 +44,41 @@ class Categories extends React.Component {
   render() {
     const { categories } = this.state;
     return (
-      <section>
-        <label
-          key="all"
-          htmlFor="all"
-        >
-          <input
-            defaultChecked
-            type="radio"
-            id="all"
+      <section className="category">
+        <ul>
+          <li
             key="all"
-            name="idCategory"
-            value="all"
-            onChange={ (event) => this.selectedCategories(event) }
-          />
-          TODAS
-        </label>
-        {categories.map(((category) => (
-          <label
-            key={ category.id }
-            htmlFor={ category.id }
+            htmlFor="all"
           >
             <input
-              data-testid="category"
+              defaultChecked
               type="radio"
-              id={ category.id }
-              key={ category.id }
+              id="all"
+              key="all"
               name="idCategory"
-              value={ category.id }
+              value="all"
               onChange={ (event) => this.selectedCategories(event) }
             />
-            {category.name}
-          </label>)))}
+            TODAS
+          </li>
+          {categories.map(((category) => (
+            <li
+              key={ category.id }
+              htmlFor={ category.id }
+            >
+              <input
+                data-testid="category"
+                type="radio"
+                id={ category.id }
+                key={ category.id }
+                name="idCategory"
+                value={ category.id }
+                onChange={ (event) => this.selectedCategories(event) }
+              />
+              {category.name}
+            </li>)))}
+        </ul>
+
       </section>
     );
   }

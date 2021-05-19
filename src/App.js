@@ -2,14 +2,12 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Cart from './pages/Cart';
-
 import Checkout from './pages/Checkout';
 import MainPage from './pages/MainPage';
 
 class App extends React.Component {
   render() {
     return (
-      <main>
         <BrowserRouter>
           <Switch>
             <Route path="/cart" component={ Cart } />
@@ -17,7 +15,6 @@ class App extends React.Component {
             <Route exact path="/" component={ MainPage } />
           </Switch>
         </BrowserRouter>
-      </main>
     );
   }
 }
