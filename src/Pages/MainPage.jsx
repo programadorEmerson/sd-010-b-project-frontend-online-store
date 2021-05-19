@@ -65,12 +65,11 @@ class MainPage extends Component {
     return (
       <main>
         <ListCategories handleCategoryClick={ this.handleCategoryClick } />
-        <section>
+        <section className="article">
           <CartButton />
-          { this.renderInitialPhrase() }
           { this.renderSearchBar() }
           { doQuery ? <ProductsList query={ query } categoryID={ categoryID } />
-            : <p>Does not render ProductList</p>}
+            : this.renderInitialPhrase() }
         </section>
       </main>
     );
