@@ -81,8 +81,8 @@ class CartItem extends Component {
     return (
       <div className="cart-item">
         {this.renderRemoveProductsIcon()}
-        {this.renderImageProduct(source)}
-        <div data-testid="shopping-cart-product-name">{ name }</div>
+        {this.renderProductImage(thumbnail)}
+        {this.renderProductName(title)}
         <div className="config-product-quantity">
           {this.renderDecreaseQuantityIcon()}
           <div
