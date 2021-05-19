@@ -39,11 +39,7 @@ class ProductDetaills extends Component {
 
     return (
       <div>
-        <Link
-          to="/shopping-cart"
-          data-testid="shopping-cart-button"
-          className="shopping-cart-button"
-        >
+        <Link to="/shopping-cart" data-testid="shopping-cart-button">
           <GrCart />
         </Link>
         <h3>Especificações Técnicas</h3>

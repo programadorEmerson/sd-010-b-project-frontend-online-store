@@ -2,56 +2,6 @@
   text-align: center;
 }
 
-a {
-  color: #333;
-  text-decoration: none;
-}
-
-.shopping-cart-button {
-  margin: 10px;
-}
-
-.input-search {
-  margin: 5px;
-  width: 80%;
-}
-
-.header {
-  background-color: #fff159;
-}
-
-.home-initial-message {
-  margin: 1px 35px;
-  text-align: center;
-}
-
-.categories {
-  border: 2px solid #fff159;
-  border-radius: 10px;
-  margin: 35px;
-  padding: 20px;
-  text-align: left;
-}
-
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 70%;
-}
-
-.product-item {
-  flex: 1;
-  height: 420px;
-  margin: 5px;
-  padding: 5px;
-  width: 250px;
-}
-
-.home {
-  display: flex;
-  width: 100%;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
