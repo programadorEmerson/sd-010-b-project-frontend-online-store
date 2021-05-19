@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import * as api2 from '../services/api2';
+import CartAmount from '../components/CartAmount';
+import Evaluation from '../components/Evaluation';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -53,16 +55,19 @@ class ProductDetails extends Component {
             if (attribute.value_name) {
               return (
                 <li key={ index }>
-                  {attribute.name}
-                  :
-                  {' '}
-                  {attribute.value_name }
+                  {`${attribute.name}:${attribute.value_name}`}
                 </li>
               );
             }
             return <div key={ index } />;
           })}
         </ul>
+        <CartAmount
+          key={ id }
+          id={ id }
+          quantity={ 2 }
+          title={ title }
+        />
         <button
           id={ id }
           type="button"
@@ -71,6 +76,7 @@ class ProductDetails extends Component {
         >
           add
         </button>
+        <Evaluation />
       </div>
     );
   }

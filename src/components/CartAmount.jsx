@@ -25,11 +25,11 @@ class CartAmount extends React.Component {
   handleDecreaseClick = () => {
     const { id } = this.props;
     const { count } = this.state;
-    api2.removeFromLocalStorage(id);
-    if (count > 0) {
+    if (count > 1) {
       this.setState((estadoAnterior) => ({
         count: estadoAnterior.count - 1,
       }));
+      api2.removeFromLocalStorage(id);
     }
   }
 
