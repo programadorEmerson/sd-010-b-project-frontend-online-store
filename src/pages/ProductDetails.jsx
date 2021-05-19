@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import getProductById from '../services/api2';
 import * as api from '../services/api';
+
 import Loading from '../components/Loading';
 import Rating from '../components/Rating';
 

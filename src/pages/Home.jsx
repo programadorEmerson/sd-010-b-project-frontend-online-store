@@ -13,8 +13,8 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <ProductList />
-        <Link data-testid="shopping-cart-button" to="/checkout">
-          <img width="30px" src={ btnIcon } alt="checkout" />
+        <Link data-testid="shopping-cart-button" to="/ShoppingCart">
+          <img width="30px" src={ btnIcon } alt="ShoppingCart" />
         </Link>
         <Categories />
       </div>
