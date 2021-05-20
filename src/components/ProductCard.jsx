@@ -36,6 +36,7 @@ class ProductCard extends Component {
               alt={ title }
             />
           </Link>
+          <p>{ price }</p>
           <button
             type="button"
             onClick={ () => this.clickCart(result) }
