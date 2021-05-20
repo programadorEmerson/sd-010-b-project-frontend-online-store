@@ -21,7 +21,6 @@ class ProductCard extends React.Component {
         };
         currentCart.push(newItem);
         localStorage.setItem('shoppingCart', JSON.stringify(currentCart));
-        console.log(currentCart);
       } else {
         const itemTobeModified = currentCart.find((item) => item.id === newId);
         itemTobeModified.quantidade += 1;
