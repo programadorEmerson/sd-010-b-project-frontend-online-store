@@ -59,9 +59,11 @@ class Home extends React.Component {
         </div>
 
         <section className="list-component">
-          {products.map((product) => (
-            <CartListProduct key={ product.id } product={ product } />
-          ))}
+          <ol className="d-flex flex-wrap justify-content-center">
+            {products.map((product) => (
+              <CartListProduct key={ product.id } product={ product } />
+            ))}
+          </ol>
         </section>
       </>
     );
