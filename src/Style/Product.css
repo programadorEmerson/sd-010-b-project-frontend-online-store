@@ -1,0 +1,39 @@
+.home {
+  display: flex;
+}
+
+.allProducts {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.productContainer {
+  align-items: center;
+  background-color: rgb(254, 255, 255);
+  border: 3px gray solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  margin: 2px;
+  width: 250px;
+}
+
+.title {
+  background-color: rgb(254, 255, 255);
+  height: 200px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.img {
+  max-height: 150px;
+  max-width: 170px;
+}
+
+.price {
+  background-color: rgb(254, 255, 255);
+  display: flex;
+  font-style: oblique;
+}

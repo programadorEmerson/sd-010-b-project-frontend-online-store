@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import * as api from '../services/api';
 import Category from './Category';
+import '../Style/Categories.css';
 
 class Categories extends Component {
   constructor() {
@@ -22,10 +25,12 @@ class Categories extends Component {
 
   render() {
     const { categories } = this.state;
+    const { buscafunc } = this.props;
     return (
-      <div>
-        {console.log(categories)}
+      <div className="categories">
+        Categorias:
         {categories.map((category) => (<Category
+          buscafunc={ buscafunc }
           key={ category.id }
           category={ category }
         />))}
@@ -33,5 +38,9 @@ class Categories extends Component {
     );
   }
 }
+
+Categories.propTypes = {
+  categoryId: PropTypes.string,
+}.isRequired;
 
 export default Categories;

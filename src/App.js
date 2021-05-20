@@ -1,18 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Card from './components/Card';
 import Home from './components/Home';
-// import Categories from './components/Categories'
+import Cart from './components/Cart';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={ Home } />
-        <Route exact path="/card" component={ Card } />
+        <Route path="/home/:id" component={ Home } />
+        <Route exact path="/cart" component={ Cart } />
       </Switch>
-      {/* <Route exact path="/" component={ Categories } /> */}
     </BrowserRouter>
   );
 }
