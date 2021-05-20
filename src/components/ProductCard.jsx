@@ -49,6 +49,7 @@ class ProductCard extends Component {
   }
 
   clickCart(id) {
+    const { results } = this.state;
     const [choosenProduct] = results.filter((item) => item.id === id);
     const storedId = localStorage.getItem('id');
     localStorage.setItem('id', [storedId, JSON.stringify(choosenProduct)]);

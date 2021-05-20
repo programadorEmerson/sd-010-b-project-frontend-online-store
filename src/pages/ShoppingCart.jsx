@@ -11,10 +11,10 @@ export default class ShoppingCart extends Component {
     const itens = JSON.parse(localStorage.getItem('id'));
 
     let willRender = false;
-    
+
     if (itens.length > 0) {
       willRender = true;
-    } 
+    }
 
     this.state = {
       id: itens,
