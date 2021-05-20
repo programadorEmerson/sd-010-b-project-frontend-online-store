@@ -4,7 +4,7 @@ import Form from '../components/FormCheckout';
 class Checkout extends React.Component {
   constructor() {
     super();
-    this.setState = {
+    this.state = {
       fullname: '',
       email: '',
       cpf: '',
