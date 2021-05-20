@@ -52,7 +52,7 @@ class Cart extends Component {
 
   render() {
     const { products } = this.state;
-    if (products.length === 0) {
+    if (!products) {
       return (
         <>
           <Link to="/">Voltar</Link>
