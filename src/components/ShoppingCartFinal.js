@@ -34,8 +34,8 @@ class ShoppingCartFinal extends Component {
       const { quanty, price } = itensCart[i];
       totalPrice += (price * quanty);
     }
-    // Pq não funciona
-    // const allValues = itensCart.map((item) => item.price * item.quanty);
+    // Trocar
+    // const allValues = itensCart && itens.map((item) => item.price * item.quanty);
     // console.log(allValues);
     return totalPrice;
   }
@@ -43,7 +43,6 @@ class ShoppingCartFinal extends Component {
   render() {
     const { itensCart } = this.state;
     const msg = 'Seu carrinho está vazio';
-    // console.log('render');
     return (
       <main>
         <div className="reviewProducts">

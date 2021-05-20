@@ -25,7 +25,7 @@ class Home extends React.Component {
   componentDidUpdate() {
     const { nameItems } = this.state;
     if (nameItems.length !== 0) {
-      console.log(`Update ${nameItems}`);
+      // console.log(`Update ${nameItems}`);
       localStorage.setItem('cartItems', JSON.stringify([...nameItems]));
     }
   }
@@ -52,7 +52,7 @@ class Home extends React.Component {
   }
 
   getName = (product) => () => {
-    console.log(`GetName: ${product}`);
+    // console.log(`GetName: ${product}`);
     this.setState((old) => ({ nameItems: [...old.nameItems, product] }));
   }
 
