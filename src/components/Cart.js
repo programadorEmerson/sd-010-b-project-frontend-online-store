@@ -59,12 +59,12 @@ class Cart extends React.Component {
     return (
       <>
         {
-          arrayItens.map((elemento) => {
+          arrayItens.map((elemento, index) => {
             console.log(elemento);
             return (<ItemProductCart
               handleChange={ this.handleChange }
               cartItem={ elemento }
-              key={ 1 }
+              key={ index + 1 }
             />);
           })
         }
