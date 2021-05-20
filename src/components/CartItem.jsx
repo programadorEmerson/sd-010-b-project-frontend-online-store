@@ -59,6 +59,7 @@ class CartItem extends React.Component {
         <button
           type="button"
           onClick={ this.increaseItem }
+          disabled={ productInfo.available_quantity <= quantity }
           data-testid="product-increase-quantity"
         >
           +
