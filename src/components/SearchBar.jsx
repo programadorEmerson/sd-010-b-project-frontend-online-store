@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import ProductList from './ProductList';
 
@@ -9,7 +9,7 @@ class SearchBar extends React.Component {
     super();
     this.state = {
       searchText: '',
-      products: '',
+      products: [],
       pageNotFound: false,
       categories: [],
       filter: '', // passamos uhuuuuuuuuuuuuuuuu
@@ -60,6 +60,7 @@ class SearchBar extends React.Component {
     const { handleClick,
       handleSearchText,
       handleCategory, state: { pageNotFound, products, categories } } = this;
+    const { addItemToCart, cart } = this.props;
     return (
       <div>
         <div onChange={ handleCategory }>
@@ -84,15 +85,21 @@ class SearchBar extends React.Component {
           Pesquisar
         </button>
         { products.length > 0
-        && <ProductList products={ products } /> }
+        && <ProductList
+          products={ products }
+          addItemToCart={ addItemToCart }
+          cart={ cart }
+        /> }
         { pageNotFound && <span>Nenhum produto foi encontrado.</span> }
+
       </div>
     );
   }
 }
 
-// SearchBar.propTypes = {
-//   filter: PropTypes.string.isRequired,
-// };
+SearchBar.propTypes = {
+  addItemToCart: PropTypes.func.isRequired,
+  cart: PropTypes.string.isRequired,
+};
 
 export default SearchBar;
