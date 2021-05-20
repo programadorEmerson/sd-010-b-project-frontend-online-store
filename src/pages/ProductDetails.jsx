@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import EvaluationForm from '../components/EvaluationForm';
 import * as api from '../services/api';
 
@@ -23,23 +25,30 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { data: { title, price, thumbnail } } = this.state;
+    console.log(this.props);
+    const { data } = this.state;
+    const { match: { params: { id } } } = this.props;
     const { addItemToCart } = this.props;
-    console.log(data);
     return (
       <main>
+        <Link
+          data-testid="shopping-cart-button"
+          to="/cart"
+        >
+          <AiOutlineShoppingCart />
+        </Link>
         <h1 data-testid="product-detail-name">
-          {title !== undefined ? title : 'Pequeno Principe, O'}
+          {data === undefined ? 'Pequeno Principe, O' : data.title}
         </h1>
         <h1>
           R$:
-          {price !== undefined ? price : ''}
+          {data !== undefined ? data.price : ''}
         </h1>
-        <img src={ thumbnail !== undefined ? thumbnail : '' } alt="" />
+        <img src={ data !== undefined ? data.thumbnail : '' } alt="" />
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => addItemToCart(id, title, price) }
+          onClick={ () => addItemToCart(id, data.title, data.price) }
         >
           Adicionar ao carrinho
         </button>

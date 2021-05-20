@@ -1,37 +1,42 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class Cart extends React.Component {
-  constructor(props) {
-    super(props);
-    const { shoppingCartProduct } = this.props;
-    this.state = {
-      teste: shoppingCartProduct,
-    };
+  findLocalItems() {
+    const values = [];
+    const keys = Object.keys(localStorage);
+    let i = keys.length;
+    while (i > 0) {
+      const item = localStorage.getItem(keys[i - 1]).split('|');
+      values.push(item);
+      i -= 1;
+    }
+    return values;
   }
 
   render() {
-    console.log(this.state.teste);
+    const results = this.findLocalItems();
     return (
       <section>
-        {/* {shoppingCartProduct === undefined ? (
+        {results.length === 0 ? (
           <span data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
+            {/* <div data-testid="shopping-cart-product-name" /> */}
+            {/* <div data-testid="shopping-cart-product-quantity" /> */}
           </span>
-        ) : ( */}
+        ) : (
           <div>
-            {this.state.teste.map((product) => (
-              <div key={ product.id }>
-                <div
+            {results.map((product) => (
+              <div key={ product[0] }>
+                <p
                   data-testid="shopping-cart-product-name"
                 >
-                  { product.title }
-                </div>
-                <div
+                  { product[1] }
+                </p>
+                <p
                   data-testid="shopping-cart-product-quantity"
                 >
-                  { product.quantity }
-                </div>
+                  { product[3] }
+                </p>
               </div>
             ))}
           </div>
@@ -40,9 +45,5 @@ class Cart extends React.Component {
     );
   }
 }
-
-Cart.propTypes = {
-  shoppingCartProduct: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default Cart;

@@ -51,7 +51,7 @@ class Input extends React.Component {
         <Link
           data-testid="shopping-cart-button"
           to="/cart"
-          shoppingCartProduct={ shoppingCartProduct }
+          // data-shoppingCartProduct={ shoppingCartProduct }
         >
           <AiOutlineShoppingCart />
         </Link>
@@ -70,7 +70,7 @@ class Input extends React.Component {
 
 Input.propTypes = {
   handleQuery: PropTypes.func.isRequired,
-  shoppingCartProduct: PropTypes.func.isRequired,
+  shoppingCartProduct: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default Input;

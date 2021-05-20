@@ -11,7 +11,21 @@ export default class ProductCard extends React.Component {
         <h3>{ title }</h3>
         <img src={ thumbnail } alt={ title } />
         <p>{ price }</p>
-        <Link data-testid="product-detail-link" to={ `/details/${id}` }>DETALHES</Link>
+        <Link
+          data-testid="product-detail-link"
+          to={ {
+            pathname: `/details/${id}`,
+            data: {
+              state: this.state,
+            } } }
+          // to={ {
+          //   pathname: `/details/${id}`,
+          //   data: {
+          //     addItemToCart,
+          //   } } }
+        >
+          DETALHES
+        </Link>
         <button
           type="button"
           data-testid="product-add-to-cart"

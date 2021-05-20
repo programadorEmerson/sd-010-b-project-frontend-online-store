@@ -2,7 +2,6 @@ import React from 'react';
 import Input from '../components/Input';
 import Categories from '../components/Categories';
 import ProductList from '../components/ProductList';
-import Cart from './Cart';
 
 class MainPage extends React.Component {
   constructor() {
@@ -10,8 +9,6 @@ class MainPage extends React.Component {
     this.state = {
       products: [],
       queryTerm: '',
-      // shoppingCartProduct: localStorage.getItem('cart') || [],
-      shoppingCartProduct: [],
     };
 
     this.handleQuery = this.handleQuery.bind(this);
@@ -26,18 +23,15 @@ class MainPage extends React.Component {
   }
 
   addItemToCart(id, title, price) {
-    const { shoppingCartProduct } = this.state;
     console.log('ola');
-
-    if (shoppingCartProduct.find((product) => product.id === id)) {
-      const index = shoppingCartProduct.findIndex((product) => product.id === id);
-      shoppingCartProduct[index].quantity += 1;
+    if (localStorage.getItem(id)) {
+      const item = localStorage.getItem(id).split(',');
+      localStorage.setItem(id,
+        `${id}|${item[1]}|${item[2]}|${(parseInt(item[3], 10) + 1)}`);
     } else {
-      const newCartProduct = { id, title, price, quantity: 1 };
-      shoppingCartProduct.push(newCartProduct);
+      const newCartProduct = `${id}|${title}|${price}|1`;
+      localStorage.setItem(id, newCartProduct);
     }
-    this.setState({ shoppingCartProduct });
-    // localStorage.setItem('cart', JSON.stringify(shoppingCartProduct));
   }
 
   render() {
@@ -48,10 +42,10 @@ class MainPage extends React.Component {
           handleQuery={ this.handleQuery }
           shoppingCartProduct={ shoppingCartProduct }
         />
-        <Cart
+        {/* <Cart
           shoppingCartProduct={ shoppingCartProduct }
           addItemToCart={ this.addItemToCart }
-        />
+        /> */}
         <Categories
           handleQuery={ this.handleQuery }
           query={ queryTerm }
