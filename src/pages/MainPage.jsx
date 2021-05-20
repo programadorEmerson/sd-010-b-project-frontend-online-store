@@ -2,6 +2,7 @@ import React from 'react';
 import Input from '../components/Input';
 import Categories from '../components/Categories';
 import ProductList from '../components/ProductList';
+import Cart from './Cart';
 
 class MainPage extends React.Component {
   constructor() {
@@ -9,7 +10,8 @@ class MainPage extends React.Component {
     this.state = {
       products: [],
       queryTerm: '',
-      shoppingCart: [],
+      // shoppingCartProduct: localStorage.getItem('cart') || [],
+      shoppingCartProduct: [],
     };
 
     this.handleQuery = this.handleQuery.bind(this);
@@ -25,6 +27,8 @@ class MainPage extends React.Component {
 
   addItemToCart(id, title, price) {
     const { shoppingCartProduct } = this.state;
+    console.log('ola');
+
     if (shoppingCartProduct.find((product) => product.id === id)) {
       const index = shoppingCartProduct.findIndex((product) => product.id === id);
       shoppingCartProduct[index].quantity += 1;
@@ -33,23 +37,26 @@ class MainPage extends React.Component {
       shoppingCartProduct.push(newCartProduct);
     }
     this.setState({ shoppingCartProduct });
-    // localStorage.setItem('cart', shoppingCartProduct);
+    // localStorage.setItem('cart', JSON.stringify(shoppingCartProduct));
   }
 
   render() {
-    const { products, queryTerm, shoppingCart } = this.state;
+    const { products, queryTerm, shoppingCartProduct } = this.state;
     return (
       <main>
+        <Input
+          handleQuery={ this.handleQuery }
+          shoppingCartProduct={ shoppingCartProduct }
+        />
+        <Cart
+          shoppingCartProduct={ shoppingCartProduct }
+          addItemToCart={ this.addItemToCart }
+        />
         <Categories
           handleQuery={ this.handleQuery }
           query={ queryTerm }
         />
-        <Input
-          handleQuery={ this.handleQuery }
-          shoppingCart={ shoppingCart }
-          addItemToCart={ this.addItemToCart }
-        />
-        <ProductList products={ products } />
+        <ProductList products={ products } addItemToCart={ this.addItemToCart } />
       </main>
     );
   }

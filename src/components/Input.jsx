@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CartButton from './CartButton';
+import { Link } from 'react-router-dom';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import * as api from '../services/api';
 import CheckoutButton from './CheckoutButton';
 
@@ -27,7 +28,9 @@ class Input extends React.Component {
   }
 
   render() {
-    const { shoppingCart, addItemToCart } = this.props;
+    const { shoppingCartProduct } = this.props;
+    console.log('input');
+    console.log(shoppingCartProduct);
     return (
       <div
         className="search"
@@ -45,10 +48,13 @@ class Input extends React.Component {
         >
           Pesquisar
         </button>
-        <CartButton
-          shoppingCart={ shoppingCart }
-          addItemToCart={ addItemToCart }
-        />
+        <Link
+          data-testid="shopping-cart-button"
+          to="/cart"
+          shoppingCartProduct={ shoppingCartProduct }
+        >
+          <AiOutlineShoppingCart />
+        </Link>
         <br />
         <CheckoutButton />
         <br />
@@ -64,8 +70,7 @@ class Input extends React.Component {
 
 Input.propTypes = {
   handleQuery: PropTypes.func.isRequired,
-  shoppingCart: PropTypes.arrayOf(PropTypes.any).isRequired,
-  addItemToCart: PropTypes.func.isRequired,
+  shoppingCartProduct: PropTypes.func.isRequired,
 };
 
 export default Input;
