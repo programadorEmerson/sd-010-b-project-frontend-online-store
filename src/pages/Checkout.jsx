@@ -25,6 +25,7 @@ class Checkout extends React.Component {
   render() {
     return (
       <>
+        <CartProducts />
         <Form handleForm={ this.handleForm } state={ this.state } />
         <button type="button">Comprar</button>
       </>
