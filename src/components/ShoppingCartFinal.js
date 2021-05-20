@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import ReviewProducts from './ReviewProducts';
+import InfoBuyer from './InfoBuyer';
+import PaymentMethod from './PaymentMethod';
 
 class ShoppingCartFinal extends Component {
   constructor() {
     super();
     this.state = {
       itensCart: false,
+      redirect: false,
     };
   }
 
@@ -28,47 +32,34 @@ class ShoppingCartFinal extends Component {
     }));
   }
 
-  somePrices = (itensCart) => {
-    let totalPrice = 0;
-    for (let i = 0; i < itensCart.length; i += 1) {
-      const { quanty, price } = itensCart[i];
-      totalPrice += (price * quanty);
-    }
-    // Trocar
-    // const allValues = itensCart && itens.map((item) => item.price * item.quanty);
-    // console.log(allValues);
-    return totalPrice;
+  clearCart = () => {
+    localStorage.clear('cartItems');
+    this.setState({ redirect: true });
   }
 
   render() {
-    const { itensCart } = this.state;
+    const { itensCart, redirect } = this.state;
     const msg = 'Seu carrinho está vazio';
     return (
-      <main>
+      <div>
+        { redirect && <Redirect to="/" /> }
         <div className="reviewProducts">
           { itensCart
-            ? itensCart.map(({ item, quanty, price }) => (
-              <div key={ item }>
-                <p>
-                  Quantidade:
-                  <span data-testid="shopping-cart-product-quantity">
-                    {` ${quanty} - `}
-                  </span>
-                  <span data-testid="shopping-cart-product-name">
-                    { ` ${item} - ` }
-                  </span>
-                  <span>
-                    Total:
-                    { ` ${price * quanty}` }
-                  </span>
-                </p>
-              </div>))
+            ? <ReviewProducts itensCart={ itensCart } />
             : <div data-testid="shopping-cart-empty-message">{ msg }</div>}
-          Total:
-          { ` ${this.somePrices(itensCart)}` }
         </div>
-        <Link to="/">Home</Link>
-      </main>
+        <form className="infoBuyer" onSubmit={ (e) => { e.preventDefault(); } }>
+          <InfoBuyer />
+          <PaymentMethod />
+          <button
+            id="buy"
+            type="submit"
+            onClick={ () => this.clearCart() }
+          >
+            Comprar
+          </button>
+        </form>
+      </div>
     );
   }
 }

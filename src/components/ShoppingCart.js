@@ -55,6 +55,7 @@ class ShoppingCart extends Component {
     const { itensCart } = this.state;
     return (
       <main>
+        <Link data-testid="checkout-products" to="/checkout">Finalizar Compra</Link>
         { itensCart
           ? itensCart.map(({ item, quanty }) => (
             <div key={ item }>
