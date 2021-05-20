@@ -97,7 +97,6 @@ class Home extends React.Component {
     );
   }
 }
-
 Home.propTypes = {
   qtd: PropTypes.func.isRequired,
   state: PropTypes.number.isRequired,
