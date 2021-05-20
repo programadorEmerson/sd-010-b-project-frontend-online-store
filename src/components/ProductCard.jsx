@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import getItemById from '../services/newRequest';
 
 class ProductCard extends Component {
   constructor(props) {
     super(props);
 
-    /* if (localStorage.getItem('id') === undefined) {
-      localStorage.setItem('id', []);
-    } */
+    localStorage.setItem('id', JSON.stringify([]));
 
     const { results } = this.props;
 
@@ -48,11 +47,12 @@ class ProductCard extends Component {
     return card;
   }
 
-  clickCart(id) {
-    const { results } = this.state;
-    const [choosenProduct] = results.filter((item) => item.id === id);
-    const storedId = localStorage.getItem('id');
-    localStorage.setItem('id', [storedId, JSON.stringify(choosenProduct)]);
+  async clickCart(id) {
+    const itemDetails = await getItemById(id);
+    const prevLS = JSON.parse(localStorage.getItem('id'));
+    console.log(prevLS);
+    prevLS.push(itemDetails);
+    localStorage.setItem('id', JSON.stringify(prevLS));
   }
 
   noResult() {
