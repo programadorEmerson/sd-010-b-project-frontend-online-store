@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 
 class Card extends Component {
   render() {
-    const { product: { title, thumbnail, price }, getName } = this.props;
+    const { product: { title, thumbnail, price }, product, getName } = this.props;
     return (
       <div data-testid="product">
         <img src={ thumbnail } alt={ title } />
         <h1>{ title }</h1>
         <p>{ price }</p>
         <button
-          onClick={ getName(title) }
+          onClick={ getName(product) }
           type="button"
           data-testid="product-add-to-cart"
         >

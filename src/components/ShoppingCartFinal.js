@@ -6,20 +6,11 @@ class ShoppingCartFinal extends Component {
     super();
     this.state = {
       itensCart: false,
-      ForcedRender: '',
     };
   }
 
   componentDidMount() {
     this.fillItensCart();
-  }
-
-  countItens = (value) => {
-    const onlyItens = [...new Set([...value])];
-    return onlyItens.map((item) => ({
-      item,
-      quanty: value.filter((v) => v === item).length,
-    }));
   }
 
   fillItensCart = () => {
@@ -28,29 +19,55 @@ class ShoppingCartFinal extends Component {
     this.setState({ itensCart });
   }
 
-  forceRender = () => {
-    this.setState({ ForcedRender: '' });
+  countItens = (value) => {
+    const onlyItens = [...new Set([...value.map((p) => p.title)])];
+    return onlyItens.map((item) => ({
+      item,
+      quanty: value.filter(({ title }) => title === item).length,
+      price: value.find(({ title }) => title === item).price,
+    }));
+  }
+
+  somePrices = (itensCart) => {
+    let totalPrice = 0;
+    for (let i = 0; i < itensCart.length; i += 1) {
+      const { quanty, price } = itensCart[i];
+      totalPrice += (price * quanty);
+    }
+    // Pq não funciona
+    // const allValues = itensCart.map((item) => item.price * item.quanty);
+    // console.log(allValues);
+    return totalPrice;
   }
 
   render() {
-    const { itensCart, ForcedRender } = this.state;
+    const { itensCart } = this.state;
+    const msg = 'Seu carrinho está vazio';
+    // console.log('render');
     return (
       <main>
-        { ForcedRender }
-        { itensCart
-          ? itensCart.map(({ item, quanty }) => (
-            <div key={ item }>
-              <p>
-                Quantidade:
-                <span data-testid="shopping-cart-product-quantity">
-                  {quanty}
-                </span>
-                <span data-testid="shopping-cart-product-name">
-                  { item }
-                </span>
-              </p>
-            </div>))
-          : <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>}
+        <div className="reviewProducts">
+          { itensCart
+            ? itensCart.map(({ item, quanty, price }) => (
+              <div key={ item }>
+                <p>
+                  Quantidade:
+                  <span data-testid="shopping-cart-product-quantity">
+                    {` ${quanty} - `}
+                  </span>
+                  <span data-testid="shopping-cart-product-name">
+                    { ` ${item} - ` }
+                  </span>
+                  <span>
+                    Total:
+                    { ` ${price * quanty}` }
+                  </span>
+                </p>
+              </div>))
+            : <div data-testid="shopping-cart-empty-message">{ msg }</div>}
+          Total:
+          { ` ${this.somePrices(itensCart)}` }
+        </div>
         <Link to="/">Home</Link>
       </main>
     );
