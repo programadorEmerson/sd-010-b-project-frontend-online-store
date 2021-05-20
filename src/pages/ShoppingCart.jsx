@@ -10,15 +10,15 @@ export default class ShoppingCart extends Component {
 
     const itens = JSON.parse(localStorage.getItem('id'));
 
+    console.log(itens);
     let willRender = false;
-
     if (itens.length > 0) {
       willRender = true;
     }
 
     this.state = {
       id: itens,
-      renderCart: willRender,
+      renderCart: false,
     };
   }
 

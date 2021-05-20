@@ -34,7 +34,6 @@ class ProductCard extends Component {
               alt={ title }
             />
           </Link>
-          <span>{ price }</span>
           <button
             type="button"
             onClick={ () => this.clickCart(id) }
@@ -48,11 +47,10 @@ class ProductCard extends Component {
     return card;
   }
 
-  clickCart(id) {
-    const { results } = this.state;
-    const [choosenProduct] = results.filter((item) => item.id === id);
-    const storedId = localStorage.getItem('id');
-    localStorage.setItem('id', [storedId, JSON.stringify(choosenProduct)]);
+  async clickCart(itemDetails) {
+    const prevLS = JSON.parse(localStorage.getItem('id'));
+    prevLS.push(itemDetails);
+    localStorage.setItem('id', JSON.stringify(prevLS));
   }
 
   noResult() {
