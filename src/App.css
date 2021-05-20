@@ -139,6 +139,14 @@ footer p {
   justify-content: space-around;
 }
 
+.prod-names {
+  width: 200px;
+}
+
+.quantprice-names {
+  width: 10px;
+}
+
 .item-container {
   align-items: flex-start;
   display: flex;
@@ -161,12 +169,8 @@ footer p {
   margin-right: 10px;
 }
 
-.quantity {
-  margin-right: 10px;
+.remove-div {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .item-container span {
@@ -174,9 +178,25 @@ footer p {
 }
 
 .prices {
-  width: 200px;
+  width: 300px;
+}
+
+.quant-field {
+  margin: 5px;
+}
+
+.quantity {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  width: 400px;
+}
+
+.finish {
+  display: flex;
+  justify-content: space-around;
+}
+
+.estrela {
+  background-color: rgb(233, 232, 232);
+  border-radius: 10px;
+  width: 19px;
 }
