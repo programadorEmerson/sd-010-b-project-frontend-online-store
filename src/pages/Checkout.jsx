@@ -1,5 +1,6 @@
 import React from 'react';
-import Form from '../components/FormCheckout';
+import Form from '../components/Checkout/FormCheckout';
+import CartProducts from '../components/Checkout/CartProducts';
 
 class Checkout extends React.Component {
   constructor() {
