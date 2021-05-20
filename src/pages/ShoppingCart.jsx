@@ -53,9 +53,6 @@ class ShoppingCart extends Component {
 
     return (
       <div>
-        <div>
-          { cartItems.length }
-        </div>
         <ul>
           {cartItems.map((product) => (
             <li key={ product.id }>

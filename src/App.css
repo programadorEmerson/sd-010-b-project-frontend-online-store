@@ -59,6 +59,18 @@ a {
   width: 250px;
 }
 
+.product-card {
+  align-items: center;
+  flex: 1;
+  margin: 5px;
+  padding: 5px;
+}
+
+.product-card img {
+  height: 150px;
+  width: 150px;
+}
+
 .home {
   display: flex;
   width: 100%;

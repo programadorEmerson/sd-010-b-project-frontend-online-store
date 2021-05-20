@@ -7,7 +7,7 @@ class ProductCard extends Component {
     const { title, price, thumbnail, countItems } = product;
 
     return (
-      <div>
+      <div className="product-card">
         <p data-testid="shopping-cart-product-name">{title}</p>
         <img src={ thumbnail } alt={ title } />
         <p>
@@ -22,9 +22,6 @@ class ProductCard extends Component {
         >
           +
         </button>
-        <p data-testid="shopping-cart-product-quantity">
-          { `Quantidade de itens: ${countItems}` }
-        </p>
         <button
           type="button"
           data-testid="product-decrease-quantity"
@@ -33,6 +30,9 @@ class ProductCard extends Component {
           -
         </button>
         <button type="button" onClick={ () => removeCart(product) }>X</button>
+        <p data-testid="shopping-cart-product-quantity">
+          { `Quantidade de itens: ${countItems}` }
+        </p>
       </div>
     );
   }
