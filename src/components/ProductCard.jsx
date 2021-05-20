@@ -29,7 +29,11 @@ class ProductCard extends Component {
       return (
         <div key={ id } data-testid="product">
           <h4>{ title }</h4>
-          <Link to={ `/product/${id}` } data-testid="product-detail-link">
+          <Link
+            to={ `/product/${id}` }
+            onClick={ () => this.saveDetails(result) }
+            data-testid="product-detail-link"
+          >
             <img
               src={ thumbnail }
               width="150"
@@ -48,6 +52,10 @@ class ProductCard extends Component {
       );
     });
     return card;
+  }
+
+  saveDetails(result) {
+    localStorage.setItem('itemDetails', JSON.stringify(result));
   }
 
   async clickCart(itemDetails) {

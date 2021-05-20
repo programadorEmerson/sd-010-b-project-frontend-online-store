@@ -23,8 +23,7 @@ export default class ProductDetails extends Component {
   }
 
   async getProduct() {
-    const { match: { params: { id } } } = this.props;
-    const result = await getItemById(id);
+    const result = JSON.parse(localStorage.getItem('itemDetails'));
     this.setState({
       loading: false,
       product: result,
