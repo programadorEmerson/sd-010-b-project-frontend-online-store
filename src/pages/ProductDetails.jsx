@@ -23,18 +23,26 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data: { title, price, thumbnail } } = this.state;
+    const { addItemToCart } = this.props;
     console.log(data);
     return (
       <main>
         <h1 data-testid="product-detail-name">
-          {data !== undefined ? data.title : 'Pequeno Principe, O'}
+          {title !== undefined ? title : 'Pequeno Principe, O'}
         </h1>
         <h1>
           R$:
-          {data !== undefined ? data.price : ''}
+          {price !== undefined ? price : ''}
         </h1>
-        <img src={ data !== undefined ? data.thumbnail : '' } alt="" />
+        <img src={ thumbnail !== undefined ? thumbnail : '' } alt="" />
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => addItemToCart(id, title, price) }
+        >
+          Adicionar ao carrinho
+        </button>
         <EvaluationForm />
       </main>
     );
@@ -42,6 +50,7 @@ class ProductDetails extends React.Component {
 }
 
 ProductDetails.propTypes = {
+  addItemToCart: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.objectOf,
     id: PropTypes.string,

@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 class Cart extends React.Component {
   render() {
     const { shoppingCartProduct } = this.props;
+    console.log(shoppingCartProduct);
     return (
       <section>
-        {shoppingCartProduct.length === 0 ? (
+        { shoppingCartProduct === undefined ? (
           <span data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </span>

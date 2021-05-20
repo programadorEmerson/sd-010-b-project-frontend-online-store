@@ -27,6 +27,7 @@ class Input extends React.Component {
   }
 
   render() {
+    const { shoppingCart, addItemToCart } = this.props;
     return (
       <div
         className="search"
@@ -44,7 +45,10 @@ class Input extends React.Component {
         >
           Pesquisar
         </button>
-        <CartButton />
+        <CartButton
+          shoppingCart={ shoppingCart }
+          addItemToCart={ addItemToCart }
+        />
         <br />
         <CheckoutButton />
         <br />
@@ -60,6 +64,8 @@ class Input extends React.Component {
 
 Input.propTypes = {
   handleQuery: PropTypes.func.isRequired,
+  shoppingCart: PropTypes.arrayOf(PropTypes.any).isRequired,
+  addItemToCart: PropTypes.func.isRequired,
 };
 
 export default Input;
