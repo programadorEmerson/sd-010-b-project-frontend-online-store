@@ -6,7 +6,7 @@ class ShoppingCart extends Component {
     super();
     this.state = {
       itensCart: false,
-      ForcedRender: '',
+      storageProducts: [],
     };
   }
 
@@ -14,49 +14,48 @@ class ShoppingCart extends Component {
     this.fillItensCart();
   }
 
-  countItens = (value) => {
-    const onlyItens = [...new Set([...value])];
-    return onlyItens.map((item) => ({
-      item,
-      quanty: value.filter((v) => v === item).length,
-    }));
-  }
-
   fillItensCart = () => {
     const value = JSON.parse(localStorage.getItem('cartItems'));
     const itensCart = !value ? false : this.countItens(value);
-    this.setState({ itensCart });
+    this.setState({ itensCart, storageProducts: value });
   }
 
-  forceRender = () => {
-    this.setState({ ForcedRender: '' });
+  countItens = (value) => {
+    const onlyItens = [...new Set([...value.map((p) => p.title)])];
+    return onlyItens.map((item) => ({
+      item,
+      quanty: value.filter(({ title }) => title === item).length,
+    }));
   }
 
   increment = (item) => {
-    const value = JSON.parse(localStorage.getItem('cartItems'));
-    value.push(item);
-    localStorage.setItem('cartItems', JSON.stringify(value));
-    this.setState({ itensCart: this.countItens(value) });
+    const { storageProducts } = this.state;
+    storageProducts.push(
+      storageProducts.find(({ title }) => title === item),
+    );
+    localStorage.setItem('cartItems', JSON.stringify(storageProducts));
+    this.setState({ itensCart: this.countItens(storageProducts) });
   }
 
   decrament = (item) => {
-    const value = JSON.parse(localStorage.getItem('cartItems'));
-    for (let i = value.length - 1; i >= 0; i -= 1) {
-      if (item === value[i]) {
-        value.splice(i, 1);
+    const { storageProducts } = this.state;
+    for (let i = storageProducts.length - 1; i >= 0; i -= 1) {
+      if (item === storageProducts[i].title) {
+        storageProducts.splice(i, 1);
         break;
       }
     }
-    localStorage.setItem('cartItems', JSON.stringify(value));
-    const itensCart = value.length === 0 ? false : this.countItens(value);
+    localStorage.setItem('cartItems', JSON.stringify(storageProducts));
+    const itensCart = storageProducts.length === 0
+      ? false : this.countItens(storageProducts);
     this.setState({ itensCart });
   }
 
   render() {
-    const { itensCart, ForcedRender } = this.state;
+    const { itensCart } = this.state;
     return (
       <main>
-        { ForcedRender }
+        <Link data-testid="checkout-products" to="/checkout">Finalizar Compra</Link>
         { itensCart
           ? itensCart.map(({ item, quanty }) => (
             <div key={ item }>

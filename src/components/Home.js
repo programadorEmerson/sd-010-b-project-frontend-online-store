@@ -18,13 +18,22 @@ class Home extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.moutState();
+  }
+
   componentDidUpdate() {
     const { nameItems } = this.state;
     if (nameItems.length !== 0) {
-      const value = JSON.parse(localStorage.getItem('cartItems'));
-      const result = !value ? [] : value;
-      localStorage.setItem('cartItems', JSON.stringify([...result, nameItems]));
+      // console.log(`Update ${nameItems}`);
+      localStorage.setItem('cartItems', JSON.stringify([...nameItems]));
     }
+  }
+
+  moutState = () => {
+    const value = JSON.parse(localStorage.getItem('cartItems'));
+    const result = !value ? [] : value;
+    this.setState({ nameItems: result });
   }
 
   getApiFromCategory = (param) => async () => {
@@ -42,8 +51,9 @@ class Home extends React.Component {
     });
   }
 
-  getName = (title) => () => {
-    this.setState({ nameItems: title });
+  getName = (product) => () => {
+    // console.log(`GetName: ${product}`);
+    this.setState((old) => ({ nameItems: [...old.nameItems, product] }));
   }
 
   getResult = ({ target: { value } }) => {
@@ -62,6 +72,8 @@ class Home extends React.Component {
           getApiFromQuery={ this.getApiFromQuery }
         />
         <Link data-testid="shopping-cart-button" id="cart" to="/cart">Carrinho</Link>
+        <br />
+        <Link data-testid="checkout-products" to="/checkout">Finalizar Compra</Link>
         <CategoryList onClick={ this.getApiFromCategory } />
 
         {filtered.length !== 0 && (

@@ -42,8 +42,8 @@ class DetailsCard extends React.Component {
     localStorage.setItem(id, JSON.stringify([...result, conteudo]));
   }
 
-  getName = (title) => () => {
-    this.setState({ nameItems: title });
+  getName = (product) => () => {
+    this.setState({ nameItems: product });
   }
 
   getAPI = async () => {
@@ -55,7 +55,7 @@ class DetailsCard extends React.Component {
   }
 
   render() {
-    const { details: { title, thumbnail, price, id } } = this.state;
+    const { details: { title, thumbnail, price, id }, details } = this.state;
     const { value } = this.state;
     return (
       <div>
@@ -67,7 +67,7 @@ class DetailsCard extends React.Component {
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
-          onClick={ this.getName(title) }
+          onClick={ this.getName(details) }
         >
           Adicionar ao Carrinho
         </button>
