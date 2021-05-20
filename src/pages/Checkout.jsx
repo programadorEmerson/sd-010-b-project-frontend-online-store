@@ -8,9 +8,9 @@ class Checkout extends React.Component {
       fullname: '',
       email: '',
       cpf: '',
-      phone: 0,
-      cep: 0,
-      adress: '',
+      phone: '',
+      cep: '',
+      address: '',
     };
     this.handleForm = this.handleForm.bind(this);
   }
