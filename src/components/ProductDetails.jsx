@@ -35,8 +35,8 @@ class ProductDetails extends Component {
     return (
       <div>
         <Link to="/">Voltar</Link>
-        <h1>
-          <p data-testid="product-detail-name">{`${title} - R$-${price}`}</p>
+        <h1 data-testid="product-detail-name">
+          {`${title} - R$-${price}`}
         </h1>
         <img className="img" src={ thumbnail } alt={ title } />
         <p>Especificações Técnicas</p>
@@ -48,6 +48,7 @@ class ProductDetails extends Component {
             return console.log('Tá aí o return, Sr. lint');
           })}
         </ul>
+        <button type="button">Adicionar</button>
       </div>
     );
   }
