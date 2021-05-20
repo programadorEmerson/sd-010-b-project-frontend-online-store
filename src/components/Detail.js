@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Img from '../images/cart.png';
+import Avaliacao from './Avaliacao';
 
 class Detail extends React.Component {
   constructor() {
@@ -107,6 +108,9 @@ class Detail extends React.Component {
                   />
                 </button>
               </Link>
+              <div>
+                <Avaliacao />
+              </div>
             </div>
           )}
       </div>
