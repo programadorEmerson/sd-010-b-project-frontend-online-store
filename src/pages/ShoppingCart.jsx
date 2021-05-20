@@ -4,16 +4,8 @@ import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 
 class ShoppingCart extends React.Component {
-  // handleClick = (operator) => {
-  //   const { quantity } = this.state;
-  //   if (operator === '+') {
-  //     this.setState({
-  //       quantity: quantity + 1,
-  //     });
-  //   }
-  //   this.setState({
-  //     quantity: quantity - 1,
-  //   });
+  // componentDidUpdate() {
+  //   this.handleClick
   // }
 
   render() {
@@ -23,28 +15,14 @@ class ShoppingCart extends React.Component {
     }
     return (
       <div>
-        {/* <div>
-          {items.map((itemObj) => <CartItem key={ itemObj.id } itemObj={ itemObj } />)}
-        </div> */}
-        {items.map((itemObj) => (
+        {items.map((itemObj, index, array) => (
           <div key={ itemObj.id }>
-            <CartItem key={ itemObj.id } itemObj={ itemObj } />
-            {/* <button
-              type="button"
+            <CartItem
               key={ itemObj.id }
-              onClick={ this.handleClick('+') }
-              data-testid="product-increase-quantity"
-            >
-              +
-            </button>
-            <button
-              type="button"
-              key={ itemObj.id }
-              onClick={ this.handleClick('-') }
-              data-testid="product-decrease-quantity"
-            >
-              +
-            </button> */}
+              itemObj={ itemObj }
+              index={ index }
+              array={ array }
+            />
           </div>
         ))}
         <Link data-testid="checkout-products" to="/Checkout">Finalizar</Link>

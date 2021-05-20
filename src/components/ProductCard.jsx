@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 class ProductCard extends React.Component {
   productOnCart(newId, price) {
-    console.log(newId, price);
     if (!localStorage.getItem('shoppingCart')) {
       const newCart = [
         {
@@ -24,12 +23,10 @@ class ProductCard extends React.Component {
         };
         currentCart.push(newItem);
         localStorage.setItem('shoppingCart', JSON.stringify(currentCart));
-        console.log(currentCart);
       } else {
         const itemTobeModified = currentCart.find((item) => item.id === newId);
         itemTobeModified.quantidade += 1;
         localStorage.setItem('shoppingCart', JSON.stringify(currentCart));
-        console.log(currentCart);
       }
     }
   }
