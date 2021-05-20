@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import '../Style/Product.css';
 import { Link } from 'react-router-dom';
 
+
 class Product extends Component {
   render() {
     const { product: { id, title, price, thumbnail } } = this.props;
@@ -16,6 +17,7 @@ class Product extends Component {
             <p className="price">{`R$-${price}`}</p>
           </div>
         </Link>
+
       </div>
     );
   }

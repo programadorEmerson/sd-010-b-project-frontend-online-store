@@ -4,6 +4,7 @@ import './App.css';
 import Home from './components/Home';
 import ProductDetails from './components/ProductDetails';
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +15,7 @@ function App() {
           path="/products/:id"
           render={ (props) => <ProductDetails { ...props } /> }
         />
+
       </Switch>
     </BrowserRouter>
   );
