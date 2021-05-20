@@ -21,15 +21,14 @@ class Payment extends React.Component {
     const valorInicial = 0;
     let calcPrice = valorInicial;
     items.forEach((item) => {
-      calcPrice += (item.price * item.initialQuantity);
+      calcPrice += (item.price * item.countItems);
     });
     return calcPrice;
   }
 
   render() {
     const { cartItems } = this.props;
-    const total = cartItems
-      .reduce((acc, value) => (acc + value.price) * value.countItems) || 0;
+    const total = this.totalCartPrice(cartItems);
     return (
       <div>
         <Navbar />
