@@ -12,9 +12,9 @@ class Search extends Component {
   }
 
   stateValue = () => {
-    const { id, product } = this.state;
-    const { buscafunc } = this.props;
-    buscafunc(id, product);
+    const { product } = this.state;
+    const { searchApi } = this.props;
+    searchApi(product);
   }
 
   changeState(event) {
@@ -47,7 +47,7 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  buscafunc: PropTypes.func,
+  stateValue: PropTypes.func,
 }.isRequired;
 
 export default Search;

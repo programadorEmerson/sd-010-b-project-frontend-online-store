@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 import CartButton from './CartButton';
@@ -10,16 +11,26 @@ import NotFound from './NotFound';
 class Home extends Component {
   constructor() {
     super();
-    // this.categoryId = this.categoryId.bind(this);
-    this.buscafunc = this.buscafunc.bind(this);
-    this.temProduto = this.temProduto.bind(this);
+    this.searchApi = this.searchApi.bind(this);
+    this.notFoundFunc = this.notFoundFunc.bind(this);
     this.state = {
       products: [],
       loading: true,
     };
   }
 
-  buscafunc(id, product) {
+  componentDidUpdate(prevProps) {
+    // Uso típico, (não esqueça de comparar as props):
+    // plantao do edu + react docs
+    // const { id } = this.props.match.params;
+    const { match: { params } } = this.props;
+    if (params !== prevProps.match.params) {
+      this.searchApi();
+    }
+  }
+
+  searchApi(product) {
+    const { match: { params: { id } } } = this.props;
     api.getProductsFromCategoryAndQuery(id, product).then((response) => {
       this.setState({
         products: response.results,
@@ -28,15 +39,8 @@ class Home extends Component {
     });
   }
 
-  // categoryId(text) {
-  //   this.setState({
-  //     id: text,
-  //   });
-  // }
-
-  temProduto() {
+  notFoundFunc() {
     const { loading, products } = this.state;
-    console.log();
     if (products.length === 0) {
       return (
         <div>
@@ -55,10 +59,10 @@ class Home extends Component {
     return (
       <div className="home">
         <div className="searchBox">
-          <Search buscafunc={ this.buscafunc } />
-          <Categories buscafunc={ this.buscafunc } />
+          <Search searchApi={ this.searchApi } />
+          <Categories />
         </div>
-        {this.temProduto()}
+        {this.notFoundFunc()}
         <div>
           <CartButton />
         </div>
@@ -66,5 +70,9 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  match: PropTypes.object,
+}.isRequired;
 
 export default Home;
