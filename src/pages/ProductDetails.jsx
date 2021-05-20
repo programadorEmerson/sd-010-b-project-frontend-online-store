@@ -30,7 +30,7 @@ export class ProductDetails extends Component {
   render() {
     const { product } = this.state;
     const { title, thumbnail, price } = product;
-    console.log(product);
+    // console.log(product);
     return (
       <div key={ title }>
         <h1 data-testid=" product-detail-name">{title}</h1>
@@ -43,7 +43,13 @@ export class ProductDetails extends Component {
               {`${attributes.name}: ${attributes.value_name}`}
             </li>))}
         </ul> */}
-        <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+        >
+          <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link>
+        </button>
+        {/* <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link> */}
         <FormAvaliation />
       </div>
     );
