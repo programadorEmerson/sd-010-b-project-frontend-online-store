@@ -30,12 +30,7 @@ class Home extends React.Component {
     return (
       <div>
         <Link to="/shopping-cart" data-testid="shopping-cart-button">Cart</Link>
-        <ul>
-          { categories.map((catItem) => (
-            <li data-testid="category" key={ catItem.id }>
-              { catItem.name }
-            </li>))}
-        </ul>
+
         <SearchBar addItemToCart={ addItemToCart } cart={ cart } />
       </div>
     );
