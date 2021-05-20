@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 import CategoryList from './CategoryList';
@@ -16,7 +17,6 @@ class Home extends React.Component {
       search: '',
       filterCategory: false,
       nameItems: [],
-      // qtd: this.props.qtd,
     };
   }
 
@@ -29,7 +29,9 @@ class Home extends React.Component {
     }
   }
 
-  countingItemsInShoppingCart = (qtd) => <span data-testid="shopping-cart-size">{qtd}</span>
+  countingItemsInShoppingCart = (qtd) => (
+    <span data-testid="shopping-cart-size">{qtd}</span>
+  )
 
   getApiFromCategory = (param) => async () => {
     this.setState({
@@ -61,6 +63,9 @@ class Home extends React.Component {
       filtered } = this.state;
     const { filterCategory } = this.state;
     const { qtd, state } = this.props;
+    const ProductListRender = (
+      <ProductList qtd={ qtd } getName={ this.getName } products={ filtered.results } />
+    );
     return (
       <main>
         <SearchBar
@@ -77,8 +82,8 @@ class Home extends React.Component {
           <div id="products">
             {!resultFilter || resultFilter.length === 0
               ? 'Nenhum produto a ser encontrado'
-              : <ProductList qtd={ qtd } getName={ this.getName } products={ filtered.results } /> }
-          </div>) }
+              : ProductListRender}
+          </div>)}
 
         {filterCategory && (
           <div id="products-category">
@@ -92,5 +97,10 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  qtd: PropTypes.func.isRequired,
+  state: PropTypes.number.isRequired,
+};
 
 export default Home;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 class Card extends Component {
   render() {
-    const { product: { title, thumbnail, price }, getName, qtd } = this.props;
+    const { product: { title, thumbnail, price }, getName } = this.props;
     return (
       <div data-testid="product">
         <img src={ thumbnail } alt={ title } />
@@ -20,11 +20,7 @@ class Card extends Component {
         <br />
         <Link
           data-testid="product-detail-link"
-          to={ {
-            pathname: `/details/${encodeURIComponent(title)}`,
-            about: {
-              name: qtd,
-            } } }
+          to={ `/details/${encodeURIComponent(title)}` }
         >
           DETALHES DO PRODUTO
         </Link>
@@ -40,7 +36,6 @@ Card.propTypes = {
     price: PropTypes.number,
   }).isRequired,
   getName: PropTypes.func.isRequired,
-  qtd: PropTypes.func.isRequired,
 };
 
 export default Card;

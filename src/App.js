@@ -18,10 +18,27 @@ class App extends React.Component {
     };
   }
 
-  propsFromDadtoSon = () => {
+  componentDidMount() {
+    this.getLocalStorage();
+  }
+
+  increment = () => {
     const { qtd } = this.state;
     this.setState({
       qtd: qtd + 1,
+    });
+  }
+
+  getLocalStorage = () => {
+    const value = JSON.parse(localStorage.getItem('cartItems'));
+    const valueSize = !value ? 0 : value.length;
+    this.setState({ qtd: valueSize });
+  }
+
+  decrement = () => {
+    const { qtd } = this.state;
+    this.setState({
+      qtd: qtd - 1,
     });
   }
 
@@ -30,9 +47,32 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={ (props) => <Home qtd={ this.propsFromDadtoSon } state={ qtd } { ...props } /> } />
-          <Route path="/cart" component={ ShoppingCart } />
-          <Route path="/details/:title" render={ (props) => <DetailsCard qtd={ this.propsFromDadtoSon } state={ qtd } { ...props } /> } />
+          <Route
+            exact
+            path="/"
+            render={ (props) => (<Home
+              qtd={ this.increment }
+              state={ qtd }
+              { ...props }
+            />) }
+          />
+          <Route
+            path="/cart"
+            render={ (props) => (<ShoppingCart
+              increment={ this.increment }
+              decrement={ this.decrement }
+              state={ qtd }
+              { ...props }
+            />) }
+          />
+          <Route
+            path="/details/:title"
+            render={ (props) => (<DetailsCard
+              qtd={ this.increment }
+              state={ qtd }
+              { ...props }
+            />) }
+          />
         </Switch>
       </Router>
     );

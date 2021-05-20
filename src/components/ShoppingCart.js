@@ -33,13 +33,16 @@ class ShoppingCart extends Component {
   }
 
   increment = (item) => {
+    const { increment } = this.props;
     const value = JSON.parse(localStorage.getItem('cartItems'));
     value.push(item);
     localStorage.setItem('cartItems', JSON.stringify(value));
     this.setState({ itensCart: this.countItens(value) });
+    increment();
   }
 
   decrament = (item) => {
+    const { decrement } = this.props;
     const value = JSON.parse(localStorage.getItem('cartItems'));
     for (let i = value.length - 1; i >= 0; i -= 1) {
       if (item === value[i]) {
@@ -47,6 +50,7 @@ class ShoppingCart extends Component {
         break;
       }
     }
+    decrement();
     localStorage.setItem('cartItems', JSON.stringify(value));
     const itensCart = value.length === 0 ? false : this.countItens(value);
     this.setState({ itensCart });

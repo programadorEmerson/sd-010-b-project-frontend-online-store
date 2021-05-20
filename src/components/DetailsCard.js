@@ -23,32 +23,16 @@ class DetailsCard extends React.Component {
 
   componentDidUpdate() {
     const { nameItems } = this.state;
-    console.log(nameItems);
     if (nameItems.length !== 0 && nameItems !== undefined) {
       const value = JSON.parse(localStorage.getItem('cartItems'));
       const result = !value ? [] : value;
       localStorage.setItem('cartItems', JSON.stringify([...result, nameItems]));
     }
-    // const quantidade = localStorage.getItem('quantidade');
-    // console.log(quantidade);
-    // localStorage.setItem('quantidade', qtd + 1);
-    // // const qtd1 = !quantidade ? [] : quantidade;
-    // localStorage.setItem('quantidade', JSON.stringify([...qtd1, qtd]));
   }
 
   handleChange(field, newValue) {
     this.setState({ [field]: newValue });
   }
-
-  // countingItemsInShoppingCart = () => {
-  //   // const { qtd } = this.state;
-  //   const qtd = 0;
-  //   const quantidade = localStorage.setItem('quantidade', qtd);
-  //   if (quantidade === undefined) {
-  //     return <p data-testid="shopping-cart-size">{qtd}</p>;
-  //   }
-  //   return <p data-testid="shopping-cart-size">{qtd + 1}</p>;
-  // }
 
   handleSubmit = (id) => () => {
     const { textArea, select } = this.state;
@@ -73,10 +57,11 @@ class DetailsCard extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const { details: { title, thumbnail, price, id } } = this.state;
     const { value, qtd } = this.state;
     const { state } = this.props;
-    // console.log(name);
+    console.log(state);
     return (
       <div>
         <h2 data-testid=" product-detail-name">{ title }</h2>
@@ -137,6 +122,8 @@ DetailsCard.propTypes = {
       title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
   }).isRequired,
+  qtd: PropTypes.func.isRequired,
+  state: PropTypes.number.isRequired,
 };
 
 export default DetailsCard;
