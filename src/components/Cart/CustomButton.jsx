@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../../css/Cart/CustomButton.css';
 
 class CustomButton extends Component {
@@ -17,4 +18,12 @@ class CustomButton extends Component {
     );
   }
 }
+
+CustomButton.propTypes = {
+  customStyle: PropTypes.string.isRequired,
+  clickFunction: PropTypes.func.isRequired,
+  children: PropTypes.string.isRequired,
+  dataTestId: PropTypes.string.isRequired,
+};
+
 export default CustomButton;
