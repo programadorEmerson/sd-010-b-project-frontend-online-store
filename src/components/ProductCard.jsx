@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import getItemById from '../services/newRequest';
 
 class ProductCard extends Component {
   constructor(props) {
     super(props);
 
-    localStorage.setItem('id', JSON.stringify([]));
+    /* if (localStorage.getItem('id') === undefined) {
+      localStorage.setItem('id', []);
+    } */
 
     const { results } = this.props;
 
@@ -36,7 +37,7 @@ class ProductCard extends Component {
           <span>{ price }</span>
           <button
             type="button"
-            onClick={ () => this.clickCart(result) }
+            onClick={ () => this.clickCart(id) }
             data-testid="product-add-to-cart"
           >
             Add
@@ -47,12 +48,10 @@ class ProductCard extends Component {
     return card;
   }
 
-  async clickCart(id) {
-    const itemDetails = await getItemById(id);
-    const prevLS = JSON.parse(localStorage.getItem('id'));
-    console.log(prevLS);
-    prevLS.push(itemDetails);
-    localStorage.setItem('id', JSON.stringify(prevLS));
+  clickCart(id) {
+    const [choosenProduct] = results.filter((item) => item.id === id);
+    const storedId = localStorage.getItem('id');
+    localStorage.setItem('id', [storedId, JSON.stringify(choosenProduct)]);
   }
 
   noResult() {
