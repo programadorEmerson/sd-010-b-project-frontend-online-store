@@ -22,8 +22,7 @@ class Cart extends React.Component {
     const { products } = this.state;
 
     if (products) {
-      const quantidadeProdutos = products.reduce((acc, obj) => {
-        if (!obj) return;
+      const quantity = products.reduce((acc, obj) => {
         const key = obj.id;
         if (!acc[key]) {
           acc[key] = [];
@@ -31,7 +30,14 @@ class Cart extends React.Component {
         acc[key].push(obj);
         return acc;
       }, {});
-      this.setState({ cart: Object.values(quantidadeProdutos) });
+
+      const newArray = Object.values(quantity).map((item) => ({
+        product: item[0],
+        quantity: item.length,
+      }));
+
+      console.log(newArray);
+      this.setState({ cart: newArray });
     }
   }
 
@@ -48,10 +54,10 @@ class Cart extends React.Component {
         <h1 data-testid="shopping-cart-empty-message"> Seu carrinho está vazio </h1>
         {cart && cart.map((item) => (
           <CartAmount
-            key={ item[0].id }
-            id={ item[0].id }
-            quantity={ item.length }
-            title={ item[0].title }
+            key={ item.product.id }
+            id={ item.product.id }
+            quantity={ item.quantity }
+            title={ item.product.title }
           />))}
         <Link
           data-testid="checkout-products"

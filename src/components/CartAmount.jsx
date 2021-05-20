@@ -47,14 +47,14 @@ class CartAmount extends React.Component {
   }
 
   render() {
-    const { id, title, handleQuantityChange } = this.props;
+    const { id, title } = this.props;
     const { count } = this.state;
     return (
       <div id={ id }>
         <h3 data-testid="shopping-cart-product-name">{title}</h3>
         <p
           data-testid="shopping-cart-product-quantity"
-          onChange={ handleQuantityChange }
+          // onChange={ handleQuantityChange }
         >
           {count}
         </p>
@@ -84,7 +84,7 @@ CartAmount.propTypes = {
   id: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  handleQuantityChange: PropTypes.func.isRequired,
+  // handleQuantityChange: PropTypes.func.isRequired,
 };
 
 export default CartAmount;
