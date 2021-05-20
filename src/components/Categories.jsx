@@ -17,12 +17,6 @@ class Categories extends Component {
     this.apiCategories();
   }
 
-  valorDaId = () => {
-    const { id } = this.state;
-    const { categoryId } = this.props;
-    categoryId(id);
-  }
-
   apiCategories() {
     api.getCategories().then((category) => this.setState({
       categories: category,
@@ -31,10 +25,12 @@ class Categories extends Component {
 
   render() {
     const { categories } = this.state;
+    const { buscafunc } = this.props;
     return (
       <div className="categories">
         Categorias:
         {categories.map((category) => (<Category
+          buscafunc={ buscafunc }
           key={ category.id }
           category={ category }
         />))}

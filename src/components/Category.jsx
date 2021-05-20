@@ -6,11 +6,11 @@ import '../Style/Categories.css';
 
 class Category extends React.Component {
   render() {
-    const { category } = this.props;
+    const { category, buscafunc } = this.props;
     return (
       <Link
         className="category"
-        to="/card"
+        to={`/${category.id}`}
         data-testid="category"
       >
         {`${category.name}`}
@@ -24,3 +24,11 @@ Category.propTypes = {
 }.isRequired;
 
 export default Category;
+
+
+
+// stateId = () => {
+//   const { id, product } = this.state;
+//   const { buscafunc } = this.props;
+//   buscafunc(id, product);
+// }

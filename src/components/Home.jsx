@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import * as api from '../services/api';
+
 import CartButton from './CartButton';
 import Search from './Search';
 import Categories from './Categories';
-import * as api from '../services/api';
 import AllProducts from './AllProducts';
 import NotFound from './NotFound';
 

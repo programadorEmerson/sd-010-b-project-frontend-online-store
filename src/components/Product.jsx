@@ -12,7 +12,6 @@ class Product extends Component {
           <img className="img" src={ thumbnail } alt={ title } />
           <p className="price">{`R$-${price}`}</p>
         </div>
-        {/* {console.log('seilah')} */}
       </div>
     );
   }
