@@ -31,10 +31,10 @@ export default class ProductDetails extends Component {
     });
   }
 
-  clickCart({ target }) {
-    const element = target.previousSibling.innerHTML;
-    const storedId = localStorage.getItem('id');
-    localStorage.setItem('id', [storedId, element]);
+  async clickCart(itemDetails) {
+    const prevLS = JSON.parse(localStorage.getItem('id'));
+    prevLS.push(itemDetails);
+    localStorage.setItem('id', JSON.stringify(prevLS));
   }
 
   renderDetails() {
@@ -58,7 +58,7 @@ export default class ProductDetails extends Component {
         <span>{ id }</span>
         <button
           type="button"
-          onClick={ this.clickCart }
+          onClick={ () => this.clickCart(product) }
           data-testid="product-detail-add-to-cart"
         >
           Add

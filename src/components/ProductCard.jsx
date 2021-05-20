@@ -10,6 +10,8 @@ class ProductCard extends Component {
       localStorage.setItem('id', []);
     } */
 
+    localStorage.setItem('id', JSON.stringify([]));
+
     const { results } = this.props;
 
     this.state = {
@@ -36,7 +38,7 @@ class ProductCard extends Component {
           </Link>
           <button
             type="button"
-            onClick={ () => this.clickCart(id) }
+            onClick={ () => this.clickCart(result) }
             data-testid="product-add-to-cart"
           >
             Add
