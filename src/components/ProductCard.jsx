@@ -8,14 +8,14 @@ class ProductCard extends React.Component {
     const { title, thumbnail, price } = product;
     return (
       <div data-testid="product">
-        <img src={ thumbnail } alt={ title } />
-        <h4>{ title }</h4>
-        <span>{ price }</span>
         <Link
-          to={ `/details/${product.id}` }
+          to={ `/details/${title}` }
           data-testid="product-detail-link"
         >
-          Detalhes
+          <img src={ thumbnail } alt={ title } />
+          <h4>{ title }</h4>
+          <span>{ price }</span>
+          {/* Detalhes */}
         </Link>
       </div>
     );

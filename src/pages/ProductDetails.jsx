@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import { FormAvaliation } from '../components/ProductAvaliation';
 
 export class ProductDetails extends Component {
   constructor() {
@@ -19,9 +20,11 @@ export class ProductDetails extends Component {
 
   requestProduct = async () => {
     const { match: { params: { id } } } = this.props;
-    const getProduct = await getProductsFromCategoryAndQuery(id, '');
+    const getProduct = await getProductsFromCategoryAndQuery('', id);
+    const { results } = getProduct;
+    const foundProduct = results.find((element) => element.title === id);
     this.setState({
-      product: getProduct,
+      product: foundProduct,
     });
   }
 
@@ -41,33 +44,47 @@ export class ProductDetails extends Component {
 
   render() {
     const { product } = this.state;
+<<<<<<< HEAD
     const { addToCart } = this;
+=======
+    const { title, thumbnail, price } = product;
+    // console.log(product);
+>>>>>>> 8c147efd83a333f9ea6cf00742b67d6538d8f4df
     return (
-      product.map(({ body }) => (
-        <div key={ body.title }>
-          <h1 data-testid=" product-detail-name">{body.title}</h1>
-          <p>{`R$${body.price}`}</p>
-          <img src={ body.thumbnail } alt={ body.title } />
-          <p>Especificações:</p>
-          <ul>
-            {body.attributes.map((item) => (
-              <li
-                key={ item.id }
-              >
-                {`${item.name}: ${item.value_name}`}
-              </li>))}
-          </ul>
+      <div key={ title }>
+        <h1 data-testid=" product-detail-name">{title}</h1>
+        <p>{`R$${price}`}</p>
+        <img src={ thumbnail } alt={ title } />
+        {/* <p>Especificações:</p>
+        <ul>
+          {attributes.map((attributes) => (
+            <li key={ attributes.id }>
+              {`${attributes.name}: ${attributes.value_name}`}
+            </li>))}
+        </ul> */}
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+        >
           <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link>
+<<<<<<< HEAD
           <button type="button" onClick={ addToCart }>add to cart</button>
         </div>
       )));
+=======
+        </button>
+        {/* <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link> */}
+        <FormAvaliation />
+      </div>
+    );
+>>>>>>> 8c147efd83a333f9ea6cf00742b67d6538d8f4df
   }
 }
 
 ProductDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
     }),
   }).isRequired,
 };
