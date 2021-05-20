@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api2 from '../services/api2';
 import CartAmount from '../components/CartAmount';
+import CartButton from '../components/CartButton';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -31,13 +32,16 @@ class Cart extends React.Component {
         return acc;
       }, {});
 
-      const newArray = Object.values(quantity).map((item) => ({
+      const cart = Object.values(quantity).map((item) => ({
         product: item[0],
         quantity: item.length,
       }));
+      // const cartSize = cart.reduce((acc, curr) => acc + curr.quantity, 0);
 
-      console.log(newArray);
-      this.setState({ cart: newArray });
+      this.setState({
+        cart,
+        // cartSize,
+      });
     }
   }
 
@@ -47,10 +51,12 @@ class Cart extends React.Component {
   }
 
   render() {
-    const { cart } = this.state;
+    const { cart, products } = this.state;
     return (
       <div>
         <Link to="/"> home </Link>
+        <CartButton cartSize={ products && products.length } />
+
         <h1 data-testid="shopping-cart-empty-message"> Seu carrinho está vazio </h1>
         {cart && cart.map((item) => (
           <CartAmount
