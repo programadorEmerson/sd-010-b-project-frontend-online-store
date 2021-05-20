@@ -8,10 +8,13 @@ export default class ShoppingCart extends Component {
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
     this.excludeItem = this.excludeItem.bind(this);
 
-    const itens = JSON.parse(localStorage.getItem('id'));
-
+    let itens = JSON.parse(localStorage.getItem('id'));
     let willRender = false;
-    if (itens.length > 0) {
+    // Antes o 04 nçai adi
+    if (itens === null) {
+      localStorage.setItem('id', JSON.stringify([]));
+      itens = JSON.parse(localStorage.getItem('id'));
+    } else if (itens.length > 0) {
       willRender = true;
     }
 
