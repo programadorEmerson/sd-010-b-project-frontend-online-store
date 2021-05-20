@@ -31,8 +31,9 @@ class Search extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h4>
         <form>
-          <input onChange={ this.changeState } type="text" />
+          <input data-testid="query-input" onChange={ this.changeState } type="text" />
           <button
+            data-testid="query-button"
             className="searchButton"
             onClick={ this.stateValue }
             type="button"

@@ -7,18 +7,18 @@ import AllProducts from './AllProducts';
 import NotFound from './NotFound';
 
 class Home extends Component {
-    constructor() {
+  constructor() {
     super();
-    this.categoryId = this.categoryId.bind(this);
+    // this.categoryId = this.categoryId.bind(this);
     this.buscafunc = this.buscafunc.bind(this);
-    this.temProduto = this.temProduto.bind(this)
+    this.temProduto = this.temProduto.bind(this);
     this.state = {
       products: [],
       loading: true,
     };
   }
 
-    buscafunc(id, product) {
+  buscafunc(id, product) {
     api.getProductsFromCategoryAndQuery(id, product).then((response) => {
       this.setState({
         products: response.results,
@@ -27,27 +27,27 @@ class Home extends Component {
     });
   }
 
-  categoryId(text) {
-    this.setState({
-      id: text,
-    });
-  }
+  // categoryId(text) {
+  //   this.setState({
+  //     id: text,
+  //   });
+  // }
 
   temProduto() {
     const { loading, products } = this.state;
-    console.log()
-    if(products.length === 0) {
-      return (<div>
-        <NotFound />
-      </div>)
-    } else {
+    console.log();
+    if (products.length === 0) {
       return (
-        <AllProducts
-          loading={ loading }
-          products={ products }
-        />
-      )
+        <div>
+          <NotFound />
+        </div>);
     }
+    return (
+      <AllProducts
+        loading={ loading }
+        products={ products }
+      />
+    );
   }
 
   render() {

@@ -6,7 +6,7 @@ class Product extends Component {
   render() {
     const { product: { id, title, price, thumbnail } } = this.props;
     return (
-      <div>
+      <div data-testid="product">
         <div className="productContainer" id={ id }>
           <h3 className="title">{ title }</h3>
           <img className="img" src={ thumbnail } alt={ title } />
