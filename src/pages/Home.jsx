@@ -1,31 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getCategories } from '../services/api';
+// import { getCategories } from '../services/api';
 import SearchBar from '../components/SearchBar';
 
 class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      categories: [],
-    };
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     categories: [],
+  //   };
+  // }
 
-  componentDidMount() {
-    this.requestCategories();
-  }
+  // componentDidMount() {
+  //   this.requestCategories();
+  // }
 
-  requestCategories = async () => {
-    const categories = await getCategories();
+  // requestCategories = async () => {
+  //   const categories = await getCategories();
 
-    this.setState({
-      categories,
-    });
-  }
+  //   this.setState({
+  //     categories,
+  //   });
+  // }
 
   render() {
-    const { categories } = this.state;
     const { addItemToCart, cart } = this.props;
     return (
       <div>
