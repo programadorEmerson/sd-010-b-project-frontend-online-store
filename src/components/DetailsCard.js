@@ -23,16 +23,32 @@ class DetailsCard extends React.Component {
 
   componentDidUpdate() {
     const { nameItems } = this.state;
-    if (nameItems.length !== 0) {
+    console.log(nameItems);
+    if (nameItems.length !== 0 && nameItems !== undefined) {
       const value = JSON.parse(localStorage.getItem('cartItems'));
       const result = !value ? [] : value;
       localStorage.setItem('cartItems', JSON.stringify([...result, nameItems]));
     }
+    // const quantidade = localStorage.getItem('quantidade');
+    // console.log(quantidade);
+    // localStorage.setItem('quantidade', qtd + 1);
+    // // const qtd1 = !quantidade ? [] : quantidade;
+    // localStorage.setItem('quantidade', JSON.stringify([...qtd1, qtd]));
   }
 
   handleChange(field, newValue) {
     this.setState({ [field]: newValue });
   }
+
+  // countingItemsInShoppingCart = () => {
+  //   // const { qtd } = this.state;
+  //   const qtd = 0;
+  //   const quantidade = localStorage.setItem('quantidade', qtd);
+  //   if (quantidade === undefined) {
+  //     return <p data-testid="shopping-cart-size">{qtd}</p>;
+  //   }
+  //   return <p data-testid="shopping-cart-size">{qtd + 1}</p>;
+  // }
 
   handleSubmit = (id) => () => {
     const { textArea, select } = this.state;
@@ -43,7 +59,9 @@ class DetailsCard extends React.Component {
   }
 
   getName = (title) => () => {
+    const { qtd } = this.props;
     this.setState({ nameItems: title });
+    qtd();
   }
 
   getAPI = async () => {
@@ -56,14 +74,28 @@ class DetailsCard extends React.Component {
 
   render() {
     const { details: { title, thumbnail, price, id } } = this.state;
-    const { value } = this.state;
+    const { value, qtd } = this.state;
+    const { state } = this.props;
+    // console.log(name);
     return (
       <div>
         <h2 data-testid=" product-detail-name">{ title }</h2>
         <img src={ thumbnail } alt={ title } />
         <p>{ price }</p>
-        <Link to="/">Home</Link>
-        <Link data-testid="shopping-cart-button" id="cart" to="/cart">Carrinho</Link>
+        <Link
+          to={ {
+            pathname: '/',
+            about: {
+              name: qtd,
+            },
+          } }
+        >
+          Home
+        </Link>
+        <Link data-testid="shopping-cart-button" id="cart" to="/cart">
+          Carrinho
+          <span data-testid="shopping-cart-size">{ state }</span>
+        </Link>
         <button
           data-testid="product-detail-add-to-cart"
           type="button"

@@ -6,15 +6,17 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import CategoryList from './CategoryList';
 import ProductList from './ProductList';
 import SearchBar from './SearchBar';
+import '../App.css';
 
 class Home extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       filtered: [],
       search: '',
       filterCategory: false,
       nameItems: [],
+      // qtd: this.props.qtd,
     };
   }
 
@@ -26,6 +28,8 @@ class Home extends React.Component {
       localStorage.setItem('cartItems', JSON.stringify([...result, nameItems]));
     }
   }
+
+  countingItemsInShoppingCart = (qtd) => <span data-testid="shopping-cart-size">{qtd}</span>
 
   getApiFromCategory = (param) => async () => {
     this.setState({
@@ -43,7 +47,9 @@ class Home extends React.Component {
   }
 
   getName = (title) => () => {
+    const { qtd } = this.props;
     this.setState({ nameItems: title });
+    qtd();
   }
 
   getResult = ({ target: { value } }) => {
@@ -54,26 +60,33 @@ class Home extends React.Component {
     const { filtered: { available_filters: resultFilter },
       filtered } = this.state;
     const { filterCategory } = this.state;
-
+    const { qtd, state } = this.props;
     return (
       <main>
         <SearchBar
           getResult={ this.getResult }
           getApiFromQuery={ this.getApiFromQuery }
         />
-        <Link data-testid="shopping-cart-button" id="cart" to="/cart">Carrinho</Link>
+        <Link data-testid="shopping-cart-button" id="cart" to="/cart">
+          Carrinho
+          <span data-testid="shopping-cart-size">{ state }</span>
+        </Link>
         <CategoryList onClick={ this.getApiFromCategory } />
 
         {filtered.length !== 0 && (
           <div id="products">
             {!resultFilter || resultFilter.length === 0
               ? 'Nenhum produto a ser encontrado'
-              : <ProductList getName={ this.getName } products={ filtered.results } /> }
+              : <ProductList qtd={ qtd } getName={ this.getName } products={ filtered.results } /> }
           </div>) }
 
         {filterCategory && (
           <div id="products-category">
-            <ProductList getName={ this.getName } products={ filterCategory.results } />
+            <ProductList
+              qtd={ qtd }
+              getName={ this.getName }
+              products={ filterCategory.results }
+            />
           </div>)}
       </main>
     );

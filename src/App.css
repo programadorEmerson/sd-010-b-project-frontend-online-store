@@ -5,3 +5,8 @@ img {
 body {
   margin-left: 10px;
 }
+
+#cart {
+  text-decoration: none;
+  /* border: 1px solid black; */
+}
