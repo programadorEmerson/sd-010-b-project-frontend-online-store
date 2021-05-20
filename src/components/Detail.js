@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Img from '../images/cart.png';
-import Avaliacao from './Avaliacao';
 
 class Detail extends React.Component {
   constructor() {
@@ -74,7 +73,6 @@ class Detail extends React.Component {
 
   render() {
     const { produto, loading } = this.state;
-    const { id } = this.props;
     return (
       <div>
         { !loading
@@ -109,11 +107,6 @@ class Detail extends React.Component {
                   />
                 </button>
               </Link>
-              <div>
-                <Avaliacao
-                  id={ id }
-                />
-              </div>
             </div>
           )}
       </div>
