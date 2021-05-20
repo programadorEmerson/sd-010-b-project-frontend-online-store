@@ -53,7 +53,7 @@ class FormCheckout extends React.Component {
               id="phone"
               name="phone"
               data-testid="checkout-phone"
-              type="number"
+              type="text"
               placeholder="Número de Telefone"
               value={ phone }
               onChange={ handleForm }
@@ -92,12 +92,12 @@ class FormCheckout extends React.Component {
 FormCheckout.propTypes = {
   handleForm: PropTypes.func.isRequired,
   state: PropTypes.shape({
-    fullname: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    cpf: PropTypes.string.isRequired,
-    phone: PropTypes.number.isRequired,
-    cep: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
+    fullname: PropTypes.string,
+    email: PropTypes.string,
+    cpf: PropTypes.string,
+    phone: PropTypes.string,
+    cep: PropTypes.string,
+    address: PropTypes.string,
   }).isRequired,
 };
 
