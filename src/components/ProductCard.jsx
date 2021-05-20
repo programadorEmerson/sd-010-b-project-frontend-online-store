@@ -37,7 +37,7 @@ class ProductCard extends Component {
           <span>{ price }</span>
           <button
             type="button"
-            onClick={ () => this.clickCart(id) }
+            onClick={ () => this.clickCart(result) }
             data-testid="product-add-to-cart"
           >
             Add
