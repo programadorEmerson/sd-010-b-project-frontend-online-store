@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { GrCart } from 'react-icons/gr';
+import { GrCart, GrHome } from 'react-icons/gr';
 
 class Header extends Component {
   constructor(props) {
@@ -13,6 +13,9 @@ class Header extends Component {
     const { handleInput, handleClick } = this.props;
     return (
       <div className="header">
+        <Link to="/">
+          <GrHome />
+        </Link>
         <input
           id="input-search"
           className="input-search"

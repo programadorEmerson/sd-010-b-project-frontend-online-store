@@ -2,6 +2,7 @@ import { Link as NewLink } from 'react-router-dom';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from '../components/ProductCard';
+import Navbar from '../components/Navbar';
 
 class ShoppingCart extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class ShoppingCart extends Component {
     if (cartItems.length === 0) {
       return (
         <div>
+          <Navbar />
           <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           <div>
             <NewLink to="/">Voltar para a tela inicial</NewLink>
