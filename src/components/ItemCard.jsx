@@ -11,7 +11,7 @@ export default class ItemCard extends Component {
   }
 
   changeQuantity = (operator) => {
-    const { product } = this.props;
+    const { product, calculateTotal } = this.props;
     const productsOnCart = JSON.parse(localStorage.getItem('products-on-cart'));
     const findProduct = productsOnCart.map(
       (prod) => {
@@ -30,18 +30,20 @@ export default class ItemCard extends Component {
       this.setState({
         quantity: product.quantity += 1,
       });
+      calculateTotal();
     } else {
       this.setState({
         quantity: product.quantity -= 1,
       });
+      calculateTotal();
     }
   }
 
   render() {
     const { product, commaFunction } = this.props;
     const { quantity } = this.state;
-    const totalPrice = product.product.price * quantity;
-    // localStorage.setItem('total-price', commaFunction(totalPrice.toFixed(2).toString().replace('.', ',')));
+    const productTotalPrice = product.product.price * quantity;
+
     return (
       <div className="item-container">
         <div className="remove-div">
@@ -71,6 +73,7 @@ export default class ItemCard extends Component {
             data-testid="product-increase-quantity"
             type="button"
             onClick={ () => this.changeQuantity('+') }
+            disabled={ quantity === product.product.available_quantity }
           >
             &#43;
           </button>
@@ -79,7 +82,8 @@ export default class ItemCard extends Component {
           {/* troca o ponto para virgula nos centavos */}
           {/* https://stackoverflow.com/questions/13672106/jquery-replace-dot-to-comma-and-round-it/13672180 */}
           <p>
-            { `R$ ${commaFunction(totalPrice.toFixed(2).toString().replace('.', ','))}` }
+            { `R$ ${commaFunction(productTotalPrice
+              .toFixed(2).toString().replace('.', ','))}` }
           </p>
         </div>
       </div>
@@ -91,6 +95,8 @@ ItemCard.propTypes = {
   product: PropTypes.shape({
     product: PropTypes.shape(),
     quantity: PropTypes.number,
+    available_quantity: PropTypes.number,
   }).isRequired,
   commaFunction: PropTypes.func.isRequired,
+  calculateTotal: PropTypes.func.isRequired,
 };

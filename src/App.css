@@ -200,3 +200,9 @@ footer p {
   border-radius: 10px;
   width: 19px;
 }
+
+/* payment page */
+.payment {
+  display: flex;
+  justify-content: space-around;
+}
