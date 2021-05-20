@@ -5,18 +5,16 @@ class Cart extends React.Component {
   constructor() {
     super();
     this.state = {
-      cartItems: JSON.parse(localStorage.getItem('cartState')),
       quantidade: 0,
-      qtadeItem: 1,
       valorTotal: 0,
     };
     this.renderCart = this.renderCart.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.updateTotalValue = this.updateTotalValue.bind(this);
+    this.valuesOfCart = this.valuesOfCart.bind(this);
   }
 
   componentDidMount() {
-    this.updateTotalValue(JSON.parse(localStorage.getItem('cartState')));
+    this.valuesOfCart();
   }
 
   componentDidUpdate() {
@@ -25,7 +23,6 @@ class Cart extends React.Component {
 
   handleChange(numero, id) {
     const cartItems1 = JSON.parse(localStorage.getItem('cartState'));
-
     const newArray = cartItems1.map((item) => {
       if (item.cardProps.id === id) {
         item.cardProps.quantity = numero;
@@ -34,33 +31,43 @@ class Cart extends React.Component {
       return item;
     });
     localStorage.setItem('cartState', JSON.stringify(newArray));
-
-    this.updateTotalValue(newArray);
+    this.valuesOfCart(newArray);
   }
 
-  updateTotalValue(arg) {
-    const { quantidade, valorTotal } = this.state;
-    console.log(arg);
-    if (arg) {
-      arg.forEach((element) => {
-        this.setState({
-          quantidade: quantidade + element.cardProps.quantity,
-          valorTotal: valorTotal + element.cardProps.price,
-        });
+  valuesOfCart(parametro = []) {
+    const listLocalStorage = JSON.parse(localStorage.getItem('cartState'));
+    const xablau = parametro.length > 0 ? parametro : listLocalStorage;
+    let quantidade = 0;
+    let valorTotal = 0;
+    if (xablau) {
+      xablau.forEach(({ cardProps: { price, quantity } }) => {
+        quantidade += quantity;
+        valorTotal += (price * quantity);
+      });
+      this.setState({
+        quantidade, valorTotal,
       });
     }
   }
 
   renderCart() {
-    const { cartItems, valorTotal } = this.state;
-    if (!cartItems) {
+    const arrayItens = JSON.parse(localStorage.getItem('cartState'));
+    const { valorTotal } = this.state;
+    if (!arrayItens) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
     return (
       <>
-        {cartItems.map((cartItem, index) => (
-          <ItemProductCart handleChange={ this.handleChange } cartItem={ cartItem } key={ index + 1 } />
-        ))}
+        {
+          arrayItens.map((elemento) => {
+            console.log(elemento);
+            return (<ItemProductCart
+              handleChange={ this.handleChange }
+              cartItem={ elemento }
+              key={ 1 }
+            />);
+          })
+        }
         <p>
           { `Valor Total R$: ${valorTotal}` }
         </p>

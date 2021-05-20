@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ItemProductCart extends React.Component {
-
   render() {
     const {
       cartItem: {
@@ -10,6 +9,8 @@ class ItemProductCart extends React.Component {
       },
     } = this.props;
     const { handleChange } = this.props;
+    console.log(this.props);
+
     return (
       <section data-testid="product">
         <fieldset>
@@ -44,7 +45,6 @@ class ItemProductCart extends React.Component {
 ItemProductCart.propTypes = {
   cartItem: PropTypes.objectOf.isRequired,
   handleChange: PropTypes.func.isRequired,
-  quantidade: PropTypes.number.isRequired,
   cardProps: PropTypes.shape({
     title: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
