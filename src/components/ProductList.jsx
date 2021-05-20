@@ -15,13 +15,19 @@ export default class ProductList extends React.Component {
   render() {
     const { loading } = this.state;
     const { products } = this.props;
+    const { addItemToCart } = this.props;
 
     if (loading) return <Loading />;
     if (products) {
       if (products.length === 0) return 'Nenhum produto foi encontrado';
       return (
         <section>
-          { products.map((prod) => <ProductCard key={ prod.title } product={ prod } />) }
+          { products.map((prod) => (
+            <ProductCard
+              key={ prod.title }
+              product={ prod }
+              addItemToCart={ addItemToCart }
+            />)) }
         </section>
       );
     }
@@ -30,4 +36,5 @@ export default class ProductList extends React.Component {
 
 ProductList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addItemToCart: PropTypes.func.isRequired,
 };

@@ -12,6 +12,7 @@ class MainPage extends React.Component {
     };
 
     this.handleQuery = this.handleQuery.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   handleQuery(products, query) {
@@ -21,16 +22,35 @@ class MainPage extends React.Component {
     });
   }
 
+  addItemToCart(id, title, price) {
+    console.log('ola');
+    if (localStorage.getItem(id)) {
+      const item = localStorage.getItem(id).split(',');
+      localStorage.setItem(id,
+        `${id}|${item[1]}|${item[2]}|${(parseInt(item[3], 10) + 1)}`);
+    } else {
+      const newCartProduct = `${id}|${title}|${price}|1`;
+      localStorage.setItem(id, newCartProduct);
+    }
+  }
+
   render() {
-    const { products, queryTerm } = this.state;
+    const { products, queryTerm, shoppingCartProduct } = this.state;
     return (
       <main>
+        <Input
+          handleQuery={ this.handleQuery }
+          shoppingCartProduct={ shoppingCartProduct }
+        />
+        {/* <Cart
+          shoppingCartProduct={ shoppingCartProduct }
+          addItemToCart={ this.addItemToCart }
+        /> */}
         <Categories
           handleQuery={ this.handleQuery }
           query={ queryTerm }
         />
-        <Input handleQuery={ this.handleQuery } />
-        <ProductList products={ products } />
+        <ProductList products={ products } addItemToCart={ this.addItemToCart } />
       </main>
     );
   }
