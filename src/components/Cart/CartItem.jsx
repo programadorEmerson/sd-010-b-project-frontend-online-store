@@ -43,7 +43,7 @@ class CartItem extends Component {
     return (
       <div
         className="product-quantity"
-        dataTestId="shopping-cart-product-quantity"
+        data-testId="shopping-cart-product-quantity"
       >
         { quantity }
       </div>
