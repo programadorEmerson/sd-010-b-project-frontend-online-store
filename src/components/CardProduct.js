@@ -15,6 +15,7 @@ class CardProduct extends React.Component {
       thumbnail,
       price,
       id,
+      quantity: 1,
     };
     handleAddToCart(cartItem);
   }
@@ -31,7 +32,7 @@ class CardProduct extends React.Component {
           <p>{`R$${price}`}</p>
           <Link data-testid="product-detail-link" to={ `/detail/${id}` }>
             {' '}
-            Detalhes
+            Detalhesz
           </Link>
           <button
             data-testid="product-add-to-cart"

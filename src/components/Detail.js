@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Img from '../images/cart.png';
 import Avaliacao from './Avaliacao';
 
@@ -51,6 +51,7 @@ class Detail extends React.Component {
       thumbnail,
       price,
       id,
+      quantity: 1,
     };
     this.handleAddToCart(cartItem);
   }
@@ -72,8 +73,7 @@ class Detail extends React.Component {
   }
 
   render() {
-    const { produto, loading } = this.state;
-    const { id } = this.props;
+    const { produto, loading, produto: { id } } = this.state;
     return (
       <div>
         { !loading
@@ -109,9 +109,7 @@ class Detail extends React.Component {
                 </button>
               </Link>
               <div>
-                <Avaliacao
-                  id={ id }
-                />
+                <Avaliacao id={ id } />
               </div>
             </div>
           )}

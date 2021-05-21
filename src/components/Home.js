@@ -87,6 +87,7 @@ class Home extends React.Component {
 
   render() {
     const { inputfilter, products, loading, categories, cartState } = this.state;
+
     return (
       <div className="App">
         <div className="Categoria">
