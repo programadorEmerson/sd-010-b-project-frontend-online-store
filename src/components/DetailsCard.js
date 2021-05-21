@@ -43,7 +43,9 @@ class DetailsCard extends React.Component {
   }
 
   getName = (product) => () => {
+    const { qtd } = this.props;
     this.setState({ nameItems: product });
+    qtd();
   }
 
   getAPI = async () => {
@@ -57,13 +59,17 @@ class DetailsCard extends React.Component {
   render() {
     const { details: { title, thumbnail, price, id }, details } = this.state;
     const { value } = this.state;
+    const { state } = this.props;
     return (
       <div>
         <h2 data-testid=" product-detail-name">{ title }</h2>
         <img src={ thumbnail } alt={ title } />
         <p>{ price }</p>
         <Link to="/">Home</Link>
-        <Link data-testid="shopping-cart-button" id="cart" to="/cart">Carrinho</Link>
+        <Link data-testid="shopping-cart-button" id="cart" to="/cart">
+          Carrinho
+          <span data-testid="shopping-cart-size">{state}</span>
+        </Link>
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
@@ -105,6 +111,8 @@ DetailsCard.propTypes = {
       title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
   }).isRequired,
+  qtd: PropTypes.func.isRequired,
+  state: PropTypes.number.isRequired,
 };
 
 export default DetailsCard;

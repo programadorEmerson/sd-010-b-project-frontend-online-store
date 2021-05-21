@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ShoppingCart extends Component {
   constructor() {
@@ -30,6 +31,8 @@ class ShoppingCart extends Component {
 
   increment = (item) => {
     const { storageProducts } = this.state;
+    const { increment } = this.props;
+    increment();
     storageProducts.push(
       storageProducts.find(({ title }) => title === item),
     );
@@ -39,6 +42,8 @@ class ShoppingCart extends Component {
 
   decrament = (item) => {
     const { storageProducts } = this.state;
+    const { decrement } = this.props;
+    decrement();
     for (let i = storageProducts.length - 1; i >= 0; i -= 1) {
       if (item === storageProducts[i].title) {
         storageProducts.splice(i, 1);
@@ -89,5 +94,10 @@ class ShoppingCart extends Component {
     );
   }
 }
+
+ShoppingCart.propTypes = {
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+};
 
 export default ShoppingCart;

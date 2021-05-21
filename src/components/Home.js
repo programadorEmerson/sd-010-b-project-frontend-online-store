@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -52,8 +53,9 @@ class Home extends React.Component {
   }
 
   getName = (product) => () => {
-    // console.log(`GetName: ${product}`);
+    const { qtd } = this.props;
     this.setState((old) => ({ nameItems: [...old.nameItems, product] }));
+    qtd();
   }
 
   getResult = ({ target: { value } }) => {
@@ -64,14 +66,17 @@ class Home extends React.Component {
     const { filtered: { available_filters: resultFilter },
       filtered } = this.state;
     const { filterCategory } = this.state;
-
+    const { state } = this.props;
     return (
       <main>
         <SearchBar
           getResult={ this.getResult }
           getApiFromQuery={ this.getApiFromQuery }
         />
-        <Link data-testid="shopping-cart-button" id="cart" to="/cart">Carrinho</Link>
+        <Link data-testid="shopping-cart-button" id="cart" to="/cart">
+          Carrinho
+          <span data-testid="shopping-cart-size">{state}</span>
+        </Link>
         <br />
         <Link data-testid="checkout-products" to="/checkout">Finalizar Compra</Link>
         <CategoryList onClick={ this.getApiFromCategory } />
@@ -91,5 +96,10 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  qtd: PropTypes.func.isRequired,
+  state: PropTypes.number.isRequired,
+};
 
 export default Home;
