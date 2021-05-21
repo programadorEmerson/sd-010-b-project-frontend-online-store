@@ -14,15 +14,19 @@ class ShoppingCart extends Component {
     }
 
     return (
-      <div>
+      <div data-testid="shopping-cart-product-name">
         {cart.map((product) => (
           <div key={ product.id }>
             <h4 data-testid="shopping-cart-product-name">{product.title}</h4>
             <img src={ product.thumbnail } alt={ product.title } />
             <p>{product.price}</p>
             <p data-testid="shopping-cart-product-quantity">
-              <span>Quantidade:</span>
-              {cart.length}
+              <span>
+                Quantidade:
+                {' '}
+                {cart.length}
+              </span>
+              {console.log(cart.length)}
             </p>
           </div>
         ))}

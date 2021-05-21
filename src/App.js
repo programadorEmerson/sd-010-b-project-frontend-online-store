@@ -14,7 +14,7 @@ class App extends React.Component {
   }
 
   addItemToCart = (product) => {
-    console.log('cheguei');
+    // console.log('cheguei');
     this.setState((preventState) => ({
       cart: [...preventState.cart, product],
     }));
