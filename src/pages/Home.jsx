@@ -5,25 +5,6 @@ import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 
 class Home extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     categories: [],
-  //   };
-  // }
-
-  // componentDidMount() {
-  //   this.requestCategories();
-  // }
-
-  // requestCategories = async () => {
-  //   const categories = await getCategories();
-
-  //   this.setState({
-  //     categories,
-  //   });
-  // }
-
   render() {
     const { addItemToCart, cart } = this.props;
     return (

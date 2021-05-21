@@ -9,7 +9,7 @@ export class ProductDetails extends Component {
     super();
 
     this.state = {
-      product: [],
+      product: '',
     };
   }
 
