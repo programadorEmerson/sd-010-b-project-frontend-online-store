@@ -10,7 +10,7 @@ export default class ShoppingCart extends Component {
 
     let itens = JSON.parse(localStorage.getItem('id'));
     let willRender = false;
-    // Antes o 04 nçai adi
+
     if (itens === null) {
       localStorage.setItem('id', JSON.stringify([]));
       itens = JSON.parse(localStorage.getItem('id'));
@@ -32,8 +32,16 @@ export default class ShoppingCart extends Component {
     );
   }
 
-  increaseQuantity({ target }) {
+  test({ target }) {
+    console.log(target.value);
+  }
+
+  increaseQuantity({ target }, avaliableItens) {
     const atualQuantity = Number(target.previousSibling.innerHTML);
+    // esse if satisfaz o requisito 14
+    if (atualQuantity >= avaliableItens) {
+      return false;
+    }
     target.previousSibling.innerHTML = atualQuantity + 1;
   }
 
@@ -41,14 +49,16 @@ export default class ShoppingCart extends Component {
     if (Number(target.nextSibling.innerHTML) === 1) {
       return false;
     }
-
     const atualQuantity = Number(target.nextSibling.innerHTML);
     target.nextSibling.innerHTML = atualQuantity - 1;
   }
 
-  excludeItem({ target }) {
+  excludeItem({ target }, id) {
+    // o requisito é o 13, mas dei uma melhorada na exclusao do item
     target.parentNode.innerHTML = '';
-    localStorage.id = '';
+    const itens = JSON.parse(localStorage.getItem('id'));
+    const filteredItens = itens.filter((item) => item.id !== id);
+    localStorage.setItem('id', JSON.stringify(filteredItens));
   }
 
   renderCart() {
@@ -69,19 +79,20 @@ export default class ShoppingCart extends Component {
         </button>
         <span
           data-testid="shopping-cart-product-quantity"
+          onChange={ this.test }
         >
           1
         </span>
         <button
           type="button"
-          onClick={ this.increaseQuantity }
+          onClick={ (event) => this.increaseQuantity(event, item.available_quantity) }
           data-testid="product-increase-quantity"
         >
           +
         </button>
         <button
           type="button"
-          onClick={ this.excludeItem }
+          onClick={ (event) => this.excludeItem(event, item.id) }
         >
           X
         </button>

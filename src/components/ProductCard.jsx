@@ -40,6 +40,8 @@ class ProductCard extends Component {
               alt={ title }
             />
           </Link>
+          {/*  a função abaixo dispara a ação do frete gratis  */}
+          { this.haveFreeShiping(result) }
           <p>{ price }</p>
           <button
             type="button"
@@ -52,6 +54,16 @@ class ProductCard extends Component {
       );
     });
     return card;
+  }
+
+  // requisito 15
+  haveFreeShiping({ shipping: { free_shipping: freeShipping } }) {
+    // botei um apelido no free_shipping pois o lint reclamava que não estava em camelCase
+    const freteGratis = freeShipping;
+    if (freteGratis === true) {
+      return (<p data-testid="free-shipping">Frete gratis incluso</p>);
+    }
+    // eu tentei por um else que retorna 'não tem frete gratis', mas o teste não gostou...
   }
 
   saveDetails(result) {
