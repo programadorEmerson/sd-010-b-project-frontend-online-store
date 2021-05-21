@@ -28,13 +28,14 @@ class Checkout extends React.Component {
     return (
       <>
         <CartProducts />
-        <Form handleForm={ this.handleForm }
-        fullname={ fullname }
-        email={ email }
-        cpf={ cpf }
-        phone={ phone }
-        cep={ cep }
-        address={ address }
+        <Form
+          handleForm={ this.handleForm }
+          fullname={ fullname }
+          email={ email }
+          cpf={ cpf }
+          phone={ phone }
+          cep={ cep }
+          address={ address }
         />
         <button type="button">Comprar</button>
       </>
