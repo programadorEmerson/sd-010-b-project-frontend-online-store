@@ -17,7 +17,7 @@ class SearchBar extends React.Component {
   }
 
   componentDidMount() {
-    console.log('mount');
+    // console.log('mount');
     this.requestCategories();
   }
 
@@ -98,7 +98,7 @@ class SearchBar extends React.Component {
 
 SearchBar.propTypes = {
   addItemToCart: PropTypes.func.isRequired,
-  cart: PropTypes.string.isRequired,
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default SearchBar;

@@ -14,7 +14,7 @@ class App extends React.Component {
   }
 
   addItemToCart = (product) => {
-    console.log('cheguei');
+    // console.log('cheguei');
     this.setState((preventState) => ({
       cart: [...preventState.cart, product],
     }));
@@ -38,8 +38,14 @@ class App extends React.Component {
           <Route
             exact
             path="/details/:id"
-            // render={ (props) => <ProductDetails { ...props } /> }
-            component={ ProductDetails }
+            render={
+              (props) => (
+                <ProductDetails
+                  { ...props }
+                  addItemToCart={ this.addItemToCart }
+                  cart={ cart }
+                />)
+            }
           />
         </Switch>
       </BrowserRouter>
