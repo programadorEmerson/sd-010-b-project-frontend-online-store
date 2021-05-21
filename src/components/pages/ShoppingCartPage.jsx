@@ -7,24 +7,59 @@ export default class ShoppingCartPage extends Component {
 
     this.state = {
       products: props.itemShoppingCart,
-
     };
-    this.getAllProducts = this.getAllProducts.bind(this);
+    this.upQuantityItem = this.upQuantityItem.bind(this);
+    this.downQuantityItem = this.downQuantityItem.bind(this);
   }
 
-  shouldComponentUpdate() {
-    this.getAllProducts();
+  // shouldComponentUpdate() {
+  //   this.getAllProducts();
+  // }
+
+  // getAllProducts() {
+  //   const { itemShoppingCart } = this.props;
+  //   this.setState(({ item }) => ({
+  //     products: [...item, itemShoppingCart],
+  //   }));
+  // }
+
+  upQuantityItem(index) {
+    const { products } = this.state;
+    const newProducts = [...products];
+    newProducts[index].quantity += 1;
+    this.setState(() => ({
+      products: newProducts,
+    }));
   }
 
-  getAllProducts() {
-    const { itemShoppingCart } = this.props;
-    this.setState(({ item }) => ({
-      products: [...item, itemShoppingCart],
+  // getProduct(product) {
+  //   this.setState(({ shoppingCart }) => ({
+  //     shoppingCart: [...shoppingCart, product],
+  //   }));
+  // }
+
+  downQuantityItem(index) {
+    const { products } = this.state;
+    const newProducts = [...products];
+    newProducts[index].quantity -= 1;
+    this.setState(() => ({
+      products: newProducts,
     }));
   }
 
   render() {
     const { products } = this.state;
+    if (products.length) {
+      products.forEach((item) => {
+        if (!item.quantity) {
+          item.quantity = 1;
+        }
+      });
+    }
+
+    // map((item) => { item.quantidade = 1; });
+    // console.log(products);
+
     return (
       <>
         <h1>
@@ -33,18 +68,34 @@ export default class ShoppingCartPage extends Component {
         <section>
           {(products.length === 0)
             ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-            : products.map((item) => (
+            : products.map((item, index) => (
               <div key={ item.id }>
                 <h6 data-testid="shopping-cart-product-name">{ item.title }</h6>
                 <img src={ item.thumbnail } alt={ item.site_id } width="30px" />
                 <p>{`R$ ${item.price}`}</p>
+                <button
+                  data-testid="product-increase-quantity"
+                  type="button"
+                  onClick={ () => this.upQuantityItem(index) }
+                >
+                  +
+                </button>
+                <p data-testid="shopping-cart-product-quantity">{item.quantity}</p>
+                <button
+                  data-testid="product-decrease-quantity"
+                  type="button"
+                  onClick={ () => this.downQuantityItem(index) }
+                >
+                  -
+
+                </button>
               </div>
             ))}
         </section>
         <section>
-          <p data-testid="shopping-cart-product-quantity">
+          <p>
             Quantidade de items no carrinho:
-            {products.length}
+            {products.quantity}
           </p>
         </section>
       </>
