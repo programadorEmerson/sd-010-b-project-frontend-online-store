@@ -13,9 +13,11 @@ class Home extends Component {
     super();
     this.searchApi = this.searchApi.bind(this);
     this.notFoundFunc = this.notFoundFunc.bind(this);
+    this.addToCart = this.addToCart.bind(this);
     this.state = {
       products: [],
       loading: true,
+      cartItens: [],
     };
   }
 
@@ -39,8 +41,16 @@ class Home extends Component {
     });
   }
 
+  addToCart(product) {
+    // this.setState((old) => ({
+    //   cartItens: [...old.cartItens, product],
+    // }));
+    console.log(product.target);
+  }
+
   notFoundFunc() {
     const { loading, products } = this.state;
+
     if (products.length === 0) {
       return (
         <div>
@@ -49,6 +59,7 @@ class Home extends Component {
     }
     return (
       <AllProducts
+        addToCart={ this.addToCart }
         loading={ loading }
         products={ products }
       />

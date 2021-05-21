@@ -12,27 +12,10 @@ class Product extends Component {
     this.state = {
       lastClickedItem: [],
     };
-
-    this.addCart = this.addCart.bind(this);
-  }
-
-  // componentDidUpdate() {
-  //   passaProps();
-  // }
-
-  addCart() {
-    const { product } = this.props;
-    this.setState({
-      lastClickedItem: product,
-    });
-    // const passaProps = () => {
-    //   return <Cart lastClickedItem={ this.state.lastClickedItem } />;
-    // };
-    // passaProps()
   }
 
   render() {
-    const { product: { id, title, price, thumbnail } } = this.props;
+    const { product: { id, title, price, thumbnail }, addToCart } = this.props;
     const link = `/products/${id}`;
     return (
       <div data-testid="product">
@@ -43,7 +26,7 @@ class Product extends Component {
             <p className="price">{`R$-${price}`}</p>
           </div>
         </Link>
-        <button onClick={ this.addCart } data-testid="product-add-to-cart" type="button">
+        <button onClick={ addToCart } data-testid="product-add-to-cart" type="button">
           Adicionar ao carrinho
         </button>
       </div>
