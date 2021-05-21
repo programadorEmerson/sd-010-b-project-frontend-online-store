@@ -18,11 +18,6 @@ export default class ProductCard extends React.Component {
             data: {
               state: this.state,
             } } }
-          // to={ {
-          //   pathname: `/details/${id}`,
-          //   data: {
-          //     addItemToCart,
-          //   } } }
         >
           DETALHES
         </Link>

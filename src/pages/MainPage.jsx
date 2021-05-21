@@ -23,9 +23,8 @@ class MainPage extends React.Component {
   }
 
   addItemToCart(id, title, price) {
-    console.log('ola');
     if (localStorage.getItem(id)) {
-      const item = localStorage.getItem(id).split(',');
+      const item = localStorage.getItem(id).split('|');
       localStorage.setItem(id,
         `${id}|${item[1]}|${item[2]}|${(parseInt(item[3], 10) + 1)}`);
     } else {
@@ -42,10 +41,6 @@ class MainPage extends React.Component {
           handleQuery={ this.handleQuery }
           shoppingCartProduct={ shoppingCartProduct }
         />
-        {/* <Cart
-          shoppingCartProduct={ shoppingCartProduct }
-          addItemToCart={ this.addItemToCart }
-        /> */}
         <Categories
           handleQuery={ this.handleQuery }
           query={ queryTerm }

@@ -23,14 +23,10 @@ class Input extends React.Component {
     const { handleQuery } = this.props;
     const { query } = this.state;
     const results = await api.getProductsFromCategoryAndQuery('all', query);
-    console.log('Input fetch');
     handleQuery(results, query);
   }
 
   render() {
-    const { shoppingCartProduct } = this.props;
-    console.log('input');
-    console.log(shoppingCartProduct);
     return (
       <div
         className="search"
@@ -51,7 +47,6 @@ class Input extends React.Component {
         <Link
           data-testid="shopping-cart-button"
           to="/cart"
-          // data-shoppingCartProduct={ shoppingCartProduct }
         >
           <AiOutlineShoppingCart />
         </Link>
@@ -70,7 +65,6 @@ class Input extends React.Component {
 
 Input.propTypes = {
   handleQuery: PropTypes.func.isRequired,
-  shoppingCartProduct: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default Input;

@@ -9,6 +9,7 @@ class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = { data: undefined };
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   componentDidMount() {
@@ -17,18 +18,26 @@ class ProductDetails extends React.Component {
 
   fetchAPI = async () => {
     const { match: { params: { id } } } = this.props;
-    console.log(id);
     const result = await api.getProductsFromCategoryAndQuery(id);
     this.setState({
       data: result,
     });
   }
 
+  addItemToCart(id = '0000', title = 'Pequeno Principe, O', price = 0) {
+    if (localStorage.getItem(id)) {
+      const item = localStorage.getItem(id).split('|');
+      localStorage.setItem(id,
+        `${id}|${item[1]}|${item[2]}|${(parseInt(item[3], 10) + 1)}`);
+    } else {
+      const newCartProduct = `${id}|${title}|${price}|1`;
+      localStorage.setItem(id, newCartProduct);
+    }
+  }
+
   render() {
-    console.log(this.props);
     const { data } = this.state;
     const { match: { params: { id } } } = this.props;
-    const { addItemToCart } = this.props;
     return (
       <main>
         <Link
@@ -48,7 +57,7 @@ class ProductDetails extends React.Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => addItemToCart(id, data.title, data.price) }
+          onClick={ () => this.addItemToCart(id, data.title, data.price) }
         >
           Adicionar ao carrinho
         </button>
@@ -59,7 +68,6 @@ class ProductDetails extends React.Component {
 }
 
 ProductDetails.propTypes = {
-  addItemToCart: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.objectOf,
     id: PropTypes.string,
