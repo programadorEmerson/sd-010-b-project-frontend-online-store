@@ -38,7 +38,6 @@ class App extends React.Component {
           <Route
             exact
             path="/details/:id"
-            // render={ (props) => <ProductDetails { ...props } /> }
             render={
               (props) => (
                 <ProductDetails

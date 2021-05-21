@@ -77,7 +77,7 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   addItemToCart: PropTypes.func.isRequired,
-  cart: PropTypes.string.isRequired,
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ProductDetails;

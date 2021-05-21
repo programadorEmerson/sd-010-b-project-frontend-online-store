@@ -19,7 +19,10 @@ class ShoppingCart extends Component {
           <div key={ product.id }>
             <h4>{product.title}</h4>
             <img src={ product.thumbnail } alt={ product.title } />
-            <p>{product.price}</p>
+            <p>
+              R$
+              {product.price}
+            </p>
             <p data-testid="shopping-cart-product-quantity">
               <span>
                 Quantidade:
