@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 class FormCheckout extends React.Component {
   render() {
-    const { handleForm, state } = this.props;
-    const { fullname, email, cpf, phone, cep, address } = state;
+    const { handleForm, fullname, email, cpf, phone, cep, address } = this.props;
     return (
       <form>
         <fieldset>
@@ -91,14 +90,12 @@ class FormCheckout extends React.Component {
 
 FormCheckout.propTypes = {
   handleForm: PropTypes.func.isRequired,
-  state: PropTypes.shape({
-    fullname: PropTypes.string,
-    email: PropTypes.string,
-    cpf: PropTypes.string,
-    phone: PropTypes.string,
-    cep: PropTypes.string,
-    address: PropTypes.string,
-  }).isRequired,
+  fullname: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  cpf: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  cep: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
 };
 
 export default FormCheckout;

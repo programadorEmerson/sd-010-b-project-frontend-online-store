@@ -24,10 +24,18 @@ class Checkout extends React.Component {
   }
 
   render() {
+    const { fullname, email, cpf, phone, cep, address } = this.state;
     return (
       <>
         <CartProducts />
-        <Form handleForm={ this.handleForm } state={ this.state } />
+        <Form handleForm={ this.handleForm }
+        fullname={ fullname }
+        email={ email }
+        cpf={ cpf }
+        phone={ phone }
+        cep={ cep }
+        address={ address }
+        />
         <button type="button">Comprar</button>
       </>
     );
