@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 import '../Style/Product.css';
 
 import { Link } from 'react-router-dom';
-import Cart from './Cart';
 
 class Product extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      lastClickedItem: [],
-    };
-  }
+  //   // this.state = {
+  //   //   lastClickedItem: [],
+  //   // };
+  // }
 
   render() {
     const { product: { id, title, price, thumbnail }, addToCart } = this.props;

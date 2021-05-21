@@ -8,7 +8,7 @@ export class CartItem extends Component {
       <div>
         <img className="img" src={ thumbnail } alt={ title } />
         <h3>{ title }</h3>
-        <p>{ price } </p>
+        <p>{ price }</p>
       </div>
     );
   }

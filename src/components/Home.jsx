@@ -14,6 +14,7 @@ class Home extends Component {
     this.searchApi = this.searchApi.bind(this);
     this.notFoundFunc = this.notFoundFunc.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.updateState = this.updateState.bind(this);
     this.state = {
       products: [],
       loading: true,
@@ -22,7 +23,13 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    localStorage.setItem('cartItens', '');
+    if (localStorage.getItem('cartItens') === null) {
+      localStorage.setItem('cartItens', '');
+    } else {
+      this.updateState();
+    }
+    // localStorage.setItem('cartItens', '');
+    // const savedItensID =
   }
 
   componentDidUpdate(prevProps) {
@@ -36,6 +43,15 @@ class Home extends Component {
 
     const { cartItensID } = this.state;
     localStorage.setItem('cartItens', cartItensID);
+  }
+
+  updateState() {
+    // JSON.parse(localStorage.getItem('cartItems'))
+    const savedItensID = localStorage.getItem('cartItens');
+    console.log(savedItensID);
+    this.setState({
+      cartItensID: savedItensID,
+    });
   }
 
   searchApi(product) {
@@ -53,6 +69,7 @@ class Home extends Component {
     this.setState((old) => ({
       cartItensID: [...old.cartItensID, id],
     }));
+    console.log(event.target.parentNode.firstChild.href.split('products/')[1]);
     // console.log(event.target.parentNode.firstChild.href.split('products/')[1]);
   }
 

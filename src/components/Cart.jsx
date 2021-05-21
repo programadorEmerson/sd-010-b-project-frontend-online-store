@@ -5,7 +5,22 @@ class Cart extends Component {
     super(props);
 
     this.emptyCart = this.emptyCart.bind(this);
+
+    this.state = {
+      cartItensID: [],
+    };
   }
+
+  // componentDidMount() {
+  //   this.updateState();
+  // }
+
+  // updateState() {
+  //   const savedItensID = localStorage.getItem('cartItens');
+  //   this.setState({
+  //     cartItensID: savedItensID,
+  //   });
+  // }
 
   emptyCart() {
     return (
