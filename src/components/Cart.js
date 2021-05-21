@@ -59,7 +59,6 @@ class Cart extends React.Component {
         quantidade += quantity;
         valorTotal += (price * quantity);
       });
-      console.log('qtd: ',quantidade);
       this.setState({
         quantidade, valorTotal,
       });
@@ -75,14 +74,12 @@ class Cart extends React.Component {
     return (
       <>
         {
-          arrayItens.map((elemento, index) => {
-            return (<ItemProductCart
-              handleChange={ this.handleChange }
-              handleChangeDelete={ this.handleChangeDelete }
-              cartItem={ elemento }
-              key={ index + 1 }
-            />);
-          })
+          arrayItens.map((elemento, index) => (<ItemProductCart
+            handleChange={ this.handleChange }
+            handleChangeDelete={ this.handleChangeDelete }
+            cartItem={ elemento }
+            key={ index + 1 }
+          />))
         }
         <p>
           { `Valor Total R$: ${valorTotal}` }
