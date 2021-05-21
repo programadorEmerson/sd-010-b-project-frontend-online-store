@@ -21,6 +21,10 @@ class Home extends Component {
     };
   }
 
+  componentDidMount() {
+    localStorage.setItem('cartItens', '');
+  }
+
   componentDidUpdate(prevProps) {
     // Uso típico, (não esqueça de comparar as props):
     // plantao do edu + react docs
@@ -29,6 +33,9 @@ class Home extends Component {
     if (params !== prevProps.match.params) {
       this.searchApi();
     }
+
+    const { cartItensID } = this.state;
+    localStorage.setItem('cartItens', cartItensID);
   }
 
   searchApi(product) {
