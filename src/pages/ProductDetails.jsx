@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Review from '../components/Review';
+import Review from '../components/ProductDetails/Review';
 
 class ProductDetails extends Component {
   render() {
