@@ -1,0 +1,32 @@
+.cart-item {
+  align-items: center;
+  border: 5px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  width: 80%;
+}
+
+.product-name {
+  flex-basis: 300px;
+}
+
+.config-product-quantity {
+  display: flex;
+  flex-direction: row;
+}
+
+.product-quantity {
+  align-items: center;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  width: 50px;
+}
+
+.product-price {
+  flex-basis: 100px;
+  text-align: center;
+}
+
