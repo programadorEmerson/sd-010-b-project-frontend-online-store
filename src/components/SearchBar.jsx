@@ -17,6 +17,7 @@ class SearchBar extends React.Component {
   }
 
   componentDidMount() {
+    console.log('mount');
     this.requestCategories();
   }
 
@@ -35,32 +36,31 @@ class SearchBar extends React.Component {
   };
 
   handleClick = async () => {
-    // console.log('opa');
-    this.setState({
-      products: '',
-    });
     const { state: { searchText, filter } } = this;
     const data = await getProductsFromCategoryAndQuery(filter, searchText);
     const { results } = data;
-    this.setState({
+    this.setState(() => ({
       products: results,
-    });
+    }));
   }
 
-  handleCategory = ({ target }) => {
+  handleCategory = async ({ target }) => {
     const { attributes } = target;
-    const value = attributes[3].nodeValue;
+    const value = attributes[3].nodeValue.toString();
+    const { state: { searchText } } = this;
+    const data = await getProductsFromCategoryAndQuery(value, searchText);
+    const { results } = data;
     this.setState(() => ({
+      products: results,
       filter: value,
     }));
-    this.handleClick();
   };
 
   render() {
+    const { addItemToCart, cart } = this.props;
     const { handleClick,
       handleSearchText,
       handleCategory, state: { pageNotFound, products, categories } } = this;
-    const { addItemToCart, cart } = this.props;
     return (
       <div>
         <div onChange={ handleCategory }>
@@ -69,7 +69,6 @@ class SearchBar extends React.Component {
               { catItem.name }
               <input type="radio" name="cat" data-testid="category" cat={ catItem.id } />
             </div>
-
           ))}
         </div>
         <label htmlFor="searchBar" data-testid="home-initial-message">
