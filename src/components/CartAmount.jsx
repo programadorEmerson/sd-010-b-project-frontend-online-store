@@ -15,7 +15,9 @@ class CartAmount extends React.Component {
   }
 
   handleIncreaseClick = () => {
+    const { onChange } = this.props;
     const { id } = this.props;
+    onChange();
     api2.addToLocalStorage(id);
     this.setState((estadoAnterior) => ({
       count: estadoAnterior.count + 1,
@@ -23,12 +25,15 @@ class CartAmount extends React.Component {
   }
 
   handleDecreaseClick = () => {
+    const { onChange } = this.props;
+
     const { id } = this.props;
     const { count } = this.state;
     if (count > 1) {
       this.setState((estadoAnterior) => ({
         count: estadoAnterior.count - 1,
       }));
+      onChange();
       api2.removeFromLocalStorage(id);
     }
   }
@@ -39,10 +44,12 @@ class CartAmount extends React.Component {
   }
 
   handleExclusion = ({ target }) => {
+    // const { onChange } = this.props;
     const { id } = target;
-    console.log(id);
+
     const getDiv = document.querySelector(`#${id}`);
     getDiv.remove();
+    // onChange();
     api2.deleteEveryFromLocalStorage(id);
   }
 
@@ -54,7 +61,6 @@ class CartAmount extends React.Component {
         <h3 data-testid="shopping-cart-product-name">{title}</h3>
         <p
           data-testid="shopping-cart-product-quantity"
-          // onChange={ handleQuantityChange }
         >
           {count}
         </p>
@@ -84,7 +90,7 @@ CartAmount.propTypes = {
   id: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  // handleQuantityChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default CartAmount;
