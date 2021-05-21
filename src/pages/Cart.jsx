@@ -36,11 +36,11 @@ class Cart extends React.Component {
         product: item[0],
         quantity: item.length,
       }));
-      const cartSize = products.reduce((acc, curr) => acc + curr.quantity, 0);
+      // const cartSize = products.reduce((acc, curr) => acc + curr.quantity, 0);
 
       this.setState({
         products,
-        cartSize,
+        cartSize: api2.readCartSizeLocalStorage(),
         cart: api2.readCartLocalStorage(),
       });
     }
@@ -69,6 +69,7 @@ class Cart extends React.Component {
             quantity={ item.quantity }
             title={ item.product.title }
             onChange={ this.fetchCart }
+            maxQuantity={ item.product.available_quantity }
           />))}
         <Link
           data-testid="checkout-products"
