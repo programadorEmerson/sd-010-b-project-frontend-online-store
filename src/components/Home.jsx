@@ -17,7 +17,7 @@ class Home extends Component {
     this.state = {
       products: [],
       loading: true,
-      cartItens: [],
+      cartItensID: [],
     };
   }
 
@@ -41,11 +41,12 @@ class Home extends Component {
     });
   }
 
-  addToCart(product) {
-    // this.setState((old) => ({
-    //   cartItens: [...old.cartItens, product],
-    // }));
-    console.log(product.target);
+  addToCart(event) {
+    const id = event.target.parentNode.firstChild.href.split('products/')[1];
+    this.setState((old) => ({
+      cartItensID: [...old.cartItensID, id],
+    }));
+    // console.log(event.target.parentNode.firstChild.href.split('products/')[1]);
   }
 
   notFoundFunc() {
