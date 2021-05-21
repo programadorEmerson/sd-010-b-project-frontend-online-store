@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { GrCart } from 'react-icons/gr';
+import Navbar from '../components/Navbar';
 
 class ProductDetaills extends Component {
   constructor(props) {
@@ -36,13 +36,7 @@ class ProductDetaills extends Component {
     const { onClick } = this.props;
     return (
       <div>
-        <Link
-          to="/shopping-cart"
-          data-testid="shopping-cart-button"
-          className="shopping-cart-button"
-        >
-          <GrCart />
-        </Link>
+        <Navbar />
         <h3>Especificações Técnicas</h3>
         <h3 data-testid="product-detail-name">{title}</h3>
         <img src={ thumbnail } alt={ title } />
