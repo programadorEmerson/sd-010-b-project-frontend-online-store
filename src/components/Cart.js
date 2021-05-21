@@ -11,6 +11,7 @@ class Cart extends React.Component {
     this.renderCart = this.renderCart.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.valuesOfCart = this.valuesOfCart.bind(this);
+    this.handleChangeDelete = this.handleChangeDelete.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +35,20 @@ class Cart extends React.Component {
     this.valuesOfCart(newArray);
   }
 
+  handleChangeDelete(id) {
+    const cartItems1 = JSON.parse(localStorage.getItem('cartState'));
+    const newArray = cartItems1.map((item) => {
+      if (item.cardProps.id === id) {
+        item.cardProps.quantity = 0;
+        return item;
+      }
+      return item;
+    });
+    newArray.splice('cartState.id', 1);
+    localStorage.setItem('cartState', JSON.stringify(newArray));
+    this.valuesOfCart(newArray);
+  }
+
   valuesOfCart(parametro = []) {
     const listLocalStorage = JSON.parse(localStorage.getItem('cartState'));
     const xablau = parametro.length > 0 ? parametro : listLocalStorage;
@@ -44,6 +59,7 @@ class Cart extends React.Component {
         quantidade += quantity;
         valorTotal += (price * quantity);
       });
+      console.log('qtd: ',quantidade);
       this.setState({
         quantidade, valorTotal,
       });
@@ -60,9 +76,9 @@ class Cart extends React.Component {
       <>
         {
           arrayItens.map((elemento, index) => {
-            console.log(elemento);
             return (<ItemProductCart
               handleChange={ this.handleChange }
+              handleChangeDelete={ this.handleChangeDelete }
               cartItem={ elemento }
               key={ index + 1 }
             />);
@@ -77,10 +93,13 @@ class Cart extends React.Component {
 
   render() {
     const { quantidade } = this.state;
+    console.log(quantidade);
     return (
       <div>
         <h1>Carrinho de Compras</h1>
-        <p data-testid="shopping-cart-product-quantity">{ quantidade }</p>
+        <p>
+          { quantidade }
+        </p>
         {this.renderCart()}
       </div>
     );
