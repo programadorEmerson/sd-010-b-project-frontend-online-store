@@ -32,10 +32,6 @@ export default class ShoppingCart extends Component {
     );
   }
 
-  test({ target }) {
-    console.log(target.value);
-  }
-
   increaseQuantity({ target }, avaliableItens) {
     const atualQuantity = Number(target.previousSibling.innerHTML);
     // esse if satisfaz o requisito 14
@@ -79,7 +75,6 @@ export default class ShoppingCart extends Component {
         </button>
         <span
           data-testid="shopping-cart-product-quantity"
-          onChange={ this.test }
         >
           1
         </span>
