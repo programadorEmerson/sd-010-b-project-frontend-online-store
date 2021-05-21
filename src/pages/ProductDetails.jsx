@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Review from '../components/ProductDetails/Review';
 import { shoppingCardProductAdd } from '../services/dataLocalStorage';
 
 class ProductDetails extends Component {
   render() {
     const { location: { state: { product } } } = this.props;
+    /* console.log(product); */
     const {
       title,
       thumbnail,
@@ -34,6 +36,7 @@ class ProductDetails extends Component {
           >
             Ir ao carrinho
           </Link>
+          <Review product={ product } />
         </section>
         <section>
           <button
