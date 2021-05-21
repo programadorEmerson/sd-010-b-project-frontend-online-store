@@ -44,12 +44,8 @@ export class ProductDetails extends Component {
 
   render() {
     const { product } = this.state;
-<<<<<<< HEAD
-    const { addToCart } = this;
-=======
     const { title, thumbnail, price } = product;
     // console.log(product);
->>>>>>> 8c147efd83a333f9ea6cf00742b67d6538d8f4df
     return (
       <div key={ title }>
         <h1 data-testid=" product-detail-name">{title}</h1>
@@ -67,17 +63,11 @@ export class ProductDetails extends Component {
           data-testid="product-detail-add-to-cart"
         >
           <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link>
-<<<<<<< HEAD
-          <button type="button" onClick={ addToCart }>add to cart</button>
-        </div>
-      )));
-=======
         </button>
         {/* <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link> */}
         <FormAvaliation />
       </div>
     );
->>>>>>> 8c147efd83a333f9ea6cf00742b67d6538d8f4df
   }
 }
 
