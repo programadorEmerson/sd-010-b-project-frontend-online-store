@@ -11,17 +11,24 @@ export class ProductDetails extends Component {
     this.state = {
       product: [],
     };
+
+    this.requestProduct = this.requestProduct.bind(this);
   }
 
   componentDidMount() {
     this.requestProduct();
   }
 
-  requestProduct = async () => {
+  async requestProduct() {
     const { match: { params: { id } } } = this.props;
+    console.log(this.props);
     const getProduct = await getProductsFromCategoryAndQuery('', id);
     const { results } = getProduct;
+    // console.log(getProduct);
+    console.log(results);
     const foundProduct = results.find((element) => element.title === id);
+    console.log(foundProduct);
+
     this.setState({
       product: foundProduct,
     });
@@ -29,8 +36,10 @@ export class ProductDetails extends Component {
 
   render() {
     const { product } = this.state;
+    console.log(this.state);
+    console.log(product);
     const { title, thumbnail, price } = product;
-    // console.log(product);
+    const { addItemToCart, cart } = this.props;
     return (
       <div key={ title }>
         <h1 data-testid=" product-detail-name">{title}</h1>
@@ -43,12 +52,16 @@ export class ProductDetails extends Component {
               {`${attributes.name}: ${attributes.value_name}`}
             </li>))}
         </ul> */}
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-        >
-          <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link>
-        </button>
+        <div data-testid="product-detail-add-to-cart">
+          <button
+            type="button"
+            data-testid="shopping-cart-button"
+            onClick={ addItemToCart }
+            cart={ cart }
+          >
+            <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link>
+          </button>
+        </div>
         {/* <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link> */}
         <FormAvaliation />
       </div>
@@ -62,6 +75,8 @@ ProductDetails.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
+  addItemToCart: PropTypes.func.isRequired,
+  cart: PropTypes.string.isRequired,
 };
 
 export default ProductDetails;
