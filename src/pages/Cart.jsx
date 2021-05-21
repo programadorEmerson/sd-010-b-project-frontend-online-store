@@ -20,18 +20,18 @@ class Cart extends React.Component {
         {results.length === 0 ? (
           <span data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
-            {/* <div data-testid="shopping-cart-product-name" /> */}
-            {/* <div data-testid="shopping-cart-product-quantity" /> */}
+            {/* <div data-testid="shopping-cart-product-name" />
+            <div data-testid="shopping-cart-product-quantity" /> */}
           </span>
         ) : (
           <div>
             {results.map((product) => (
               <div key={ product[0] }>
-                <p
+                <h1
                   data-testid="shopping-cart-product-name"
                 >
                   { product[1] }
-                </p>
+                </h1>
                 <p
                   data-testid="shopping-cart-product-quantity"
                 >
