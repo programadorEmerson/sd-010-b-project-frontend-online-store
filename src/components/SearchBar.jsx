@@ -17,7 +17,7 @@ class SearchBar extends React.Component {
   }
 
   componentDidMount() {
-    console.log('mount');
+    // console.log('mount');
     this.requestCategories();
   }
 

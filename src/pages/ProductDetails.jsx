@@ -52,15 +52,26 @@ export class ProductDetails extends Component {
               {`${attributes.name}: ${attributes.value_name}`}
             </li>))}
         </ul> */}
-        <div data-testid="product-detail-add-to-cart">
-          <div data-testid="shopping-cart-product-quantity" />
+        <div>
+          <p>
+            Quantidade:
+            {' '}
+            <span data-testid="shopping-cart-product-quantity">{cart.length}</span>
+            {console.log(cart.length)}
+          </p>
           <button
             type="button"
-            data-testid="shopping-cart-button"
+            data-testid="product-detail-add-to-cart"
             onClick={ () => addItemToCart(product) }
             cart={ cart }
           >
-            <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link>
+            Adicionar ao Carrinho de Compras
+          </button>
+          <button
+            type="button"
+            data-testid="shopping-cart-button"
+          >
+            <Link to="/shopping-cart">Carrinho</Link>
           </button>
         </div>
         {/* <Link to="/shopping-cart">Adicionar ao Carrinho de Compras</Link> */}

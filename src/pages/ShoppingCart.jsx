@@ -21,18 +21,17 @@ class ShoppingCart extends Component {
             <img src={ product.thumbnail } alt={ product.title } />
             <p>
               R$
+              {' '}
               {product.price}
-            </p>
-            <p data-testid="shopping-cart-product-quantity">
-              <span>
-                Quantidade:
-                {' '}
-                {cart.length}
-              </span>
-              {console.log(cart.length)}
             </p>
           </div>
         ))}
+        <p>
+          Quantidade:
+          {' '}
+          <span data-testid="shopping-cart-product-quantity">{cart.length}</span>
+          {console.log(cart.length)}
+        </p>
       </div>
     );
   }
