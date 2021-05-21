@@ -73,7 +73,7 @@ class Detail extends React.Component {
   }
 
   render() {
-    const { produto, loading } = this.state;
+    const { produto, loading, produto: { id } } = this.state;
     return (
       <div>
         { !loading
@@ -109,7 +109,7 @@ class Detail extends React.Component {
                 </button>
               </Link>
               <div>
-                <Avaliacao />
+                <Avaliacao id={ id } />
               </div>
             </div>
           )}

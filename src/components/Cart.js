@@ -8,6 +8,7 @@ class Cart extends React.Component {
       quantidade: 0,
       valorTotal: 0,
     };
+
     this.renderCart = this.renderCart.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.valuesOfCart = this.valuesOfCart.bind(this);
