@@ -59,8 +59,6 @@ export default class FormComents extends Component {
                 index={ index }
                 rating={ rating }
                 hoverRating={ hoverRating }
-                onMouseEnter={ this.onMouseEnter }
-                onMouseLeave={ this.onMouseLeave }
                 onSaveRating={ this.onSaveRating }
               />
             )) }
