@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class AddToCart extends Component {
   addToCart = () => {
+    const { add } = this.props;
     const prod = this.props;
     const productsOnCart = 'products-on-cart';
     const productsString = localStorage.getItem(productsOnCart);
@@ -14,7 +15,7 @@ export default class AddToCart extends Component {
       if (checkEqual) {
         const oldArray = products
           .filter((product) => product.product.id !== prod.product.id);
-        checkEqual.quantity += 1;
+        checkEqual.quantity += add;
         const newArray = [...oldArray, checkEqual];
         const { product } = this.props;
         const TOTAL_PRICE_STORAGE = 'total-price';
@@ -29,7 +30,7 @@ export default class AddToCart extends Component {
         return localStorage.setItem(productsOnCart, JSON.stringify(newArray));
       }
     }
-    products.push({ ...prod, quantity: 1 });
+    products.push({ ...prod, quantity: add });
     localStorage.setItem(productsOnCart, JSON.stringify(products));
     const { product } = this.props;
     const TOTAL_PRICE_STORAGE = 'total-price';
@@ -63,4 +64,5 @@ AddToCart.propTypes = {
     id: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  add: PropTypes.number.isRequired,
 };

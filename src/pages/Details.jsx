@@ -11,8 +11,7 @@ class Details extends Component {
     super();
     this.state = {
       product: { attributes: [] },
-      // shipping: { free_shipping: false },
-      isShipping: false,
+      addtoquantity: 1,
     };
   }
 
@@ -28,19 +27,34 @@ class Details extends Component {
         );
       });
   }
- shippingMessage() => {
-  const { product:{ shipping: {free_shipping} } } = this.state;
- }
+
+  checkShipping = (shipping) => {
+    if (shipping) {
+      return shipping.free_shipping ? <span>&#128722;Frete Gratis</span> : null;
+    }
+  }
+
+  clickToChangeQuantity = ({ target }) => {
+    if (target.value === '+') {
+      return this.setState((prev) => ({
+        addtoquantity: prev.addtoquantity + 1,
+      }));
+    }
+    this.setState((prev) => ({
+      addtoquantity: prev.addtoquantity - 1,
+    }));
+  }
+
   render() {
-    const { product:
-      { title, price, thumbnail, attributes }, product, isShipping } = this.state;
-    console.log(product.shipping);
-    // const freteGratis = (<span data-testid="free-shipping">&#128722; Frete grátis</span>);
+    const { product: { title, price, thumbnail, attributes, shipping },
+      product, addtoquantity } = this.state;
     return (
       <section>
         <img src={ thumbnail } alt={ title } />
-        <h2 data-testid="product-detail-name">{ `${title} - R$ ${price}` }</h2>
-        { isShipping ? freteGratis : null }
+        <h2 data-testid="product-detail-name">
+          { `${title} - R$ ${price}` }
+        </h2>
+        {this.checkShipping(shipping)}
         <h3>Especificações Técnicas</h3>
         <ul>
           {attributes.map((atribut) => (
@@ -54,12 +68,21 @@ class Details extends Component {
           <section>
             <h3>Quantidade:</h3>
             <h2>
-              <input type="button" value="-" />
-              1
-              <input type="button" value="+" />
+              <input
+                type="button"
+                value="-"
+                disabled={ addtoquantity <= 1 }
+                onClick={ this.clickToChangeQuantity }
+              />
+              <span>{ addtoquantity }</span>
+              <input type="button" value="+" onClick={ this.clickToChangeQuantity } />
             </h2>
           </section>
-          <AddToCart data-testid="product-detail-add-to-cart" product={ product } />
+          <AddToCart
+            data-testid="product-detail-add-to-cart"
+            product={ product }
+            add={ addtoquantity }
+          />
           <MyForm />
         </section>
         <Link to="/" style={ { textDecoration: 'none' } }>
