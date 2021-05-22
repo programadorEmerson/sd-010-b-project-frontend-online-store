@@ -23,25 +23,40 @@ export default class ProductCard extends Component {
 
     return (
       <div className="card" data-testid="product">
-        <p data-testid="shopping-cart-product-name">{title}</p>
-        <div className="img">
+        <div className="img-card">
           <img src={ thumbnail } alt="img" />
         </div>
-        <p>{price}</p>
-        { shipping.free_shipping ? <p data-testid="free-shipping">Frete grátis</p> : ''}
-        <button
-          type="button"
-          onClick={ this.handleAddToCart }
-          data-testid="product-add-to-cart"
-        >
-          Adicionar
-        </button>
-        <Link
-          data-testid="product-detail-link"
-          to={ { pathname: '/details', state: { item } } }
-        >
-          Detalhes
-        </Link>
+        <div className="title-card">
+          <p data-testid="shopping-cart-product-name">{title}</p>
+        </div>
+        <div className="price-card">
+          <span>{`R$ ${price}`}</span>
+        </div>
+
+        <div className="button-container">
+          <button
+            className="button-add-cart"
+            type="button"
+            onClick={ this.handleAddToCart }
+            data-testid="product-add-to-cart"
+          >
+            Adicionar
+          </button>
+        </div>
+        <div className="button-link">
+          <Link
+            className="details-link"
+            data-testid="product-detail-link"
+            to={ { pathname: '/details', state: { item } } }
+          >
+            Detalhes
+          </Link>
+        </div>
+
+        <div className="frete-card">
+          { shipping.free_shipping ? <p data-testid="free-shipping">Frete grátis</p> : ''}
+        </div>
+
       </div>
     );
   }

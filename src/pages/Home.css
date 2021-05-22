@@ -1,6 +1,7 @@
 :root {
 
-  --color-golden: hsl(34, 97%, 48%);
+  --color-golden: #81B9F9;
+
 }
 
 * {
@@ -13,12 +14,12 @@
 }
 
 .content-left {
-  background-color: aqua;
+  background-color: var(--color-golden);
   width: 20vw;
 }
 
 .content-right {
-  background-color: burlywood;
+  background-color: #C3D2FD;
   display: flex;
   flex-direction: column;
   width: 80vw;
