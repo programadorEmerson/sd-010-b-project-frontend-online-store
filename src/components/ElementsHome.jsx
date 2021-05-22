@@ -26,6 +26,7 @@ export default class ElementsHome extends Component {
             data-testid="shopping-cart-button"
           >
             <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
+            <span data-testid="shopping-cart-size" />
           </Link>
         </button>
         <ProductList
@@ -43,5 +44,4 @@ ElementsHome.propTypes = {
   handleChange: PropTypes.func,
   handleClick: PropTypes.func,
   handleClickAddCart: PropTypes.func,
-  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
 }.isRequired;

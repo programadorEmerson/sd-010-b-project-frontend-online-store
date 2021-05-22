@@ -74,12 +74,14 @@ export default class ProductDetails extends Component {
     return (
       <div>
         <div>
+          {/* <CartButton foo={ cart } /> */}
           <button type="button">
             <Link
               to={ { pathname: '/shoppingcart', state: { cart } } }
               data-testid="shopping-cart-button"
             >
               <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
+              <span data-testid="shopping-cart-size">{ cart.count }</span>
             </Link>
           </button>
           <h3 data-testid="product-detail-name">{title}</h3>
