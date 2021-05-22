@@ -1,13 +1,12 @@
 .categories {
-  background-color: rgb(255, 255, 255);
-  font-style: italic;
-  font-weight: bold;
+  background-color: rgb(254, 255, 255);
   display: flex;
-  margin: 10px;
   flex-direction: column;
+  font-style: italic;
+  margin: 10px;
 }
 
 .category {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(254, 255, 255);
   margin-top: 20px;
 }

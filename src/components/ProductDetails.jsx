@@ -8,6 +8,8 @@ class ProductDetails extends Component {
   constructor(props) {
     super(props);
 
+    this.addToCart = this.addToCart.bind(this);
+
     this.state = {
       product: [],
       load: true,
@@ -25,6 +27,25 @@ class ProductDetails extends Component {
         load: false,
       });
     });
+  }
+
+  addToCart() {
+    const { product } = this.state;
+
+    if (localStorage.getItem('keyTemp') === null) {
+      const products = [product];
+
+      const teste = JSON.stringify(products);
+      localStorage.setItem('keyTemp', teste);
+    } else {
+      const jsonKeyTemp = localStorage.getItem('keyTemp');
+      const keyTemp = JSON.parse(jsonKeyTemp);
+
+      keyTemp.push(product);
+
+      const teste = JSON.stringify(keyTemp);
+      localStorage.setItem('keyTemp', teste);
+    }
   }
 
   render() {
@@ -48,7 +69,14 @@ class ProductDetails extends Component {
             return console.log('Tá aí o return, Sr. lint');
           })}
         </ul>
-        <button type="button">Adicionar</button>
+        <button
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.addToCart }
+          type="button"
+        >
+          Adicionar ao carrinho
+        </button>
+        <button data-testid="shopping-cart-button" />
       </div>
     );
   }
