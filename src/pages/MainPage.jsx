@@ -35,7 +35,6 @@ class MainPage extends React.Component {
 
   render() {
     const { products, queryTerm, shoppingCartProduct } = this.state;
-    
     return (
       <main>
         <Input
