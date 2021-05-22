@@ -15,6 +15,7 @@ export default class ProductList extends React.Component {
   render() {
     const { loading } = this.state;
     const { products } = this.props;
+    console.log(products);
     const { addItemToCart } = this.props;
 
     if (loading) return <Loading />;
@@ -27,6 +28,7 @@ export default class ProductList extends React.Component {
               key={ prod.title }
               product={ prod }
               addItemToCart={ addItemToCart }
+              freeShipping={ prod.shipping.free_shipping }
             />)) }
         </section>
       );
