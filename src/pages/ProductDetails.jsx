@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import FormComents from '../components/FormComents';
 import RenderComents from '../components/RenderComents';
+import ButtonSP from '../components/CountSP';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -67,7 +68,7 @@ export default class ProductDetails extends Component {
   }
 
   render() {
-    const { coments } = this.state;
+    const { coments, handleClickAddCart2 } = this.state;
     const { location: { state } } = this.props;
     const { product } = state;
     const { title, price, thumbnail } = product;
@@ -76,16 +77,7 @@ export default class ProductDetails extends Component {
     return (
       <div>
         <div>
-          {/* <CartButton foo={ cart } /> */}
-          <button type="button">
-            <Link
-              to={ { pathname: '/shoppingcart', state: { cart } } }
-              data-testid="shopping-cart-button"
-            >
-              <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
-              <span data-testid="shopping-cart-size">{ cart.count }</span>
-            </Link>
-          </button>
+          <ButtonSP cart={ cart } handleClickAddCart2={ handleClickAddCart2 } />
           <h3 data-testid="product-detail-name">{title}</h3>
           <img src={ thumbnail } alt={ title } />
           <h2>

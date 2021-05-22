@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import ProductList from './ProductList';
+import ButtonSP from './CountSP';
 
 export default class ElementsHome extends Component {
   render() {
@@ -20,15 +20,7 @@ export default class ElementsHome extends Component {
         >
           PESQUISAR
         </button>
-        <button type="button">
-          <Link
-            to={ { pathname: '/shoppingcart', state: { cart } } }
-            data-testid="shopping-cart-button"
-          >
-            <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
-            <span data-testid="shopping-cart-size" />
-          </Link>
-        </button>
+        <ButtonSP cart={ cart } handleClickAddCart={ handleClickAddCart } />
         <ProductList
           products={ products }
           handleClickAddCart={ handleClickAddCart }
