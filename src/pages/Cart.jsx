@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
 import * as modules from '../services/modules';
 import BtnDecrement from '../components/BtnDecrement';
 import BtnIncrement from '../components/BtnIncrement';
@@ -11,7 +12,6 @@ class Cart extends React.Component {
     super(props);
 
     this.state = {
-      // cart: [],
       reload: false,
     };
     this.handleReload = this.handleReload.bind(this);
@@ -40,10 +40,6 @@ class Cart extends React.Component {
             <BtnDel product={ product } handleReload={ this.handleReload } />
           </div>
         ))}
-        {/* <p>{this.hand*leQuantity()} </p> */}
-        {/* <p>
-          {this.handleTotalCart()}
-        </p> */}
         <span>
           Preço total:
           { totalPrice }

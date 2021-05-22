@@ -11,7 +11,6 @@ class ProductDetails extends Component {
   constructor(props) {
     super(props);
 
-    this.handleRating = this.handleRating.bind(this);
     this.handleEmailMsgRating = this.handleEmailMsgRating.bind(this);
     this.handleSubmitRating = this.handleSubmitRating.bind(this);
     this.handleAvaliation = this.handleAvaliation.bind(this);
@@ -21,7 +20,7 @@ class ProductDetails extends Component {
       rating: 0,
       email: '',
       avaliation: '',
-      reaload: true,
+      reload: true,
     };
   }
 
@@ -33,19 +32,18 @@ class ProductDetails extends Component {
       },
     } = this.props;
 
-    const { rating, email, avaliation, reaload } = this.state;
+    const { rating, email, avaliation, reload } = this.state;
     const obj = { id: item.id, rating, email, avaliation };
     modules.setReview(obj);
-    this.setState({ reaload });
+    this.setState({ reload });
   }
 
   handleEmailMsgRating(e) {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }
+    const isnum = /^\d+$/.test(value);
+    const value2 = !isnum ? value : parseInt(value, 10);
 
-  handleRating(value) {
-    this.setState({ rating: value });
+    this.setState({ [name]: value2 });
   }
 
   handleRealodAddToCart() {
@@ -55,10 +53,10 @@ class ProductDetails extends Component {
       },
     } = this.props;
 
-    const { reaload } = this.state;
+    const { reload } = this.state;
     modules.addProductCart(item);
 
-    this.setState({ reaload });
+    this.setState({ reload });
   }
 
   handleAvaliation() {
@@ -107,7 +105,10 @@ class ProductDetails extends Component {
         >
           Adicionar
         </button>
-        <StarRating rating={ rating } handleRating={ this.handleRating } />
+        <StarRating
+          rating={ rating }
+          handleEmailMsgRating={ this.handleEmailMsgRating }
+        />
         <FormRating
           handleEmailMsgRating={ this.handleEmailMsgRating }
           handleSubmitRating={ this.handleSubmitRating }

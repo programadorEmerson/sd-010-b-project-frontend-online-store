@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import * as api from '../services/api';
-import * as modules from '../services/modules';
 
 import InputSearch from '../components/InputSearch';
+import CartComponent from '../components/CartComponent';
 import Categories from '../components/Categories';
-import ButtonToCart from '../components/ButtonToCart';
 import ProductCard from '../components/ProductCard';
+import './Home.css';
 
 export default class Home extends Component {
   constructor() {
@@ -15,7 +14,6 @@ export default class Home extends Component {
     this.state = {
       categories: [],
       products: [],
-      foundProducts: true,
       value: '',
       reload: true,
     };
@@ -42,7 +40,7 @@ export default class Home extends Component {
       .getProductsFromCategoryAndQuery('', value)
       .then((data) => this.setState({ products: data.results }))
       .catch(() => {
-        this.setState({ foundProducts: false });
+        alert('Erro: Tente novamente.');
       });
   }
 
@@ -66,7 +64,6 @@ export default class Home extends Component {
           <ProductCard
             key={ item.id }
             item={ item }
-            addProductIntoCart={ this.addProductIntoCart }
             data-testid="product"
             handleReload={ this.handleReload }
           />
@@ -81,34 +78,33 @@ export default class Home extends Component {
   }
 
   render() {
-    const { categories, foundProducts, cart } = this.state;
+    const { products, categories } = this.state;
 
     return (
-      <div>
-        <Categories
-          handleSelectCategory={ this.handleSelectCategory }
-          categories={ categories }
-        />
-        <div>
-          <InputSearch
-            handleInputSearch={ this.handleInputSearch }
-            handleSubmitFetch={ this.handleSubmitFetch }
+      <section className="container">
+        <aside className="content-left">
+          <Categories
+            handleSelectCategory={ this.handleSelectCategory }
+            categories={ categories }
           />
-          <Link
-            to={ { pathname: '/cart', state: { cart } } }
-            data-testid="shopping-cart-button"
-          >
-            <ButtonToCart />
-          </Link>
-          <p data-testid="shopping-cart-size">{modules.getLength()}</p>
-          <p data-testid="home-initial-message">
-            {foundProducts
-              ? 'Digite algum termo de pesquisa ou escolha uma categoria.'
-              : 'Nenhum produto foi encontrado'}
-          </p>
-        </div>
-        {this.handleCard()}
-      </div>
+        </aside>
+        <section className="content-right">
+          <section className="header-home">
+            <InputSearch
+              handleInputSearch={ this.handleInputSearch }
+              handleSubmitFetch={ this.handleSubmitFetch }
+            />
+            <CartComponent />
+          </section>
+          <section className="content-card">
+            <div className="home-initial-message" data-testid="home-initial-message">
+              { products.length
+                ? this.handleCard()
+                : 'Digite algum termo de pesquisa ou escolha uma categoria.'}
+            </div>
+          </section>
+        </section>
+      </section>
     );
   }
 }

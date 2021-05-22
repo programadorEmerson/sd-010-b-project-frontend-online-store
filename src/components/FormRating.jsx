@@ -6,7 +6,7 @@ export default class FormRating extends Component {
     const { handleSubmitRating, handleEmailMsgRating } = this.props;
     return (
       <div>
-        <form action="">
+        <form>
           <input
             type="email"
             required

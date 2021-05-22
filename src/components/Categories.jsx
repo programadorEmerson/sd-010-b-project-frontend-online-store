@@ -13,8 +13,8 @@ class Categories extends Component {
           {categories.map(({ name, id }) => (
             <div key={ id }>
               <label htmlFor="select-category">
-                { name }
                 <input
+                  className="input-category"
                   id="select-category"
                   type="radio"
                   onClick={ (e) => handleSelectCategory(e) }
@@ -22,6 +22,7 @@ class Categories extends Component {
                   name="category"
                   value={ id }
                 />
+                { name }
               </label>
             </div>
           ))}
