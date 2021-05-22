@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductFromId } from '../services/api2';
+
 import Loading from './Loading';
 import Rating from './Rating';
+import CartButton from './CartButton';
+
 import '../Style/Product.css';
 
 class ProductDetails extends Component {
   constructor(props) {
     super(props);
+    this.addToCart = this.addToCart.bind(this);
     this.state = {
       product: [],
       load: true,
@@ -23,6 +27,25 @@ class ProductDetails extends Component {
         load: false,
       });
     });
+  }
+
+  addToCart() {
+    const { product } = this.state;
+
+    if (localStorage.getItem('keyTemp') === null) {
+      const products = [product];
+
+      const teste = JSON.stringify(products);
+      localStorage.setItem('keyTemp', teste);
+    } else {
+      const jsonKeyTemp = localStorage.getItem('keyTemp');
+      const keyTemp = JSON.parse(jsonKeyTemp);
+
+      keyTemp.push(product);
+
+      const teste = JSON.stringify(keyTemp);
+      localStorage.setItem('keyTemp', teste);
+    }
   }
 
   render() {
@@ -69,8 +92,16 @@ class ProductDetails extends Component {
           </div>
         </div>
         <div>
-          <Rating id={ id } />
+          <button
+            data-testid="product-detail-add-to-cart"
+            onClick={ this.addToCart }
+            type="button"
+          >
+            Adicionar ao carrinho
+          </button>
+          <CartButton />
         </div>
+        <Rating id={ id } />
       </div>
     );
   }

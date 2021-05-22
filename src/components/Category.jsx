@@ -12,7 +12,6 @@ class Category extends React.Component {
         className="category"
         to={ `/home/${category.id}` }
         data-testid="category"
-        // onClick={ console.log(category.id) }
       >
         {`${category.name}`}
       </Link>

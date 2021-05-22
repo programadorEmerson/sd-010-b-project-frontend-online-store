@@ -13,20 +13,38 @@ class Home extends Component {
     super();
     this.searchApi = this.searchApi.bind(this);
     this.notFoundFunc = this.notFoundFunc.bind(this);
+    this.updateState = this.updateState.bind(this);
     this.state = {
       products: [],
       loading: true,
     };
   }
 
+  componentDidMount() {
+    if (localStorage.getItem('cartItens') === null) {
+      localStorage.setItem('cartItens', '');
+    } else {
+      this.updateState();
+    }
+  }
+
   componentDidUpdate(prevProps) {
     // Uso típico, (não esqueça de comparar as props):
     // plantao do edu + react docs
-    // const { id } = this.props.match.params;
     const { match: { params } } = this.props;
     if (params !== prevProps.match.params) {
       this.searchApi();
     }
+
+    const { cartItensID } = this.state;
+    localStorage.setItem('cartItens', cartItensID);
+  }
+
+  updateState() {
+    const savedItensID = localStorage.getItem('cartItens');
+    this.setState({
+      cartItensID: savedItensID,
+    });
   }
 
   searchApi(product) {
@@ -39,6 +57,10 @@ class Home extends Component {
     });
   }
 
+  stateAddCart() {
+    console.log('this.props');
+  }
+
   notFoundFunc() {
     const { loading, products } = this.state;
     if (products.length === 0) {
@@ -49,6 +71,7 @@ class Home extends Component {
     }
     return (
       <AllProducts
+        stateAddCart={ this.stateAddCart }
         loading={ loading }
         products={ products }
       />
