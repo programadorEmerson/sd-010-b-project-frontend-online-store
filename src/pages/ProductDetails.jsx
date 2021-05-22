@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import FormComents from '../components/FormComents';
 import RenderComents from '../components/RenderComents';
+import ButtonSP from '../components/CountSP';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -12,7 +13,6 @@ export default class ProductDetails extends Component {
       coments: [],
       cart: [],
     };
-    this.handleClickAddCart2 = this.handleClickAddCart2.bind(this);
   }
 
   // Comments:
@@ -40,6 +40,7 @@ export default class ProductDetails extends Component {
       this.setState({
         cart: productCart,
       });
+      localStorage.setItem('shopcart', JSON.stringify(productCart));
     } else {
       let productCart = cart;
       const findProduct = productCart.find((data) => data.id === product.id);
@@ -51,6 +52,7 @@ export default class ProductDetails extends Component {
         this.setState({
           cart: productCart,
         });
+        localStorage.setItem('shopcart', JSON.stringify(productCart));
       } else {
         const { id, title, price, thumbnail } = product;
         const availableQuantity = product.available_quantity;
@@ -60,12 +62,13 @@ export default class ProductDetails extends Component {
         this.setState({
           cart: productCart,
         });
+        localStorage.setItem('shopcart', JSON.stringify(productCart));
       }
     }
   }
 
   render() {
-    const { coments } = this.state;
+    const { coments, handleClickAddCart2 } = this.state;
     const { location: { state } } = this.props;
     const { product } = state;
     const { title, price, thumbnail } = product;
@@ -74,17 +77,13 @@ export default class ProductDetails extends Component {
     return (
       <div>
         <div>
-          <button type="button">
-            <Link
-              to={ { pathname: '/shoppingcart', state: { cart } } }
-              data-testid="shopping-cart-button"
-            >
-              <img src="https://www.freeiconspng.com/uploads/grocery-cart-icon-14.png" alt="cart icon" height="25px" />
-            </Link>
-          </button>
+          <ButtonSP cart={ cart } handleClickAddCart2={ handleClickAddCart2 } />
           <h3 data-testid="product-detail-name">{title}</h3>
           <img src={ thumbnail } alt={ title } />
-          <h2>{`Preço: R$ ${price}`}</h2>
+          <h2>
+            {`Preço: R$ 
+            ${price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}`}
+          </h2>
         </div>
         <button
           type="button"

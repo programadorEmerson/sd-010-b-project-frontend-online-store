@@ -4,11 +4,7 @@ import Star from './Star';
 
 // Fonte: https://javascript.plainenglish.io/how-to-build-a-star-rating-component-in-react-dad06b05679b
 export default function Rating(props) {
-  const {
-    index,
-    rating,
-    onSaveRating,
-  } = props;
+  const { index, rating, onSaveRating } = props;
 
   const fill = React.useMemo(() => {
     if (rating >= index) {
