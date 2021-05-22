@@ -26,13 +26,6 @@ class ProductDetails extends Component {
     api2.saveCartLocalStorage(cart);
   }
 
-  fetchProduct = async () => {
-    const { match: { params: { id } } } = this.props;
-    const product = await api2.getProductsFromId(id);
-
-    this.setState({ product });
-  }
-
   fetchCart = () => {
     const cart = api2.readCartLocalStorage();
     if (cart) this.setState({ cart });
@@ -44,8 +37,20 @@ class ProductDetails extends Component {
     if (cart) { this.setState({ cart: [...cart, product] }); }
   }
 
+  handleElementRemoval = () => {
+    document.querySelector('#shipping-element').remove();
+  }
+
+  fetchProduct = async () => {
+    const { match: { params: { id } } } = this.props;
+    const product = await api2.getProductsFromId(id);
+
+    this.setState({ product });
+  }
+
   render() {
-    const { product: { title, thumbnail, price, attributes, id }, cart } = this.state;
+    const { product:
+      { title, thumbnail, price, attributes, id, shipping }, cart } = this.state;
     return (
       <div>
         <CartButton cartSize={ cart.length } />
@@ -71,6 +76,11 @@ class ProductDetails extends Component {
           quantity={ 2 }
           title={ title }
         />
+        <div className="free-shipping-container">
+          {(shipping && shipping.free_shipping)
+            ? <p data-testid="free-shipping" id="shipping-element">Frete Gratis</p>
+            : this.handleElementRemoval}
+        </div>
         <button
           id={ id }
           type="button"
