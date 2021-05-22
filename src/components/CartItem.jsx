@@ -5,7 +5,7 @@ export class CartItem extends Component {
   render() {
     const { product: { id, title, price, thumbnail, quantity = 1 } } = this.props;
     return (
-      <div data-testid="shopping-cart-product-name">
+      <div>
         <h3 data-testid="shopping-cart-product-name">{ title }</h3>
         <img className="img" src={ thumbnail } alt={ title } />
         <p>{ id }</p>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductFromId } from '../services/api2';
 import Loading from './Loading';
+import CartButton from './CartButton';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -76,7 +77,7 @@ class ProductDetails extends Component {
         >
           Adicionar ao carrinho
         </button>
-        <button data-testid="shopping-cart-button" />
+        <CartButton />
       </div>
     );
   }
