@@ -60,17 +60,17 @@ class Cart extends React.Component {
       <div>
         <Link to="/"> home </Link>
         <CartButton cartSize={ cartSize } />
-
-        <h1 data-testid="shopping-cart-empty-message"> Seu carrinho está vazio </h1>
-        {products && products.map((item) => (
-          <CartAmount
-            key={ item.product.id }
-            id={ item.product.id }
-            quantity={ item.quantity }
-            title={ item.product.title }
-            onChange={ this.fetchCart }
-            maxQuantity={ item.product.available_quantity }
-          />))}
+        {(!cartSize)
+          ? <h1 data-testid="shopping-cart-empty-message"> Seu carrinho está vazio </h1>
+          : products && products.map((item) => (
+            <CartAmount
+              key={ item.product.id }
+              id={ item.product.id }
+              quantity={ item.quantity }
+              title={ item.product.title }
+              onChange={ this.fetchCart }
+              maxQuantity={ item.product.available_quantity }
+            />))}
         <Link
           data-testid="checkout-products"
           to={ {

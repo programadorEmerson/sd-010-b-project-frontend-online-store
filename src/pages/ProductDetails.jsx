@@ -11,14 +11,16 @@ class ProductDetails extends Component {
     super(props);
 
     this.state = {
-      product: {},
-      cart: [],
+      product: [],
+      cart: api2.readCartLocalStorage(),
+      quantity: 0,
     };
   }
 
   componentDidMount() {
     this.fetchProduct();
-    this.fetchCart();
+    // this.fetchCart();
+    this.setQuantityState();
   }
 
   componentDidUpdate() {
@@ -26,40 +28,58 @@ class ProductDetails extends Component {
     api2.saveCartLocalStorage(cart);
   }
 
-  fetchCart = () => {
-    const cart = api2.readCartLocalStorage();
-    if (cart) this.setState({ cart });
-  }
+  // fetchCart = () => {
+  //   const cart = api2.readCartLocalStorage();
+  //   if (cart) this.setState({ cart });
+  // }
 
-  handleAddClick = () => {
-    const { product, cart } = this.state;
-
-    if (cart) { this.setState({ cart: [...cart, product] }); }
+  handleAddClick = ({ target: { id } }) => {
+    const { cart } = this.state;
+    if (cart) {
+      const product = cart.find((item) => item.id === id);
+      this.setState({ cart: [...cart, product] });
+    }
+    this.handleProductQuantity();
+    api2.addToLocalStorage(id);
   }
 
   handleElementRemoval = () => {
     document.querySelector('#shipping-element').remove();
   }
 
+  handleProductQuantity = () => {
+    const { cart, product } = this.state;
+    const productsFiltered = cart.filter((item) => item.id === product.id);
+    this.setState({ quantity: productsFiltered.length, cart: [...cart, product] });
+  }
+
+  setQuantityState = () => {
+    const { cart, product } = this.state;
+    const productQuantity = cart.filter((item) => item.id === product.id);
+    this.setState({ quantity: productQuantity.length });
+  }
+
   fetchProduct = async () => {
+    const cart = api2.readCartLocalStorage();
     const { match: { params: { id } } } = this.props;
     const product = await api2.getProductsFromId(id);
-
-    this.setState({ product });
+    if (cart) {
+      const productQuantity = cart.filter((item) => item.id === product.id);
+      this.setState({ cart, product, quantity: productQuantity.length });
+    }
   }
 
   render() {
-    const { product:
-      { title, thumbnail, price, attributes, id, shipping }, cart } = this.state;
+    const { product, cart, quantity } = this.state;
     return (
       <div>
         <CartButton cartSize={ cart.length } />
 
-        <h1 data-testid="product-detail-name">{ title }</h1>
-        <img src={ thumbnail } alt={ title } />
-        <h2>{price}</h2>
+        <h1 data-testid="product-detail-name">{ product.title }</h1>
+        <img src={ product.thumbnail } alt={ product.title } />
+        <h2>{product.price}</h2>
         <ul>
-          {attributes && attributes.map((attribute, index) => {
+          {product.attributes && product.attributes.map((attribute, index) => {
             if (attribute.value_name) {
               return (
                 <li key={ index }>
@@ -71,18 +91,20 @@ class ProductDetails extends Component {
           })}
         </ul>
         <CartAmount
-          key={ id }
-          id={ id }
-          quantity={ 2 }
-          title={ title }
+          key={ product.id }
+          id={ product.id }
+          quantity={ quantity }
+          title={ product.title }
+          onChange={ this.handleProductQuantity }
+          maxQuantity={ product.available_quantity }
         />
         <div className="free-shipping-container">
-          {(shipping && shipping.free_shipping)
+          {(product.shipping && product.shipping.free_shipping)
             ? <p data-testid="free-shipping" id="shipping-element">Frete Gratis</p>
             : this.handleElementRemoval}
         </div>
         <button
-          id={ id }
+          id={ product.id }
           type="button"
           onClick={ this.handleAddClick }
           data-testid="product-detail-add-to-cart"

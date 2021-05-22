@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { CgShoppingCart } from 'react-icons/cg';
 
 class CartButton extends React.Component {
   render() {
@@ -10,7 +11,7 @@ class CartButton extends React.Component {
         to="/cart"
         data-testid="shopping-cart-button"
       >
-        carrinho
+        <CgShoppingCart />
 
         <span data-testid="shopping-cart-size">{cartSize}</span>
       </Link>

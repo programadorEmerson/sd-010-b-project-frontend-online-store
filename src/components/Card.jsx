@@ -7,6 +7,11 @@ class Card extends React.Component {
     document.querySelector('#shipping-element').remove();
   }
 
+  handleClick = (e) => {
+    const { onClick } = this.props;
+    onClick(e);
+  }
+
   render() {
     const { product:
         { title,
@@ -15,24 +20,29 @@ class Card extends React.Component {
           id,
           shipping,
         },
-    onClick,
     } = this.props;
     return (
       <div data-testid="product">
-        <Link to={ `product/${id}` } data-testid="product-detail-link">
-          <h4>{ title }</h4>
-          <img src={ thumbnail } alt={ title } />
-          <h5>{ price }</h5>
-          <div className="free-shipping-container">
-            {(shipping && shipping.free_shipping)
-              ? <p data-testid="free-shipping" id="shipping-element">Frete Gratis</p>
-              : this.handleElementRemoval}
-          </div>
+
+        <h4>{ title }</h4>
+        <img src={ thumbnail } alt={ title } />
+        <h5>{ price }</h5>
+        <Link
+          to={ `/product/${id}` }
+          // onClick={ this.handleDetailsClick }
+          data-testid="product-detail-link"
+        >
+          Ver detalhes
         </Link>
+        <div className="free-shipping-container">
+          {(shipping && shipping.free_shipping)
+            ? <p data-testid="free-shipping" id="shipping-element">Frete Gratis</p>
+            : this.handleElementRemoval}
+        </div>
         <button
           id={ id }
           type="button"
-          onClick={ onClick }
+          onClick={ (e) => this.handleClick(e) }
           data-testid="product-add-to-cart"
         >
           Add

@@ -19,10 +19,10 @@ class CartAmount extends React.Component {
     const { count } = this.state;
     if (count < maxQuantity) {
       api2.addToLocalStorage(id);
+      onChange();
       this.setState((estadoAnterior) => ({
         count: estadoAnterior.count + 1,
       }));
-      onChange();
     }
   }
 

@@ -1,16 +1,16 @@
 import React from 'react';
 import * as api from '../services/api';
-import Mensagem from '../components/Mensagem';
 import Card from '../components/Card';
 import CategoryFilter from '../components/CategoryFilter';
 import * as api2 from '../services/api2';
 import CartButton from '../components/CartButton';
+import SearchContent from './SearchContent';
 
 class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      categories: null,
+      categories: [],
       search: '',
       cart: [],
       categorySelected: [],
@@ -27,9 +27,8 @@ class Home extends React.Component {
     api2.saveCartLocalStorage(cart);
   }
 
-  handleChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({ [name]: value });
+  handleChange = (actualState) => {
+    this.setState({ search: actualState });
   }
 
   clickButtonSearch = async () => {
@@ -37,7 +36,6 @@ class Home extends React.Component {
     const searchResult = await api
       .getProductsFromCategoryAndQuery(search, categorySelected);
     this.setState({
-      // searchResult,
       products: searchResult.results,
     });
   }
@@ -65,35 +63,24 @@ class Home extends React.Component {
     if (result) this.setState({ products: result.results });
   }
 
-  handleAddClick = ({ target }) => {
-    const { id } = target;
+  handleAddClick = ({ target: { id } }) => {
     const { products, cart } = this.state;
     const product = products.find((item) => item.id === id);
-    if (cart) { this.setState({ cart: [...cart, product] }); }
+    this.setState({ cart: [...cart, product] });
+    api2.addToLocalStorage(id);
   }
 
   render() {
     const { categories, products, search, cart } = this.state;
     return (
       <div>
+        <SearchContent
+          onClick={ this.clickButtonSearch }
+          onChange={ this.handleChange }
+        />
+
         <CartButton cartSize={ cart.length } />
 
-        <Mensagem />
-        <input
-          type="text"
-          name="search"
-          placeholder="buscar"
-          data-testid="query-input"
-          onChange={ this.handleChange }
-          autoComplete="off"
-        />
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ this.clickButtonSearch }
-        >
-          Search
-        </button>
         <label htmlFor="categoryFilter">
           { categories
           && categories.map((category) => (
@@ -107,11 +94,14 @@ class Home extends React.Component {
         </label>
         { products
           && products.map((product) => (
+
             <Card
               product={ product }
               key={ product.id }
               onClick={ this.handleAddClick }
-            />))}
+            />
+
+          ))}
       </div>
     );
   }
