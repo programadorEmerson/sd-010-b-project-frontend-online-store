@@ -4,13 +4,18 @@ import { Link } from 'react-router-dom';
 
 export default class ProductCard extends React.Component {
   render() {
-    const { product: { title, thumbnail, price, id }, addItemToCart } = this.props;
-
+    const { product: {
+      title, thumbnail, price, id },
+    addItemToCart, freeShipping } = this.props;
     return (
       <section data-testid="product">
         <h3>{ title }</h3>
         <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
+        <p>
+          { price }
+          <br />
+          {freeShipping ? <span data-testid="free-shipping">Frete Grátis</span> : '' }
+        </p>
         <Link
           data-testid="product-detail-link"
           to={ {
@@ -41,4 +46,5 @@ ProductCard.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired,
   addItemToCart: PropTypes.func.isRequired,
+  freeShipping: PropTypes.bool.isRequired,
 };
