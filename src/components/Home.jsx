@@ -60,7 +60,7 @@ class Home extends Component {
       this.setState({
         products: response.results,
         loading: false,
-        teste: '',
+        // teste: '',
       });
     });
   }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export class CartItem extends Component {
+class CartItem extends Component {
   render() {
     const { product: { id, title, price, thumbnail, quantity = 1 } } = this.props;
     return (
-      <div>
+      <div data-testid="shopping-cart-product-name">
         <h3 data-testid="shopping-cart-product-name">{ title }</h3>
         <img className="img" src={ thumbnail } alt={ title } />
         <p>{ id }</p>
