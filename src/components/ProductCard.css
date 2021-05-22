@@ -40,7 +40,6 @@
 }
 
 .price-card {
-  color: red;
   margin-bottom: 10px;
 }
 
@@ -49,10 +48,11 @@
 }
 
 .button-add-cart {
-  background-color: #3790f8;
-  border-color: #3790f8;
+  background-color: #04BF55;
+  /* border-color: #04BF55; */
+  border: none;
   color: #fff;
-  border-radius: 8px;
+  border-radius: 7px;
   padding: 5px 20px;
   font-size: 0.9em;
   margin-bottom: 10px;
@@ -65,13 +65,16 @@
 }
 
 .button-link {
-  background-color: #3E5978;
-  color: white;
-  padding: 3px;
   margin-bottom: 10px;
 }
 
 .details-link {
   color: rgb(255, 255, 255);
   text-decoration: none;
+  background-color: #06BFAD;
+  border-color: #06BFAD;
+  border-radius: 8px;
+  padding: 5px 20px;
+  font-size: 0.9em;
+  margin-bottom: 40px;
 }
