@@ -13,11 +13,6 @@ function App() {
         <Route exact path="/" component={ Home } />
         <Route path="/home/:id" component={ Home } />
         <Route exact path="/cart" component={ Cart } />
-        {/* <Route
-          exact
-          path="/cart"
-          render={ (props) => <Cart { ...props } stateAddCart={ stateAddCart } /> }
-        /> */}
         <Route
           exact
           path="/products/:id"

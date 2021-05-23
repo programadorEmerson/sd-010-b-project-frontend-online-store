@@ -13,12 +13,10 @@ class Home extends Component {
     super();
     this.searchApi = this.searchApi.bind(this);
     this.notFoundFunc = this.notFoundFunc.bind(this);
-    // this.addToCart = this.addToCart.bind(this);
     this.updateState = this.updateState.bind(this);
     this.state = {
       products: [],
       loading: true,
-      // cartItensID: [],
     };
   }
 
@@ -28,14 +26,11 @@ class Home extends Component {
     } else {
       this.updateState();
     }
-    // localStorage.setItem('cartItens', '');
-    // const savedItensID =
   }
 
   componentDidUpdate(prevProps) {
     // Uso típico, (não esqueça de comparar as props):
     // plantao do edu + react docs
-    // const { id } = this.props.match.params;
     const { match: { params } } = this.props;
     if (params !== prevProps.match.params) {
       this.searchApi();
@@ -46,9 +41,7 @@ class Home extends Component {
   }
 
   updateState() {
-    // JSON.parse(localStorage.getItem('cartItems'))
     const savedItensID = localStorage.getItem('cartItens');
-    // console.log(savedItensID);
     this.setState({
       cartItensID: savedItensID,
     });
@@ -60,30 +53,16 @@ class Home extends Component {
       this.setState({
         products: response.results,
         loading: false,
-        // teste: '',
       });
     });
   }
 
-  // addToCart(event) {
-  //   const id = event.target.parentNode.firstChild.href.split('products/')[1];
-  //   this.setState((old) => ({
-  //     cartItensID: [...old.cartItensID, id],
-  //   }));
-  //   console.log(event.target.parentNode.firstChild.href.split('products/')[1]);
-  //   // console.log(event.target.parentNode.firstChild.href.split('products/')[1]);
-  // }
-
   stateAddCart() {
     console.log('this.props');
-    // this.setState({
-    //   teste: this.props;
-    // });
   }
 
   notFoundFunc() {
     const { loading, products } = this.state;
-
     if (products.length === 0) {
       return (
         <div>
@@ -92,7 +71,6 @@ class Home extends Component {
     }
     return (
       <AllProducts
-        // addToCart={ this.addToCart }
         stateAddCart={ this.stateAddCart }
         loading={ loading }
         products={ products }
@@ -101,7 +79,6 @@ class Home extends Component {
   }
 
   render() {
-    // console.log(this.props);
     return (
       <div className="home">
         <div className="searchBox">

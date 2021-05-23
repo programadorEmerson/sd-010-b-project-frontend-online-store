@@ -26,12 +26,17 @@ class Search extends Component {
 
   render() {
     return (
-      <div>
+      <div className="fundo">
         <h4 className="searchTitle" data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h4>
-        <form>
-          <input data-testid="query-input" onChange={ this.changeState } type="text" />
+        <form className="fundo">
+          <input
+            className="query-input"
+            data-testid="query-input"
+            onChange={ this.changeState }
+            type="text"
+          />
           <button
             data-testid="query-button"
             className="searchButton"

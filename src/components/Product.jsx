@@ -30,15 +30,9 @@ class Product extends Component {
     }
   }
 
-  stateAddCart() {
-    console.log('teste');
-    // console.log(addCart);
-  }
-
   render() {
     const { product: { id, title, price, thumbnail } } = this.props;
     const link = `/products/${id}`;
-    // console.log(this.props);
 
     return (
       <div data-testid="product">
@@ -51,7 +45,6 @@ class Product extends Component {
         </Link>
         <button
           onClick={ this.addToCart }
-          // stateAddCart={ stateAddCart }
           data-testid="product-add-to-cart"
           type="button"
         >
