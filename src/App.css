@@ -37,7 +37,7 @@
   width: 80%;
 }
 
-#search-btn {
+.search-btn {
   border: grey solid 0.9px;
   border-radius: 10px;
   padding: 4px;

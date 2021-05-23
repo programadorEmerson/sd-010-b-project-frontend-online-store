@@ -19,7 +19,7 @@ class SearchContent extends React.Component {
       <section data-testid="home-initial-message" className="search-content">
         <div className="input-plus-btn">
           <input
-            id="search-input"
+            className="search-input"
             type="text"
             name="search"
             placeholder="buscar"
