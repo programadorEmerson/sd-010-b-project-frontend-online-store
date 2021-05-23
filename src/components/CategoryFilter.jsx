@@ -5,7 +5,7 @@ class CategoryFilter extends React.Component {
   render() {
     const { category: { id, name }, handleCategory, onClick } = this.props;
     return (
-      <div>
+      <section className="category-item">
         <label htmlFor={ id } data-testid="category">
           <input
             onClick={ onClick }
@@ -16,7 +16,7 @@ class CategoryFilter extends React.Component {
           />
           { name }
         </label>
-      </div>
+      </section>
     );
   }
 }

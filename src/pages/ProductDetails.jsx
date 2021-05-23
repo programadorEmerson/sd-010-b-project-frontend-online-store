@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
+import { IoHome } from 'react-icons/io5';
 import * as api2 from '../services/api2';
 import CartAmount from '../components/CartAmount';
 import Evaluation from '../components/Evaluation';
@@ -18,9 +19,9 @@ class ProductDetails extends Component {
   }
 
   componentDidMount() {
+    this.fetchCart();
     this.fetchProduct();
-    // this.fetchCart();
-    this.setQuantityState();
+    // this.handleProductQuantity();
   }
 
   componentDidUpdate() {
@@ -28,19 +29,15 @@ class ProductDetails extends Component {
     api2.saveCartLocalStorage(cart);
   }
 
-  // fetchCart = () => {
-  //   const cart = api2.readCartLocalStorage();
-  //   if (cart) this.setState({ cart });
-  // }
+  fetchCart = () => {
+    const cart = api2.readCartLocalStorage();
+    this.setState({ cart });
+  }
 
-  handleAddClick = ({ target: { id } }) => {
-    const { cart } = this.state;
-    if (cart) {
-      const product = cart.find((item) => item.id === id);
-      this.setState({ cart: [...cart, product] });
-    }
+  handleAddClick = () => {
+    const { cart, product } = this.state;
+    this.setState({ cart: [...cart, product] });
     this.handleProductQuantity();
-    api2.addToLocalStorage(id);
   }
 
   handleElementRemoval = () => {
@@ -48,33 +45,40 @@ class ProductDetails extends Component {
   }
 
   handleProductQuantity = () => {
-    const { cart, product } = this.state;
-    const productsFiltered = cart.filter((item) => item.id === product.id);
-    this.setState({ quantity: productsFiltered.length, cart: [...cart, product] });
+    const cart = api2.readCartLocalStorage();
+    const { product } = this.state;
+    const { match: { params: { id } } } = this.props;
+    let find;
+    if (cart) {
+      find = cart.find((item) => item.id === id);
+    }
+    let filter;
+    if (find) {
+      filter = cart.filter((item) => item.id === id);
+      if (filter) this.setState({ quantity: filter.length, cart: [...cart, product] });
+    }
+    if (!filter) this.setState({ quantity: 1, cart: [...cart, product] });
+    api2.addToLocalStorage(id);
   }
 
-  setQuantityState = () => {
-    const { cart, product } = this.state;
-    const productQuantity = cart.filter((item) => item.id === product.id);
-    this.setState({ quantity: productQuantity.length });
-  }
+  // setQuantityState = () => {
+  //   const { cart, product } = this.state;
+  //   const productQuantity = cart.filter((item) => item.id === product.id);
+  //   this.setState({ quantity: productQuantity.length });
+  // }
 
   fetchProduct = async () => {
-    const cart = api2.readCartLocalStorage();
     const { match: { params: { id } } } = this.props;
     const product = await api2.getProductsFromId(id);
-    if (cart) {
-      const productQuantity = cart.filter((item) => item.id === product.id);
-      this.setState({ cart, product, quantity: productQuantity.length });
-    }
+    this.setState({ product });
   }
 
   render() {
     const { product, cart, quantity } = this.state;
     return (
       <div>
+        <Link to="/"><IoHome /></Link>
         <CartButton cartSize={ cart.length } />
-
         <h1 data-testid="product-detail-name">{ product.title }</h1>
         <img src={ product.thumbnail } alt={ product.title } />
         <h2>{product.price}</h2>
@@ -92,7 +96,7 @@ class ProductDetails extends Component {
         </ul>
         <CartAmount
           key={ product.id }
-          id={ product.id }
+          className={ product.id }
           quantity={ quantity }
           title={ product.title }
           onChange={ this.handleProductQuantity }

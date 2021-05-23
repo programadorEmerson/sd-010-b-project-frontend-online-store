@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { IoHome } from 'react-icons/io5';
 
 class Checkout extends React.Component {
   constructor() {
@@ -89,6 +91,7 @@ class Checkout extends React.Component {
   render() {
     return (
       <div>
+        <Link to="/"><IoHome /></Link>
         { this.renderOrder()}
         { this.renderInputName()}
         { this.renderInputEmail()}

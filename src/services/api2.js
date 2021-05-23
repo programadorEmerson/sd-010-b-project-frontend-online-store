@@ -3,7 +3,6 @@ export async function getProductsFromId(productId) {
     `https://api.mercadolibre.com/items?ids=${productId}`,
   );
   const response = await product.json();
-
   return response[0].body;
 }
 
@@ -26,9 +25,9 @@ export const deleteEveryFromLocalStorage = (id) => {
 
 export const addToLocalStorage = async (id) => {
   const cart = JSON.parse(localStorage.getItem('cart'));
-  let product = cart.find((item) => item.id === id);
-  if (!product) { product = await getProductsFromId(id); }
-
+  // let product;
+  // if (cart) { product = cart.find((item) => item.id === id); }
+  const product = await getProductsFromId(id);
   cart.push(product);
   saveCartLocalStorage(cart);
 };

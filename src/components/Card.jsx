@@ -1,16 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { MdAddShoppingCart } from 'react-icons/md';
 
 class Card extends React.Component {
   handleElementRemoval = () => {
     document.querySelector('#shipping-element').remove();
   }
 
-  handleClick = (e) => {
+  handleClick = (event) => {
     const { onClick } = this.props;
-    onClick(e);
+    onClick(event);
   }
+
+  // handleDetailsClick = (e) => {
+  //   const { onLinkClick } = this.props;
+  //   onLinkClick(e);
+  // }
 
   render() {
     const { product:
@@ -22,32 +28,35 @@ class Card extends React.Component {
         },
     } = this.props;
     return (
-      <div data-testid="product">
-
+      <section data-testid="product" className="product-container">
         <h4>{ title }</h4>
         <img src={ thumbnail } alt={ title } />
-        <h5>{ price }</h5>
+        <h5>
+          R$
+          { price }
+        </h5>
         <Link
+          className={ id }
           to={ `/product/${id}` }
-          // onClick={ this.handleDetailsClick }
+          onClick={ this.handleDetailsClick }
           data-testid="product-detail-link"
         >
           Ver detalhes
         </Link>
-        <div className="free-shipping-container">
+        <span className="free-shipping-container">
           {(shipping && shipping.free_shipping)
             ? <p data-testid="free-shipping" id="shipping-element">Frete Gratis</p>
             : this.handleElementRemoval}
-        </div>
+        </span>
         <button
-          id={ id }
-          type="button"
           onClick={ (e) => this.handleClick(e) }
+          className={ id }
+          type="button"
           data-testid="product-add-to-cart"
         >
-          Add
+          <MdAddShoppingCart className={ id } />
         </button>
-      </div>
+      </section>
     );
   }
 }

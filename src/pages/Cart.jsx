@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { IoHome } from 'react-icons/io5';
 import * as api2 from '../services/api2';
 import CartAmount from '../components/CartAmount';
 import CartButton from '../components/CartButton';
@@ -9,8 +10,8 @@ class Cart extends React.Component {
     super(props);
 
     this.state = {
-      cart: [],
-      products: [],
+      cart: api2.readCartLocalStorage(),
+      products: api2.readCartLocalStorage(),
     };
   }
 
@@ -36,11 +37,11 @@ class Cart extends React.Component {
         product: item[0],
         quantity: item.length,
       }));
-      // const cartSize = products.reduce((acc, curr) => acc + curr.quantity, 0);
+      const cartSize = products.reduce((acc, curr) => acc + curr.quantity, 0);
 
       this.setState({
         products,
-        cartSize: api2.readCartSizeLocalStorage(),
+        cartSize,
         cart: api2.readCartLocalStorage(),
       });
     }
@@ -58,7 +59,7 @@ class Cart extends React.Component {
     const { products, cartSize } = this.state;
     return (
       <div>
-        <Link to="/"> home </Link>
+        <Link to="/"><IoHome /></Link>
         <CartButton cartSize={ cartSize } />
         {(!cartSize)
           ? <h1 data-testid="shopping-cart-empty-message"> Seu carrinho está vazio </h1>

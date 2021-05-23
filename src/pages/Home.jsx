@@ -63,26 +63,27 @@ class Home extends React.Component {
     if (result) this.setState({ products: result.results });
   }
 
-  handleAddClick = ({ target: { id } }) => {
+  handleAddClick = ({ target: { className } }) => {
     const { products, cart } = this.state;
-    const product = products.find((item) => item.id === id);
+    const product = products.find((item) => item.id === className);
+    api2.addToLocalStorage(className);
     this.setState({ cart: [...cart, product] });
-    api2.addToLocalStorage(id);
   }
 
   render() {
     const { categories, products, search, cart } = this.state;
     return (
-      <div>
-        <SearchContent
-          onClick={ this.clickButtonSearch }
-          onChange={ this.handleChange }
-        />
-
-        <CartButton cartSize={ cart.length } />
-
-        <label htmlFor="categoryFilter">
-          { categories
+      <main className="main-content">
+        <header className="top-content">
+          <SearchContent
+            onClick={ this.clickButtonSearch }
+            onChange={ this.handleChange }
+          />
+          {(cart) && <CartButton cartSize={ cart.length } />}
+        </header>
+        <section className="categories-plus-products">
+          <label htmlFor="categoryFilter" className="left-content">
+            { categories
           && categories.map((category) => (
             <CategoryFilter
               key={ category.id }
@@ -91,18 +92,21 @@ class Home extends React.Component {
               onClick={ () => this.handleCategoryClick(search, category.id) }
             />
           ))}
-        </label>
-        { products
+          </label>
+          <section className="right-content">
+            { products
           && products.map((product) => (
-
             <Card
               product={ product }
               key={ product.id }
+              id={ product.id }
               onClick={ this.handleAddClick }
+              // onLinkClick={  }
             />
-
           ))}
-      </div>
+          </section>
+        </section>
+      </main>
     );
   }
 }
