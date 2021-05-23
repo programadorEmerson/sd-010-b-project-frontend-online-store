@@ -5,8 +5,7 @@
 
 .main-content {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-flow: column wrap;
 }
 
 .top-content {
@@ -36,12 +35,11 @@
   font-family: monospace;
   padding: 4px;
   width: 80%;
-  
 }
 
 #search-btn {
-  display: flex;
   border: grey solid 0.9px;
+  display: flex;
   border-radius: 10px;
   justify-content: center;
   padding: 4px;
@@ -56,9 +54,9 @@
   max-width: 10%;
 }
 .search-content p {
+  font-family: monospace;
   font-size: large;
   font-weight: 400;
-  font-family: monospace;
   margin-top: 5px;
 }
 
@@ -98,12 +96,12 @@
   display: flex;
   flex-direction: column;
   height: 250px;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   margin: 8px;
   width: 200px;
 }
 
-.product-container h4{
+.product-container h4 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: small;
   max-width: 80%;
@@ -111,10 +109,10 @@
 }
 
 .product-container img {
-  max-width: 100px;
   max-height: 100px;
+  max-width: 100px;
 }
 
-.free-shipping-container{
+.free-shipping-container {
   font-size: small;
 }
