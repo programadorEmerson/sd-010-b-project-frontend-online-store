@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductFromId } from '../services/api2';
 import Loading from './Loading';
+import CartButton from './CartButton';
 
 class ProductDetails extends Component {
   constructor(props) {
     super(props);
+
+    this.addToCart = this.addToCart.bind(this);
 
     this.state = {
       product: [],
@@ -27,6 +30,25 @@ class ProductDetails extends Component {
     });
   }
 
+  addToCart() {
+    const { product } = this.state;
+
+    if (localStorage.getItem('keyTemp') === null) {
+      const products = [product];
+
+      const teste = JSON.stringify(products);
+      localStorage.setItem('keyTemp', teste);
+    } else {
+      const jsonKeyTemp = localStorage.getItem('keyTemp');
+      const keyTemp = JSON.parse(jsonKeyTemp);
+
+      keyTemp.push(product);
+
+      const teste = JSON.stringify(keyTemp);
+      localStorage.setItem('keyTemp', teste);
+    }
+  }
+
   render() {
     const { product: { title, price, thumbnail, attributes } } = this.state;
     const { load } = this.state;
@@ -35,8 +57,8 @@ class ProductDetails extends Component {
     return (
       <div>
         <Link to="/">Voltar</Link>
-        <h1>
-          <p data-testid="product-detail-name">{`${title} - R$-${price}`}</p>
+        <h1 data-testid="product-detail-name">
+          {`${title} - R$-${price}`}
         </h1>
         <img className="img" src={ thumbnail } alt={ title } />
         <p>Especificações Técnicas</p>
@@ -48,6 +70,14 @@ class ProductDetails extends Component {
             return console.log('Tá aí o return, Sr. lint');
           })}
         </ul>
+        <button
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.addToCart }
+          type="button"
+        >
+          Adicionar ao carrinho
+        </button>
+        <CartButton />
       </div>
     );
   }
