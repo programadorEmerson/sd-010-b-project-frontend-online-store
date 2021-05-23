@@ -39,9 +39,7 @@
 
 #search-btn {
   border: grey solid 0.9px;
-  display: flex;
   border-radius: 10px;
-  justify-content: center;
   padding: 4px;
   width: 30px;
 }
@@ -53,6 +51,7 @@
   margin-left: 10px;
   max-width: 10%;
 }
+
 .search-content p {
   font-family: monospace;
   font-size: large;
@@ -102,7 +101,7 @@
 }
 
 .product-container h4 {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial , Helvetica , sans-serif;
   font-size: small;
   max-width: 80%;
   text-align: center;
