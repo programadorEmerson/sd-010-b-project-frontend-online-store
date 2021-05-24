@@ -18,8 +18,8 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchCategories();
     this.fetchCart();
+    this.fetchCategories();
   }
 
   componentDidUpdate() {
@@ -63,10 +63,10 @@ class Home extends React.Component {
     if (result) this.setState({ products: result.results });
   }
 
-  handleAddClick = ({ target: { className } }) => {
+  handleAddClick = (id) => {
     const { products, cart } = this.state;
-    const product = products.find((item) => item.id === className);
-    api2.addToLocalStorage(className);
+    const product = products.find((item) => item.id === id);
+    api2.addToLocalStorage(product.id);
     this.setState({ cart: [...cart, product] });
   }
 
@@ -99,8 +99,8 @@ class Home extends React.Component {
             <Card
               product={ product }
               key={ product.id }
-              id={ product.id }
-              onClick={ this.handleAddClick }
+              className={ product.id }
+              onClick={ () => this.handleAddClick(product.id) }
               // onLinkClick={  }
             />
           ))}

@@ -38,7 +38,7 @@ class Card extends React.Component {
         <Link
           className={ id }
           to={ `/product/${id}` }
-          onClick={ this.handleDetailsClick }
+          // onClick={ this.handleDetailsClick }
           data-testid="product-detail-link"
         >
           Ver detalhes

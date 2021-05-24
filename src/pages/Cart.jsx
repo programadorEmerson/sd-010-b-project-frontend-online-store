@@ -10,21 +10,21 @@ class Cart extends React.Component {
     super(props);
 
     this.state = {
-      cart: api2.readCartLocalStorage(),
-      products: api2.readCartLocalStorage(),
+      cart: [],
+      products: [],
     };
   }
 
   componentDidMount() {
+    this.handleInitialState();
     this.fetchCart();
   }
 
   fetchCart = () => {
-    // utilizando exemplo de reduce fornecido em https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
-    let products = api2.readCartLocalStorage();
-    const { cart } = this.state;
-    if (products && cart) {
-      const quantity = products.reduce((acc, obj) => {
+    // utilizando exemplo de reduce fornecido em https://developer.mproductsozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+    const cart = api2.readCartLocalStorage();
+    if (cart) {
+      const quantity = cart.reduce((acc, obj) => {
         const key = obj.id;
         if (!acc[key]) {
           acc[key] = [];
@@ -33,40 +33,52 @@ class Cart extends React.Component {
         return acc;
       }, {});
 
-      products = Object.values(quantity).map((item) => ({
+      const retornoNegativo = -1;
+
+      const newArray = Object.values(quantity).map((item) => ({
         product: item[0],
         quantity: item.length,
-      }));
-      const cartSize = products.reduce((acc, curr) => acc + curr.quantity, 0);
+      })).sort((a, b) => {
+        if (a.product.title < b.product.title) return retornoNegativo;
+        if (a.product.title > b.product.title) return 1;
+        return 0;
+      });
 
+      const cartSize = newArray.reduce((acc, curr) => acc + curr.quantity, 0);
+      // utilizando exemplo de ordenacao de objetos: https://pt.stackoverflow.com/questions/46600/como-ordenar-uma-array-de-objetos-com-array-sort
       this.setState({
-        products,
+        products: newArray,
         cartSize,
         cart: api2.readCartLocalStorage(),
       });
     }
   }
 
-  // handleQuantityChange = () => {
-  //   const { products } = this.state;
-  //   const cartSize = products.reduce((acc, curr) => acc + curr.quantity, 0);
-  //   this.setState({
-  //     cartSize,
-  //   });
-  // }
+  handleQuantityChange = () => {
+    const { products } = this.state;
+    const cartSize = products.reduce((acc, curr) => acc + curr.quantity, 0);
+    this.setState({
+      cartSize,
+    });
+  }
+
+  handleInitialState = () => {
+    const cart = api2.readCartLocalStorage();
+    this.setState({ cart });
+  }
 
   render() {
-    const { products, cartSize } = this.state;
+    const { products, cartSize, cart } = this.state;
     return (
       <div>
         <Link to="/"><IoHome /></Link>
         <CartButton cartSize={ cartSize } />
-        {(!cartSize)
+        {(!cart)
           ? <h1 data-testid="shopping-cart-empty-message"> Seu carrinho está vazio </h1>
           : products && products.map((item) => (
             <CartAmount
               key={ item.product.id }
-              id={ item.product.id }
+              className={ item.product.id }
               quantity={ item.quantity }
               title={ item.product.title }
               onChange={ this.fetchCart }

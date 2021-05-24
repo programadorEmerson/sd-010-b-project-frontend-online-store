@@ -7,17 +7,15 @@ class CartButton extends React.Component {
   render() {
     const { cartSize } = this.props;
     return (
-      <section className="shopping-cart-button">
 
-        <Link
-          to="/cart"
-          data-testid="shopping-cart-button"
-        >
-          <GiShoppingCart />
+      <Link
+        to="/cart"
+        data-testid="shopping-cart-button"
+      >
+        <GiShoppingCart />
 
-          <span data-testid="shopping-cart-size">{cartSize}</span>
-        </Link>
-      </section>
+        <span data-testid="shopping-cart-size">{cartSize}</span>
+      </Link>
     );
   }
 }

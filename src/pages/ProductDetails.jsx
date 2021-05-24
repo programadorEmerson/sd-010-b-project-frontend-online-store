@@ -21,7 +21,7 @@ class ProductDetails extends Component {
   componentDidMount() {
     this.fetchCart();
     this.fetchProduct();
-    // this.handleProductQuantity();
+    this.handleQuantityState();
   }
 
   componentDidUpdate() {
@@ -36,29 +36,46 @@ class ProductDetails extends Component {
 
   handleAddClick = () => {
     const { cart, product } = this.state;
-    this.setState({ cart: [...cart, product] });
-    this.handleProductQuantity();
+    const { match: { params: { id } } } = this.props;
+    this.setState((previousState) => ({
+      quantity: previousState.quantity + 1,
+      cart: [...cart, product],
+    }));
+    api2.addToLocalStorage(id);
   }
 
   handleElementRemoval = () => {
     document.querySelector('#shipping-element').remove();
   }
 
-  handleProductQuantity = () => {
-    const cart = api2.readCartLocalStorage();
-    const { product } = this.state;
+  handleQuantityState = () => {
     const { match: { params: { id } } } = this.props;
+    const cart = api2.readCartLocalStorage();
     let find;
+    let filter;
     if (cart) {
       find = cart.find((item) => item.id === id);
     }
+    if (find) {
+      filter = cart.filter((item) => item.id === id);
+      if (filter) this.setState({ quantity: filter.length });
+    }
+  }
+
+  handleProductQuantity = () => {
+    const { match: { params: { id } } } = this.props;
+    const cart = api2.readCartLocalStorage();
+    const { product } = this.state;
+    let find;
     let filter;
+    if (cart) {
+      find = cart.find((item) => item.id === id);
+    }
     if (find) {
       filter = cart.filter((item) => item.id === id);
       if (filter) this.setState({ quantity: filter.length, cart: [...cart, product] });
     }
-    if (!filter) this.setState({ quantity: 1, cart: [...cart, product] });
-    api2.addToLocalStorage(id);
+    if (!filter) this.handleAddClick();
   }
 
   // setQuantityState = () => {
@@ -73,7 +90,16 @@ class ProductDetails extends Component {
     this.setState({ product });
   }
 
+  // hancleDecreaseBtn = () => {
+  //   const { match: { params: { id } } } = this.props;
+  //   this.setState((previousState) => ({
+  //     quantity: previousState.quantity - 1,
+  //   }));
+  //   api2.removeFromLocalStorage(id);
+  // }
+
   render() {
+    const { match: { params: { id } } } = this.props;
     const { product, cart, quantity } = this.state;
     return (
       <div>
@@ -95,11 +121,12 @@ class ProductDetails extends Component {
           })}
         </ul>
         <CartAmount
-          key={ product.id }
-          className={ product.id }
+          key={ id }
+          className={ id }
           quantity={ quantity }
           title={ product.title }
           onChange={ this.handleProductQuantity }
+          // onDecreaseChange={ this.hancleDecreaseBtn }
           maxQuantity={ product.available_quantity }
         />
         <div className="free-shipping-container">
@@ -108,7 +135,7 @@ class ProductDetails extends Component {
             : this.handleElementRemoval}
         </div>
         <button
-          id={ product.id }
+          className={ product.id }
           type="button"
           onClick={ this.handleAddClick }
           data-testid="product-detail-add-to-cart"
