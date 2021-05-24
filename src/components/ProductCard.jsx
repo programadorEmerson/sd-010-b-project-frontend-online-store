@@ -29,7 +29,7 @@ class ProductCard extends React.Component {
             <p>{ `R$${this.numberWithCommas(priceWithStyle)}` }</p>
           </div>
           <div>
-            <AddToCart data-testid="product-add-to-cart" product={ product } />
+            <AddToCart data-testid="product-add-to-cart" product={ product } add={ 1 } />
             <Link
               to={ `/details/${id}/${title.replace('%', '')}` }
             >

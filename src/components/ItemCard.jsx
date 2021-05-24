@@ -10,16 +10,16 @@ export default class ItemCard extends Component {
     };
   }
 
-  changeQuantity = (operator) => {
+  changeQuantity = (operator, value) => {
     const { product, calculateTotal } = this.props;
     const productsOnCart = JSON.parse(localStorage.getItem('products-on-cart'));
     const findProduct = productsOnCart.map(
       (prod) => {
         if (prod.product.id === product.product.id) {
           if (operator === '+') {
-            prod.quantity += 1;
+            prod.quantity += value;
           } else {
-            prod.quantity -= 1;
+            prod.quantity -= value;
           }
         }
         return prod;
@@ -51,14 +51,17 @@ export default class ItemCard extends Component {
           <button type="button">Remover</button>
         </div>
         <div className="info-wrap">
-          <img src={ product.product.thumbnail } alt="" width="120px" />
-          <p data-testid="shopping-cart-product-name">{ product.product.title }</p>
+          <h4>Produto</h4>
+          <div className="description">
+            <img src={ product.product.thumbnail } alt="" width="120px" />
+            <p data-testid="shopping-cart-product-name">{ product.product.title }</p>
+          </div>
         </div>
         <div className="quantity">
           <button
             data-testid="product-decrease-quantity"
             type="button"
-            onClick={ () => this.changeQuantity('-') }
+            onClick={ () => this.changeQuantity('-', 1) }
             disabled={ quantity === 1 }
           >
             &#8722;
@@ -69,7 +72,7 @@ export default class ItemCard extends Component {
           <button
             data-testid="product-increase-quantity"
             type="button"
-            onClick={ () => this.changeQuantity('+') }
+            onClick={ () => this.changeQuantity('+', 1) }
             disabled={ quantity === product.product.available_quantity }
           >
             &#43;

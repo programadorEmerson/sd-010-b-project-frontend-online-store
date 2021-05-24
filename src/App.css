@@ -148,7 +148,7 @@ footer p {
 }
 
 .item-container {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   justify-content: space-between;
 }
@@ -156,7 +156,13 @@ footer p {
 .info-wrap {
   align-items: center;
   display: flex;
+  flex-direction: column;
   width: 750px;
+}
+
+.description {
+  display: flex;
+  width: 400px;
 }
 
 .info-wrap img {
