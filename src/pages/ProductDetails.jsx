@@ -122,7 +122,7 @@ class ProductDetails extends Component {
         </ul>
         <CartAmount
           key={ id }
-          className={ id }
+          id={ id }
           quantity={ quantity }
           title={ product.title }
           onChange={ this.handleProductQuantity }

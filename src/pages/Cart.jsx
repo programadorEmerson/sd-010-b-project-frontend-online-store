@@ -78,7 +78,7 @@ class Cart extends React.Component {
           : products && products.map((item) => (
             <CartAmount
               key={ item.product.id }
-              className={ item.product.id }
+              id={ item.product.id }
               quantity={ item.quantity }
               title={ item.product.title }
               onChange={ this.fetchCart }

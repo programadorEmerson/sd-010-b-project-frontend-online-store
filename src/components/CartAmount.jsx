@@ -43,14 +43,13 @@ class CartAmount extends React.Component {
     this.setState({ count: quantity });
   }
 
-  handleExclusion = ({ target }) => {
-    const { onChange } = this.props;
-    const { className } = target;
-
+  handleExclusion = ({ target: { className } }) => {
+    // const { onChange } = this.props;
+    console.log(className);
     const getDiv = document.getElementsByClassName(className)[0];
     getDiv.remove();
     api2.deleteEveryFromLocalStorage(className);
-    onChange();
+    // onChange();
   }
 
   render() {
